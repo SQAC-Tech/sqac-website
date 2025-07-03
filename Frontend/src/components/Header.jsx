@@ -10,10 +10,12 @@ const ResponsiveHeader = () => {
 
       {/* Desktop */}
       <div className="hidden lg:flex justify-between items-center">
+        <Link to='/'>
         <div className="flex items-center gap-x-1 px-7 py-1 rounded-4xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
           <img src={Logo} alt="Logo" className='h-10 w-9 rounded-full' />
           <p className='text-white font-medium text-2xl'>SQAC</p>
         </div>
+        </Link>
 
         <div className="flex items-center gap-x-25 px-8 py-2 rounded-4xl border-2 border-[#7133a9] cursor-pointer" style={{ background: "linear-gradient(to right, #0f001a, #4a1b72, #0f001a)" }}>
           <Link to="/about" className='text-white font-medium text-xl hover:text-purple-300 transition-colors'>About Us</Link>
@@ -31,11 +33,12 @@ const ResponsiveHeader = () => {
       {/* Mobile */}
       <div className="lg:hidden">
         <div className="flex justify-between items-center">
+          <Link to='/'>
           <div className="flex items-center gap-x-2 px-4 py-1 rounded-2xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
             <img src={Logo} alt="Logo" className='h-8 w-7 sm:h-10 sm:w-9 rounded-full' />
             <p className='text-white font-medium text-lg sm:text-xl'>SQAC</p>
           </div>
-
+      </Link>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 rounded-lg border-2 border-[#7133a9] bg-[#1a0033] text-white hover:bg-purple-900 transition-colors"
