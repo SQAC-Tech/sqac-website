@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import Content from "./Content";
 import backgroundImage from "../../assets/background2.png";
+import { ShootingStars } from "../UI/shooting-stars";
+import Domains from "./Domains";
 
 function HomePage() {
   useEffect(() => {
@@ -9,19 +11,22 @@ function HomePage() {
     cursorSpot.style.width = "200px";
     cursorSpot.style.height = "200px";
     cursorSpot.style.pointerEvents = "none";
-    cursorSpot.style.background = "radial-gradient(circle, rgba(178,102,255,0.3) 0%, transparent 60%)";
+    cursorSpot.style.background =
+      "radial-gradient(circle, rgba(178,102,255,0.3) 0%, transparent 60%)";
     cursorSpot.style.borderRadius = "50%";
     cursorSpot.style.zIndex = "1000";
     cursorSpot.style.transition = "transform 0.1s ease";
     document.body.appendChild(cursorSpot);
 
     const moveSpot = (e) => {
-      cursorSpot.style.transform = `translate(${e.clientX - 100}px, ${e.clientY - 100}px)`;
+      cursorSpot.style.transform = `translate(${e.clientX - 100}px, ${
+        e.clientY - 100
+      }px)`;
     };
     window.addEventListener("mousemove", moveSpot);
 
     const sparkles = [];
-    for (let i = 0; i < 40; i++) {
+    for (let i = 0; i < 120; i++) {
       const sparkle = document.createElement("div");
       sparkle.style.position = "fixed";
       sparkle.style.width = "3px";
@@ -40,7 +45,7 @@ function HomePage() {
         [
           { opacity: 0.2, transform: "scale(0.8) translateY(0px)" },
           { opacity: 0.6, transform: "scale(1) translateY(-8px)" },
-          { opacity: 0.2, transform: "scale(0.8) translateY(0px)" }
+          { opacity: 0.2, transform: "scale(0.8) translateY(0px)" },
         ],
         {
           duration: 6000 + Math.random() * 3000,
@@ -60,13 +65,17 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
-      <div
-        className="fixed top-0 left-0 w-full h-full -z-10 bg-no-repeat bg-cover animate-slowspin"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      ></div>
-      <Content />
-    </div>
+    <>
+      <div className="relative min-h-screen">
+        <div
+          className="fixed top-0 left-0 w-full h-full -z-10 bg-no-repeat bg-cover animate-slowspin"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        ></div>
+        <Content />
+        <Domains />
+      </div>
+      <ShootingStars />
+    </>
   );
 }
 

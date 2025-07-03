@@ -87,7 +87,8 @@ export default function Domains() {
 
   return (
     <div className="py-20 lg:py-32">
-      <h2 className="text-4xl lg:text-5xl font-bold mb-16 lg:mb-20 text-center text-purple-400">
+      <h2 className="text-4xl lg:text-5xl font-bold mb-16 lg:mb-20 text-center text-purple-400"
+      id="domain">
         Domains
       </h2>
       <Timeline data={data} />

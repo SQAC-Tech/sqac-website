@@ -1,4 +1,7 @@
 @import "tailwindcss";
+*{
+  scroll-behavior: smooth;
+}
 
 .glow-text {
   text-shadow: 0 0 8px #9333ea, 0 0 14px #c084fc;
