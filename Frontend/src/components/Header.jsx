@@ -54,12 +54,12 @@ const ResponsiveHeader = () => {
 
         {isMobileMenuOpen && (
           <div className="mt-4 p-4 rounded-2xl border-2 border-[#7133a9] bg-gradient-to-b from-[#0f001a] to-[#4a1b72]">
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 items-center">
               <Link to="/about" className='text-white font-medium text-lg hover:text-purple-300 transition-colors text-left'>About Us</Link>
               <Link to="/team" className='text-white font-medium text-lg hover:text-purple-300 transition-colors text-left'>Team</Link>
               <Link to="/projects" className='text-white font-medium text-lg hover:text-purple-300 transition-colors text-left'>Projects</Link>
               <Link to="/events" className='text-white font-medium text-lg hover:text-purple-300 transition-colors text-left'>Events</Link>
-              <div className="p-[2px] rounded-2xl bg-gradient-to-br from-pink-500 to-purple-700 inline-block mt-2">
+              <div className="p-[1px] rounded-2xl bg-gradient-to-br from-pink-500 to-purple-700 inline-block mt-2">
                 <Link to="/join" className="bg-[#1a0033] text-white font-bold px-6 py-2 rounded-2xl w-full text-lg hover:bg-purple-900 transition-colors">
                   Join Us
                 </Link>
