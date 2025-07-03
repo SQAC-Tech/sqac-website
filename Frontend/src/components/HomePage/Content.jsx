@@ -1,4 +1,5 @@
 "use client";
+import { motion } from "framer-motion";
 
 import SQAC from "../../assets/SQAC2.png";
 
@@ -13,18 +14,24 @@ function Content() {
       </div>
 
       
-      <div className="mb-6 md:mb-10 w-full max-w-[80vw] sm:max-w-[70vw] md:max-w-[600px] max-h-[35vh]">
+<div className="mb-6 md:mb-10 w-full max-w-[80vw] sm:max-w-[70vw] md:max-w-[600px] max-h-[35vh] relative">
+  <motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1.5, ease: "easeOut" }}
+  className="absolute inset-0 rounded-full
+    bg-[radial-gradient(circle_at_center,rgba(178,102,255,0.25),transparent)] blur-2xl z-0 pointer-events-none"
+/>
   <img
     src={SQAC}
     alt="SQAC Community"
-    className="w-full h-full object-contain"
+    className="w-full h-full object-contain relative z-10"
     loading="lazy"
   />
 </div>
 
-
       {/* Tagline Text Instead of Typewriter */}
-      <div className="flex flex-col items-center justify-center w-full max-w-3xl text-center p-4 md:p-5 rounded-2xl bg-black/40 backdrop-blur-sm">
+    <div className="w-full max-w-3xl text-center p-4 md:p-5">
   <p className="text-sm sm:text-base md:text-lg lg:text-xl font-medium text-white">
     Building a thriving community of{" "}
     <span className="text-purple-400">developers</span>,{" "}
