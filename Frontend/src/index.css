@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+.glow-text {
+  text-shadow: 0 0 8px #9333ea, 0 0 14px #c084fc;
+}
+
+.glow-hover:hover {
+  text-shadow: 0 0 10px #a855f7, 0 0 20px #d8b4fe;
+  transition: all 0.3s ease-in-out;
+}
