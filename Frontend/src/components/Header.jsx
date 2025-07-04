@@ -11,10 +11,10 @@ const ResponsiveHeader = () => {
       {/* Desktop */}
       <div className="hidden lg:flex justify-between items-center">
         <Link to='/'>
-        <div className="flex items-center gap-x-1 px-7 py-1 rounded-4xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
-          <img src={Logo} alt="Logo" className='h-10 w-9 rounded-full' />
-          <p className='text-white font-medium text-2xl'>SQAC</p>
-        </div>
+          <div className="flex items-center gap-x-1 px-7 py-1 rounded-4xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
+            <img src={Logo} alt="Logo" className='h-10 w-9 rounded-full' />
+            <p className='text-white font-medium text-2xl'>SQAC</p>
+          </div>
         </Link>
 
         <div className="flex items-center gap-x-25 px-8 py-2 rounded-4xl border-2 border-[#7133a9] cursor-pointer" style={{ background: "linear-gradient(to right, #0f001a, #4a1b72, #0f001a)" }}>
@@ -22,8 +22,8 @@ const ResponsiveHeader = () => {
           <Link to="/team" className='text-white font-medium text-xl hover:text-purple-300 transition-colors'>Team</Link>
           <Link to="/projects" className='text-white font-medium text-xl hover:text-purple-300 transition-colors'>Projects</Link>
           <Link to="/events" className='text-white font-medium text-xl hover:text-purple-300 transition-colors'>Events</Link>
-          <div className="p-[2px] rounded-2xl bg-gradient-to-br from-pink-500 to-purple-700 inline-block">
-            <Link to="/join" className="bg-[#1a0033] text-white font-bold px-6 py-1 rounded-2xl w-full h-full text-xl hover:bg-purple-900 transition-colors">
+          <div className="p-[2px] h-10 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-700 inline-block">
+            <Link to="/join" className="flex items-center justify-center h-full bg-[#1a0033] text-white font-bold px-6 rounded-2xl text-xl hover:bg-purple-900 transition-colors">
               Join Us
             </Link>
           </div>
@@ -34,11 +34,11 @@ const ResponsiveHeader = () => {
       <div className="lg:hidden">
         <div className="flex justify-between items-center">
           <Link to='/'>
-          <div className="flex items-center gap-x-2 px-4 py-1 rounded-2xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
-            <img src={Logo} alt="Logo" className='h-8 w-7 sm:h-10 sm:w-9 rounded-full' />
-            <p className='text-white font-medium text-lg sm:text-xl'>SQAC</p>
-          </div>
-      </Link>
+            <div className="flex items-center gap-x-2 px-4 py-1 rounded-2xl border-2 border-[#7133a9]" style={{ background: "#1a0033" }}>
+              <img src={Logo} alt="Logo" className='h-8 w-7 sm:h-10 sm:w-9 rounded-full' />
+              <p className='text-white font-medium text-lg sm:text-xl'>SQAC</p>
+            </div>
+          </Link>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 rounded-lg border-2 border-[#7133a9] bg-[#1a0033] text-white hover:bg-purple-900 transition-colors"
