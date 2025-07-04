@@ -3,6 +3,7 @@ import Content from "./Content";
 import backgroundImage from "../../assets/background2.png";
 import { ShootingStars } from "../UI/shooting-stars";
 import Domains from "./Domains";
+import WWD from "./WhatWeDo.jsx";
 
 function HomePage() {
   useEffect(() => {
@@ -72,6 +73,7 @@ function HomePage() {
           style={{ backgroundImage: `url(${backgroundImage})` }}
         ></div>
         <Content />
+        <WWD />
         <Domains />
       </div>
       <ShootingStars />

@@ -39,9 +39,9 @@ function Content() {
       </div>
 
       {/* CTA Button */}
-      <div className="mt-6 mb-10 w-full max-w-[300px] sm:max-w-[350px] ">
+      <div className="pl-22 mt-6 mb-1 w-full max-w-[300px] sm:max-w-[350px] ">
         <a href="#domain">
-        <button className="w-full h-12 sm:h-14 rounded-full bg-[#1a0033] text-white text-lg sm:text-xl font-semibold border-2 border-purple-400 hover:bg-purple-900 transition-colors duration-200 cursor-pointer">
+        <button className="w-[60%] h-12 sm:h-14 rounded-2xl bg-[#1a0033] text-fuchsia-100 text-lg sm:text-xl font-semibold border-2 border-purple-400 hover:bg-purple-900 transition-colors duration-200 cursor-pointer ">
           Explore ≫
         </button>
         </a>
