@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import ResponsiveHeader from './components/Header.jsx';
 import HomePage from './components/HomePage/HomePage.jsx';
-import Domains from './components/HomePage/Domains.jsx';
 import Footer from './components/Footer.jsx';
 import Aboutus from './components/Aboutus/Aboutus.jsx';
 import Events from './components/Eventspage/Events.jsx';
@@ -13,17 +11,17 @@ import Projects from './components/Projects/Projects.jsx';
 const App = () => {
   return (
     <Router>
-      <div>
-        <ResponsiveHeader />
-
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/about" element={<Aboutus />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/projects" element={<Projects />} />
-        </Routes>
-
+      <div className="flex flex-col min-h-screen">
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/homepage" element={<HomePage />} />
+            <Route path="/about" element={<Aboutus />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+        </main>
         <Footer />
       </div>
     </Router>
