@@ -1,10 +1,13 @@
-import React from 'react';
+import Content from "./Content";
 
-const HomePage = () => {
+function HomePage() {
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
-      <h1 className="text-2xl font-bold">Home Page Coming Soon!</h1>
-    </div>
+    <>
+      <div className="relative min-h-screen">
+        <Content />
+      </div>
+      
+    </>
   );
 };
 
