@@ -2,6 +2,7 @@ import React from 'react';
 import { FiArrowRight } from 'react-icons/fi';
 import SQAC from '../../assets/LogoSQAC.png';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   const { scrollY } = useScroll();
@@ -21,9 +22,9 @@ function Navbar() {
       </motion.div>
 
       
-      <button className="rounded-2xl px-4 sm:px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-300 text-white hover:scale-105 transition">
+      <Link to='/recruitment'><button className="rounded-2xl px-4 cursor-pointer sm:px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-300 text-white hover:scale-105 transition">
         Join Us
-      </button>
+      </button></Link>
     </nav>
   );
 }

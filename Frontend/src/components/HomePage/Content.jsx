@@ -1,74 +1,101 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import SQAC from "../../assets/LogoSQAC.png"
-import Projects from "../../assets/projectsPhoto.png"
-import Teams from "../../assets/TeamPhoto.png"
+import SQAC from "../../assets/LogoSQAC.png";
+import Projects from "../../assets/projectsPhoto.png";
+import Teams from "../../assets/TeamPhoto.png";
+import Events from "../../assets/events.png";
 import Navbar from "./Navbar";
 
 function Content() {
-  const navItems = [{ label: "ABOUT", path: "/about" }, { label: "TEAM", path: "/team" }, { label: "PROJECTS", path: "/projects" }, { label: "EVENTS", path: "/events" },];
+  const navItems = [
+    { label: "ABOUT", path: "/about" },
+    { label: "TEAM", path: "/team" },
+    { label: "PROJECTS", path: "/projects" },
+    { label: "EVENTS", path: "/events" },
+  ];
+
+  const cards = [
+    {
+      src: Teams,
+      alt: "Team collaboration",
+      rotation: "-6deg",
+      delay: 0,
+      zIndex: 10,
+    },
+    {
+      src: Projects,
+      alt: "Coding projects",
+      rotation: "0deg",
+      delay: 0.1,
+      zIndex: 20,
+    },
+    {
+      src: Events,
+      alt: "Event highlights",
+      rotation: "6deg",
+      delay: 0.2,
+      zIndex: 15,
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-[linear-gradient(to_bottom,_##EEE8D3_63%,_#EEE8D3_100%)] overflow-hidden relative">
+    <div className="pt-[100vh] lg:pt-0 min-h-screen bg-gradient-to-b from-pink-100 via-white to-purple-100 overflow-hidden relative">
       <div className="relative">
-        <motion.div className="absolute z-10 rounded-[50px] sm:rounded-[75px] lg:rounded-[100px] flex flex-col mt-7 h-full"
+        <motion.div
+          className="absolute z-10 rounded-[50px] sm:rounded-[75px] lg:rounded-[100px] flex flex-col mt-7 h-full"
           style={{
-            width: 'min(1208px, 95vw)',
-            height: '70vh',
-            left: '50%',
-            background: 'linear-gradient(179.89deg, rgba(255, 209, 234, 0.7) 2.71%, rgba(255, 255, 255, 0.7) 49.32%)'}}
+            width: "min(1208px, 95vw)",
+            height: "70vh",
+            left: "50%",
+            background:
+              "linear-gradient(179.89deg, rgba(255, 209, 234, 0.7) 2.71%, rgba(255, 255, 255, 0.7) 49.32%)",
+          }}
           initial={{ y: "100vh", x: "-50%", rotate: -0.07 }}
           animate={{ y: "15vh", x: "-50%", rotate: -0.07 }}
-          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}>
-          {/*navBar*/}
-          <nav className="flex items-center justify-center md:justify-end space-x-4 lg:space-x-8 pt-4 sm:pt-6 lg:pt-8 px-4 sm:px-8 lg:px-16">
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+        >
+          <nav className="flex flex-wrap items-center justify-center md:justify-end gap-4 lg:gap-8 py-6 px-8">
             {navItems.map(({ label, path }) => (
               <Link
                 key={label}
                 to={path}
-                className="relative font-bold text-xl sm:text-2xl md:text-3xl text-orange-400 hover:text-pink-600 transition-all duration-300 uppercase tracking-wide after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-pink-950 after:transition-all after:duration-300 hover:after:w-full">
+                className="relative font-bold text-xl sm:text-2xl md:text-3xl text-orange-400 hover:text-pink-600 transition-all duration-300 uppercase tracking-wide after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-pink-950 after:transition-all after:duration-300 hover:after:w-full"
+              >
                 {label}
               </Link>
             ))}
           </nav>
         </motion.div>
 
-       <Navbar/>
-        {/* SQAC Text */}
-        <div className="absolute left-8 sm:left-12 lg:left-35 top-12 sm:top-20 lg:top-31 transform -translate-y-1/2 z-0">
-          <motion.h1 className="font- text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[#F0A01F] leading-none tracking-wider drop-shadow-md"
-            initial={{ x: "-100vw" }}
-            animate={{ x: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut", delay: 1 }}>
-            SQAC
-          </motion.h1>
-        </div>
+        <Navbar />
       </div>
 
-      <div className="w-[99%] absolute bottom-0 left-[59%] transform -translate-x-1/2 h-[70vh] flex z-10">
-        {/* Team Card */}
-        <motion.div className="w-1/2 h-full transform -rotate-[12deg] origin-bottom-right hover:rotate-0 transition-transform duration-500 group cursor-pointer -mr-[18%] z-0 hover:z-30"
-          initial={{ y: "100vh" }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0 }}>
-          <div className="relative w-full h-full overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-            <img src={Teams} alt="Team collaboration"
-              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
-        </motion.div>
-        {/*Projects Card*/}
-        <motion.div className="w-1/2 h-full transform rotate-[12deg] origin-bottom-left hover:rotate-0 transition-transform duration-500 group cursor-pointer z-10"
-          initial={{ y: "100vh" }}
-          animate={{ y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}>
-          <div className="relative w-full h-full overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-            <img src={Projects} alt="Coding projects"
-              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-          </div>
-        </motion.div>
+      <div className="w-full absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center items-end gap-4 md:gap-6 lg:gap-8 p-4 md:p-8 z-10 flex-wrap">
+        {cards.map((card, index) => (
+          <motion.div
+            key={index}
+            className="w-[250px] sm:w-[280px] md:w-[300px] lg:w-[320px] h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] cursor-pointer relative overflow-hidden shadow-2xl hover:shadow-3xl rounded-xl"
+            style={{
+              rotate: card.rotation,
+              zIndex: card.zIndex,
+            }}
+            initial={{ y: 200, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut", delay: card.delay }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <img
+              src={card.src}
+              alt={card.alt}
+              className="w-full h-full object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 }
+
 export default Content;
