@@ -11,7 +11,7 @@ function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between bg-white/30 backdrop-blur-md border-b border-white/20 px-4 sm:px-6 py-3">
       <div className="flex items-center">
-        <img src={SQAC} alt="Logo" className="w-10 h-10" />
+        <Link to='/'><img src={SQAC} alt="Logo" className="w-10 h-10" /></Link>
       </div>
 
       <motion.div
