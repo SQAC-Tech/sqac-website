@@ -6,6 +6,7 @@ import Aboutus from './components/Aboutus/Aboutus.jsx';
 import Events from './components/Eventspage/Events.jsx';
 import Team from './components/Team/Team.jsx';
 import Projects from './components/Projects/Projects.jsx';
+import JoinUs from './components/JoinUs/JoinUs.jsx';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/events" element={<Events />} />
           <Route path="/team" element={<Team />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/recruitment" element={<JoinUs />} />
         </Routes>
 
         <Footer />

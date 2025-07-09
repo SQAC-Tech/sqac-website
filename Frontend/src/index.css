@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+:root {
+  --font-logo: "Montserrat", "sans-serif";
+}
 *{
   scroll-behavior: smooth;
 }
