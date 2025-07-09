@@ -1,51 +1,64 @@
 import React from 'react';
-import { motion, useScroll, useTransform, useMotionTemplate } from 'framer-motion';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionTemplate
+} from 'framer-motion';
+import Layer from '../../assets/glow.png';
 
-const SECTION_HEIGHT = 1500;
+const SECTION_HEIGHT = 1000;
 
 function CenterImage() {
   const { scrollY } = useScroll();
 
-  // Fade out between SECTION_HEIGHT and SECTION_HEIGHT + 500
-  const opacity = useTransform(
-    scrollY,
-    [SECTION_HEIGHT, SECTION_HEIGHT + 500],
-    [1, 0]
-  );
+  // Animate the clipping polygon
+  const clip1 = useTransform(scrollY, [0, SECTION_HEIGHT], [25, 0]);
+  const clip2 = useTransform(scrollY, [0, SECTION_HEIGHT], [25, 100]);
+  const clip3 = useTransform(scrollY, [0, SECTION_HEIGHT], [75, 100]);
+  const clip4 = useTransform(scrollY, [0, SECTION_HEIGHT], [75, 0]);
 
-  // Animate background size smoothly from cover to 70% zoom
-  const backgroundSize = useTransform(
-    scrollY,
-    [SECTION_HEIGHT, SECTION_HEIGHT + 500],
-    ["cover", "100%"]
-  );
-
-  // Animate clip path polygon shape
-  const clip1 = useTransform(scrollY, [0, SECTION_HEIGHT], [20, 0]);
-  const clip2 = useTransform(scrollY, [0, SECTION_HEIGHT], [55, 100]);
-
-  const clipPath = useMotionTemplate`
+  const activeClip = useMotionTemplate`
     polygon(
       ${clip1}% ${clip1}%,
       ${clip2}% ${clip1}%,
-      ${clip2}% ${clip2}%,
-      ${clip1}% ${clip2}%
+      ${clip3}% ${clip3}%,
+      ${clip4}% ${clip3}%
     )
   `;
 
+  // Animate gradient opacity towards end of scroll
+  const gradientOpacity = useTransform(
+    scrollY,
+    [SECTION_HEIGHT, SECTION_HEIGHT + 300],
+    [0, 1]
+  );
+
   return (
     <motion.div
-      className="sticky top-0 w-full h-screen"
+      className="sticky top-0 w-full h-screen "
       style={{
-        opacity,
-        clipPath,
-        backgroundImage:
-          "url(https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
-        backgroundSize,
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        clipPath: activeClip,
+        backgroundImage: `url(${Layer})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        overflow: 'hidden',
       }}
-    ></motion.div>
+    >
+      <span>Scroll</span>
+      <motion.div
+        style={{
+          opacity: gradientOpacity,
+          background: 'linear-gradient(to bottom, rgba(180, 199, 97, 0.73) 0%, rgb(255, 255, 255) 10%)',
+          width: '100%',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          pointerEvents: 'none'
+        }}
+      />
+    </motion.div>
   );
 }
 

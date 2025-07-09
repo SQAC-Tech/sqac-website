@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 function Content() {
   const navItems = [{ label: "ABOUT", path: "/about" }, { label: "TEAM", path: "/team" }, { label: "PROJECTS", path: "/projects" }, { label: "EVENTS", path: "/events" },];
   return (
-    <div className="min-h-screen bg-[linear-gradient(to_bottom,_#F8F4FD_63%,_#F1C985_100%)] overflow-hidden relative">
+    <div className="min-h-screen bg-[linear-gradient(to_bottom,_##EEE8D3_63%,_#EEE8D3_100%)] overflow-hidden relative">
       <div className="relative">
         <motion.div className="absolute z-10 rounded-[50px] sm:rounded-[75px] lg:rounded-[100px] flex flex-col mt-7 h-full"
           style={{
