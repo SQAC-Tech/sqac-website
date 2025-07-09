@@ -134,10 +134,16 @@ const DomainContent = ({ item, isPhotoLeft, onSubdomainClick }) => {
 
   const Desktop = () => (
     <div className="hidden lg:grid grid-cols-[1fr_5rem_1fr] gap-x-8 items-center">
-      {isPhotoLeft ? (
+{isPhotoLeft ? (
         <>
           <Bubble className="justify-center">
-            <img src={item.mainImage} alt="" className="max-h-52 object-contain" />
+            <motion.img
+              src={item.mainImage}
+              alt=""
+              className="max-h-52 object-contain"
+              whileHover={{ rotate: 3, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            />
           </Bubble>
           <div className="relative h-full">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
@@ -157,7 +163,13 @@ const DomainContent = ({ item, isPhotoLeft, onSubdomainClick }) => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
           </div>
           <Bubble className="justify-center">
-            <img src={item.mainImage} alt="" className="max-h-52 object-contain" />
+            <motion.img
+              src={item.mainImage}
+              alt=""
+              className="max-h-52 object-contain"
+              whileHover={{ rotate: 3, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 200, damping: 10 }}
+            />
           </Bubble>
         </>
       )}
