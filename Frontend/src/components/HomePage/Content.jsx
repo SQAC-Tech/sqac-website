@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import SQAC from "../../assets/LogoSQAC.png"
 import Projects from "../../assets/projectsPhoto.png"
 import Teams from "../../assets/TeamPhoto.png"
+import Navbar from "./Navbar";
 
 function Content() {
   const navItems = [{ label: "ABOUT", path: "/about" }, { label: "TEAM", path: "/team" }, { label: "PROJECTS", path: "/projects" }, { label: "EVENTS", path: "/events" },];
@@ -31,22 +32,10 @@ function Content() {
           </nav>
         </motion.div>
 
-        <div className="relative">
-          {/* Header */}
-          <header className="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 sm:py-6 relative z-10">
-            {/* Logo */}
-            <div className="flex items-center space-x-2">
-              <img src={SQAC} alt="Logo" className="w-10 h-10 sm:w-12 sm:h-12 lg:w-15 lg:h-16" />
-            </div>
-            {/* Join Us Button */}
-            <Link className="bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold px-5 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 text-sm sm:text-base lg:text-lg rounded-full hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105">
-              Join us
-            </Link>
-          </header>
-        </div>
+       <Navbar/>
         {/* SQAC Text */}
         <div className="absolute left-8 sm:left-12 lg:left-35 top-12 sm:top-20 lg:top-31 transform -translate-y-1/2 z-0">
-          <motion.h1 className="font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[#F0A01F] leading-none tracking-wider drop-shadow-md"
+          <motion.h1 className="font- text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-[#F0A01F] leading-none tracking-wider drop-shadow-md"
             initial={{ x: "-100vw" }}
             animate={{ x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut", delay: 1 }}>
