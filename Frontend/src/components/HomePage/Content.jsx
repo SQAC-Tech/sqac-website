@@ -6,6 +6,7 @@ import Projects from "../../assets/projectsPhoto.png";
 import Teams from "../../assets/TeamPhoto.png";
 import Events from "../../assets/events.png";
 import Navbar from "./Navbar";
+import ContactUs from "./ContactUs";
 
 function Content() {
   const navItems = [
