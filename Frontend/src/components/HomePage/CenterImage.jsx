@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 import Layer from "../../assets/glow.png";
+import Logo from '../../assets/LogoSQAC.png'
 
 function CenterImage({ sectionHeight }) {
   const { scrollY } = useScroll();
@@ -41,15 +47,44 @@ function CenterImage({ sectionHeight }) {
   );
 
   return (
-    <div className="sticky top-0 w-full h-screen overflow-hidden relative">
-      
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#FFD1EA] to-purple-200 flex items-center justify-center">
-        <h1 className="text-5xl md:text-7xl font-extrabold text-pink-600 drop-shadow-md text-center px-4">
-          Scroll to Know More 
-        </h1>
-      </div>
+    <div className="sticky top-0 w-full h-screen overflow-hidden ">
+     <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#FFD1EA] to-purple-200 flex flex-col items-center justify-center space-y-4">
+  {/* SQAC Logo */}
+  <motion.img
+    src={Logo}
+    alt="SQAC Logo"
+    className="w-24 md:w-32 h-auto animate-glowBlink"
+    initial={{ scale: 1 }}
+    animate={{ scale: [1, 1.05, 1] }}
+    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+    style={{
+      filter: `
+        drop-shadow(0 0 10px rgba(236, 72, 153, 1))
+        drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))
+        drop-shadow(0 0 30px rgba(236, 72, 153, 0.6))
+      `,
+    }}
+  />
 
-      
+  {/* Glowing Heading */}
+  <motion.h1
+    className="text-4xl md:text-7xl font-extrabold text-pink-600 text-center px-4 animate-glowBlink mb-20"
+    initial={{ scale: 1 }}
+    animate={{ scale: [1, 1.05, 1] }}
+    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+    style={{
+      textShadow: `
+        0 0 10px rgba(236, 72, 153, 1),
+        0 0 20px rgba(236, 72, 153, 0.8),
+        0 0 30px rgba(236, 72, 153, 0.6)
+      `,
+    }}
+  >
+    Scroll to Know More !!
+  </motion.h1>
+</div>
+
+
       <motion.div
         className="absolute inset-0 z-10"
         style={{
@@ -60,7 +95,6 @@ function CenterImage({ sectionHeight }) {
           backgroundRepeat: "no-repeat",
         }}
       >
-        
         <motion.div
           style={{
             opacity: gradientOpacity,

@@ -6,4 +6,25 @@
 *{
   scroll-behavior: smooth;
 }
+@keyframes glowBlink {
+  0%, 100% {
+    opacity: 1;
+    text-shadow:
+      0 0 10px rgba(236, 72, 153, 0.8),
+      0 0 20px rgba(236, 72, 153, 0.6),
+      0 0 30px rgba(236, 72, 153, 0.4);
+  }
+  50% {
+    opacity: 0.8;
+    text-shadow:
+      0 0 4px rgba(236, 72, 153, 0.3),
+      0 0 8px rgba(236, 72, 153, 0.2),
+      0 0 12px rgba(236, 72, 153, 0.1);
+  }
+}
+
+.animate-glowBlink {
+  animation: glowBlink 2s infinite ease-in-out;
+}
+
 
