@@ -13,7 +13,7 @@ function HomePage() {
         <Content />
         <WhatWeDoSection />
         <Domains />
-        <ContactUs/>
+        
         
       </div>
       

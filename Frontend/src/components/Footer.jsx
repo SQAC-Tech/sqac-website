@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import SQAC from '../assets/LogoSQAC.png';
+import ContactUs from "./HomePage/ContactUs";
 
 function Footer() {
   return (
     <footer className="w-full bg-gradient-to-br from-[#FFD1EA] to-purple-200 text-gray-800 px-6 py-10">
+      <ContactUs/>
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
         
-       
+        
         <div className="flex flex-col items-center md:items-start gap-3 text-center md:text-left">
           <Link to="/">
             <img src={SQAC} alt="Logo" className="w-12 h-12 mx-auto md:mx-0" />
@@ -61,6 +63,7 @@ function Footer() {
         </div>
       </div>
 
+      
       <div className="mt-8 text-center text-xl text-gray-600">
         © {new Date().getFullYear()} SQAC. All rights reserved.
       </div>

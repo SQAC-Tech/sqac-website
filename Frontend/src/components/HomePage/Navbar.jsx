@@ -14,12 +14,7 @@ function Navbar() {
         <Link to='/'><img src={SQAC} alt="Logo" className="w-10 h-10" /></Link>
       </div>
 
-      <motion.div
-        className="absolute left-1/2 -translate-x-1/2 text-sm sm:text-base text-gray-800 font-medium pointer-events-none"
-        style={{ opacity: textOpacity }}
-      >
-        Scroll to explore ↓
-      </motion.div>
+
 
       
       <Link to='/recruitment'><button className="rounded-2xl px-4 cursor-pointer sm:px-5 py-2 bg-gradient-to-r from-purple-400 to-pink-300 text-white hover:scale-105 transition">
