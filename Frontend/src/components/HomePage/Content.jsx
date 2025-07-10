@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import SQAC from "../../assets/LogoSQAC.png";
 import Projects from "../../assets/projectsPhoto.png";
 import Teams from "../../assets/TeamPhoto.png";
-import Events from "../../assets/events.png";
+import Events from "../../assets/EventsPic.png";
 import Navbar from "./Navbar";
 import ContactUs from "./ContactUs";
 
