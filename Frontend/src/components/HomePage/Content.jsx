@@ -76,7 +76,16 @@ function Content() {
         {cards.map((card, index) => (
           <motion.div
             key={index}
-            className="w-[250px] sm:w-[280px] md:w-[300px] lg:w-[320px] h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] cursor-pointer relative overflow-hidden shadow-2xl hover:shadow-3xl rounded-xl"
+            className="
+              w-[clamp(200px,25vw,320px)]
+              aspect-[4/3]
+              cursor-pointer
+              relative
+              overflow-hidden
+              shadow-2xl
+              hover:shadow-3xl
+              rounded-xl
+            "
             style={{
               rotate: card.rotation,
               zIndex: card.zIndex,
