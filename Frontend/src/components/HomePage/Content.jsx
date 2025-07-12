@@ -72,11 +72,11 @@ function Content() {
         <Navbar />
       </div>
 
-      <div className="w-full absolute bottom-[5%] left-1/2 transform -translate-x-1/2 flex justify-center items-end gap-[4px] sm:gap-[8px] md:gap-[12px] p-4 md:p-8 z-10 flex-wrap">
+      <div className="w-full absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center items-end gap-4 md:gap-6 lg:gap-8 p-4 md:p-8 z-10 flex-wrap">
         {cards.map((card, index) => (
           <motion.div
             key={index}
-            className="w-[250px] sm:w-[280px] md:w-[300px] lg:w-[320px] h-[200px] sm:h-[250px] md:h-[270px] lg:h-[390px] cursor-pointer relative overflow-hidden shadow-2xl hover:shadow-3xl rounded-xl"
+            className="w-[250px] sm:w-[280px] md:w-[300px] lg:w-[320px] h-[180px] sm:h-[200px] md:h-[220px] lg:h-[240px] cursor-pointer relative overflow-hidden shadow-2xl hover:shadow-3xl rounded-xl"
             style={{
               rotate: card.rotation,
               zIndex: card.zIndex,
