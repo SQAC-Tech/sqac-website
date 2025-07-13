@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import SQAC from "../../assets/LogoSQAC.png";
 import Projects from "../../assets/projectsPhoto.png";
 import Teams from "../../assets/TeamPhoto.png";
-import Events from "../../assets/EventsPic.png";
+import Events from "../../assets/Events-photo.png";
 import Navbar from "./Navbar";
 import ContactUs from "./ContactUs";
 
@@ -72,13 +72,13 @@ function Content() {
         <Navbar />
       </div>
 
-      <div className="w-full absolute bottom-0 left-1/2 transform -translate-x-1/2 flex justify-center items-end gap-4 md:gap-6 lg:gap-8 p-4 md:p-8 z-10 flex-wrap">
+<div className="w-full absolute bottom-[5%] left-1/2 transform -translate-x-1/2 flex justify-center items-end gap-[4px] sm:gap-[8px] md:gap-[12px] p-4 md:p-8 z-10 flex-wrap">
         {cards.map((card, index) => (
           <motion.div
             key={index}
             className="
               w-[clamp(200px,25vw,320px)]
-              aspect-[4/3]
+              aspect-[3.5/4]
               cursor-pointer
               relative
               overflow-hidden
