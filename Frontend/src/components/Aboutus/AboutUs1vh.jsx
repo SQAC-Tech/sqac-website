@@ -1,11 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen . bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
       <div className="relative w-full min-h-screen overflow-hidden">
-        {/* Background gradient */}
+       
         <div
           className="absolute inset-0"
           style={{
@@ -13,30 +13,30 @@ const AboutUs = () => {
           }}
         />
 
-        {/* Pink transparent box */}
+       
         <div
           className="absolute left-1/2 -translate-x-1/2 w-[80%] h-[440px] rounded-[40px] z-10"
           style={{
-            background: "rgba(255, 209, 234, 0.6)",
+            background: "linear-gradient(180deg, #FFD1EA80 0%, #F8F4FD 100%)",
+            
             top: "40px",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
           }}
         />
 
-        {/* Foreground content */}
         <div className="relative z-20 flex flex-col justify-center items-center min-h-screen px-4 text-center">
-          {/* Animate Heading (from top) */}
+         
           <motion.h1
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#3B0A4B] to-[#3B0A4B80] bg-clip-text text-transparent font-poppins"
+            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105  font-poppins"
           >
             About Us
           </motion.h1>
 
-          {/* Animate Group Photo */}
+         
           <motion.div
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -45,14 +45,14 @@ const AboutUs = () => {
           >
             <div className="overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=900&q=80"
+                src={TeamPic}
                 alt="SQAC Team Group Photo"
-                className="w-[900px] h-[400px] object-cover"
+                className="w-[700px] h-[400px] object-contain"
               />
             </div>
           </motion.div>
 
-          {/* Animate Paragraph */}
+        
           <motion.div
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
