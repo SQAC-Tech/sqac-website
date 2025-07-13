@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
 const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
@@ -45,9 +45,9 @@ const AboutUs = () => {
           >
             <div className="overflow-hidden rounded-2xl shadow-2xl">
               <img
-                src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=900&q=80"
+                src={TeamPic}
                 alt="SQAC Team Group Photo"
-                className="w-[900px] h-[400px] object-cover"
+                className="w-[700px] h-[400px] object-contain"
               />
             </div>
           </motion.div>
