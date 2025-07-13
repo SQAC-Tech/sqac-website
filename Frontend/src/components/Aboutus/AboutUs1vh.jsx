@@ -5,7 +5,7 @@ const AboutUs = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="relative w-full min-h-screen overflow-hidden">
-        {/* Background gradient */}
+       
         <div
           className="absolute inset-0"
           style={{
@@ -13,7 +13,7 @@ const AboutUs = () => {
           }}
         />
 
-        {/* Pink transparent box */}
+       
         <div
           className="absolute left-1/2 -translate-x-1/2 w-[80%] h-[440px] rounded-[40px] z-10"
           style={{
@@ -24,9 +24,8 @@ const AboutUs = () => {
           }}
         />
 
-        {/* Foreground content */}
         <div className="relative z-20 flex flex-col justify-center items-center min-h-screen px-4 text-center">
-          {/* Animate Heading (from top) */}
+         
           <motion.h1
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -36,7 +35,7 @@ const AboutUs = () => {
             About Us
           </motion.h1>
 
-          {/* Animate Group Photo */}
+         
           <motion.div
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -52,7 +51,7 @@ const AboutUs = () => {
             </div>
           </motion.div>
 
-          {/* Animate Paragraph */}
+        
           <motion.div
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
