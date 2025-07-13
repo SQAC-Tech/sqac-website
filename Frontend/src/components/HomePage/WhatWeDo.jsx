@@ -36,8 +36,7 @@ const WhatWeDoSection = () => {
   const [front, back] = cards[index];
 
   return (
-    <div className="flex px-6 md:px-16 h-screen bg-gradient-to-b from-[#F1C985] via-[#F8F4FD] to-[#F8F4FD] relative overflow-hidden flex-col md:flex-row">
-
+    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-[#F1C985] via-[#F8F4FD] to-[#F8F4FD] relative overflow-hidden flex-col md:flex-row">
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
         initial={{ x: 100, opacity: 0 }}
@@ -54,7 +53,7 @@ const WhatWeDoSection = () => {
       </motion.div>
 
       <motion.div
-        className="flex-1 flex flex-col items-center justify-center relative mt-12 md:mt-0"
+        className="flex-1 flex flex-col items-center justify-center relative mt-12 md:mt-0 overflow-visible"
         initial={{ x: 100, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -76,7 +75,6 @@ const WhatWeDoSection = () => {
 
         <button onClick={() => { setFlip(false); setIndex((index + 1) % cards.length); }} className="absolute right-[-2.5rem] top-1/2 -translate-y-1/2 p-3 bg-cyan-500 text-white rounded-full hover:bg-cyan-600">→</button>
 
-        {/* Count bar positioned just below the card */}
         <div className="flex gap-2 mt-6">
           {cards.map((_, i) => (
             <div key={i} className={`h-2 rounded-full transition-all ${i === index ? 'w-8 bg-gradient-to-r from-purple-500 to-pink-500' : 'w-2 bg-gray-300'}`} />
