@@ -41,7 +41,7 @@ function Content() {
   ];
 
   return (
-    <div className="pt-[100vh] lg:pt-0 min-h-screen bg-gradient-to-b from-pink-100 via-white to-purple-100 overflow-hidden relative">
+    <div className="pt-[120vh] sm:pt-[110vh] md:pt-[100vh] lg:pt-0 min-h-screen bg-gradient-to-b from-pink-100 via-white to-purple-100 overflow-hidden relative">
       <div className="relative">
         <motion.div
           className="absolute z-10 rounded-[50px] sm:rounded-[75px] lg:rounded-[100px] flex flex-col mt-7 h-full"
