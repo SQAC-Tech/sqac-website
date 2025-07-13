@@ -204,7 +204,7 @@ export default function Domains() {
   ];
 
   return (
-    <div className="py-20 lg:py-32" style={{ background: "linear-gradient(to bottom, #F8F4FD, #FFD1EA 90%)" }}>
+    <div className="py-20 lg:py-32 bg-gradient-to-t from-cyan-200 via-cyan-500 to-fuchsia-50" >
       <AnimatePresence>
         {selectedItem && <FlipCardModal item={selectedItem} onClose={() => setSelectedItem(null)} />}
       </AnimatePresence>

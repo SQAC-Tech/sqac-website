@@ -43,7 +43,7 @@ function CenterImage({ sectionHeight }) {
 
   return (
     <div className="sticky top-0 w-full h-screen overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-[#FFD1EA] to-purple-200 flex flex-col items-center justify-center space-y-4">
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-zinc-50 via-orange-200 to-orange-400 flex flex-col items-center justify-center space-y-4">
         <motion.img
           src={Logo}
           alt="SQAC Logo"
@@ -85,6 +85,7 @@ function CenterImage({ sectionHeight }) {
           backgroundSize: bgSize,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
+          height: "100%", 
         }}
       >
         <motion.div

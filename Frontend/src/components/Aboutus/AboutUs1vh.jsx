@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
 const AboutUs = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen . bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
       <div className="relative w-full min-h-screen overflow-hidden">
        
         <div
@@ -17,7 +17,8 @@ const AboutUs = () => {
         <div
           className="absolute left-1/2 -translate-x-1/2 w-[80%] h-[440px] rounded-[40px] z-10"
           style={{
-            background: "rgba(255, 209, 234, 0.6)",
+            background: "linear-gradient(180deg, #FFD1EA80 0%, #F8F4FD 100%)",
+            
             top: "40px",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
@@ -30,7 +31,7 @@ const AboutUs = () => {
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#3B0A4B] to-[#3B0A4B80] bg-clip-text text-transparent font-poppins"
+            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105  font-poppins"
           >
             About Us
           </motion.h1>
