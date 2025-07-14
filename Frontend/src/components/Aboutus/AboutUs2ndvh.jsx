@@ -42,28 +42,34 @@ function ServicesSection() {
       <div className={`grid gap-10 w-full max-w-6xl ${selected ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
         <div className="grid grid-cols-2 gap-6 max-w-2xl mx-auto">
           {serviceCards.map(card => (
-            <div
+            <motion.div
               key={card.id}
+              role="button"
+              aria-label={`Select ${card.name} service`}
               onClick={() => setSelected(card.id)}
-              className={`cursor-pointer bg-white rounded-xl p-6 text-center shadow-md transition-all duration-300 hover:scale-105 hover:shadow-purple-200 ${
-                selected === card.id ? 'bg-purple-100 scale-105 shadow-lg' : ''
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              className={`cursor-pointer bg-white rounded-xl p-6 text-center shadow-md transition-all duration-300 hover:scale-105 hover:shadow-purple-200 hover:border-purple-500 border-2 ${
+                selected === card.id ? 'bg-purple-100 scale-105 shadow-lg border-purple-500 border-2' : ''
               }`}
             >
               <div className="text-5xl mb-3">{card.icon}</div>
               <h3 className="text-xl font-semibold text-purple-800">{card.name}</h3>
-            </div>
+            </motion.div>
           ))}
         </div>
 
         {selected && (
           <motion.div
+          key={selected}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          className="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full relative">
+          className="bg-white rounded-xl shadow-lg p-8 w-full sm:max-w-lg relative">
             <button
               onClick={() => setSelected(null)}
-              className="absolute top-3 right-3 text-xl font-bold text-purple-600 hover:text-purple-800"
+              className="absolute top-3 right-3 text-xl font-bold text-purple-600 hover:text-purple-800 cursor-pointer"
+              aria-label="Close service details"
             >
               ✕
             </button>
