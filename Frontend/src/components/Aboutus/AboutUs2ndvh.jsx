@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+
 
 const services = {
   webdev: {
@@ -54,7 +56,11 @@ function ServicesSection() {
         </div>
 
         {selected && (
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full relative">
+          <motion.div
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.4 }}
+          className="bg-white rounded-xl shadow-lg p-8 max-w-lg w-full relative">
             <button
               onClick={() => setSelected(null)}
               className="absolute top-3 right-3 text-xl font-bold text-purple-600 hover:text-purple-800"
@@ -71,7 +77,7 @@ function ServicesSection() {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

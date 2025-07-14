@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
 const AboutUs = () => {
   return (
-    <div className="min-h-screen . bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
+    <div className="min-h-screen bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
       <div className="relative w-full min-h-screen overflow-hidden">
        
         <div
@@ -69,6 +69,7 @@ const AboutUs = () => {
                 Where code meets perfection — and you're part of it.
               </span>
             </p>
+            
           </motion.div>
         </div>
       </div>
