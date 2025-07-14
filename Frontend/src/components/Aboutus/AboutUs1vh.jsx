@@ -1,9 +1,12 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React , { useRef }from "react";
+import { motion , useInView } from "framer-motion";
 import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
 const AboutUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="min-h-screen bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
+    <section className="min-h-screen py-16 sm:py-24 px-4 sm:px-10 bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
       <div className="relative w-full min-h-screen overflow-hidden">
        
         <div
@@ -25,13 +28,15 @@ const AboutUs = () => {
           }}
         />
 
-        <div className="relative z-20 flex flex-col justify-center items-center min-h-screen px-4 text-center">
+        <div 
+        ref={ref}
+         className="relative z-20 flex flex-col justify-center items-center min-h-[calc(100vh-120px)] px-4 text-center">
          
           <motion.h1
             initial={{ y: -80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105  font-poppins"
+            className="mt-14 text-3xl sm:text-4xl md:text-5xl font-bold mb-4 transition-all duration-300 hover:scale-105 font-poppins"
           >
             About Us
           </motion.h1>
@@ -39,41 +44,46 @@ const AboutUs = () => {
          
           <motion.div
             initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
             className="group mt-4 flex justify-center items-center"
           >
-            <div className="overflow-hidden rounded-2xl shadow-2xl">
+            <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="overflow-hidden rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
               <img
                 src={TeamPic}
                 alt="SQAC Team Group Photo"
-                className="w-[700px] h-[400px] object-contain"
+                className="w-full max-w-md sm:max-w-xl h-auto object-contain"
               />
-            </div>
+            </motion.div>
           </motion.div>
 
         
           <motion.div
             initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
             className="mt-6 max-w-4xl px-4"
           >
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed font-poppins text-center">
+            <p aria-label="SQAC community mission statement" 
+            className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-poppins text-center sm:text-left">
               At SQAC, we believe great software is built through precision and
               passion. We're a student-led community that promotes clean code,
               critical thinking, and collaborative learning through hands-on
               sessions, testing workshops, and real-world projects.
-              <span className="font-semibold text-[#3B0A4B] italic">
+              <blockquote className="font-semibold text-[#3B0A4B] italic">
                 {" "}
                 Where code meets perfection — and you're part of it.
-              </span>
+              </blockquote>
             </p>
             
           </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
