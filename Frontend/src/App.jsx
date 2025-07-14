@@ -11,7 +11,6 @@ import JoinUs from './components/JoinUs/JoinUs.jsx';
 const App = () => {
   return (
     <Router>
-      <div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<Aboutus />} />
@@ -22,7 +21,6 @@ const App = () => {
         </Routes>
 
         <Footer />
-      </div>
     </Router>
   );
 };

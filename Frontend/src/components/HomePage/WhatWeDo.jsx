@@ -36,7 +36,8 @@ const WhatWeDoSection = () => {
   const [front, back] = cards[index];
 
   return (
-    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-[#F1C985] via-[#F8F4FD] to-[#F8F4FD] relative overflow-hidden flex-col md:flex-row">
+    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-t from-fuchsia-50 via-red-300 to-orange-300 overflow-hidden flex-col md:flex-row">
+      
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
         initial={{ x: 100, opacity: 0 }}
