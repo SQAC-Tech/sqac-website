@@ -7,10 +7,12 @@ import Events from './components/Eventspage/Events.jsx';
 import Team from './components/Team/Team.jsx';
 import Projects from './components/Projects/Projects.jsx';
 import JoinUs from './components/JoinUs/JoinUs.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 const App = () => {
   return (
     <Router>
+      <ScrollToTop/>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<Aboutus />} />
@@ -19,7 +21,6 @@ const App = () => {
           <Route path="/projects" element={<Projects />} />
           <Route path="/recruitment" element={<JoinUs />} />
         </Routes>
-
         <Footer />
     </Router>
   );
