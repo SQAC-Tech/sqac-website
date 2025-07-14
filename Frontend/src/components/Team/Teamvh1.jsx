@@ -8,7 +8,7 @@ const Teamvh1 = () => {
     <div className="relative min-h-screen bg-gradient-to-b from-purple-200 via-pink-100 to-orange-100 p-8 overflow-hidden">
   {/* Header */}
   <div className="flex justify-between items-center mb-10">
-    {/* Add header content here if needed */}
+  
   </div>
 
   {/* Randomly placed bubbles */}
@@ -20,12 +20,12 @@ const Teamvh1 = () => {
     <h1 className="absolute top-[30vh] left-[28vw] font-semibold text-[80px] leading-[60px] text-[#5C5C5C]" >TEAM"</h1>
     <motion.div   animate={{ y: [0, -25, 0] }}
      transition={{ duration: 1.7, repeat: Infinity, ease: "easeInOut" }}
-     className="absolute top-[53vh] left-[3vw] bg-red-300 bg-opacity-40 text-sm font-bold rounded-full w-21 h-21 flex items-center justify-center">
+     className="absolute top-[53vh] left-[3vw] bg-red-300 bg-opacity-40  font-['Stick_No_Bills'] text-lg font-bold rounded-full w-21 h-21 flex items-center justify-center">
       LEARNERS
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
     transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-    className="absolute top-[69vh] left-[8vw] bg-[#AFE7D4] text-sm font-bold rounded-full w-26 h-26 flex items-center justify-center">
+    className="absolute top-[69vh] left-[8vw] bg-[#AFE7D4] bg-opacity-70 font-['Stick_No_Bills'] text-4xl font-bold rounded-full w-26 h-26 flex items-center justify-center">
       UI / UX
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
@@ -35,22 +35,22 @@ const Teamvh1 = () => {
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
     transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-     className="absolute top-[45vh] left-[44vw] bg-[#C5FFAA] text-sm font-bold rounded-full w-24 h-24 flex items-center justify-center">
+     className="absolute top-[45vh] left-[44vw] bg-[#C5FFAA] bg-opacity-70 font-['Stick_No_Bills']  text-lg font-bold rounded-full w-24 h-24 flex items-center justify-center">
       EVENTS
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
      transition={{ duration: 1.9, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute top-[65vh] left-[55vw] bg-[#FFE26F8F] bg-opacity-56 text-sm font-bold rounded-full w-27 h-27 flex items-center justify-center">
+      className="absolute top-[65vh] left-[55vw] bg-[#FFE26F8F] bg-opacity-70 font-['Stick_No_Bills']  bg-opacity-56 text-lg font-bold rounded-full w-27 h-27 flex items-center justify-center">
       Developers
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
     transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-     className="absolute top-[15vh] left-[80vw] bg-[#97B6FF] text-sm font-bold rounded-full w-24 h-24 flex items-center justify-center">
+     className="absolute top-[15vh] left-[80vw] bg-[#97B6FF] bg-opacity-70 font-['Stick_No_Bills']  text-lg font-bold rounded-full w-24 h-24 flex items-center justify-center">
       MANAGERS
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
     transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }} 
-     className="absolute top-[56vh] left-[88vw] bg-[#C5A9F4] text-sm font-bold rounded-full w-22 h-22 flex items-center justify-center">
+     className="absolute top-[56vh] left-[88vw] bg-[#C5A9F4] bg-opacity-70 font-['Stick_No_Bills']  text-lg font-bold rounded-full w-22 h-22 flex items-center justify-center">
       TECHIE
     </motion.div>
     <motion.div animate={{ y: [0, -25, 0] }}
