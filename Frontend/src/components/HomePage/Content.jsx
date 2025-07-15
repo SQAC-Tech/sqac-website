@@ -9,12 +9,7 @@ import Navbar from "./Navbar";
 import ContactUs from "./ContactUs";
 
 function Content() {
-  const navItems = [
-    { label: "ABOUT", path: "/about" },
-    { label: "TEAM", path: "/team" },
-    { label: "PROJECTS", path: "/projects" },
-    { label: "EVENTS", path: "/events" },
-  ];
+  
 
   const cards = [
     {
@@ -56,17 +51,8 @@ function Content() {
           animate={{ y: "15vh", x: "-50%", rotate: -0.07 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
         >
-          <nav className="flex flex-wrap items-center justify-center md:justify-end gap-4 lg:gap-8 py-6 px-8">
-            {navItems.map(({ label, path }) => (
-              <Link
-                key={label}
-                to={path}
-                className="relative font-bold text-xl sm:text-2xl md:text-3xl text-orange-400 hover:text-pink-600 transition-all duration-300 uppercase tracking-wide after:content-[''] after:absolute after:left-0 after:bottom-0 after:h-[2px] after:w-0 after:bg-pink-950 after:transition-all after:duration-300 hover:after:w-full"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
+          
+     
         </motion.div>
 
         <Navbar />
