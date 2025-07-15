@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Card, CardContent, Typography, IconButton, Divider, Box, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import StarIcon from "@mui/icons-material/Star";
 import { motion } from 'framer-motion';
 
 
@@ -56,12 +59,10 @@ function ServicesSection() {
     We offer a diverse range of technical and creative services that help turn ideas into action.
   </p>
 
-  {/* Wrapped Card Container */}
 <div className="bg-white/10 backdrop-blur-md border border-purple-900/40 rounded-3xl shadow-2xl p-6 sm:p-12 w-full max-w-7xl">
 
   <div className="grid gap-10 lg:grid-cols-2">
     
-   {/* Left – Service Cards */}
 <div className="grid grid-cols-2 gap-5 sm:gap-6 max-w-2xl mx-auto">
   {serviceCards.map(card => (
     <motion.div
@@ -97,9 +98,6 @@ function ServicesSection() {
   ))}
 </div>
 
-
-
-    {/* Right - Details or Placeholder */}
     <motion.div
       key={selected || 'placeholder'}
       initial={{ opacity: 0, x: 50 }}
@@ -108,64 +106,100 @@ function ServicesSection() {
       className="rounded-2xl shadow-lg p-8 w-full sm:max-w-lg relative flex flex-col justify-center items-center bg-[#eaf9fd] dark:bg-[#202033] text-gray-800 dark:text-purple-100"
     >
       {selected ? (
-  <motion.div
-    key={selected}
-    initial={{ opacity: 0, x: 60 }}
-    animate={{ opacity: 1, x: 0 }}
-    exit={{ opacity: 0, x: 60 }}
-    transition={{ duration: 0.5, ease: "easeOut" }}
-    className="relative bg-[#1a1a2e]/80 backdrop-blur-lg border border-purple-400 rounded-2xl shadow-2xl p-8 w-full sm:max-w-lg flex flex-col
-               ring-2 ring-purple-500/40 hover:ring-purple-500 transition-all duration-300"
-  >
-    {/* Glowing border effect using pseudo-element */}
-    <div className="absolute inset-0 rounded-2xl border-2 border-purple-500 opacity-30 blur-lg animate-pulse pointer-events-none"></div>
-
-    {/* Close Button */}
-    <button
-      onClick={() => setSelected(null)}
-      className="absolute top-3 right-3 text-2xl font-bold text-purple-300 hover:text-purple-100 transition duration-200 z-10"
-      aria-label="Close service details"
-    >
-      ✕
-    </button>
-
-    {/* Title */}
-    <h3 className="text-3xl font-extrabold text-purple-200 mb-3 z-10">
-      {services[selected].title}
-    </h3>
-
-    {/* Description */}
-    <p className="text-base sm:text-lg text-purple-300 mb-6 leading-relaxed z-10">
-      {services[selected].desc}
-    </p>
-
-    {/* Features List */}
-    <ul className="space-y-3 mt-auto z-10">
-      {services[selected].features.map((f, i) => (
-        <li
-          key={i}
-          className="flex items-center text-sm sm:text-base text-purple-100"
+          <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full sm:max-w-lg"
         >
-          <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
-          {f}
-        </li>
-      ))}
-    </ul>
-  </motion.div>
+          <Card
+            sx={{
+              bgcolor: "#1a1a2e",
+              color: "white",
+              borderRadius: 3,
+              boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)",
+              position: "relative",
+              p: 2,
+            }}
+          >
+            <IconButton
+              onClick={() => setSelected(null)}
+              sx={{ position: "absolute", top: 12, right: 12, color: "white" }}
+              aria-label="Close"
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <CardContent>
+              <Typography variant="h5" fontWeight={600} gutterBottom>
+                {services[selected].title}
+              </Typography>
+
+              <Typography variant="body1" gutterBottom color="gray">
+                {services[selected].desc}
+              </Typography>
+
+              <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.2)" }} />
+
+              <Typography variant="subtitle1" gutterBottom>
+                Features:
+              </Typography>
+
+              <List dense>
+                {services[selected].features.map((feature, i) => (
+                  <ListItem key={i} disableGutters sx={{ px: 0 }}>
+                    <Box
+                      sx={{
+                        width: 8,
+                        height: 8,
+                        bgcolor: "#9f7aea",
+                        borderRadius: "50%",
+                        mr: 2,
+                        mt: "6px",
+                        flexShrink: 0,
+                      }}
+                    />
+                    <ListItemText primary={feature} />
+                  </ListItem>
+                ))}
+              </List>
+            </CardContent>
+          </Card>
+        </motion.div>
 ) : (
   <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className="hidden lg:flex flex-col justify-center items-center text-center bg-[#1a1a2e]/80 backdrop-blur-lg rounded-xl shadow-lg border border-purple-700/30 p-8 w-full sm:max-w-lg text-purple-100
-               ring-2 ring-purple-500/20 hover:ring-purple-400/40 transition-all duration-300"
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  className="w-full sm:max-w-lg"
+>
+  <Card
+    sx={{
+      bgcolor: "#1a1a2e",
+      color: "white",
+      borderRadius: 3,
+      boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)",
+      position: "relative",
+      px: 5,
+      py: 6,
+      textAlign: "center",
+    }}
   >
-    <div className="text-6xl mb-4">✨</div>
-    <h3 className="text-2xl font-semibold text-purple-200 mb-2">Welcome to SQAC Services</h3>
-    <p className="text-purple-300 text-sm sm:text-base">
-      Select a service card on the left to explore what we offer — whether you're into tech, design, or community!
-    </p>
-  </motion.div>
+    <CardContent>
+      <Box sx={{ fontSize: "3.5rem", mb: 3 }}>✨</Box>
+
+      <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#d8b4fe" }}>
+        Welcome to SQAC Services
+      </Typography>
+
+      <Typography variant="body1" sx={{ fontSize: "1.125rem", color: "#c4c4c4" }}>
+        Select a service card on the left to explore what we offer — whether you're into tech, design, or corporate!
+      </Typography>
+    </CardContent>
+  </Card>
+</motion.div>
+
+
 )}
 
     </motion.div>
