@@ -108,39 +108,66 @@ function ServicesSection() {
       className="rounded-2xl shadow-lg p-8 w-full sm:max-w-lg relative flex flex-col justify-center items-center bg-[#eaf9fd] dark:bg-[#202033] text-gray-800 dark:text-purple-100"
     >
       {selected ? (
-        <>
-          <button
-            onClick={() => setSelected(null)}
-            className="absolute top-3 right-3 text-xl font-bold text-purple-600 hover:text-purple-800 dark:hover:text-purple-300 cursor-pointer"
-            aria-label="Close service details"
-          >
-            ✕
-          </button>
-          <h3 className="text-2xl font-bold text-purple-700 dark:text-purple-300 mb-4">{services[selected].title}</h3>
-          <p className="text-gray-700 dark:text-purple-200 mb-4">{services[selected].desc}</p>
-          <ul className="space-y-2 text-left mt-4">
-            {services[selected].features.map((f, i) => (
-              <li key={i} className="flex items-center text-gray-700 dark:text-purple-200">
-                <span className="w-2 h-2 bg-purple-500 rounded-full mr-3" />
-                <span>{f}</span>
-              </li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="hidden lg:flex flex-col justify-center items-center text-center bg-gradient-to-br from-[#1a1a2e] to-[#2c2c54] rounded-2xl shadow-lg border border-purple-700/30 p-8 w-full sm:max-w-lg text-purple-100"
+  <motion.div
+    key={selected}
+    initial={{ opacity: 0, x: 60 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: 60 }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
+    className="relative bg-[#1a1a2e]/80 backdrop-blur-lg border border-purple-400 rounded-2xl shadow-2xl p-8 w-full sm:max-w-lg flex flex-col
+               ring-2 ring-purple-500/40 hover:ring-purple-500 transition-all duration-300"
+  >
+    {/* Glowing border effect using pseudo-element */}
+    <div className="absolute inset-0 rounded-2xl border-2 border-purple-500 opacity-30 blur-lg animate-pulse pointer-events-none"></div>
+
+    {/* Close Button */}
+    <button
+      onClick={() => setSelected(null)}
+      className="absolute top-3 right-3 text-2xl font-bold text-purple-300 hover:text-purple-100 transition duration-200 z-10"
+      aria-label="Close service details"
+    >
+      ✕
+    </button>
+
+    {/* Title */}
+    <h3 className="text-3xl font-extrabold text-purple-200 mb-3 z-10">
+      {services[selected].title}
+    </h3>
+
+    {/* Description */}
+    <p className="text-base sm:text-lg text-purple-300 mb-6 leading-relaxed z-10">
+      {services[selected].desc}
+    </p>
+
+    {/* Features List */}
+    <ul className="space-y-3 mt-auto z-10">
+      {services[selected].features.map((f, i) => (
+        <li
+          key={i}
+          className="flex items-center text-sm sm:text-base text-purple-100"
         >
-          <div className="text-6xl mb-4">✨</div>
-          <h3 className="text-2xl font-semibold text-purple-300 mb-2">Welcome to SQAC Services</h3>
-          <p className="text-purple-200 text-sm sm:text-base">
-            Select a service card on the left to explore what we offer — whether you're into tech, design, or community!
-          </p>
-        </motion.div>
-      )}
+          <span className="w-2 h-2 bg-purple-400 rounded-full mr-3" />
+          {f}
+        </li>
+      ))}
+    </ul>
+  </motion.div>
+) : (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="hidden lg:flex flex-col justify-center items-center text-center bg-[#1a1a2e]/80 backdrop-blur-lg rounded-xl shadow-lg border border-purple-700/30 p-8 w-full sm:max-w-lg text-purple-100
+               ring-2 ring-purple-500/20 hover:ring-purple-400/40 transition-all duration-300"
+  >
+    <div className="text-6xl mb-4">✨</div>
+    <h3 className="text-2xl font-semibold text-purple-200 mb-2">Welcome to SQAC Services</h3>
+    <p className="text-purple-300 text-sm sm:text-base">
+      Select a service card on the left to explore what we offer — whether you're into tech, design, or community!
+    </p>
+  </motion.div>
+)}
+
     </motion.div>
   </div>
 </div>
