@@ -6,7 +6,7 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen py-16 sm:py-24 px-4 sm:px-10 bg-gradient-to-t from-pink-400 via-red-400 to-orange-600">
+    <section className="min-h-screen py-16 sm:py-24 px-4 sm:px-10 bg-gradient-to-t from-fuchsia-50 via-red-300 to-orange-300">
       <div className="relative w-full min-h-screen overflow-hidden">
        
         <div
