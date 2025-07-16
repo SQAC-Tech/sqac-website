@@ -49,10 +49,14 @@ function ServicesSection() {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    if (selected) {
-      document.getElementById("details-card")?.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [selected]);
+  if (selected && window.innerWidth < 768) {
+    document.getElementById("details-card")?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }
+}, [selected]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-t from-cyan-200 via-cyan-500 to-fuchsia-50 flex flex-col items-center py-16 px-4">

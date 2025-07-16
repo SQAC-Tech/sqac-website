@@ -1,87 +1,54 @@
-import React , { useRef }from "react";
-import { motion , useInView } from "framer-motion";
-import TeamPic from '../../assets/Demo_SQAC_Team.jpg'
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import TeamPic from "../../assets/Demo_SQAC_Team.jpg";
+
 const AboutUs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen py-16 sm:py-24 px-4 sm:px-10 bg-gradient-to-t from-fuchsia-50 via-red-300 to-orange-300">
-      <div className="relative w-full min-h-screen overflow-hidden">
-       
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(180deg, #FFD1EA80 0%, #F8F4FD 100%)",
-          }}
-        />
+    <section className="min-h-[95vh] px-2 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-pink-50 via-red-200 to-orange-100">
+      <div ref={ref} className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto">
 
-       
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-[80%] h-[440px] rounded-[40px] z-10"
-          style={{
-            background: "linear-gradient(180deg, #FFD1EA80 0%, #F8F4FD 100%)",
-            
-            top: "40px",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-          }}
-        />
+        <motion.h1
+          initial={{ y: -40, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 font-poppins hover:scale-105 transition-transform">
+          About Us
+        </motion.h1>
 
-        <div 
-        ref={ref}
-         className="relative z-20 flex flex-col justify-center items-center min-h-[calc(100vh-120px)] px-4 text-center">
-         
-          <motion.h1
-            initial={{ y: -80, opacity: 0 }}
+        <motion.div
+          initial={{ scale: 0.97, opacity: 0 }}
+          animate={isInView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+          className="bg-white/30 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-[95%] sm:max-w-[90%]">
+          <div className="rounded-xl overflow-hidden shadow-md mb-5">
+            <img
+              src={TeamPic}
+              alt="SQAC Team"
+              className="w-full h-[300px] sm:h-[340px] object-cover object-center"
+            />
+          </div>
+
+          <motion.p
+            initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mt-14 text-3xl sm:text-4xl md:text-5xl font-bold mb-4 transition-all duration-300 hover:scale-105 font-poppins"
-          >
-            About Us
-          </motion.h1>
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="text-sm sm:text-base text-gray-800 font-poppins leading-relaxed">
+            At <strong>SQAC</strong>, we’re a student-led community passionate about clean
+            code, real-world projects, and collaborative learning. We host hands-on sessions,
+            testing workshops, and build future-ready developers.
+          </motion.p>
 
-         
-          <motion.div
-            initial={{ y: 60, opacity: 0 }}
+          <motion.blockquote
+            initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="group mt-4 flex justify-center items-center"
-          >
-            <motion.div
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : {}}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="overflow-hidden rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
-              <img
-                src={TeamPic}
-                alt="SQAC Team Group Photo"
-                className="w-full max-w-md sm:max-w-xl h-auto object-contain"
-              />
-            </motion.div>
-          </motion.div>
-
-        
-          <motion.div
-            initial={{ y: 60, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-            className="mt-6 max-w-4xl px-4"
-          >
-            <p aria-label="SQAC community mission statement" 
-            className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed font-poppins text-center sm:text-left">
-              At SQAC, we believe great software is built through precision and
-              passion. We're a student-led community that promotes clean code,
-              critical thinking, and collaborative learning through hands-on
-              sessions, testing workshops, and real-world projects.
-              <blockquote className="font-semibold text-[#3B0A4B] italic">
-                {" "}
-                Where code meets perfection — and you're part of it.
-              </blockquote>
-            </p>
-            
-          </motion.div>
-        </div>
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-4 text-purple-800 text-base italic font-semibold">
+            “Where code meets perfection — and you're part of it.”
+          </motion.blockquote>
+        </motion.div>
       </div>
     </section>
   );
