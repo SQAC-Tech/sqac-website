@@ -62,7 +62,6 @@ const Team = () => {
 
   const groupedTeam = groupTeamByPosition();
 
-  // Adjusted display order: President > Board Member > Domain Lead > Associate > Member
   const displayOrder = ['President', 'Board Member', 'Domain Lead', 'Associate', 'Member'];
 
   return (
@@ -101,13 +100,20 @@ const Team = () => {
                     hierarchyClass = 'border-2 border-gray-200';
                   }
 
+                  let imageUrl = Image;
+                  if (imageUrl && imageUrl.includes('drive.google.com/open?id=')) {
+                    const fileId = imageUrl.split('id=')[1];
+                    imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+                  }
+
+
                   return (
                     <div
                       key={index}
                       className={`bg-white rounded-xl shadow-lg p-4 w-64 text-center ${hierarchyClass}`}
                     >
                       <img
-                        src={Image || 'https://via.placeholder.com/150'}
+                        src={imageUrl || 'https://via.placeholder.com/150'}
                         alt={Name}
                         className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
                       />
