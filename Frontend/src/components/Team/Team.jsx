@@ -68,8 +68,7 @@ const Team = () => {
   return (
     <div>
       <Navbar />
-      <div className="p-6 bg-gradient-to-b from-yellow-100 to-pink-100">
-
+      <div className="pt-20 p-6 bg-gradient-to-b from-yellow-100 to-pink-100">
         {displayOrder.map((groupName) => (
           groupedTeam[groupName].length > 0 && (
             <div key={groupName} className="mb-10">
@@ -108,7 +107,6 @@ const Team = () => {
                     imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
                   }
 
-
                   return (
                     <div
                       key={index}
@@ -133,7 +131,7 @@ const Team = () => {
                             <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
                           </a>
                         )}
-                        {Instagram && (
+                        {GitHub && (
                           <a href={GitHub} target="_blank" rel="noopener noreferrer">
                             <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
                           </a>
@@ -146,7 +144,6 @@ const Team = () => {
             </div>
           )
         ))}
-
       </div>
     </div>
   );
