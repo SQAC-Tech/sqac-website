@@ -1,51 +1,86 @@
-import React from 'react';
-import boardIcon from '../../assets/boardIcon.png';
-import techIcon from '../../assets/techIcon.png';
-import corpIcon from '../../assets/corpIcon.png';
-import creativeIcon from '../../assets/creativeIcon.png';
+import React, { useState } from 'react';
+import {Users,Code2,Building2,Palette,Globe,Brain,Smartphone,Megaphone,HandCoins,Calendar} from 'lucide-react';
 
 const Teamvh2 = () => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const handleCardClick = (domain) => {
+    if (domain === 'Technical' || domain === 'Corporate') {
+      setOpenDropdown(openDropdown === domain ? null : domain);
+    } else {
+      console.log(`Navigating to: ${domain}`);
+    }
+  };
+
+  const handleSubdomainClick = (sub) => {
+    console.log(`Navigating to: ${sub}`);
+  };
+
+  const cardStyle =
+    'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
+
+  const iconStyle = 'w-16 h-16 sm:w-20 sm:h-20 mb-4 text-indigo-700';
+
+  const dropdownStyle =
+    'mt-2 bg-white shadow-md rounded-xl px-4 py-3 text-sm font-medium text-gray-800 space-y-2';
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-100 via-white to-pink-100 flex flex-col items-center justify-center px-4 py-10">
-      
-      {/* Heading */}
-      <h1 className="text-3xl sm:text-4xl md:text-5xl font-['Protest_Riot'] font-extrabold mb-12 text-[#040101] text-center">
-        CHOOSE DOMAIN
+    <div className="min-h-screen bg-gradient-to-b from-orange-100 via-white to-pink-100 flex flex-col items-center justify-center px-4 py-10 font-['Poppins']">
+
+      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">
+        Choose Your Domain
       </h1>
 
-      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20">
-        
-        {/* Card 1: Board Members */}
-        <div className="flex flex-col items-center text-center">
-          <img src={boardIcon} alt="Board" className="w-24 sm:w-28 md:w-32 h-auto mb-4" />
-          <p className="text-xl sm:text-2xl font-bold font-['Protest_Riot'] leading-none">
-            Board<br />Members
-          </p>
+
+        <div className={cardStyle} onClick={() => handleCardClick('Board Members')}>
+          <Users className={iconStyle} />
+          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Board Members</p>
         </div>
 
-        {/* Card 2: Technical */}
-        <div className="flex flex-col items-center text-center">
-          <img src={techIcon} alt="Technical" className="w-24 sm:w-28 md:w-32 h-auto mb-4" />
-          <p className="text-xl sm:text-2xl font-bold font-['Protest_Riot'] leading-none">
-            Technical
-          </p>
+        <div className="flex flex-col items-center">
+          <div className={cardStyle} onClick={() => handleCardClick('Technical')}>
+            <Code2 className={iconStyle} />
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Technical</p>
+          </div>
+          {openDropdown === 'Technical' && (
+            <div className={dropdownStyle}>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Web Dev')}>
+                <Globe className="w-4 h-4" /> Web Dev
+              </div>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('App Dev')}>
+                <Smartphone className="w-4 h-4" /> App Dev
+              </div>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('AI/ML')}>
+                <Brain className="w-4 h-4" /> AI / ML
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Card 3: Corporate */}
-        <div className="flex flex-col items-center text-center">
-          <img src={corpIcon} alt="Corporate" className="w-24 sm:w-28 md:w-32 h-auto mb-4" />
-          <p className="text-xl sm:text-2xl font-bold font-['Protest_Riot']">
-            Corporate
-          </p>
+        <div className="flex flex-col items-center">
+          <div className={cardStyle} onClick={() => handleCardClick('Corporate')}>
+            <Building2 className={iconStyle} />
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Corporate</p>
+          </div>
+          {openDropdown === 'Corporate' && (
+            <div className={dropdownStyle}>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('PR')}>
+                <Megaphone className="w-4 h-4" /> PR
+              </div>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Sponsorship')}>
+                <HandCoins className="w-4 h-4" /> Sponsorship
+              </div>
+              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Events')}>
+                <Calendar className="w-4 h-4" /> Events
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Card 4: Creative */}
-        <div className="flex flex-col items-center text-center">
-          <img src={creativeIcon} alt="Creative" className="w-24 sm:w-28 md:w-32 h-auto mb-4" />
-          <p className="text-xl sm:text-2xl font-bold font-['Protest_Riot']">
-            Creative
-          </p>
+        <div className={cardStyle} onClick={() => handleCardClick('Creative')}>
+          <Palette className={iconStyle} />
+          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Creative</p>
         </div>
       </div>
     </div>

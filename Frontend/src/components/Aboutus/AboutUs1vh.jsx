@@ -27,7 +27,7 @@ const AboutUs = () => {
             <img
               src={TeamPic}
               alt="SQAC Team"
-              className="w-full h-[300px] sm:h-[340px] object-cover object-center"
+              className="w-full max-w-[500px] h-auto mx-auto object-cover rounded-xl"
             />
           </div>
 
