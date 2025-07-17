@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from '../HomePage/Navbar';
 import linkedinIcon from '../../assets/linkedin.png';
 import instagramIcon from '../../assets/instagram.png';
+import githubIcon from '../../assets/github.png';
 
 const Team = () => {
   const [teamData, setTeamData] = useState([]);
@@ -80,6 +81,7 @@ const Team = () => {
                     ['Position in SQAC']: Position,
                     ['LinkedIn Profile Link']: LinkedIn,
                     ['Instagram Profile Link']: Instagram,
+                    ['GitHub Profile Link']: GitHub,
                     ['Your Image For Website']: Image,
                     ['Your Core Domain']: Domain,
                   } = member;
@@ -129,6 +131,11 @@ const Team = () => {
                         {Instagram && (
                           <a href={Instagram} target="_blank" rel="noopener noreferrer">
                             <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
+                          </a>
+                        )}
+                        {Instagram && (
+                          <a href={GitHub} target="_blank" rel="noopener noreferrer">
+                            <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
                           </a>
                         )}
                       </div>
