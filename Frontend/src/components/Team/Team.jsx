@@ -4,6 +4,8 @@ import Navbar from '../HomePage/Navbar';
 import linkedinIcon from '../../assets/linkedin.png';
 import instagramIcon from '../../assets/instagram.png';
 import githubIcon from '../../assets/github.png';
+import Teamvh1 from './Teamvh1';
+import Teamvh2 from './Teamvh2';
 
 const Team = () => {
   const [teamData, setTeamData] = useState([]);
@@ -68,6 +70,8 @@ const Team = () => {
   return (
     <div>
       <Navbar />
+      <Teamvh1/>
+      <Teamvh2/>
       <div className="pt-20 p-6 bg-gradient-to-b from-yellow-100 to-pink-100">
         {displayOrder.map((groupName) => (
           groupedTeam[groupName].length > 0 && (
