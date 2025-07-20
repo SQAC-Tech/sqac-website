@@ -1,7 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100..900;1,100..900&family=Protest+Riot&family=Stick+No+Bills:wght@200..800&display=swap");
 @import "tailwindcss";
 
 :root {
   --font-logo: "Montserrat", "sans-serif";
+  --font-bubble: "Stick No Bills", "sans-serif";
+  --font-head: "Poppins", "sans-serif";
+  --font-domains: "Protest Riot", "sans-serif";
 }
 *{
   scroll-behavior: smooth;
@@ -25,6 +29,27 @@
 
 .animate-glowBlink {
   animation: glowBlink 2s infinite ease-in-out;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
+}
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
 

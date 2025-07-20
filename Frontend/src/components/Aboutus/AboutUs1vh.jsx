@@ -1,78 +1,56 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import TeamPic from "../../assets/Demo_SQAC_Team.jpg";
 
 const AboutUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <div className="min-h-screen bg-white">
-      <div className="relative w-full min-h-screen overflow-hidden">
-        {/* Background gradient */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background: "linear-gradient(180deg, #FFD1EA80 0%, #F8F4FD 100%)",
-          }}
-        />
+    <section className="min-h-[95vh] px-2 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-pink-50 via-red-200 to-orange-100">
+      <div ref={ref} className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto">
 
-        {/* Pink transparent box */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-[80%] h-[440px] rounded-[40px] z-10"
-          style={{
-            background: "rgba(255, 209, 234, 0.6)",
-            top: "40px",
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-          }}
-        />
+        <motion.h1
+          initial={{ y: -40, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 font-poppins hover:scale-105 transition-transform">
+          About Us
+        </motion.h1>
 
-        {/* Foreground content */}
-        <div className="relative z-20 flex flex-col justify-center items-center min-h-screen px-4 text-center">
-          {/* Animate Heading (from top) */}
-          <motion.h1
-            initial={{ y: -80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mt-14 text-4xl md:text-5xl lg:text-6xl font-bold mb-4 transition-all duration-300 hover:scale-105 bg-gradient-to-b from-[#3B0A4B] to-[#3B0A4B80] bg-clip-text text-transparent font-poppins"
-          >
-            About Us
-          </motion.h1>
+        <motion.div
+          initial={{ scale: 0.97, opacity: 0 }}
+          animate={isInView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
+          className="bg-white/30 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-[95%] sm:max-w-[90%]">
+          <div className="rounded-xl overflow-hidden shadow-md mb-5">
+            <img
+              src={TeamPic}
+              alt="SQAC Team"
+              className="w-full max-w-[500px] h-auto mx-auto object-cover rounded-xl"
+            />
+          </div>
 
-          {/* Animate Group Photo */}
-          <motion.div
-            initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-            className="group mt-4 flex justify-center items-center"
-          >
-            <div className="overflow-hidden rounded-2xl shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=900&q=80"
-                alt="SQAC Team Group Photo"
-                className="w-[900px] h-[400px] object-cover"
-              />
-            </div>
-          </motion.div>
+          <motion.p
+            initial={{ y: 30, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            className="text-sm sm:text-base text-gray-800 font-poppins leading-relaxed">
+            At <strong>SQAC</strong>, we’re a student-led community passionate about clean
+            code, real-world projects, and collaborative learning. We host hands-on sessions,
+            testing workshops, and build future-ready developers.
+          </motion.p>
 
-          {/* Animate Paragraph */}
-          <motion.div
-            initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}
-            className="mt-6 max-w-4xl px-4"
-          >
-            <p className="text-base md:text-lg text-gray-700 leading-relaxed font-poppins text-center">
-              At SQAC, we believe great software is built through precision and
-              passion. We're a student-led community that promotes clean code,
-              critical thinking, and collaborative learning through hands-on
-              sessions, testing workshops, and real-world projects.
-              <span className="font-semibold text-[#3B0A4B] italic">
-                {" "}
-                Where code meets perfection — and you're part of it.
-              </span>
-            </p>
-          </motion.div>
-        </div>
+          <motion.blockquote
+            initial={{ y: 20, opacity: 0 }}
+            animate={isInView ? { y: 0, opacity: 1 } : {}}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-4 text-purple-800 text-base italic font-semibold">
+            “Where code meets perfection — and you're part of it.”
+          </motion.blockquote>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

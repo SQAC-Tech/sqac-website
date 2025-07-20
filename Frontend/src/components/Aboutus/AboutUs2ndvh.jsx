@@ -1,83 +1,208 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, Typography, IconButton, Divider, Box, List, ListItem, ListItemText } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { motion } from 'framer-motion';
 
 const services = {
   webdev: {
     title: 'Web Development',
     desc: 'We build responsive websites using React, Node.js, and full-stack tech.',
-    features: ['Custom Web Apps', 'E-commerce', 'API Development', 'DB Design']
+    features: ['Custom Web Apps', 'E-commerce Platforms', 'API Integration', 'Database Design']
+  },
+  appdev: {
+    title: 'App Development',
+    desc: 'Crafting intuitive mobile apps using modern frameworks for Android and iOS.',
+    features: ['Cross-platform Apps', 'React Native & Flutter', 'UI/UX Design', 'App Deployment']
   },
   aiml: {
-    title: 'AI/ML',
+    title: 'AI / ML',
     desc: 'Automate and gain insights with intelligent AI/ML systems.',
-    features: ['Analytics', 'NLP', 'Computer Vision', 'Recommendations']
+    features: ['Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Recommendation Engines']
   },
-  creatives: {
-    title: 'Creatives',
-    desc: 'We create stunning designs and brand experiences.',
-    features: ['Brand Design', 'UI/UX', 'Motion Graphics', 'Illustrations']
+  events: {
+    title: 'Event Management',
+    desc: 'Organizing impactful tech events, workshops, and community meetups.',
+    features: ['Hackathons', 'Seminars', 'Meetups', 'Community Sessions']
   },
-  corporate: {
-    title: 'Corporate',
-    desc: 'Optimize operations with our digital corporate solutions.',
-    features: ['Consulting', 'Automation', 'Transformation', 'Project Mgmt']
+  sponsor: {
+    title: 'Sponsorship',
+    desc: 'Building corporate relationships and securing funding for initiatives.',
+    features: ['Brand Collaborations', 'Fundraising', 'Corporate Outreach', 'Partnership Growth']
+  },
+  pr: {
+    title: 'Public Relations',
+    desc: 'Managing our external communication and media presence.',
+    features: ['Content Creation', 'Social Media Strategy', 'Press Releases', 'Community Engagement']
   }
 };
 
 const serviceCards = [
-  { id: 'webdev', name: 'Web Dev', icon: '🌐' },
-  { id: 'aiml', name: 'AI/ML', icon: '🤖' },
-  { id: 'creatives', name: 'Creatives', icon: '🎨' },
-  { id: 'corporate', name: 'Corporate', icon: '🏢' }
+  { id: 'webdev', name: 'Web Dev', icon: '🌐', category: 'Tech' },
+  { id: 'appdev', name: 'App Dev', icon: '📱', category: 'Tech' },
+  { id: 'aiml', name: 'AI/ML', icon: '🤖', category: 'Tech' },
+  { id: 'events', name: 'Events', icon: '📅', category: 'Corporate' },
+  { id: 'sponsor', name: 'Sponsors', icon: '💰', category: 'Corporate' },
+  { id: 'pr', name: 'Public Relations', icon: '🗣️', category: 'Corporate' },
 ];
 
-const ServicesSection = () => {
+function ServicesSection() {
   const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+  if (selected && window.innerWidth < 768) {
+    document.getElementById("details-card")?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest"
+    });
+  }
+}, [selected]);
+
+
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-pink-300 to-purple-100" />
-      <div className="absolute inset-0 flex justify-center items-center z-0">
-        <div className="w-full max-w-6xl h-[600px] rounded-[40px] bg-pink-100/50 backdrop-blur-sm" />
-      </div>
-      <div className="relative z-10 flex flex-col items-center px-4 pt-16">
-        <motion.h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-b from-[#3B0A4B] to-[#7B2A8C] bg-clip-text text-transparent font-poppins" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          Services We Provide
-        </motion.h2>
-        <div className={`grid gap-12 w-full max-w-7xl ${selected ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-          <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
-            {serviceCards.map((card, i) => (
-              <motion.div key={card.id} onClick={() => setSelected(card.id)} className={`relative p-10 rounded-2xl cursor-pointer flex flex-col items-center text-center min-h-[200px] ${selected === card.id ? 'bg-gradient-to-br from-pink-200 to-purple-200 shadow-xl scale-105' : 'bg-white/80 hover:bg-gradient-to-br hover:from-pink-100 hover:to-purple-100 shadow-md'}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: i * 0.1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <div className="text-5xl mb-6">{card.icon}</div>
-                <h3 className="text-2xl font-semibold text-gray-800">{card.name}</h3>
-                {selected === card.id && (
-                  <motion.div className="absolute top-3 right-3 w-3 h-3 bg-pink-500 rounded-full" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.3 }} />
-                )}
+    <div className="min-h-screen bg-gradient-to-t from-cyan-200 via-cyan-500 to-fuchsia-50 flex flex-col items-center py-16 px-4">
+      <h2 className="text-4xl font-bold text-purple-600 mb-4 drop-shadow-md">Services We Provide</h2>
+
+      <p className="text-center text-gray-600 max-w-2xl mb-10">
+        We offer a diverse range of technical and creative services that help turn ideas into action.
+      </p>
+
+      <div className="bg-white/10 backdrop-blur-md border border-purple-900/40 rounded-3xl shadow-2xl p-6 sm:p-12 w-full max-w-7xl">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-2 gap-5 sm:gap-6 max-w-2xl mx-auto">
+            {serviceCards.map(card => (
+              <motion.div
+                key={card.id}
+                role="button"
+                aria-label={`Select ${card.name} service`}
+                onClick={() => setSelected(card.id)}
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.96 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                className={`
+                  group relative cursor-pointer select-none rounded-2xl p-6 flex flex-col items-center
+                  text-center shadow-md transition-all duration-300 border
+                  backdrop-blur-sm bg-[#2c2c54]/60 border-transparent
+                  hover:shadow-purple-400/40 hover:border-purple-400/60 hover:ring-2 hover:ring-purple-400/20
+                  ${selected === card.id ? 'bg-[#3d3d6b]/80 shadow-lg scale-105 border-purple-500 ring-2 ring-purple-400/40' : ''}
+                `}
+              >
+                <div className={`text-4xl sm:text-5xl mb-4 transition-colors duration-300 ${selected === card.id ? 'text-purple-200' : 'text-purple-100'} group-hover:text-purple-300`}>
+                  {card.icon}
+                </div>
+                <h3 className={`font-semibold tracking-wide text-base sm:text-lg ${selected === card.id ? 'text-purple-100' : 'text-purple-200'}`}>
+                  {card.name}
+                </h3>
+
+                <span className="pointer-events-none absolute inset-0 rounded-2xl group-hover:before:opacity-40 before:absolute before:-inset-1 before:rounded-2xl before:bg-gradient-to-br before:from-purple-400/30 before:to-purple-600/10 before:blur-md before:opacity-0 transition-opacity duration-300" />
               </motion.div>
             ))}
           </div>
-          <AnimatePresence>
-            {selected && (
-              <motion.div key="info-panel" className="flex justify-center items-center -ml-6" initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 100 }} transition={{ duration: 0.5 }}>
-                <div className="relative p-10 bg-white/90 border border-pink-200 rounded-2xl shadow-xl w-full max-w-lg min-h-[300px]">
-                  <button onClick={() => setSelected(null)} className="absolute top-3 right-3 text-xl font-bold text-pink-800 hover:text-pink-900">✕</button>
-                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-b from-[#3B0A4B] to-[#7B2A8C] bg-clip-text text-transparent font-poppins">{services[selected].title}</h3>
-                  <p className="text-gray-600 mb-6 text-[17px] leading-relaxed">{services[selected].desc}</p>
-                  <ul className="space-y-3">
-                    {services[selected].features.map((f, i) => (
-                      <motion.li key={i} className="flex items-center text-gray-700 text-[16px]" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.1 }}>
-                        <span className="w-2 h-2 bg-pink-500 rounded-full mr-3" />
-                        {f}
-                      </motion.li>
-                    ))}
-                  </ul>
-                </div>
+
+          <motion.div
+            key={selected || 'placeholder'}
+            id="details-card"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.4 }}
+            className="rounded-2xl shadow-lg w-full sm:max-w-lg sm:max-h-[85vh] sm:overflow-y-auto p-6 sm:p-8 pb-10 relative flex flex-col justify-start items-start bg-[#eaf9fd] dark:bg-[#202033] text-gray-800 dark:text-purple-100 scroll-mt-24"
+          >
+            {selected ? (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full"
+              >
+                <Card
+                  sx={{
+                    bgcolor: "#1a1a2e",
+                    color: "white",
+                    borderRadius: 3,
+                    boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)",
+                    position: "relative",
+                    p: 2,
+                  }}
+                >
+                  <IconButton
+                    onClick={() => setSelected(null)}
+                    sx={{ position: "absolute", top: 12, right: 12, color: "white" }}
+                    aria-label="Close"
+                  >
+                    <CloseIcon />
+                  </IconButton>
+
+                  <CardContent>
+                    <Typography variant="h5" fontWeight={600} gutterBottom>
+                      {services[selected].title}
+                    </Typography>
+
+                    <Typography variant="body1" gutterBottom color="gray">
+                      {services[selected].desc}
+                    </Typography>
+
+                    <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.2)" }} />
+
+                    <Typography variant="subtitle1" gutterBottom>
+                      Features:
+                    </Typography>
+
+                    <List dense>
+                      {services[selected].features.map((feature, i) => (
+                        <ListItem key={i} disableGutters sx={{ px: 0 }}>
+                          <Box
+                            sx={{
+                              width: 8,
+                              height: 8,
+                              bgcolor: "#9f7aea",
+                              borderRadius: "50%",
+                              mr: 2,
+                              mt: "6px",
+                              flexShrink: 0,
+                            }}
+                          />
+                          <ListItemText primary={feature} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full"
+              >
+                <Card
+                  sx={{
+                    bgcolor: "#1a1a2e",
+                    color: "white",
+                    borderRadius: 3,
+                    boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)",
+                    position: "relative",
+                    px: 5,
+                    py: 6,
+                    textAlign: "center",
+                  }}
+                >
+                  <CardContent>
+                    <Box sx={{ fontSize: "3.5rem", mb: 3 }}>✨</Box>
+                    <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#d8b4fe" }}>
+                      Welcome to SQAC Services
+                    </Typography>
+                    <Typography variant="body1" sx={{ fontSize: "1.125rem", color: "#c4c4c4" }}>
+                      Select a service card on the left to explore what we offer — whether you're into tech, design, or corporate!
+                    </Typography>
+                  </CardContent>
+                </Card>
               </motion.div>
             )}
-          </AnimatePresence>
+          </motion.div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default ServicesSection;

@@ -23,7 +23,7 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full bg-gradient-to-br from-[#FFD1EA] to-purple-200 text-gray-800 px-6 py-16">
+    <footer className="w-full bg-gradient-to-t from-violet-300 via-purple-200 to-cyan-200 text-gray-800 px-6 py-16">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Left Column: Contact Form */}
         <motion.div
