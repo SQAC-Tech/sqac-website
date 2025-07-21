@@ -32,7 +32,6 @@ const Team = () => {
   const [selectedDomain, setSelectedDomain] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch team data
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
@@ -47,12 +46,11 @@ const Team = () => {
     fetchTeamData();
   }, []);
 
-  // Fetch Sub Domains
   useEffect(() => {
     const fetchSubDomains = async () => {
       try {
         const response = await axios.get('https://sqac-website.onrender.com/api/data/field/Sub Domain');
-        const cleaned = [...new Set(response.data.filter(Boolean).map((d) => d.trim()))];
+        const cleaned = [...new Set(response.data.filter(Boolean).map(d => d.trim()))];
         setSubDomains(cleaned);
       } catch (error) {
         console.error('Error fetching subdomains:', error);
@@ -66,21 +64,13 @@ const Team = () => {
 
     return teamData.filter((member) => {
       const domainField = member['Sub Domain'] || '';
-      const subdomains = domainField.split(/and|,|&/).map((d) => d.trim().toLowerCase());
+      const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
       return subdomains.includes(selectedDomain.toLowerCase());
     });
   };
 
   const groupMembersByHierarchy = (members) => {
-    const groups = {
-      'Secretary': [],
-      'Joint Secretary': [],
-      'Corporate Lead': [],
-      'Technical Lead': [],
-      'Domain Lead': [],
-      'Associate': [],
-      'Member': [],
-    };
+    const groups = Object.fromEntries(hierarchyOrder.map(role => [role, []]));
 
     members.forEach((member) => {
       const position = member['Position in SQAC'] || '';
@@ -90,7 +80,7 @@ const Team = () => {
       if (matchedKey) {
         groups[matchedKey].push(member);
       } else {
-        groups['Member'].push(member); // fallback
+        groups['Member'].push(member);
       }
     });
 
@@ -147,31 +137,37 @@ const Team = () => {
                     return (
                       <div
                         key={index}
-                        className="bg-white rounded-xl shadow-lg p-4 w-64 text-center border-2 border-gray-200 cursor-pointer"
+                        className="relative group bg-white rounded-xl border-2 border-gray-200 shadow-lg p-4 w-64 text-center cursor-pointer transition-transform duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl overflow-hidden"
                       >
-                        <img
-                          src={imageUrl || 'https://via.placeholder.com/150'}
-                          alt={Name}
-                          className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
-                        />
-                        <h3 className="text-lg font-semibold">{Name}</h3>
-                        <p className="text-sm text-gray-600">{Position}</p>
-                        <div className="flex justify-center gap-4 mt-3">
-                          {LinkedIn && (
-                            <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
-                              <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
-                            </a>
-                          )}
-                          {Instagram && (
-                            <a href={Instagram} target="_blank" rel="noopener noreferrer">
-                              <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
-                            </a>
-                          )}
-                          {GitHub && (
-                            <a href={GitHub} target="_blank" rel="noopener noreferrer">
-                              <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
-                            </a>
-                          )}
+                        {/* Glow gradient on hover */}
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 blur-sm opacity-0 group-hover:opacity-80 transition duration-500 rounded-xl z-0" />
+                        
+                        {/* Content */}
+                        <div className="relative z-10">
+                          <img
+                            src={imageUrl || 'https://via.placeholder.com/150'}
+                            alt={Name}
+                            className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
+                          />
+                          <h3 className="text-lg font-semibold text-gray-800">{Name}</h3>
+                          <p className="text-sm text-gray-600">{Position}</p>
+                          <div className="flex justify-center gap-4 mt-3">
+                            {LinkedIn && (
+                              <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
+                                <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 hover:scale-110 transition" />
+                              </a>
+                            )}
+                            {Instagram && (
+                              <a href={Instagram} target="_blank" rel="noopener noreferrer">
+                                <img src={instagramIcon} alt="Instagram" className="w-6 h-6 hover:scale-110 transition" />
+                              </a>
+                            )}
+                            {GitHub && (
+                              <a href={GitHub} target="_blank" rel="noopener noreferrer">
+                                <img src={githubIcon} alt="GitHub" className="w-6 h-6 hover:scale-110 transition" />
+                              </a>
+                            )}
+                          </div>
                         </div>
                       </div>
                     );
