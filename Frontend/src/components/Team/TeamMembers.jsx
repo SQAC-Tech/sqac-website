@@ -1,32 +1,66 @@
-import React from 'react';
-import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import React, { useEffect, useState } from "react";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
-const ProfileCard = () => (
-  <div className="relative bg-white rounded-[30px] w-64 h-80 shadow-lg flex flex-col items-center justify-end pb-6">
-    <div className=" absolute top-[28px] w-34 h-34 bg-black rounded-full shadow-md" />
-    <div className="flex gap-7 text-2xl text-gray-700">
-      <a href="#" aria-label="GitHub"><FaGithub /></a>
-      <a href="#" aria-label="LinkedIn"><FaLinkedin className="text-[#0077B5]" /></a>
-      <a href="#" aria-label="Instagram"><FaInstagram className="text-[#E1306C]" /></a>
-    </div>
-  </div>
-);
+const baseURL = "https://sqac-website.onrender.com/api/data/field";
 
-const TeamMembers = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-100 to-orange-200 flex flex-col items-center justify-center gap-12 px-4 py-10">
-      {/* Center Card */}
-      <div className="flex justify-center">
-        <ProfileCard />
-      </div>
-
-      {/* Bottom Cards */}
-      <div className="flex flex-col md:flex-row gap-20">
-        <ProfileCard />
-        <ProfileCard />
-      </div>
-    </div>
-  );
+const positionPriority = {
+  "Board Member": 1,
+  "Domain Lead": 2,
+  Associate: 3,
+  Member: 4,
 };
 
-export default TeamMembers;
+const getImageURL = (driveLink) => {
+  const match = driveLink?.match(/[-\w]{25,}/);
+  return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : "";
+};
+
+export default function TeamMembers({ domain }) {
+  const [members, setMembers] = useState([]);
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      const res = await fetch(`${baseURL}/${domain}`);
+      const data = await res.json();
+      const sorted = data.sort((a, b) =>
+        (positionPriority[a["Position in SQAC"]] || 99) -
+        (positionPriority[b["Position in SQAC"]] || 99)
+      );
+      setMembers(sorted);
+    };
+    if (domain) fetchMembers();
+  }, [domain]);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4">
+      {members.map((member, idx) => (
+        <div key={idx} className="bg-white shadow-md rounded-2xl p-4 flex flex-col items-center">
+          <img
+            src={getImageURL(member["Your Image For Website"])}
+            alt={member.Name}
+            className="w-28 h-28 rounded-full object-cover mb-4 border"
+          />
+          <h2 className="text-lg font-semibold">{member.Name}</h2>
+          <p className="text-gray-500">{member["Position in SQAC"]}</p>
+          <div className="flex gap-3 mt-3">
+            {member["GitHub Profile Link"] && (
+              <a href={member["GitHub Profile Link"]} target="_blank" rel="noopener noreferrer">
+                <FaGithub className="text-xl hover:text-black" />
+              </a>
+            )}
+            {member["LinkedIn Profile Link"] && (
+              <a href={member["LinkedIn Profile Link"]} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="text-xl hover:text-blue-600" />
+              </a>
+            )}
+            {member["Instagram Profile Link"] && (
+              <a href={member["Instagram Profile Link"]} target="_blank" rel="noopener noreferrer">
+                <FaInstagram className="text-xl hover:text-pink-500" />
+              </a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
