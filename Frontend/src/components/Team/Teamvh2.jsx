@@ -1,3 +1,4 @@
+// Teamvh2.jsx
 import React, { useState } from 'react';
 import {
   Users, Code2, Building2, Palette, Globe, Brain,
@@ -11,12 +12,12 @@ const Teamvh2 = ({ onSelectDomain }) => {
     if (domain === 'Technical' || domain === 'Corporate') {
       setOpenDropdown(openDropdown === domain ? null : domain);
     } else {
-      onSelectDomain(domain); // notify Team.jsx
+      onSelectDomain(domain);
     }
   };
 
   const handleSubdomainClick = (subdomain) => {
-    onSelectDomain(subdomain); // notify Team.jsx
+    onSelectDomain(subdomain);
   };
 
   const cardStyle = 'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
@@ -40,13 +41,13 @@ const Teamvh2 = ({ onSelectDomain }) => {
           </div>
           {openDropdown === 'Technical' && (
             <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Web Dev')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Web Dev')}>
                 <Globe className="w-4 h-4" /> Web Dev
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('App Dev')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('App Dev')}>
                 <Smartphone className="w-4 h-4" /> App Dev
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('AI/ML')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('AI/ML')}>
                 <Brain className="w-4 h-4" /> AI / ML
               </div>
             </div>
@@ -60,22 +61,22 @@ const Teamvh2 = ({ onSelectDomain }) => {
           </div>
           {openDropdown === 'Corporate' && (
             <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('PR')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('PR')}>
                 <Megaphone className="w-4 h-4" /> PR
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Sponsorship')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Sponsorship')}>
                 <HandCoins className="w-4 h-4" /> Sponsorship
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600" onClick={() => handleSubdomainClick('Events')}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Events')}>
                 <Calendar className="w-4 h-4" /> Events
               </div>
             </div>
           )}
         </div>
 
-        <div className={cardStyle} onClick={() => handleCardClick('Creative')}>
+        <div className={cardStyle} onClick={() => handleCardClick('Creatives')}>
           <Palette className={iconStyle} />
-          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Creative</p>
+          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Creatives</p>
         </div>
       </div>
     </div>

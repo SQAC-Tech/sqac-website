@@ -66,11 +66,7 @@ const Team = () => {
 
     return teamData.filter((member) => {
       const domainField = member['Sub Domain'] || '';
-      const subdomains = domainField
-        .toLowerCase()
-        .split(/,|and|&|\/|;/)
-        .map((d) => d.trim());
-
+      const subdomains = domainField.split(/and|,|&/).map((d) => d.trim().toLowerCase());
       return subdomains.includes(selectedDomain.toLowerCase());
     });
   };
