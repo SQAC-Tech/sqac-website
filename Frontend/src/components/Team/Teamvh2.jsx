@@ -1,4 +1,4 @@
-// Teamvh2.jsx
+
 import React, { useState } from 'react';
 import {
   Users, Code2, Building2, Palette, Globe, Brain,

@@ -105,7 +105,7 @@ const Team = () => {
       <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
       {selectedDomain && (
-        <div className="pt-20 p-6 bg-gradient-to-b from-yellow-100 to-pink-100 min-h-screen">
+        <div className="pt-20 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
           <h2 className="text-center text-2xl font-bold mb-10">
             Showing results for: {selectedDomain}
           </h2>
