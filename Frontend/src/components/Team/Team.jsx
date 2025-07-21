@@ -7,10 +7,32 @@ import githubIcon from '../../assets/github.png';
 import Teamvh1 from './Teamvh1';
 import Teamvh2 from './Teamvh2';
 
+const hierarchyOrder = [
+  'Secretary',
+  'Joint Secretary',
+  'Corporate Lead',
+  'Technical Lead',
+  'Domain Lead',
+  'Associate',
+  'Member',
+];
+
+const getHierarchyIndex = (position) => {
+  for (let i = 0; i < hierarchyOrder.length; i++) {
+    if (position?.toLowerCase().includes(hierarchyOrder[i].toLowerCase())) {
+      return i;
+    }
+  }
+  return hierarchyOrder.length;
+};
+
 const Team = () => {
   const [teamData, setTeamData] = useState([]);
+  const [subDomains, setSubDomains] = useState([]);
+  const [selectedDomain, setSelectedDomain] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Fetch team data
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
@@ -22,37 +44,64 @@ const Team = () => {
         setLoading(false);
       }
     };
-
     fetchTeamData();
   }, []);
 
-  const groupTeamByPosition = () => {
+  // Fetch Sub Domains
+  useEffect(() => {
+    const fetchSubDomains = async () => {
+      try {
+        const response = await axios.get('https://sqac-website.onrender.com/api/data/field/Sub Domain');
+        const cleaned = [...new Set(response.data.filter(Boolean).map((d) => d.trim()))];
+        setSubDomains(cleaned);
+      } catch (error) {
+        console.error('Error fetching subdomains:', error);
+      }
+    };
+    fetchSubDomains();
+  }, []);
+
+  const filterMembersByDomain = () => {
+    if (!selectedDomain || !teamData.length) return [];
+
+    return teamData.filter((member) => {
+      const domainField = member['Sub Domain'] || '';
+      const subdomains = domainField
+        .toLowerCase()
+        .split(/,|and|&|\/|;/)
+        .map((d) => d.trim());
+
+      return subdomains.includes(selectedDomain.toLowerCase());
+    });
+  };
+
+  const groupMembersByHierarchy = (members) => {
     const groups = {
-      President: [],
-      'Board Member': [],
+      'Secretary': [],
+      'Joint Secretary': [],
+      'Corporate Lead': [],
+      'Technical Lead': [],
       'Domain Lead': [],
-      Associate: [],
-      Member: [],
+      'Associate': [],
+      'Member': [],
     };
 
-    teamData.forEach((member) => {
+    members.forEach((member) => {
       const position = member['Position in SQAC'] || '';
-
-      if (position.includes('President')) {
-        groups.President.push(member);
-      } else if (position.includes('Board Member')) {
-        groups['Board Member'].push(member);
-      } else if (position.includes('Domain Lead') || position.includes('Lead')) {
-        groups['Domain Lead'].push(member);
-      } else if (position.includes('Associate')) {
-        groups.Associate.push(member);
+      const matchedKey = hierarchyOrder.find((role) =>
+        position.toLowerCase().includes(role.toLowerCase())
+      );
+      if (matchedKey) {
+        groups[matchedKey].push(member);
       } else {
-        groups.Member.push(member);
+        groups['Member'].push(member); // fallback
       }
     });
 
     return groups;
   };
+
+  const displayMembers = groupMembersByHierarchy(filterMembersByDomain());
 
   if (loading) {
     return (
@@ -63,92 +112,80 @@ const Team = () => {
     );
   }
 
-  const groupedTeam = groupTeamByPosition();
-
-  const displayOrder = ['President', 'Board Member', 'Domain Lead', 'Associate', 'Member'];
-
   return (
     <div>
       <Navbar />
-      <Teamvh1/>
-      <Teamvh2/>
-      <div className="pt-20 p-6 bg-gradient-to-b from-yellow-100 to-pink-100">
-        {displayOrder.map((groupName) => (
-          groupedTeam[groupName].length > 0 && (
-            <div key={groupName} className="mb-10">
-              <h2 className="text-2xl font-bold mb-4 text-center">{groupName}</h2>
-              <div className="flex flex-wrap justify-center gap-8">
-                {groupedTeam[groupName].map((member, index) => {
-                  const {
-                    Name,
-                    ['Position in SQAC']: Position,
-                    ['LinkedIn Profile Link']: LinkedIn,
-                    ['Instagram Profile Link']: Instagram,
-                    ['GitHub Profile Link']: GitHub,
-                    ['Your Image For Website']: Image,
-                    ['Your Core Domain']: Domain,
-                  } = member;
+      <Teamvh1 />
+      <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
-                  let hierarchyClass = '';
+      {selectedDomain && (
+        <div className="pt-20 p-6 bg-gradient-to-b from-yellow-100 to-pink-100 min-h-screen">
+          <h2 className="text-center text-2xl font-bold mb-10">
+            Showing results for: {selectedDomain}
+          </h2>
 
-                  if (Position.includes('President')) {
-                    hierarchyClass = 'border-4 border-yellow-500';
-                  } else if (Position.includes('Board Member')) {
-                    hierarchyClass = 'border-4 border-green-500';
-                  } else if (Position.includes('Domain Lead') || Position.includes('Lead')) {
-                    hierarchyClass = 'border-4 border-purple-500';
-                  } else if (Position.includes('Associate')) {
-                    hierarchyClass = 'border-4 border-blue-500';
-                  } else if (Position.includes('Member')) {
-                    hierarchyClass = 'border-2 border-gray-300';
-                  } else {
-                    hierarchyClass = 'border-2 border-gray-200';
-                  }
+          {hierarchyOrder.map((role) => {
+            const members = displayMembers[role];
+            if (!members || members.length === 0) return null;
 
-                  let imageUrl = Image;
-                  if (imageUrl && imageUrl.includes('drive.google.com/open?id=')) {
-                    const fileId = imageUrl.split('id=')[1];
-                    imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-                  }
+            return (
+              <div key={role} className="mb-16">
+                <h3 className="text-xl font-semibold text-center mb-6">{role}</h3>
+                <div className="flex flex-wrap justify-center gap-8">
+                  {members.map((member, index) => {
+                    const {
+                      Name,
+                      ['Position in SQAC']: Position,
+                      ['LinkedIn Profile Link']: LinkedIn,
+                      ['Instagram Profile Link']: Instagram,
+                      ['GitHub Profile Link']: GitHub,
+                      ['Your Image For Website']: Image,
+                    } = member;
 
-                  return (
-                    <div
-                      key={index}
-                      className={`bg-white rounded-xl shadow-lg p-4 w-64 text-center ${hierarchyClass}`}
-                    >
-                      <img
-                        src={imageUrl || 'https://via.placeholder.com/150'}
-                        alt={Name}
-                        className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
-                      />
-                      <h3 className="text-lg font-semibold">{Name}</h3>
-                      <p className="text-sm text-gray-600">{Position}</p>
-                      <p className="text-sm text-gray-500">{Domain}</p>
-                      <div className="flex justify-center gap-4 mt-3">
-                        {LinkedIn && (
-                          <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
-                            <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
-                          </a>
-                        )}
-                        {Instagram && (
-                          <a href={Instagram} target="_blank" rel="noopener noreferrer">
-                            <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
-                          </a>
-                        )}
-                        {GitHub && (
-                          <a href={GitHub} target="_blank" rel="noopener noreferrer">
-                            <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
-                          </a>
-                        )}
+                    let imageUrl = Image;
+                    if (imageUrl?.includes('drive.google.com/open?id=')) {
+                      const fileId = imageUrl.split('id=')[1];
+                      imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
+                    }
+
+                    return (
+                      <div
+                        key={index}
+                        className="bg-white rounded-xl shadow-lg p-4 w-64 text-center border-2 border-gray-200 cursor-pointer"
+                      >
+                        <img
+                          src={imageUrl || 'https://via.placeholder.com/150'}
+                          alt={Name}
+                          className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
+                        />
+                        <h3 className="text-lg font-semibold">{Name}</h3>
+                        <p className="text-sm text-gray-600">{Position}</p>
+                        <div className="flex justify-center gap-4 mt-3">
+                          {LinkedIn && (
+                            <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
+                              <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
+                            </a>
+                          )}
+                          {Instagram && (
+                            <a href={Instagram} target="_blank" rel="noopener noreferrer">
+                              <img src={instagramIcon} alt="Instagram" className="w-6 h-6" />
+                            </a>
+                          )}
+                          {GitHub && (
+                            <a href={GitHub} target="_blank" rel="noopener noreferrer">
+                              <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
+                            </a>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          )
-        ))}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,16 +1,55 @@
 import React from 'react';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
-const ProfileCard = () => (
-  <div className="relative bg-white rounded-[30px] w-64 h-80 shadow-lg flex flex-col items-center justify-end pb-6">
-    <div className=" absolute top-[28px] w-34 h-34 bg-black rounded-full shadow-md" />
-    <div className="flex gap-7 text-2xl text-gray-700">
-      <a href="#" aria-label="GitHub"><FaGithub /></a>
-      <a href="#" aria-label="LinkedIn"><FaLinkedin className="text-[#0077B5]" /></a>
-      <a href="#" aria-label="Instagram"><FaInstagram className="text-[#E1306C]" /></a>
+import React from "react";
+import { FaLinkedin, FaGithub, FaInstagram } from "react-icons/fa";
+
+const ProfileCard = ({ member }) => {
+  const {
+    Name,
+    "Position in SQAC": Position,
+    "Profile Photo": PhotoURL,
+    GitHub,
+    LinkedIn,
+    Instagram,
+  } = member;
+
+  const extractDriveImage = (url) => {
+    const match = url?.match(/[-\w]{25,}/);
+    return match ? `https://drive.google.com/uc?export=view&id=${match[0]}` : "";
+  };
+
+  return (
+    <div className="bg-white rounded-2xl shadow p-4 text-center">
+      <img
+        src={extractDriveImage(PhotoURL)}
+        alt={Name}
+        className="w-28 h-28 mx-auto rounded-full object-cover mb-2"
+      />
+      <h3 className="text-lg font-semibold">{Name}</h3>
+      <p className="text-sm text-gray-600 mb-2">{Position}</p>
+      <div className="flex justify-center gap-3 mt-2 text-blue-600">
+        {GitHub && (
+          <a href={GitHub} target="_blank" rel="noopener noreferrer">
+            <FaGithub />
+          </a>
+        )}
+        {LinkedIn && (
+          <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
+            <FaLinkedin />
+          </a>
+        )}
+        {Instagram && (
+          <a href={Instagram} target="_blank" rel="noopener noreferrer">
+            <FaInstagram />
+          </a>
+        )}
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
+
 
 const TeamMembers2 = () => {
   return (

@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
-import {Users,Code2,Building2,Palette,Globe,Brain,Smartphone,Megaphone,HandCoins,Calendar} from 'lucide-react';
+import {
+  Users, Code2, Building2, Palette, Globe, Brain,
+  Smartphone, Megaphone, HandCoins, Calendar
+} from 'lucide-react';
 
-const Teamvh2 = () => {
+const Teamvh2 = ({ onSelectDomain }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const handleCardClick = (domain) => {
     if (domain === 'Technical' || domain === 'Corporate') {
       setOpenDropdown(openDropdown === domain ? null : domain);
     } else {
-      console.log(`Navigating to: ${domain}`);
+      onSelectDomain(domain); // notify Team.jsx
     }
   };
 
-  const handleSubdomainClick = (sub) => {
-    console.log(`Navigating to: ${sub}`);
+  const handleSubdomainClick = (subdomain) => {
+    onSelectDomain(subdomain); // notify Team.jsx
   };
 
-  const cardStyle =
-    'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
-
+  const cardStyle = 'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
   const iconStyle = 'w-16 h-16 sm:w-20 sm:h-20 mb-4 text-indigo-700';
-
-  const dropdownStyle =
-    'mt-2 bg-white shadow-md rounded-xl px-4 py-3 text-sm font-medium text-gray-800 space-y-2';
+  const dropdownStyle = 'mt-2 bg-white shadow-md rounded-xl px-4 py-3 text-sm font-medium text-gray-800 space-y-2';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-100 via-white to-pink-100 flex flex-col items-center justify-center px-4 py-10 font-['Poppins']">
-
-      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">
-        Choose Your Domain
-      </h1>
+      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">Choose Your Domain</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20">
-
-        <div className={cardStyle} onClick={() => handleCardClick('Board Members')}>
+        <div className={cardStyle} onClick={() => handleCardClick('Board Member')}>
           <Users className={iconStyle} />
           <p className="text-xl sm:text-2xl font-semibold text-gray-800">Board Members</p>
         </div>
