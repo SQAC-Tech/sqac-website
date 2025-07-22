@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {Card,CardContent,Typography,IconButton,Divider,Box,List,ListItem,ListItemText,} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@mui/material/styles";
 import { motion } from 'framer-motion';
 import {LayoutTemplate,Smartphone,Cpu,PenTool,CalendarClock,Mic,Handshake} from 'lucide-react';
 
@@ -51,6 +52,8 @@ const serviceCards = [
   { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={36} /> },
   { id: 'creatives', name: 'Creatives', icon: <PenTool size={36} /> },
 ];
+
+
 
 function ServicesSection() {
   const [selected, setSelected] = useState(null);
@@ -123,39 +126,91 @@ function ServicesSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
-            className="rounded-2xl shadow-lg w-full max-w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-6 sm:p-8 pb-10 relative flex flex-col justify-start items-start bg-[#eaf9fd] dark:bg-[#202033] text-gray-800 dark:text-purple-100 scroll-mt-24"
+            className="rounded-2xl w-full max-w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-6 sm:p-8 pb-10 relative flex flex-col justify-start items-start 
+    bg-white/10 backdrop-blur-md text-gray-100 dark:text-purple-100 scroll-mt-24 
+    border border-purple-400 shadow-[0_0_18px_4px_rgba(168,85,247,0.3)]"
+
           >
             {selected ? (
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
-                <Card sx={{ bgcolor: "#1a1a2e", color: "white", borderRadius: 3, boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)", position: "relative", p: 2 }}>
-                  <IconButton onClick={() => setSelected(null)} sx={{ position: "absolute", top: 12, right: 12, color: "white" }} aria-label="Close">
-                    <CloseIcon />
-                  </IconButton>
-                  <CardContent>
-                    <Typography variant="h5" fontWeight={600} gutterBottom>{services[selected].title}</Typography>
-                    <Typography variant="body1" gutterBottom color="gray">{services[selected].desc}</Typography>
-                    <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.2)" }} />
-                    <Typography variant="subtitle1" gutterBottom>Features:</Typography>
-                    <List dense>
-                      {services[selected].features.map((feature, i) => (
-                        <ListItem key={i} disableGutters sx={{ px: 0 }}>
-                          <Box sx={{ width: 8, height: 8, bgcolor: "#9f7aea", borderRadius: "50%", mr: 2, mt: "6px", flexShrink: 0 }} />
-                          <ListItemText primary={feature} />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </CardContent>
-                </Card>
-              </motion.div>
+              <motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  className="w-full"
+>
+  <Card
+    sx={{
+      bgcolor: "#daf3fa", // light blue background
+      color: "#f2f2f2", // off-white text
+      borderRadius: 3,
+      boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)", // purple glow
+      position: "relative",
+      p: 2,
+    }}
+  >
+    <IconButton
+      onClick={() => setSelected(null)}
+      sx={{ position: "absolute", top: 12, right: 12, color: "#9f7aea" }} // purple cross
+      aria-label="Close"
+    >
+      <CloseIcon />
+    </IconButton>
+
+    <CardContent>
+      <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: "#9f7aea" }}>
+        {services[selected].title}
+      </Typography>
+
+      <Typography variant="body1" gutterBottom sx={{ color: "#555555" }}>
+        {services[selected].desc}
+      </Typography>
+
+      <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.2)" }} />
+
+      <Typography variant="subtitle1" gutterBottom sx={{ color: "#9f7aea" }}>
+        Features:
+      </Typography>
+
+      <List dense>
+        {services[selected].features.map((feature, i) => (
+          <ListItem key={i} disableGutters sx={{ px: 0 }}>
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                bgcolor: "#9f7aea",
+                borderRadius: "50%",
+                mr: 2,
+                mt: "6px",
+                flexShrink: 0,
+              }}
+            />
+            <ListItemText primary={feature} primaryTypographyProps={{ sx: { color: "#444" } }} />
+          </ListItem>
+        ))}
+      </List>
+    </CardContent>
+  </Card>
+</motion.div>
+
             ) : (
               <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
-                <Card sx={{ bgcolor: "#1a1a2e", color: "white", borderRadius: 3, boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)", position: "relative", px: 5, py: 6, textAlign: "center" }}>
+                <Card sx={{ bgcolor: "#daf3fa", color: "white", borderRadius: 3, boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)", position: "relative", px: 5, py: 6, textAlign: "center" }}>
                   <CardContent>
                     <Box sx={{ fontSize: "3.5rem", mb: 3 }}>✨</Box>
-                    <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#d8b4fe" }}>
+                    <Typography
+                      variant="h4"
+                      fontWeight={700}
+                      gutterBottom
+                      sx={{ color: "#7b1fa2" }} // darker purple
+                    >
                       Welcome to SQAC Services
                     </Typography>
-                    <Typography variant="body1" sx={{ fontSize: "1.125rem", color: "#c4c4c4" }}>
+
+                    <Typography
+                      variant="body1"
+                      sx={{ fontSize: "1.125rem", color: "#4a4a4a" }} // darker gray
+                    >
                       Select a service card on the left to explore what we offer — whether you're into tech, design, or corporate!
                     </Typography>
                   </CardContent>
