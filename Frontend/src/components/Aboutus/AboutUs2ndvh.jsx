@@ -19,6 +19,11 @@ const services = {
     desc: 'Automate and gain insights with intelligent AI/ML systems.',
     features: ['Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Recommendation Engines']
   },
+  creatives: {
+    title: 'Creatives',
+    desc: 'Designing engaging visual content and media to boost brand identity.',
+    features: ['Graphic Design', 'Video Editing', 'Brand Identity', 'Motion Graphics']
+  },
   events: {
     title: 'Event Management',
     desc: 'Organizing impactful tech events, workshops, and community meetups.',
@@ -34,12 +39,14 @@ const services = {
     desc: 'Managing our external communication and media presence.',
     features: ['Content Creation', 'Social Media Strategy', 'Press Releases', 'Community Engagement']
   }
+  
 };
 
 const serviceCards = [
   { id: 'webdev', name: 'Web Dev', icon: '🌐', category: 'Tech' },
   { id: 'appdev', name: 'App Dev', icon: '📱', category: 'Tech' },
   { id: 'aiml', name: 'AI/ML', icon: '🤖', category: 'Tech' },
+  { id: 'creatives', name: 'Creatives', icon: '🎨', category: 'Design' },
   { id: 'events', name: 'Events', icon: '📅', category: 'Corporate' },
   { id: 'sponsor', name: 'Sponsors', icon: '💰', category: 'Corporate' },
   { id: 'pr', name: 'Public Relations', icon: '🗣️', category: 'Corporate' },
@@ -60,6 +67,7 @@ function ServicesSection() {
 
   return (
     <div className="min-h-screen bg-gradient-to-t from-cyan-200 via-cyan-500 to-fuchsia-50 flex flex-col items-center py-16 px-4">
+
       <h2 className="text-4xl font-bold text-purple-600 mb-4 drop-shadow-md">Services We Provide</h2>
 
       <p className="text-center text-gray-600 max-w-2xl mb-10">
