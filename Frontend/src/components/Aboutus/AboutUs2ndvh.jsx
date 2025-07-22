@@ -128,7 +128,7 @@ function ServicesSection() {
             transition={{ duration: 0.4 }}
             className="rounded-2xl w-full max-w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-6 sm:p-8 pb-10 relative flex flex-col justify-start items-start 
             bg-white/10 backdrop-blur-md text-gray-100 dark:text-purple-100 scroll-mt-24 
-            border border-purple-400 shadow-[0_0_18px_4px_rgba(168,85,247,0.3)]"
+            border border-purple-50000 shadow-[0_0_18px_4px_rgba(168,85,247,0.3)]"
 
           >
             {selected ? (
