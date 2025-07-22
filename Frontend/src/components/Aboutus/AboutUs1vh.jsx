@@ -7,7 +7,8 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-[95vh] px-2 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-pink-50 via-red-200 to-orange-100">
+    <section className="min-h-screen px-4 sm:px-8 py-16 bg-gradient-to-b from-pink-50 via-red-200 to-cyan-200">
+
       <div ref={ref} className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto">
 
         <motion.h1
@@ -22,12 +23,14 @@ const AboutUs = () => {
           initial={{ scale: 0.97, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-          className="bg-white/30 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-[95%] sm:max-w-[90%]">
+          className="bg-white/50 backdrop-blur-md shadow-2xl rounded-3xl p-4 sm:p-8 w-full max-w-3xl mx-auto mt-6"
+>
           <div className="rounded-xl overflow-hidden shadow-md mb-5">
             <img
               src={TeamPic}
               alt="SQAC Team"
-              className="w-full max-w-[500px] h-auto mx-auto object-cover rounded-xl"
+              className="w-full max-w-[600px] h-auto mx-auto object-cover rounded-xl shadow-lg"
+
             />
           </div>
 
@@ -45,7 +48,7 @@ const AboutUs = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-4 text-purple-800 text-base italic font-semibold">
+            className="mt-6 text-purple-800 text-lg italic font-semibold text-center">
             “Where code meets perfection — and you're part of it.”
           </motion.blockquote>
         </motion.div>
