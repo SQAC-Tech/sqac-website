@@ -61,13 +61,21 @@ const Team = () => {
 
   const filterMembersByDomain = () => {
     if (!selectedDomain || !teamData.length) return [];
-
+  
     return teamData.filter((member) => {
+      const position = member['Position in SQAC']?.toLowerCase() || '';
       const domainField = member['Sub Domain'] || '';
       const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
+  
+      // Special check for Board Members
+      if (selectedDomain.toLowerCase() === 'board member') {
+        return position.includes('board member');
+      }
+  
       return subdomains.includes(selectedDomain.toLowerCase());
     });
   };
+  
 
   const groupMembersByHierarchy = (members) => {
     const groups = Object.fromEntries(hierarchyOrder.map(role => [role, []]));
@@ -105,9 +113,9 @@ const Team = () => {
       <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
       {selectedDomain && (
-        <div className="pt-20 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
-          <h2 className="text-center text-2xl font-bold mb-10">
-            Showing results for: {selectedDomain}
+        <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
+          <h2 className="text-center text-5xl font-bold mb-10">
+             {selectedDomain}
           </h2>
 
           {hierarchyOrder.map((role) => {

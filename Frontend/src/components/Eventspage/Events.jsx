@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../HomePage/Navbar'
-import ComingSoonPage from '../ComingSoonPage'
+import ComingSoonEvent from '../ComingSoonEvent'
 
 const Events = () => {
   return (
     <div>
       <Navbar/>
-      <ComingSoonPage/>
+      <ComingSoonEvent/>
     </div>
   )
 }

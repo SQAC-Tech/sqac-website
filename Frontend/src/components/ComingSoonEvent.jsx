@@ -54,15 +54,14 @@ const ComingSoonPage = () => {
             variants={itemVariants}
             className="mt-4 text-2xl md:text-3xl text-gray-800 font-medium max-w-2xl leading-snug mx-auto"
           >
-            We're building something{' '}
-            <span className="text-pink-500 font-semibold">truly special</span>
+            A new wave of <span className="text-pink-500 font-semibold">innovation and events</span> is on its way.
           </motion.p>
 
           <motion.p
             variants={itemVariants}
             className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mx-auto"
           >
-            Our team is working tirelessly to deliver an experience that exceeds all expectations.
+            Our team at SQAC is curating impactful sessions, workshops, and competitions that blend learning with excitement.
           </motion.p>
 
           <motion.div
@@ -78,7 +77,7 @@ const ComingSoonPage = () => {
               whileTap={{ scale: 0.98 }}
               className="px-10 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold shadow-lg transition-all duration-300"
             >
-              Join Us
+              Get Involved
             </motion.button>
           </motion.div>
 
@@ -86,7 +85,8 @@ const ComingSoonPage = () => {
             variants={itemVariants}
             className="mt-12 text-gray-500 text-sm tracking-wider"
           >
-            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW          </motion.div>
+            EXCITING EVENTS ARE ON THE HORIZON — STAY TUNED!
+          </motion.div>
         </div>
       </motion.div>
     </section>
