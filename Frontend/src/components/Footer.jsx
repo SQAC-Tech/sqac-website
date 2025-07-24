@@ -23,8 +23,8 @@ function Footer() {
   };
 
   return (
-    <footer className="w-full bg-gradient-to-t from-violet-300 via-purple-200 to-cyan-200 text-gray-800 px-6 py-16">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+    <footer className="relative w-full   text-gray-800 px-6 pt-16 pb-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 z-10 relative">
         {/* Left Column: Contact Form */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -169,8 +169,28 @@ function Footer() {
         </div>
       </div>
 
-      {/* Footer bottom line */}
-      <div className="mt-12 text-center text-sm text-gray-600 border-t border-white/30 pt-6">
+      
+      <div className="absolute bottom-0 left-0 w-full">
+        <svg
+          viewBox="0 0 1440 320"
+          className="w-full h-32"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="waveGradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#a855f7" />     
+              <stop offset="50%" stopColor="#ec4899" />     
+              <stop offset="100%" stopColor="#f97316" />    
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#waveGradient)"
+            d="M0,160L48,149.3C96,139,192,117,288,122.7C384,128,480,160,576,181.3C672,203,768,213,864,213.3C960,213,1056,203,1152,186.7C1248,171,1344,149,1392,138.7L1440,128V320H0Z"
+          ></path>
+        </svg>
+      </div>
+
+      <div className="mt-6 text-center text-sm text-gray-600 relative z-10">
         © {new Date().getFullYear()} SQAC. All rights reserved.
       </div>
     </footer>

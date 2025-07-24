@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import TeamPic from "../../assets/Demo_SQAC_Team.jpg";
+import TeamPic from "../../assets/SQAC_Team.jpg";
 
 const AboutUs = () => {
   const ref = useRef(null);
