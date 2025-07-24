@@ -30,7 +30,7 @@ function Navbar() {
             <li key={item.path} className="px-4">
               <Link
                 to={item.path}
-                className="relative text-gray-800 hover:text-purple-600 transition duration-300 group"
+                className="relative text-gray-800 hover:text-purple-600 transition font-semibold duration-300 group"
               >
                 {item.label}
                 <span className="block h-[2px] max-w-0 group-hover:max-w-full transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-400"></span>
@@ -40,7 +40,7 @@ function Navbar() {
         </ul>
 
         <Link to="/recruitment" onClick={closeMenu}>
-          <button className="hidden sm:block rounded-full px-5 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md hover:scale-110 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)] transition duration-300">
+          <button className="hidden sm:block rounded-full px-6 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md hover:scale-110 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)] transition duration-300">
             Join Us
           </button>
         </Link>

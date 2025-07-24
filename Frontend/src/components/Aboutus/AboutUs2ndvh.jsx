@@ -82,10 +82,10 @@ function ServicesSection() {
         transition={{ type: 'spring', stiffness: 260, damping: 18 }}
         className={`
           group relative cursor-pointer select-none rounded-2xl p-5 flex flex-col items-center
-          text-center shadow-md transition-all duration-300 border
-          backdrop-blur-sm bg-[#2c2c54]/60 border-transparent
-          hover:shadow-purple-400/40 hover:border-purple-400/60 hover:ring-2 hover:ring-purple-400/20
-          ${selected === card.id ? 'bg-[#3d3d6b]/80 shadow-lg scale-105 border-purple-500 ring-2 ring-purple-400/40' : ''}
+          text-center shadow-md border
+          backdrop-blur-sm bg-purple-700/100 border-transparent
+          hover:shadow-purple-900/80 hover:border-purple-400/60 hover:ring-2 hover:ring-purple-800/20
+          ${selected === card.id ? 'bg-[#3d3d6b]/80 shadow-lg  border-purple-500 ring-2 ring-purple-400/40' : ''}
         `}
       >
         <div className={`mb-3 transition-colors duration-300 ${selected === card.id ? 'text-purple-200' : 'text-purple-100'} group-hover:text-purple-300`}>
