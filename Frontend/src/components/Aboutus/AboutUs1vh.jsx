@@ -1,15 +1,15 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import TeamPic from "../../assets/SQAC_Group_photo.jpg";
+import TeamPic from "../../assets/SQAC_Team.jpg";
 
 const AboutUs = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen px-4 sm:px-8 py-26 bg-gradient-to-b from-pink-50 via-red-200 to-cyan-200">
+    <section className="min-h-screen px-4 sm:px-8 py-16 z-10">
 
-      <div ref={ref} className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto">
+      <div ref={ref} className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto z-3">
 
         <motion.h1
           initial={{ y: -40, opacity: 0 }}

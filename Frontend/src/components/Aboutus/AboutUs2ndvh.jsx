@@ -100,7 +100,7 @@ function ServicesSection() {
   };
 
   return (
-    <div className="min-h-[85vh] bg-gradient-to-b from-cyan-200 via-pink-50 to-[#a5f3fc] flex flex-col items-center py-8 px-4">
+    <div className="min-h-[85vh] ] flex flex-col items-center py-8 px-4">
       <h2 className="text-3xl sm:text-4xl font-bold text-purple-600 mb-4 drop-shadow-md">Our Core Domains</h2>
       <p className="text-center text-gray-600 max-w-2xl mb-10">
         Discover the key domains we work in — from technology and design to strategic and corporate solutions.
