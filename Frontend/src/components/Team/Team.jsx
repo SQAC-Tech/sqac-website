@@ -17,15 +17,6 @@ const hierarchyOrder = [
   'Member',
 ];
 
-const getHierarchyIndex = (position) => {
-  for (let i = 0; i < hierarchyOrder.length; i++) {
-    if (position?.toLowerCase().includes(hierarchyOrder[i].toLowerCase())) {
-      return i;
-    }
-  }
-  return hierarchyOrder.length;
-};
-
 const Team = () => {
   const [teamData, setTeamData] = useState([]);
   const [subDomains, setSubDomains] = useState([]);
@@ -33,60 +24,52 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchTeamData = async () => {
-      try {
-        const response = await axios.get('https://sqac-website.onrender.com/api/data');
-        setTeamData(response.data);
+    axios.get('https://sqac-website.onrender.com/api/data')
+      .then((res) => {
+        setTeamData(res.data);
         setLoading(false);
-      } catch (error) {
-        console.error('Error fetching team data:', error);
+      })
+      .catch((err) => {
+        console.error('Error fetching team data:', err);
         setLoading(false);
-      }
-    };
-    fetchTeamData();
+      });
   }, []);
 
   useEffect(() => {
-    const fetchSubDomains = async () => {
-      try {
-        const response = await axios.get('https://sqac-website.onrender.com/api/data/field/Sub Domain');
-        const cleaned = [...new Set(response.data.filter(Boolean).map(d => d.trim()))];
+    axios.get('https://sqac-website.onrender.com/api/data/field/Sub Domain')
+      .then((res) => {
+        const cleaned = [...new Set(res.data.filter(Boolean).map(d => d.trim()))];
         setSubDomains(cleaned);
-      } catch (error) {
-        console.error('Error fetching subdomains:', error);
-      }
-    };
-    fetchSubDomains();
+      })
+      .catch((err) => {
+        console.error('Error fetching subdomains:', err);
+      });
   }, []);
 
   const filterMembersByDomain = () => {
-    if (!selectedDomain || !teamData.length) return [];
-  
+    if (!selectedDomain) return [];
+
     return teamData.filter((member) => {
       const position = member['Position in SQAC']?.toLowerCase() || '';
       const domainField = member['Sub Domain'] || '';
       const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
-  
-      // Special check for Board Members
+
       if (selectedDomain.toLowerCase() === 'board member') {
         return position.includes('board member');
       }
-  
+
       return subdomains.includes(selectedDomain.toLowerCase());
     });
   };
-  
 
-  const groupMembersByHierarchy = (members) => {
+  const groupByHierarchy = (members) => {
     const groups = Object.fromEntries(hierarchyOrder.map(role => [role, []]));
 
     members.forEach((member) => {
       const position = member['Position in SQAC'] || '';
-      const matchedKey = hierarchyOrder.find((role) =>
-        position.toLowerCase().includes(role.toLowerCase())
-      );
-      if (matchedKey) {
-        groups[matchedKey].push(member);
+      const role = hierarchyOrder.find(h => position.toLowerCase().includes(h.toLowerCase()));
+      if (role) {
+        groups[role].push(member);
       } else {
         groups['Member'].push(member);
       }
@@ -95,7 +78,7 @@ const Team = () => {
     return groups;
   };
 
-  const displayMembers = groupMembersByHierarchy(filterMembersByDomain());
+  const displayMembers = groupByHierarchy(filterMembersByDomain());
 
   if (loading) {
     return (
@@ -115,12 +98,12 @@ const Team = () => {
       {selectedDomain && (
         <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
           <h2 className="text-center text-5xl font-bold mb-10">
-             {selectedDomain}
+            {selectedDomain}
           </h2>
 
           {hierarchyOrder.map((role) => {
             const members = displayMembers[role];
-            if (!members || members.length === 0) return null;
+            if (!members.length) return null;
 
             return (
               <div key={role} className="mb-16">
@@ -145,37 +128,31 @@ const Team = () => {
                     return (
                       <div
                         key={index}
-                        className="relative group bg-white rounded-xl border-2 border-gray-200 shadow-lg p-4 w-64 text-center cursor-pointer transition-transform duration-300 ease-in-out transform hover:-translate-y-2 hover:scale-105 hover:shadow-2xl overflow-hidden"
+                        className="bg-white rounded-xl border-2 border-gray-200 shadow-md p-4 w-64 text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
                       >
-                        {/* Glow gradient on hover */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-400 via-pink-500 to-yellow-500 blur-sm opacity-0 group-hover:opacity-80 transition duration-500 rounded-xl z-0" />
-                        
-                        {/* Content */}
-                        <div className="relative z-10">
-                          <img
-                            src={imageUrl || 'https://via.placeholder.com/150'}
-                            alt={Name}
-                            className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
-                          />
-                          <h3 className="text-lg font-semibold text-gray-800">{Name}</h3>
-                          <p className="text-sm text-gray-600">{Position}</p>
-                          <div className="flex justify-center gap-4 mt-3">
-                            {LinkedIn && (
-                              <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
-                                <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 hover:scale-110 transition" />
-                              </a>
-                            )}
-                            {Instagram && (
-                              <a href={Instagram} target="_blank" rel="noopener noreferrer">
-                                <img src={instagramIcon} alt="Instagram" className="w-6 h-6 hover:scale-110 transition" />
-                              </a>
-                            )}
-                            {GitHub && (
-                              <a href={GitHub} target="_blank" rel="noopener noreferrer">
-                                <img src={githubIcon} alt="GitHub" className="w-6 h-6 hover:scale-110 transition" />
-                              </a>
-                            )}
-                          </div>
+                        <img
+                          src={imageUrl || 'https://via.placeholder.com/150'}
+                          alt={Name}
+                          className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
+                        />
+                        <h3 className="text-lg font-semibold text-gray-800">{Name}</h3>
+                        <p className="text-sm text-gray-600">{Position}</p>
+                        <div className="flex justify-center gap-4 mt-3">
+                          {LinkedIn && (
+                            <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
+                              <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 hover:scale-110 transition" />
+                            </a>
+                          )}
+                          {Instagram && (
+                            <a href={Instagram} target="_blank" rel="noopener noreferrer">
+                              <img src={instagramIcon} alt="Instagram" className="w-6 h-6 hover:scale-110 transition" />
+                            </a>
+                          )}
+                          {GitHub && (
+                            <a href={GitHub} target="_blank" rel="noopener noreferrer">
+                              <img src={githubIcon} alt="GitHub" className="w-6 h-6 hover:scale-110 transition" />
+                            </a>
+                          )}
                         </div>
                       </div>
                     );
