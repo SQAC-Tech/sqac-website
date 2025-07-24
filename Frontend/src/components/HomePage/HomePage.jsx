@@ -9,11 +9,8 @@ function HomePage() {
   return (
       <div className="relative min-h-screen">
         <Home />
-        <Content />
         <WhatWeDoSection />
         <Domains />
-        <ContactUs />
-        <Footer />
       </div>
   );
 };
