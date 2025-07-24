@@ -18,6 +18,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
 
   const handleSubdomainClick = (subdomain) => {
     onSelectDomain(subdomain);
+    setOpenDropdown(null);
   };
 
   const cardStyle = 'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
