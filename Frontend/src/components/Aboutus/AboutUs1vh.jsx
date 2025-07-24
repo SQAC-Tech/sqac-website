@@ -15,7 +15,7 @@ const AboutUs = () => {
           initial={{ y: -40, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : {}}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6 font-poppins hover:scale-105 transition-transform">
+          className="text-5xl sm:text-5xl font-bold text-gray-800 mb-6 font-poppins hover:scale-105 transition-transform">
           About Us
         </motion.h1>
 
@@ -29,7 +29,7 @@ const AboutUs = () => {
             <img
               src={TeamPic}
               alt="SQAC Team"
-              className="w-full max-w-[600px] h-auto mx-auto object-cover rounded-xl shadow-lg"
+              className="w-full max-w-[1000px] h-auto mx-auto object-cover rounded-xl shadow-lg"
 
             />
           </div>

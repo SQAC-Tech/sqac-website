@@ -9,6 +9,7 @@ import Projects from './components/Projects/Projects.jsx';
 import JoinUs from './components/JoinUs/JoinUs.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import useLenisScroll from './utils/smoothScroll';
+import Navbar from './components/HomePage/Navbar.jsx';
 
 const App = () => {
   useLenisScroll(); 
@@ -16,6 +17,7 @@ const App = () => {
   return (
     <Router>
       <ScrollToTop />
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<Aboutus />} />

@@ -40,7 +40,7 @@ const WhatWeDoSection = () => {
       
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
-        initial={{ x: 100, opacity: 0 }}
+        initial={{ x: 100, opacity: 0 }}  
         whileInView={{ x: 0, opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.2, duration: 0.8 }}
