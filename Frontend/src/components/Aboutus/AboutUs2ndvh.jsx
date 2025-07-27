@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography, IconButton, Divider, Box, List, ListItem, ListItemText } from "@mui/material";
+import {
+  Card, CardContent, Typography, IconButton, Divider,
+  Box, List, ListItem, ListItemText
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { motion } from 'framer-motion';
-import { LayoutTemplate, Smartphone, Cpu, PenTool, CalendarClock, Mic, Handshake } from 'lucide-react';
+import {
+  LayoutTemplate, Smartphone, Cpu, PenTool,
+  CalendarClock, Mic, Handshake
+} from 'lucide-react';
 
 const services = {
   webdev: {
@@ -68,45 +74,65 @@ function ServicesSection() {
     const card = serviceCards.find(c => c.id === id);
     if (!card) return null;
 
+    const isActive = selected === card.id;
+
     return (
       <motion.div
         key={card.id}
         role="button"
         aria-label={`Select ${card.name} service`}
         onClick={() => setSelected(card.id)}
-        whileHover={{ scale: 1.07 }}
-        whileTap={{ scale: 0.96 }}
-        transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+        whileHover={{ 
+          y: -4,
+          scale: 1.03,
+          boxShadow: "0 6px 12px rgba(6, 182, 212, 0.2)"
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 15 }}
         className={`
           group relative cursor-pointer select-none rounded-2xl p-5 flex flex-col items-center
-          text-center shadow-md border
-          backdrop-blur-sm bg-orange-300/80 border-transparent
-          hover:shadow-pink-300/80 hover:border-cyan-200/60 hover:ring-2 hover:ring-pink-300/20
-          ${selected === card.id ? 'bg-pink-300/80 shadow-lg border-cyan-200 ring-2 ring-orange-300/40' : ''}
+          text-center shadow-md border-2
+          backdrop-blur-sm transition-all duration-300
+          ${isActive
+            ? 'bg-orange-400/90 border-orange-300 ring-2 ring-orange-500 text-white'
+            : 'bg-cyan-200/90 border-cyan-300/50 hover:border-cyan-400 hover:ring-2 hover:ring-cyan-400/50'
+          }
         `}
       >
-        <div className={`mb-3 transition-colors duration-300 ${selected === card.id ? 'text-cyan-200' : 'text-white'} group-hover:text-cyan-100`}>
-          {card.icon}
+        <div className={`mb-3 transition-all duration-300 ${isActive ? 'text-white' : 'text-gray-800 group-hover:text-gray-900'}`}>
+          <motion.div
+            whileHover={{ rotate: isActive ? 0 : 10, scale: 1.1 }}
+            transition={{ type: 'spring', stiffness: 300 }}
+          >
+            {card.icon}
+          </motion.div>
         </div>
-        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${selected === card.id ? 'text-white' : 'text-gray-800'}`}>
+        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${isActive ? 'text-white' : 'text-gray-900 group-hover:text-gray-800'}`}>
           {card.name}
         </h3>
-        <span className="pointer-events-none absolute inset-0 rounded-2xl group-hover:before:opacity-40 before:absolute before:-inset-1 before:rounded-2xl before:bg-gradient-to-br before:from-pink-300/30 before:to-orange-300/10 before:blur-md before:opacity-0 transition-opacity duration-300" />
+        {!isActive && (
+          <motion.div 
+            className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-300/20 to-cyan-100/10 opacity-0 group-hover:opacity-100 -z-10"
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
+        )}
       </motion.div>
     );
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-200 via-white to-white">
+    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-200 to-cyan-200">
       <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 mb-6 font-poppins hover:scale-105 transition-transform">Our Core Domains</h2>
       <p className="text-center text-gray-600 max-w-2xl mb-10">
         Discover the key domains we work in — from technology and design to strategic and corporate solutions.
       </p>
 
-      <div className="bg-white/10 backdrop-blur-md border border-cyan-200/40 rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-5xl">
+      <div className="bg-white/10 backdrop-blur-md border border-cyan-200/40 rounded-3xl shadow-lg p-4 sm:p-6 w-full max-w-5xl">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
           {/* Left Grid - Service Cards */}
-          <div className="grid grid-cols-2 gap-1.5 w-full place-items-center">
+          <div className="grid grid-cols-2 gap-3 w-full place-items-center">
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('webdev')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('events')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('appdev')}</div>
@@ -138,13 +164,28 @@ function ServicesSection() {
                     bgcolor: "#f0fdfa",
                     color: "#333",
                     borderRadius: 3,
-                    boxShadow: "0px 0px 20px rgba(236, 72, 153, 0.4)",
-                    p: 2,
-                    position: 'relative'
+                    boxShadow: "0 6px 16px -4px rgba(6, 182, 212, 0.3)",
+                    px: 5,
+                    py: 6,
+                    textAlign: "center",
+                    transition: "all 0.3s ease",
+                    '&:hover': {
+                      boxShadow: "0 8px 20px -4px rgba(6, 182, 212, 0.4)"
+                    }
                   }}>
                     <IconButton
                       onClick={() => setSelected(null)}
-                      sx={{ position: "absolute", top: 12, right: 12, color: "#f472b6" }}
+                      sx={{ 
+                        position: "absolute", 
+                        top: 12, 
+                        right: 12, 
+                        color: "#f472b6",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          transform: "rotate(90deg)",
+                          color: "#f97316"
+                        }
+                      }}
                       aria-label="Close"
                     >
                       <CloseIcon sx={{ fontSize: '1.5rem' }} />
@@ -156,13 +197,36 @@ function ServicesSection() {
                       <Typography variant="body1" gutterBottom sx={{ color: "#555" }}>
                         {services[selected].desc}
                       </Typography>
-                      <Divider sx={{ my: 2, borderColor: "rgba(6, 182, 212, 0.3)" }} />
-                      <Typography variant="subtitle1" gutterBottom sx={{ color: "#06b6d4" }}>
+                      <Divider sx={{ 
+                        my: 2, 
+                        borderColor: "rgba(6, 182, 212, 0.3)",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          borderColor: "rgba(6, 182, 212, 0.6)"
+                        }
+                      }} />
+                      <Typography variant="subtitle1" gutterBottom sx={{ 
+                        color: "#06b6d4",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          textShadow: "0 0 8px rgba(6, 182, 212, 0.3)"
+                        }
+                      }}>
                         Features:
                       </Typography>
                       <List dense>
                         {services[selected].features.map((feature, i) => (
-                          <ListItem key={i} disableGutters sx={{ px: 0 }}>
+                          <ListItem 
+                            key={i} 
+                            disableGutters 
+                            sx={{ 
+                              px: 0,
+                              transition: "all 0.3s ease",
+                              '&:hover': {
+                                transform: "translateX(4px)"
+                              }
+                            }}
+                          >
                             <Box sx={{
                               width: 8,
                               height: 8,
@@ -171,8 +235,23 @@ function ServicesSection() {
                               mr: 2,
                               mt: "6px",
                               flexShrink: 0,
+                              transition: "all 0.3s ease",
+                              '&:hover': {
+                                transform: "scale(1.3)"
+                              }
                             }} />
-                            <ListItemText primary={feature} primaryTypographyProps={{ sx: { color: "#444" } }} />
+                            <ListItemText 
+                              primary={feature} 
+                              primaryTypographyProps={{ 
+                                sx: { 
+                                  color: "#444",
+                                  transition: "all 0.3s ease",
+                                  '&:hover': {
+                                    color: "#222"
+                                  }
+                                } 
+                              }} 
+                            />
                           </ListItem>
                         ))}
                       </List>
@@ -189,17 +268,48 @@ function ServicesSection() {
                     bgcolor: "#f0fdfa",
                     color: "#333",
                     borderRadius: 3,
-                    boxShadow: "0px 0px 20px rgba(6, 182, 212, 0.4)",
+                    boxShadow: "0 6px 16px -4px rgba(6, 182, 212, 0.3)",
                     px: 5,
                     py: 6,
-                    textAlign: "center"
+                    textAlign: "center",
+                    transition: "all 0.3s ease",
+                    '&:hover': {
+                      boxShadow: "0 8px 20px -4px rgba(6, 182, 212, 0.4)",
+                      transform: "translateY(-2px)"
+                    }
                   }}>
                     <CardContent>
-                      <Box sx={{ fontSize: "3.5rem", mb: 3, color: "#f97316" }}>✨</Box>
-                      <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#ec4899" }}>
+                      <motion.div
+                        animate={{
+                          rotate: [0, 10, -10, 0],
+                          scale: [1, 1.1, 1.1, 1]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          repeatType: "reverse"
+                        }}
+                        sx={{ fontSize: "3.5rem", mb: 3, color: "#f97316" }}
+                      >
+                        ✨
+                      </motion.div>
+                      <Typography variant="h4" fontWeight={700} gutterBottom sx={{ 
+                        color: "#ec4899",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          textShadow: "0 0 8px rgba(236, 72, 153, 0.3)"
+                        }
+                      }}>
                         Welcome to SQAC Domains
                       </Typography>
-                      <Typography variant="body1" sx={{ fontSize: "1.125rem", color: "#555" }}>
+                      <Typography variant="body1" sx={{ 
+                        fontSize: "1.125rem", 
+                        color: "#555",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          color: "#333"
+                        }
+                      }}>
                         Choose a domain card to explore how we empower areas like technology, creative design, and corporate innovation.
                       </Typography>
                     </CardContent>
