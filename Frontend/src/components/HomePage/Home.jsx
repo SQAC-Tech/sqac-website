@@ -4,8 +4,7 @@ import SQAC from "../../assets/LogoSQAC.png";
 
 export default function LandingHero() {
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center px-4 bg-gradient-to-br from-[#f3d79e] via-[#f3d8ad] to-orange-300  overflow-hidden">
-
+    <section className="relative min-h-screen w-full flex items-center justify-center px-4 bg-gradient-to-b from-[#f3d79e] via-[#f3d8ad] to-red-300 overflow-hidden">
       {/* Blurred circle for depth */}
       <div className="absolute w-[900px] h-[900px] bg-pink-300 opacity-20 rounded-full blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0"></div>
 

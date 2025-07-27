@@ -20,7 +20,7 @@ const hierarchyOrder = [
 const Team = () => {
   const [teamData, setTeamData] = useState([]);
   const [subDomains, setSubDomains] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState('Board Member');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
