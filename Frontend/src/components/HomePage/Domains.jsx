@@ -153,7 +153,7 @@ export default function Domains() {
   ];
 
   return (
-    <div className="py-20 lg:py-32 bg-gradient-to-t from-cyan-200 via-cyan-500 to-fuchsia-50">
+    <div className="py-20 lg:py-32 bg-gradient-to-b from-orange-300 via-fuchsia-100 to-white">
       <h2 className="text-4xl lg:text-5xl font-bold mb-12 text-center text-[#3B0A4B]">
         Our Core Domains
       </h2>
