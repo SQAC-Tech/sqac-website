@@ -7,7 +7,7 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen px-4 sm:px-8 py-16 bg-gradient-to-br from-pink-300 to-orange-300">
+    <section className="min-h-screen px-4 sm:px-8 py-16 z-10 bg-gradient-to-b from-white via-white to-orange-300">
       <div
         ref={ref}
         className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto z-3"
