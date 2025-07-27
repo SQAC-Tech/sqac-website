@@ -7,7 +7,7 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen px-4 sm:px-8 py-16 z-10 bg-gradient-to-b from-white via-white to-orange-300">
+    <section className="min-h-screen px-4 sm:px-8 py-16 z-10 bg-gradient-to-b from-white via-white to-orange-200">
       <div
         ref={ref}
         className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto z-3"
@@ -18,7 +18,7 @@ const AboutUs = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 mb-6 font-poppins hover:scale-105 transition-transform"
         >
-          About Us
+          ABOUT US
         </motion.h1>
 
         <motion.div

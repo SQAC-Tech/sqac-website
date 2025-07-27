@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {Card,CardContent,Typography,IconButton,Divider,Box,List,ListItem,ListItemText,} from "@mui/material";
+import { Card, CardContent, Typography, IconButton, Divider, Box, List, ListItem, ListItemText } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { useTheme } from "@mui/material/styles";
 import { motion } from 'framer-motion';
-import {LayoutTemplate,Smartphone,Cpu,PenTool,CalendarClock,Mic,Handshake} from 'lucide-react';
+import { LayoutTemplate, Smartphone, Cpu, PenTool, CalendarClock, Mic, Handshake } from 'lucide-react';
 
 const services = {
   webdev: {
@@ -53,8 +52,6 @@ const serviceCards = [
   { id: 'creatives', name: 'Creatives', icon: <PenTool size={36} /> },
 ];
 
-
-
 function ServicesSection() {
   const [selected, setSelected] = useState(null);
 
@@ -83,31 +80,32 @@ function ServicesSection() {
         className={`
           group relative cursor-pointer select-none rounded-2xl p-5 flex flex-col items-center
           text-center shadow-md border
-          backdrop-blur-sm bg-purple-700/100 border-transparent
-          hover:shadow-purple-900/80 hover:border-purple-400/60 hover:ring-2 hover:ring-purple-800/20
-          ${selected === card.id ? 'bg-[#3d3d6b]/80 shadow-lg  border-purple-500 ring-2 ring-purple-400/40' : ''}
+          backdrop-blur-sm bg-orange-300/80 border-transparent
+          hover:shadow-pink-300/80 hover:border-cyan-200/60 hover:ring-2 hover:ring-pink-300/20
+          ${selected === card.id ? 'bg-pink-300/80 shadow-lg border-cyan-200 ring-2 ring-orange-300/40' : ''}
         `}
       >
-        <div className={`mb-3 transition-colors duration-300 ${selected === card.id ? 'text-purple-200' : 'text-purple-100'} group-hover:text-purple-300`}>
+        <div className={`mb-3 transition-colors duration-300 ${selected === card.id ? 'text-cyan-200' : 'text-white'} group-hover:text-cyan-100`}>
           {card.icon}
         </div>
-        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${selected === card.id ? 'text-purple-100' : 'text-purple-200'}`}>
+        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${selected === card.id ? 'text-white' : 'text-gray-800'}`}>
           {card.name}
         </h3>
-        <span className="pointer-events-none absolute inset-0 rounded-2xl group-hover:before:opacity-40 before:absolute before:-inset-1 before:rounded-2xl before:bg-gradient-to-br before:from-purple-400/30 before:to-purple-600/10 before:blur-md before:opacity-0 transition-opacity duration-300" />
+        <span className="pointer-events-none absolute inset-0 rounded-2xl group-hover:before:opacity-40 before:absolute before:-inset-1 before:rounded-2xl before:bg-gradient-to-br before:from-pink-300/30 before:to-orange-300/10 before:blur-md before:opacity-0 transition-opacity duration-300" />
       </motion.div>
     );
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-300 via-fuchsia-100 to-white">
-      <h2 className="text-3xl sm:text-4xl font-bold text-purple-600 mb-4 drop-shadow-md">Our Core Domains</h2>
+    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-200 via-white to-white">
+      <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 mb-6 font-poppins hover:scale-105 transition-transform">Our Core Domains</h2>
       <p className="text-center text-gray-600 max-w-2xl mb-10">
         Discover the key domains we work in — from technology and design to strategic and corporate solutions.
       </p>
 
-      <div className="bg-white/10 backdrop-blur-md border border-purple-900/40 rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-5xl">
+      <div className="bg-white/10 backdrop-blur-md border border-cyan-200/40 rounded-3xl shadow-2xl p-4 sm:p-6 w-full max-w-5xl">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
+          {/* Left Grid - Service Cards */}
           <div className="grid grid-cols-2 gap-1.5 w-full place-items-center">
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('webdev')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('events')}</div>
@@ -120,103 +118,96 @@ function ServicesSection() {
             </div>
           </div>
 
-          <motion.div
-            key={selected || 'placeholder'}
-            id="details-card"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4 }}
-            className="rounded-2xl w-full max-w-full sm:max-w-md max-h-[85vh] overflow-y-auto p-6 sm:p-8 pb-10 relative flex flex-col justify-start items-start 
-            bg-white/10 backdrop-blur-md text-gray-100 dark:text-purple-100 scroll-mt-24 
-            border border-purple-50000 shadow-[0_0_18px_4px_rgba(168,85,247,0.3)]"
-
-          >
-            {selected ? (
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="w-full"
-              >
-                <Card
-                  sx={{
-                    bgcolor: "#daf3fa", 
-                    color: "#f2f2f2", 
-                    borderRadius: 3,
-                    boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)",
-                    position: "relative",
-                    p: 2,
-                  }}
+          {/* Right Container - Centered Details Card */}
+          <div className="w-full h-full flex items-center justify-center relative">
+            <motion.div
+              key={selected || 'placeholder'}
+              id="details-card"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="w-full max-w-md mx-auto sticky top-4"
+            >
+              {selected ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <IconButton
-                    onClick={() => setSelected(null)}
-                    sx={{ position: "absolute", top: 12, right: 12, color: "#9f7aea" }}
-                    aria-label="Close"
-                  >
-                    <CloseIcon />
-                  </IconButton>
-
-                  <CardContent>
-                    <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: "#9f7aea" }}>
-                      {services[selected].title}
-                    </Typography>
-
-                    <Typography variant="body1" gutterBottom sx={{ color: "#555555" }}>
-                      {services[selected].desc}
-                    </Typography>
-
-                    <Divider sx={{ my: 2, borderColor: "rgba(255,255,255,0.2)" }} />
-
-                    <Typography variant="subtitle1" gutterBottom sx={{ color: "#9f7aea" }}>
-                      Features:
-                    </Typography>
-
-                    <List dense>
-                      {services[selected].features.map((feature, i) => (
-                        <ListItem key={i} disableGutters sx={{ px: 0 }}>
-                          <Box
-                            sx={{
+                  <Card sx={{
+                    bgcolor: "#f0fdfa",
+                    color: "#333",
+                    borderRadius: 3,
+                    boxShadow: "0px 0px 20px rgba(236, 72, 153, 0.4)",
+                    p: 2,
+                    position: 'relative'
+                  }}>
+                    <IconButton
+                      onClick={() => setSelected(null)}
+                      sx={{ position: "absolute", top: 12, right: 12, color: "#f472b6" }}
+                      aria-label="Close"
+                    >
+                      <CloseIcon sx={{ fontSize: '1.5rem' }} />
+                    </IconButton>
+                    <CardContent>
+                      <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: "#f97316" }}>
+                        {services[selected].title}
+                      </Typography>
+                      <Typography variant="body1" gutterBottom sx={{ color: "#555" }}>
+                        {services[selected].desc}
+                      </Typography>
+                      <Divider sx={{ my: 2, borderColor: "rgba(6, 182, 212, 0.3)" }} />
+                      <Typography variant="subtitle1" gutterBottom sx={{ color: "#06b6d4" }}>
+                        Features:
+                      </Typography>
+                      <List dense>
+                        {services[selected].features.map((feature, i) => (
+                          <ListItem key={i} disableGutters sx={{ px: 0 }}>
+                            <Box sx={{
                               width: 8,
                               height: 8,
-                              bgcolor: "#9f7aea",
+                              bgcolor: "#f97316",
                               borderRadius: "50%",
                               mr: 2,
                               mt: "6px",
                               flexShrink: 0,
-                            }}
-                          />
-                          <ListItemText primary={feature} primaryTypographyProps={{ sx: { color: "#444" } }} />
-                        </ListItem>
-                      ))}
-                    </List>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ) : (
-              <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full">
-                <Card sx={{ bgcolor: "#daf3fa", color: "white", borderRadius: 3, boxShadow: "0px 0px 20px rgba(147, 51, 234, 0.4)", position: "relative", px: 5, py: 6, textAlign: "center" }}>
-                  <CardContent>
-                    <Box sx={{ fontSize: "3.5rem", mb: 3 }}>✨</Box>
-                    <Typography
-                      variant="h4"
-                      fontWeight={700}
-                      gutterBottom
-                      sx={{ color: "#7b1fa2" }}
-                    >
-                      Welcome to SQAC Domains
-                    </Typography>
-
-                    <Typography
-                      variant="body1"
-                      sx={{ fontSize: "1.125rem", color: "#4a4a4a" }}
-                    >
-                      Choose a domain card on the left to explore how we empower areas like technology, creative design, and corporate innovation at SQAC.
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            )}
-          </motion.div>
+                            }} />
+                            <ListItemText primary={feature} primaryTypographyProps={{ sx: { color: "#444" } }} />
+                          </ListItem>
+                        ))}
+                      </List>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Card sx={{
+                    bgcolor: "#f0fdfa",
+                    color: "#333",
+                    borderRadius: 3,
+                    boxShadow: "0px 0px 20px rgba(6, 182, 212, 0.4)",
+                    px: 5,
+                    py: 6,
+                    textAlign: "center"
+                  }}>
+                    <CardContent>
+                      <Box sx={{ fontSize: "3.5rem", mb: 3, color: "#f97316" }}>✨</Box>
+                      <Typography variant="h4" fontWeight={700} gutterBottom sx={{ color: "#ec4899" }}>
+                        Welcome to SQAC Domains
+                      </Typography>
+                      <Typography variant="body1" sx={{ fontSize: "1.125rem", color: "#555" }}>
+                        Choose a domain card to explore how we empower areas like technology, creative design, and corporate innovation.
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              )}
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>
