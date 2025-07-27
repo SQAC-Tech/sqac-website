@@ -31,7 +31,7 @@ const ComingSoonPage = () => {
   };
 
   return (
-    <section className="min-h-[95vh] px-4 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-orange-100 to-cyan-200">
+    <section className="min-h-[95vh] px-4 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200">
       <motion.div
         initial="hidden"
         animate="visible"
@@ -86,7 +86,8 @@ const ComingSoonPage = () => {
             variants={itemVariants}
             className="mt-12 text-gray-500 text-sm tracking-wider"
           >
-            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW          </motion.div>
+            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW          
+          </motion.div>
         </div>
       </motion.div>
     </section>
