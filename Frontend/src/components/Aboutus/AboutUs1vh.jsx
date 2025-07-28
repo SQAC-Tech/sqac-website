@@ -7,7 +7,7 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="min-h-screen px-4 sm:px-8 py-16 z-10 bg-gradient-to-b from-pink-200 to-orange-200">
+    <section className="h-screen px-4 sm:px-6 pt-4 pb-6 z-10 bg-gradient-to-b from-pink-200 to-orange-200 flex justify-center items-center">
       <div
         ref={ref}
         className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto z-3"
@@ -27,7 +27,7 @@ const AboutUs = () => {
           transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
           className="bg-gradient-to-tr from-white/40 via-orange-100/30 to-pink-100/40 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-3xl mx-auto mt-6 border border-orange-200 hover:shadow-2xl transition-all duration-300"
         >
-          <div className="rounded-xl overflow-hidden shadow-md mb-5 transition-transform duration-300 hover:scale-105">
+          <div className="rounded-xl overflow-hidden mb-4 max-h-[45vh]">
             <img
               src={TeamPic}
               alt="SQAC Team"
