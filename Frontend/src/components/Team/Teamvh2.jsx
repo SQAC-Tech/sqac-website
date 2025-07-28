@@ -26,7 +26,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
   const dropdownStyle = 'mt-2 bg-white shadow-md rounded-xl px-4 py-3 text-sm font-medium text-gray-800 space-y-2';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-100 via-white to-pink-100 flex flex-col items-center justify-center px-4 py-1 font-['Poppins']">
+    <div className="min-h-screen bg-gradient-to-b from-orange-200 via-white to-pink-200 flex flex-col items-center justify-center px-4 py-1 font-['Poppins']">
       <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">Choose Your Domain</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20">

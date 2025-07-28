@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 
 function Content() {
   return (
-    <div className="min-h-screen bg-gradient-to-t from-orange-300 via-neutral-50 to-pink-300 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-t from-orange-200 via-neutral-50 to-pink-300 relative overflow-hidden">
       <Navbar />
 
       <div className="absolute -top-10 left-10 z-0 select-none">
