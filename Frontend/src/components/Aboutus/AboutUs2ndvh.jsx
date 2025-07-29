@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { motion } from 'framer-motion';
 import {
   LayoutTemplate, Smartphone, Cpu, PenTool,
-  CalendarClock, Mic, Handshake
+  CalendarClock, Mic, Handshake,Camera
 } from 'lucide-react';
 
 const services = {
@@ -26,11 +26,7 @@ const services = {
     desc: 'Automate and gain insights with intelligent AI/ML systems.',
     features: ['Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Recommendation Engines'],
   },
-  creatives: {
-    title: 'Creatives',
-    desc: 'Designing engaging visual content and media to boost brand identity.',
-    features: ['Graphic Design', 'Video Editing', 'Brand Identity', 'Motion Graphics'],
-  },
+
   events: {
     title: 'Event Management',
     desc: 'Organizing impactful tech events, workshops, and community meetups.',
@@ -41,10 +37,10 @@ const services = {
     desc: 'Building corporate relationships and securing funding for initiatives.',
     features: ['Brand Collaborations', 'Fundraising', 'Corporate Outreach', 'Partnership Growth'],
   },
-  pr: {
-    title: 'Public Relations',
+  media: {
+    title: 'Media',
     desc: 'Managing our external communication and media presence.',
-    features: ['Content Creation', 'Social Media Strategy', 'Press Releases', 'Community Engagement'],
+    features: ['Content Creation', 'Video Editing', 'Community Engagement','Brand Identity'],
   },
 };
 
@@ -52,10 +48,9 @@ const serviceCards = [
   { id: 'webdev', name: 'Web Dev', icon: <LayoutTemplate size={36} /> },
   { id: 'events', name: 'Events', icon: <CalendarClock size={36} /> },
   { id: 'appdev', name: 'App Dev', icon: <Smartphone size={36} /> },
-  { id: 'pr', name: 'PR', icon: <Mic size={36} /> },
+  { id: 'media', name: 'Media', icon: <Camera size={36} /> },
   { id: 'aiml', name: 'AI/ML', icon: <Cpu size={36} /> },
   { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={36} /> },
-  { id: 'creatives', name: 'Creatives', icon: <PenTool size={36} /> },
 ];
 
 function ServicesSection() {
@@ -136,12 +131,10 @@ function ServicesSection() {
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('webdev')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('events')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('appdev')}</div>
-            <div className="w-full max-w-[160px] h-[140px]">{renderCard('pr')}</div>
+            <div className="w-full max-w-[160px] h-[140px]">{renderCard('media')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('aiml')}</div>
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('sponsor')}</div>
-            <div className="col-span-2 flex justify-center w-full">
-              <div className="w-full max-w-[160px] h-[140px]">{renderCard('creatives')}</div>
-            </div>
+            
           </div>
 
           {/* Right Container - Centered Details Card */}
