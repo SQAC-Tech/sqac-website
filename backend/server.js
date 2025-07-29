@@ -75,6 +75,10 @@ cron.schedule('0 * * * *', async () => {
     console.log('Error syncing Excel to MongoDB:', err);
   }
 });
-
+setInterval(() => {
+  fetch('https://sqac-website-k0bp.onrender.com/api/health')
+    .then(res => console.log(`Self-ping status: ${res.status}`))
+    .catch(err => console.error('Self-ping failed:', err));
+}, 14 * 60 * 1000);
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
