@@ -1,4 +1,7 @@
 require('dotenv').config();
+console.log("MONGO_URI:", process.env.MONGO_URI); // <--- Add this line
+
+require('dotenv').config();
 const mongoose = require('mongoose');
 const xlsx = require('xlsx');
 const Data = require('./models/Data');
