@@ -24,7 +24,7 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('https://sqac-website-k0bp.onrender.com/api/data')
+    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
       .then((res) => {
         setTeamData(res.data);
         setLoading(false);
@@ -36,15 +36,16 @@ const Team = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://sqac-website-k0bp.onrender.com/api/data/field/Sub Domain')
-      .then((res) => {
-        const cleaned = [...new Set(res.data.filter(Boolean).map(d => d.trim()))];
-        setSubDomains(cleaned);
-      })
-      .catch((err) => {
-        console.error('Error fetching subdomains:', err);
-      });
-  }, []);
+    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
+  .then(response => {
+    const data = response.data;
+    const names = data.map(row => row["Sub Domain"]);  // assuming the column is named exactly "name"
+    console.log(names); // Output: ["Alice", "Bob", "Charlie", ...]
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+  });
+  }, []); // <-- Close useEffect and add dependency array
 
   const filterMembersByDomain = () => {
     if (!selectedDomain) return [];
