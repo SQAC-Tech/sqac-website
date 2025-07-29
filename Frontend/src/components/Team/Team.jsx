@@ -24,7 +24,7 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('https://sqac-website.onrender.com/api/data')
+    axios.get('https://sqac-website-k0bp.onrender.com/api/data')
       .then((res) => {
         setTeamData(res.data);
         setLoading(false);
@@ -36,7 +36,7 @@ const Team = () => {
   }, []);
 
   useEffect(() => {
-    axios.get('https://sqac-website.onrender.com/api/data/field/Sub Domain')
+    axios.get('https://sqac-website-k0bp.onrender.com/api/data/field/Sub Domain')
       .then((res) => {
         const cleaned = [...new Set(res.data.filter(Boolean).map(d => d.trim()))];
         setSubDomains(cleaned);
