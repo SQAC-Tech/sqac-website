@@ -62,9 +62,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
           </div>
           {openDropdown === 'Corporate' && (
             <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('PR')}>
-                <Megaphone className="w-4 h-4" /> PR
-              </div>
+
               <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Sponsorship')}>
                 <HandCoins className="w-4 h-4" /> Sponsorship
               </div>
@@ -77,7 +75,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
 
         <div className={cardStyle} onClick={() => handleCardClick('Creatives')}>
           <Palette className={iconStyle} />
-          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Creatives</p>
+          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Media</p>
         </div>
       </div>
     </div>
