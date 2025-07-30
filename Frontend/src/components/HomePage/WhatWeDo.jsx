@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import {Laptop, Code, Users, Calendar, Palette, RotateCcw,} from "lucide-react";
+import {
+  Laptop,
+  Code,
+  Users,
+  Calendar,
+  Palette,
+  RotateCcw,
+} from "lucide-react";
 
 const WhatWeDoSection = () => {
   const [index, setIndex] = useState(0);
@@ -55,7 +62,6 @@ const WhatWeDoSection = () => {
 
   return (
     <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-red-300 via-orange-200 to-orange-300 overflow-hidden flex-col md:flex-row">
-
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
         initial={{ x: 100, opacity: 0 }}
@@ -89,16 +95,24 @@ const WhatWeDoSection = () => {
             setFlip(false);
             setIndex((index - 1 + cards.length) % cards.length);
           }}
-          className="absolute -left-6 sm:-left-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-purple-500 text-white rounded-full hover:bg-purple-600 active:scale-95 transition z-10"
+          className="absolute -left-4 sm:-left-10 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-purple-500 text-white rounded-full hover:bg-purple-600 active:scale-95 transition z-10"
         >
           ←
         </button>
 
-        <div
-          className="relative w-64 sm:w-72 md:w-96 h-[400px] sm:h-[440px] md:h-[500px]"
-          onMouseEnter={() => setFlip(true)}
-          onMouseLeave={() => setFlip(false)}
-        >
+       <div
+  className="relative w-64 sm:w-72 md:w-96 h-[400px] sm:h-[440px] md:h-[500px]"
+  onClick={() => {
+    if (window.innerWidth < 1024) setFlip((prev) => !prev); // mobile & tablet
+  }}
+  onMouseEnter={() => {
+    if (window.innerWidth >= 1024) setFlip(true); // desktop only
+  }}
+  onMouseLeave={() => {
+    if (window.innerWidth >= 1024) setFlip(false); // desktop only
+  }}
+>
+
           {[front, back].map((card, i) => (
             <div
               key={i}
@@ -127,7 +141,7 @@ const WhatWeDoSection = () => {
             setFlip(false);
             setIndex((index + 1) % cards.length);
           }}
-          className="absolute -right-6 sm:-right-8 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-500 text-white rounded-full hover:bg-cyan-600 active:scale-95 transition z-10"
+          className="absolute -right-4 sm:-right-10 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-500 text-white rounded-full hover:bg-cyan-600 active:scale-95 transition z-10"
         >
           →
         </button>
