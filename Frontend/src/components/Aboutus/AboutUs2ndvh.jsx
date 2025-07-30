@@ -130,7 +130,7 @@ function ServicesSection() {
       </p>
 
       <div className="bg-white/10 backdrop-blur-md border border-cyan-200/40 rounded-3xl shadow-lg p-4 sm:p-6 w-full max-w-5xl">
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3">
           {/* Left Grid - Service Cards */}
           <div className="grid grid-cols-2 gap-3 w-full place-items-center">
             <div className="w-full max-w-[160px] h-[140px]">{renderCard('webdev')}</div>
