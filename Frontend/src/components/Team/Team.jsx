@@ -7,14 +7,67 @@ import githubIcon from '../../assets/github.png';
 import Teamvh1 from './Teamvh1';
 import Teamvh2 from './Teamvh2';
 
-const hierarchyOrder = [
+// Strict hierarchy order for Board Members
+const boardMemberHierarchy = [
   'Secretary',
   'Joint Secretary',
-  'Corporate Lead',
-  'Technical Lead',
+  'Leads', // Combined Technical and Corporate Leads
   'Domain Lead',
   'Associate',
   'Member',
+];
+
+// Hardcoded board members data in strict order
+const hardcodedBoardMembers = [
+  // Secretary - Only Yash Gupta
+  {
+    'Name': 'Yash Gupta',
+    'Position in SQAC': 'Secretary & Board Member',
+    'Sub Domain': 'Board Member',
+    'LinkedIn Profile Link': '',
+    'Instagram Profile Link': '',
+    'GitHub Profile Link': '',
+    'Your Image For Website': ''
+  },
+  // Joint Secretaries - Tanmay and Nityam
+  {
+    'Name': 'Tanmay Bansal',
+    'Position in SQAC': 'Joint Secretary & Board Member',
+    'Sub Domain': 'Board Member',
+    'LinkedIn Profile Link': '',
+    'Instagram Profile Link': '',
+    'GitHub Profile Link': '',
+    'Your Image For Website': ''
+  },
+  {
+    'Name': 'Nityam Jain',
+    'Position in SQAC': 'Joint Secretary & Board Member',
+    'Sub Domain': 'Board Member',
+    'LinkedIn Profile Link': '',
+    'Instagram Profile Link': '',
+    'GitHub Profile Link': '',
+    'Your Image For Website': ''
+  },
+  // Technical Lead
+  {
+    'Name': 'Priyanshu Vasudev',
+    'Position in SQAC': 'Technical Lead & Board Member',
+    'Sub Domain': 'Board Member',
+    'LinkedIn Profile Link': '',
+    'Instagram Profile Link': '',
+    'GitHub Profile Link': '',
+    'Your Image For Website': ''
+  },
+  // Corporate Lead
+  {
+    'Name': 'Vedant Modi',
+    'Position in SQAC': 'Corporate Lead & Board Member',
+    'Sub Domain': 'Board Member',
+    'LinkedIn Profile Link': '',
+    'Instagram Profile Link': '',
+    'GitHub Profile Link': '',
+    'Your Image For Website': ''
+  }
 ];
 
 const Team = () => {
@@ -35,44 +88,47 @@ const Team = () => {
       });
   }, []);
 
-  useEffect(() => {
-    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
-  .then(response => {
-    const data = response.data;
-    const names = data.map(row => row["Sub Domain"]);  // assuming the column is named exactly "name"
-    console.log(names); // Output: ["Alice", "Bob", "Charlie", ...]
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
-  }, []); // <-- Close useEffect and add dependency array
-
   const filterMembersByDomain = () => {
     if (!selectedDomain) return [];
 
+    // Return hardcoded data for Board Member in strict order
+    if (selectedDomain.toLowerCase() === 'board member') {
+      return hardcodedBoardMembers;
+    }
+
+    // For other domains, use the original filtering logic
     return teamData.filter((member) => {
-      const position = member['Position in SQAC']?.toLowerCase() || '';
       const domainField = member['Sub Domain'] || '';
       const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
-
-      if (selectedDomain.toLowerCase() === 'board member') {
-        return position.includes('board member');
-      }
-
       return subdomains.includes(selectedDomain.toLowerCase());
     });
   };
 
   const groupByHierarchy = (members) => {
-    const groups = Object.fromEntries(hierarchyOrder.map(role => [role, []]));
+    const groups = Object.fromEntries(boardMemberHierarchy.map(role => [role, []]));
 
     members.forEach((member) => {
       const position = member['Position in SQAC'] || '';
-      const role = hierarchyOrder.find(h => position.toLowerCase().includes(h.toLowerCase()));
-      if (role) {
-        groups[role].push(member);
+      
+      // Special handling for hardcoded board members to maintain strict order
+      if (selectedDomain.toLowerCase() === 'board member') {
+        if (position.includes('Secretary') && member.Name === 'Yash Gupta') {
+          groups['Secretary'].push(member);
+        } else if (position.includes('Joint Secretary')) {
+          groups['Joint Secretary'].push(member);
+        } else if (position.includes('Lead')) { // Combine both leads under 'Leads'
+          groups['Leads'].push(member);
+        } else {
+          groups['Member'].push(member);
+        }
       } else {
-        groups['Member'].push(member);
+        // Original logic for other domains
+        const role = boardMemberHierarchy.find(h => position.toLowerCase().includes(h.toLowerCase()));
+        if (role) {
+          groups[role].push(member);
+        } else {
+          groups['Member'].push(member);
+        }
       }
     });
 
@@ -97,67 +153,93 @@ const Team = () => {
       <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
       {selectedDomain && (
-        <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
+        <div className="pt-2 p-6 bg-gradient-to-b from-pink-200 via-yellow-100 to-cyan-200 min-h-screen">
           <h2 className="text-center text-5xl font-bold mb-10">
             {selectedDomain}
           </h2>
 
-          {hierarchyOrder.map((role) => {
+          {boardMemberHierarchy.map((role) => {
             const members = displayMembers[role];
             if (!members.length) return null;
 
-            return (
-              <div key={role} className="mb-16">
-                <h3 className="text-xl font-semibold text-center mb-6">{role}</h3>
-                <div className="flex flex-wrap justify-center gap-8">
-                  {members.map((member, index) => {
-                    const {
-                      Name,
-                      ['Position in SQAC']: Position,
-                      ['LinkedIn Profile Link']: LinkedIn,
-                      ['Instagram Profile Link']: Instagram,
-                      ['GitHub Profile Link']: GitHub,
-                      ['Your Image For Website']: Image,
-                    } = member;
-
-                    let imageUrl = Image;
-                    if (imageUrl?.includes('drive.google.com/open?id=')) {
-                      const fileId = imageUrl.split('id=')[1];
-                      imageUrl = `https://drive.google.com/uc?export=view&id=${fileId}`;
-                    }
-
-                    return (
+            // Special styling for Leads section
+            if (role === 'Leads') {
+              return (
+                <div key={role} className="mb-16">
+                  <h3 className="text-xl font-semibold text-center mb-6">Leads</h3>
+                  <div className="flex flex-wrap justify-center gap-8">
+                    {members.map((member, index) => (
                       <div
                         key={index}
                         className="bg-white rounded-xl border-2 border-gray-200 shadow-md p-4 w-64 text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
                       >
                         <img
-                          src={imageUrl || 'https://via.placeholder.com/150'}
-                          alt={Name}
+                          src={member['Your Image For Website'] || 'https://via.placeholder.com/150'}
+                          alt={member.Name}
                           className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
                         />
-                        <h3 className="text-lg font-semibold text-gray-800">{Name}</h3>
-                        <p className="text-sm text-gray-600">{Position}</p>
+                        <h3 className="text-lg font-semibold text-gray-800">{member.Name}</h3>
+                        <p className="text-sm text-gray-600">{member['Position in SQAC']}</p>
                         <div className="flex justify-center gap-4 mt-3">
-                          {LinkedIn && (
-                            <a href={LinkedIn} target="_blank" rel="noopener noreferrer">
+                          {member['LinkedIn Profile Link'] && (
+                            <a href={member['LinkedIn Profile Link']} target="_blank" rel="noopener noreferrer">
                               <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 hover:scale-110 transition" />
                             </a>
                           )}
-                          {Instagram && (
-                            <a href={Instagram} target="_blank" rel="noopener noreferrer">
+                          {member['Instagram Profile Link'] && (
+                            <a href={member['Instagram Profile Link']} target="_blank" rel="noopener noreferrer">
                               <img src={instagramIcon} alt="Instagram" className="w-6 h-6 hover:scale-110 transition" />
                             </a>
                           )}
-                          {GitHub && (
-                            <a href={GitHub} target="_blank" rel="noopener noreferrer">
+                          {member['GitHub Profile Link'] && (
+                            <a href={member['GitHub Profile Link']} target="_blank" rel="noopener noreferrer">
                               <img src={githubIcon} alt="GitHub" className="w-6 h-6 hover:scale-110 transition" />
                             </a>
                           )}
                         </div>
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            // Default styling for other roles
+            return (
+              <div key={role} className="mb-16">
+                <h3 className="text-xl font-semibold text-center mb-6">{role}</h3>
+                <div className="flex flex-wrap justify-center gap-8">
+                  {members.map((member, index) => (
+                    <div
+                      key={index}
+                      className="bg-white rounded-xl border-2 border-gray-200 shadow-md p-4 w-64 text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
+                    >
+                      <img
+                        src={member['Your Image For Website'] || 'https://via.placeholder.com/150'}
+                        alt={member.Name}
+                        className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
+                      />
+                      <h3 className="text-lg font-semibold text-gray-800">{member.Name}</h3>
+                      <p className="text-sm text-gray-600">{member['Position in SQAC']}</p>
+                      <div className="flex justify-center gap-4 mt-3">
+                        {member['LinkedIn Profile Link'] && (
+                          <a href={member['LinkedIn Profile Link']} target="_blank" rel="noopener noreferrer">
+                            <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 hover:scale-110 transition" />
+                          </a>
+                        )}
+                        {member['Instagram Profile Link'] && (
+                          <a href={member['Instagram Profile Link']} target="_blank" rel="noopener noreferrer">
+                            <img src={instagramIcon} alt="Instagram" className="w-6 h-6 hover:scale-110 transition" />
+                          </a>
+                        )}
+                        {member['GitHub Profile Link'] && (
+                          <a href={member['GitHub Profile Link']} target="_blank" rel="noopener noreferrer">
+                            <img src={githubIcon} alt="GitHub" className="w-6 h-6 hover:scale-110 transition" />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             );

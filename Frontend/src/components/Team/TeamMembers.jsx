@@ -14,7 +14,7 @@ const ProfileCard = () => (
 
 const TeamMembers = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 via-pink-100 to-orange-200 flex flex-col items-center justify-center gap-12 px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-b from-pink-200 via-pink-200 to-orange-200 flex flex-col items-center justify-center gap-12 px-4 py-10">
       {/* Center Card */}
       <div className="flex justify-center">
         <ProfileCard />
