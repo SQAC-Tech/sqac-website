@@ -40,7 +40,7 @@ const hardcodedBoardMembers = [
     'Your Image For Website': ''
   },
   {
-    'Name': 'Nityam Jain',
+    'Name': 'Nityam Sharma',
     'Position in SQAC': 'Joint Secretary & Board Member',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': '',
