@@ -1,15 +1,14 @@
-
 import React, { useState } from 'react';
 import {
-  Users, Code2, Building2, Palette, Globe, Brain,
-  Smartphone, Megaphone, HandCoins, Calendar
+  Users, Code2, Building2, Camera,Palette ,Globe, Brain,
+  Smartphone, Megaphone, HandCoins, Calendar, Image as MediaIcon
 } from 'lucide-react';
 
 const Teamvh2 = ({ onSelectDomain }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
   const handleCardClick = (domain) => {
-    if (domain === 'Technical' || domain === 'Corporate') {
+    if (domain === 'Technical' || domain === 'Corporate' || domain === 'Media') {
       setOpenDropdown(openDropdown === domain ? null : domain);
     } else {
       onSelectDomain(domain);
@@ -62,7 +61,6 @@ const Teamvh2 = ({ onSelectDomain }) => {
           </div>
           {openDropdown === 'Corporate' && (
             <div className={dropdownStyle}>
-
               <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Sponsorship')}>
                 <HandCoins className="w-4 h-4" /> Sponsorship
               </div>
@@ -73,9 +71,21 @@ const Teamvh2 = ({ onSelectDomain }) => {
           )}
         </div>
 
-        <div className={cardStyle} onClick={() => handleCardClick('Creatives')}>
-          <Palette className={iconStyle} />
-          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Media</p>
+        <div className="flex flex-col items-center">
+          <div className={cardStyle} onClick={() => handleCardClick('Media')}>
+            <Camera className={iconStyle} />
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Media</p>
+          </div>
+          {openDropdown === 'Media' && (
+            <div className={dropdownStyle}>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Creatives')}>
+                <Palette className="w-4 h-4" /> Creatives
+              </div>
+              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('PR')}>
+                <Megaphone className="w-4 h-4" /> PR
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
