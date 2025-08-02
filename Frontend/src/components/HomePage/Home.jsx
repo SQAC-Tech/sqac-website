@@ -17,7 +17,7 @@ export default function LandingHero() {
           hidden: { opacity: 0, y: 80 },
           visible: { opacity: 1, y: 0 },
         }}
-        className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-20 w-full max-w-[1600px]"
+        className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-20 w-full max-w-[1600px] mt-13"
       >
         {/* Left Title */}
         <div className="flex flex-col items-center md:items-end text-center md:text-right space-y-4">
