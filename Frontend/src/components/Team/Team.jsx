@@ -20,45 +20,45 @@ const hardcodedBoardMembers = [
     Name: 'Yash Gupta',
     'Position in SQAC': 'Secretary & Board Member',
     'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': '',
-    'Instagram Profile Link': '',
-    'GitHub Profile Link': '',
+    'LinkedIn Profile Link': 'https://www.linkedin.com/in/yash-gupta-052a32142/',
+    'Instagram Profile Link': 'https://www.instagram.com/guptayash_16/',
+    'GitHub Profile Link': 'https://github.com/Yash9837',
     'Your Image For Website': '',
   },
   {
     Name: 'Tanmay Bansal',
     'Position in SQAC': 'Joint Secretary & Board Member',
     'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': '',
-    'Instagram Profile Link': '',
-    'GitHub Profile Link': '',
+    'LinkedIn Profile Link': 'https://www.linkedin.com/in/tanmay-bansal-3b17a8247/',
+    'Instagram Profile Link': 'https://www.instagram.com/tanmay__170/?igsh=MTZ5NG1pbDcweDg4bg%3D%3D',
+    'GitHub Profile Link': 'https://github.com/Tanmay170',
     'Your Image For Website': '',
   },
   {
     Name: 'Nityam Sharma',
     'Position in SQAC': 'Joint Secretary & Board Member',
     'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': '',
-    'Instagram Profile Link': '',
-    'GitHub Profile Link': '',
+    'LinkedIn Profile Link': 'https://www.linkedin.com/in/nityamsharma-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    'Instagram Profile Link': 'https://www.instagram.com/_nityamsharma_/?igsh=MXhkM3AzZ203YzZ1Zw%3D%3D',
+    'GitHub Profile Link': 'https://github.com/SharmaNityam',
     'Your Image For Website': '',
   },
   {
     Name: 'Priyanshu Vasudev',
     'Position in SQAC': 'Technical Lead & Board Member',
     'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': '',
-    'Instagram Profile Link': '',
-    'GitHub Profile Link': '',
+    'LinkedIn Profile Link': 'https://www.linkedin.com/in/priyanshu-vasudev-off/',
+    'Instagram Profile Link': 'https://www.instagram.com/priyanshu.vasudev/',
+    'GitHub Profile Link': 'https://github.com/Priyanshu2608',
     'Your Image For Website': '',
   },
   {
     Name: 'Vedant Modi',
     'Position in SQAC': 'Corporate Lead & Board Member',
     'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': '',
-    'Instagram Profile Link': '',
-    'GitHub Profile Link': '',
+    'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
+    'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
+    'GitHub Profile Link': 'https://github.com/VEDANTMODI21',
     'Your Image For Website': '',
   },
 ];
@@ -144,7 +144,7 @@ const Team = () => {
       <Teamvh1 />
       <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
-      <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
+      <div className="pt-2 p-6 bg-gradient-to-b from-pink-200 via-yellow-100 to-cyan-200 min-h-screen">
         {loading ? (
           <div className="text-center mt-10">Loading team data...</div>
         ) : (
@@ -181,19 +181,34 @@ const Team = () => {
                           <h3 className="text-lg font-semibold text-gray-800">{member.Name}</h3>
                           <p className="text-sm text-gray-600">{member['Position in SQAC']}</p>
                           <div className="flex justify-center gap-4 mt-3">
-                            {member['LinkedIn Profile Link'] && (
-                              <a href={member['LinkedIn Profile Link']} target="_blank" rel="noopener noreferrer">
-                                <FaLinkedin className="w-5 h-5 text-blue-600 hover:scale-110 transition" />
+                            {member['LinkedIn Profile Link']?.trim() && (
+                              <a 
+                                href={member['LinkedIn Profile Link'].trim()} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                              >
+                                <FaLinkedin className="w-5 h-5 text-blue-600" />
                               </a>
                             )}
-                            {member['Instagram Profile Link'] && (
-                              <a href={member['Instagram Profile Link']} target="_blank" rel="noopener noreferrer">
-                                <FaInstagram className="w-5 h-5 text-pink-500 hover:scale-110 transition" />
+                            {member['Instagram Profile Link']?.trim() && (
+                              <a 
+                                href={member['Instagram Profile Link'].trim()} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                              >
+                                <FaInstagram className="w-5 h-5 text-pink-500" />
                               </a>
                             )}
-                            {member['GitHub Profile Link'] && (
-                              <a href={member['GitHub Profile Link']} target="_blank" rel="noopener noreferrer">
-                                <FaGithub className="w-5 h-5 text-gray-800 hover:scale-110 transition" />
+                            {member['GitHub Profile Link']?.trim() && (
+                              <a 
+                                href={member['GitHub Profile Link'].trim()} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="hover:scale-110 transition-transform"
+                              >
+                                <FaGithub className="w-5 h-5 text-gray-800" />
                               </a>
                             )}
                           </div>
@@ -208,7 +223,7 @@ const Team = () => {
         )}
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
