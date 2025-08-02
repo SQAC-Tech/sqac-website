@@ -77,15 +77,24 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
+    axios.get(import.meta.env.VITE_API)
       .then((res) => {
         setTeamData(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error('Error fetching team data:', err);
+      .catch(() => {
         setLoading(false);
       });
+  }, []);
+
+  useEffect(() => {
+    axios.get(import.meta.env.VITE_API)
+      .then(response => {
+        const data = response.data;
+        const uniqueDomains = [...new Set(data.map(row => row["Sub Domain"]).filter(Boolean))];
+        setSubDomains(uniqueDomains);
+      })
+      .catch(() => {});
   }, []);
 
   const filterMembersByDomain = () => {
@@ -153,10 +162,8 @@ const Team = () => {
       <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
 
       {selectedDomain && (
-        <div className="pt-2 p-6 bg-gradient-to-b from-pink-200 via-yellow-100 to-cyan-200 min-h-screen">
-          <h2 className="text-center text-5xl font-bold mb-10">
-            {selectedDomain}
-          </h2>
+        <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
+          <h2 className="text-center text-5xl font-bold mb-10">{selectedDomain}</h2>
 
           {boardMemberHierarchy.map((role) => {
             const members = displayMembers[role];
