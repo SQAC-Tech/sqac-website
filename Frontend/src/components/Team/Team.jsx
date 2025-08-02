@@ -24,28 +24,25 @@ const Team = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
+    axios.get(import.meta.env.VITE_API)
       .then((res) => {
         setTeamData(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        console.error('Error fetching team data:', err);
+      .catch(() => {
         setLoading(false);
       });
   }, []);
 
   useEffect(() => {
-    axios.get('https://sheetdb.io/api/v1/jymm1gsk9tq9n')
-  .then(response => {
-    const data = response.data;
-    const names = data.map(row => row["Sub Domain"]);  // assuming the column is named exactly "name"
-    console.log(names); // Output: ["Alice", "Bob", "Charlie", ...]
-  })
-  .catch(error => {
-    console.error('Error fetching data:', error);
-  });
-  }, []); // <-- Close useEffect and add dependency array
+    axios.get(import.meta.env.VITE_API)
+      .then(response => {
+        const data = response.data;
+        const uniqueDomains = [...new Set(data.map(row => row["Sub Domain"]).filter(Boolean))];
+        setSubDomains(uniqueDomains);
+      })
+      .catch(() => {});
+  }, []);
 
   const filterMembersByDomain = () => {
     if (!selectedDomain) return [];
@@ -98,9 +95,7 @@ const Team = () => {
 
       {selectedDomain && (
         <div className="pt-2 p-6 bg-gradient-to-b from-pink-100 via-yellow-300 to-cyan-200 min-h-screen">
-          <h2 className="text-center text-5xl font-bold mb-10">
-            {selectedDomain}
-          </h2>
+          <h2 className="text-center text-5xl font-bold mb-10">{selectedDomain}</h2>
 
           {hierarchyOrder.map((role) => {
             const members = displayMembers[role];
