@@ -11,23 +11,27 @@ import ScrollToTop from './components/ScrollToTop.jsx';
 import useLenisScroll from './utils/smoothScroll';
 import Navbar from './components/HomePage/Navbar.jsx';
 
+import './App.css'; // Make sure this is imported for custom styles
+
 const App = () => {
-  useLenisScroll(); 
+  useLenisScroll();
 
   return (
-    <Router>
-      <ScrollToTop />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<Aboutus />} />
-        <Route path="/events" element={<Events />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/recruitment" element={<JoinUs />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <div className="app-container">
+      <Router>
+        <ScrollToTop />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<Aboutus />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/recruitment" element={<JoinUs />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>
   );
 };
 
