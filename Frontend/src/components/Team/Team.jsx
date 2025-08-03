@@ -23,7 +23,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/yash-gupta-052a32142/',
     'Instagram Profile Link': 'https://www.instagram.com/guptayash_16/',
     'GitHub Profile Link': 'https://github.com/Yash9837',
-    'Your Image For Website': '',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/WhatsApp_Image_2025-07-29_at_11.47.56_-_Yash_Gupta_fcyni0',
   },
   {
     Name: 'Tanmay Bansal',
@@ -32,7 +32,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/tanmay-bansal-3b17a8247/',
     'Instagram Profile Link': 'https://www.instagram.com/tanmay__170/?igsh=MTZ5NG1pbDcweDg4bg%3D%3D',
     'GitHub Profile Link': 'https://github.com/Tanmay170',
-    'Your Image For Website': '',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/IMG-20240927-WA0002_-_TANMAY_BANSAL_RA2311043010022_xj6wui',
   },
   {
     Name: 'Nityam Sharma',
@@ -41,7 +41,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/nityamsharma-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     'Instagram Profile Link': 'https://www.instagram.com/_nityamsharma_/?igsh=MXhkM3AzZ203YzZ1Zw%3D%3D',
     'GitHub Profile Link': 'https://github.com/SharmaNityam',
-    'Your Image For Website': '',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/Screenshot_2025-01-07-19-52-51-05_6012fa4d4ddec268fc5c7112cbb265e7_-_Nityam_Sharma_jjfgcn',
   },
   {
     Name: 'Priyanshu Vasudev',
@@ -50,7 +50,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/priyanshu-vasudev-off/',
     'Instagram Profile Link': 'https://www.instagram.com/priyanshu.vasudev/',
     'GitHub Profile Link': 'https://github.com/Priyanshu2608',
-    'Your Image For Website': '',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/priyanshu_pskop4',
   },
   {
     Name: 'Vedant Modi',
@@ -59,7 +59,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
     'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
     'GitHub Profile Link': 'https://github.com/VEDANTMODI21',
-    'Your Image For Website': '',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/ved_iit_pic_-_VEDANT_MODI_psuieb',
   },
 ];
 
