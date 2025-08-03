@@ -10,6 +10,7 @@ import JoinUs from './components/JoinUs/JoinUs.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import useLenisScroll from './utils/smoothScroll';
 import Navbar from './components/HomePage/Navbar.jsx';
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 import './App.css'; // Make sure this is imported for custom styles
 
@@ -31,7 +32,9 @@ const App = () => {
         </Routes>
         <Footer />
       </Router>
+      <SpeedInsights/>
     </div>
+
   );
 };
 
