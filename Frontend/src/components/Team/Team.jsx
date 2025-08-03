@@ -223,7 +223,7 @@ const Team = () => {
         )}
       </div>
 
-      <Footer />
+     
     </div>
   );
 };
