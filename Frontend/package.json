@@ -17,6 +17,7 @@
     "@studio-freight/lenis": "^1.0.42",
     "@tabler/icons-react": "^3.34.0",
     "@tailwindcss/vite": "^4.1.11",
+    "@vercel/speed-insights": "^1.2.0",
     "aos": "^2.3.4",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
