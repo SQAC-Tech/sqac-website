@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import tech from "../../assets/technical.png";
-import corp from "../../assets/corporate.png";
-
+import tech from "../../assets/technical (2).png";
+import corp from "../../assets/corp (2).png";
+import media from "../../assets/media.png";
 
 const FloatBox = ({ name, description }) => {
   const [open, setOpen] = useState(false);
@@ -55,7 +55,8 @@ const Bubble = ({ children, className }) => (
 const DomainContent = ({ item, isPhotoLeft }) => {
   const Mobile = () => (
     <div className="space-y-8 md:hidden">
-      <Bubble className="justify-center">
+      <Bubble className="justify-center flex-col">
+        <h3 className="text-xl font-bold text-[#4A1E5C] mb-2">{item.title}</h3>
         <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
       </Bubble>
       <Bubble className="flex-col items-start">
@@ -69,28 +70,30 @@ const DomainContent = ({ item, isPhotoLeft }) => {
     <div className="hidden md:grid grid-cols-[1fr_2rem_1fr] gap-x-6 items-center">
       {isPhotoLeft ? (
         <>
-          <Bubble className="justify-center">
-            <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
+          <Bubble className="justify-center flex-col">
+            <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3>
+            <img src={item.mainImage} alt="" className="max-h-55 object-contain" />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
             <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
           </div>
-          <Bubble className="flex-col items-start">
+          <Bubble className="flex-col items-center">
             <p className="text-[#333] text-base lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
         </>
       ) : (
         <>
-          <Bubble className="flex-col items-start">
+          <Bubble className="flex-col items-center">
             <p className="text-[#333] text-base lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
             <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
           </div>
-          <Bubble className="justify-center">
-            <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
+          <Bubble className="justify-center flex-col">
+            <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3>
+            <img src={item.mainImage} alt="" className="max-h-55 object-contain" />
           </Bubble>
         </>
       )}
@@ -116,6 +119,7 @@ export default function Domains() {
 
   const domainItems = [
     {
+      title: "Technical",
       description:
         "The Technical Domain nurtures passionate developers and designers. From building elegant websites to crafting AI models — this is where code meets creativity.",
       mainImage: tech,
@@ -123,17 +127,26 @@ export default function Domains() {
         { name: "Web Dev", description: "Building responsive and dynamic websites." },
         { name: "App Dev", description: "Creating intuitive mobile applications." },
         { name: "AI/ML", description: "Developing intelligent systems and models." },
-        { name: "Creatives", description: "Designing stunning graphics and user interfaces." },
       ],
     },
     {
+      title: "Corporate",
       description:
         "The Corporate Domain powers our visibility and network. It manages events, sponsorships, and public relations, making sure our voice reaches far and wide.",
       mainImage: corp,
       subdomains: [
         { name: "Events", description: "Organizing engaging events and workshops." },
         { name: "Sponsorship", description: "Securing partnerships and sponsorships." },
-        { name: "PR", description: "Managing public relations and media outreach." },
+      ],
+    },
+    {
+      title: "Media",
+      description:
+        "The Corporate Domain powers our visibility and network. It manages events, sponsorships, and public relations, making sure our voice reaches far and wide.",
+      mainImage: media,
+      subdomains: [
+        { name: "Creatives", description: "Designing stunning graphics and user interfaces." },
+        { name: "Public Relations", description: "Managing public relations and media outreach." },
       ],
     },
   ];
@@ -155,7 +168,7 @@ export default function Domains() {
           }}
         />
 
-        <div className="space-y-20 md:space-y-24 mt-16">
+        <div className="space-y-20 md:space-y-24 mt-12">
           {domainItems.map((item, index) => (
             <DomainContent
               key={index}
