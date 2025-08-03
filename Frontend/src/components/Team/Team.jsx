@@ -18,7 +18,7 @@ const boardMemberHierarchy = [
 const hardcodedBoardMembers = [
   {
     Name: 'Yash Gupta',
-    'Position in SQAC': 'Secretary & Board Member',
+    'Position in SQAC': 'Secretary ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/yash-gupta-052a32142/',
     'Instagram Profile Link': 'https://www.instagram.com/guptayash_16/',
@@ -27,7 +27,7 @@ const hardcodedBoardMembers = [
   },
   {
     Name: 'Tanmay Bansal',
-    'Position in SQAC': 'Joint Secretary & Board Member',
+    'Position in SQAC': 'Joint Secretary ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/tanmay-bansal-3b17a8247/',
     'Instagram Profile Link': 'https://www.instagram.com/tanmay__170/?igsh=MTZ5NG1pbDcweDg4bg%3D%3D',
@@ -36,7 +36,7 @@ const hardcodedBoardMembers = [
   },
   {
     Name: 'Nityam Sharma',
-    'Position in SQAC': 'Joint Secretary & Board Member',
+    'Position in SQAC': 'Joint Secretary ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/nityamsharma-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     'Instagram Profile Link': 'https://www.instagram.com/_nityamsharma_/?igsh=MXhkM3AzZ203YzZ1Zw%3D%3D',
@@ -45,7 +45,7 @@ const hardcodedBoardMembers = [
   },
   {
     Name: 'Priyanshu Vasudev',
-    'Position in SQAC': 'Technical Lead & Board Member',
+    'Position in SQAC': 'Technical Lead ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/priyanshu-vasudev-off/',
     'Instagram Profile Link': 'https://www.instagram.com/priyanshu.vasudev/',
@@ -54,7 +54,7 @@ const hardcodedBoardMembers = [
   },
   {
     Name: 'Vedant Modi',
-    'Position in SQAC': 'Corporate Lead & Board Member',
+    'Position in SQAC': 'Corporate Lead',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
     'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
