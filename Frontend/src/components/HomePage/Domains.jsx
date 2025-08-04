@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import tech from "../../assets/technical.png";
-import corp from "../../assets/corp.png";
+import corp from "../../assets/Corp.png";
 import media from "../../assets/media.png";
 
 const FloatBox = ({ name, description }) => {
