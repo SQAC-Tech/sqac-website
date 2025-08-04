@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import tech from "../../assets/technical (2).png";
-import corp from "../../assets/corp (2).png";
+import tech from "../../assets/technical.png";
+import corp from "../../assets/corp.png";
 import media from "../../assets/media.png";
 
 const FloatBox = ({ name, description }) => {
