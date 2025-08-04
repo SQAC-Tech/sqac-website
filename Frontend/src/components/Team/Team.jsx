@@ -54,7 +54,7 @@ const hardcodedBoardMembers = [
   },
   {
     Name: 'Vedant Modi',
-    'Position in SQAC': 'Corporate Lead',
+    'Position in SQAC': 'Corporate Lead ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
     'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
