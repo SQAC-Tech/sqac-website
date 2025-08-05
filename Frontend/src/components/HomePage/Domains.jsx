@@ -59,8 +59,8 @@ const DomainContent = ({ item, isPhotoLeft }) => {
         <h3 className="text-xl font-bold text-[#4A1E5C] mb-2">{item.title}</h3>
         <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
       </Bubble>
-      <Bubble className="flex-col items-start">
-        <p className="text-[#333] text-base">{item.description}</p>
+      <Bubble className="flex-col items-center">
+        <p className="text-[#333] text-center text-base ">{item.description}</p>
         <HoverDock items={item.subdomains} />
       </Bubble>
     </div>
@@ -71,29 +71,29 @@ const DomainContent = ({ item, isPhotoLeft }) => {
       {isPhotoLeft ? (
         <>
           <Bubble className="justify-center flex-col">
-            <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3>
-            <img src={item.mainImage} alt="" className="max-h-55 object-contain" />
+            {/* <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3> */}
+            <img src={item.mainImage} alt="" className="w-full h-full object-cover rounded-2xl" />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
             <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
           </div>
           <Bubble className="flex-col items-center">
-            <p className="text-[#333] text-base lg:text-lg">{item.description}</p>
+            <p className="text-[#333] text-base text-center lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
         </>
       ) : (
         <>
           <Bubble className="flex-col items-center">
-            <p className="text-[#333] text-base lg:text-lg">{item.description}</p>
+            <p className="text-[#333] text-base text-center lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
             <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
           </div>
           <Bubble className="justify-center flex-col">
-            <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3>
-            <img src={item.mainImage} alt="" className="max-h-55 object-contain" />
+            {/* <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3> */}
+            <img src={item.mainImage} alt="" className="w-full h-full object-cover rounded-2xl" />
           </Bubble>
         </>
       )}
@@ -142,7 +142,7 @@ export default function Domains() {
     {
       title: "Media",
       description:
-        "The Corporate Domain powers our visibility and network. It manages events, sponsorships, and public relations, making sure our voice reaches far and wide.",
+        "The Media Domain shapes our identity and amplifies our presence. It blends public relations and creative design to craft compelling stories, manage our image, and ensure our club resonates with every audience it reaches.",
       mainImage: media,
       subdomains: [
         { name: "Creatives", description: "Designing stunning graphics and user interfaces." },
