@@ -45,12 +45,12 @@ const services = {
 };
 
 const serviceCards = [
-  { id: 'webdev', name: 'Web Dev', icon: <LayoutTemplate size={38} /> },
-  { id: 'events', name: 'Events', icon: <CalendarClock size={38} /> },
-  { id: 'appdev', name: 'App Dev', icon: <Smartphone size={38} /> },
-  { id: 'media', name: 'Media', icon: <Camera size={38} /> },
-  { id: 'aiml', name: 'AI/ML', icon: <Cpu size={38} /> },
-  { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={38} /> },
+  { id: 'webdev', name: 'Web Dev', icon: <LayoutTemplate size={36} /> },
+  { id: 'events', name: 'Events', icon: <CalendarClock size={36} /> },
+  { id: 'appdev', name: 'App Dev', icon: <Smartphone size={36} /> },
+  { id: 'media', name: 'Media', icon: <Camera size={36} /> },
+  { id: 'aiml', name: 'AI/ML', icon: <Cpu size={36} /> },
+  { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={36} /> },
 ];
 
 function ServicesSection() {
@@ -89,8 +89,8 @@ function ServicesSection() {
           text-center shadow-md border-2
           backdrop-blur-sm transition-all duration-300
           ${isActive
-            ? 'bg-gradient-to-br from-orange-400 to-pink-400 border-orange-600 text-white'
-            : 'bg-cyan-300/90 border-cyan-500/50 hover:border-cyan-400 hover:ring-2 hover:ring-cyan-400/50'
+            ? 'bg-orange-400/90 border-orange-300 ring-2 ring-orange-500 text-white'
+            : 'bg-cyan-200/90 border-cyan-300/50 hover:border-cyan-400 hover:ring-2 hover:ring-cyan-400/50'
           }
         `}
       >
@@ -120,7 +120,7 @@ function ServicesSection() {
   return (
     <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-200 to-cyan-200">
       <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 mb-6 font-poppins hover:scale-105 transition-transform">Our Core Domains</h2>
-      <p className="text-center text-pink-600 font-semibold max-w-xl mb-10">
+      <p className="text-center text-gray-600 max-w-2xl mb-10">
         Discover the key domains we work in — from technology and design to strategic and corporate solutions.
       </p>
 
@@ -153,29 +153,30 @@ function ServicesSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                   <Card
-                  sx={{
-                    background:
-                      "linear-gradient(to right, #ae8bf6ff, #fe74b9ff)",
-                    color: "#fff",
+                  <Card sx={{
+                    bgcolor: "#f0fdfa",
+                    color: "#333",
                     borderRadius: 3,
                     boxShadow: "0 6px 16px -4px rgba(6, 182, 212, 0.3)",
                     px: 5,
                     py: 6,
                     textAlign: "center",
-                  }}
-                >
+                    transition: "all 0.3s ease",
+                    '&:hover': {
+                      boxShadow: "0 8px 20px -4px rgba(6, 182, 212, 0.4)"
+                    }
+                  }}>
                     <IconButton
                       onClick={() => setSelected(null)}
                       sx={{ 
                         position: "absolute", 
                         top: 12, 
                         right: 12, 
-                        color: "#ffffff",
+                        color: "#f472b6",
                         transition: "all 0.3s ease",
                         '&:hover': {
                           transform: "rotate(90deg)",
-                          color: "#00ffff"
+                          color: "#f97316"
                         }
                       }}
                       aria-label="Close"
@@ -183,22 +184,22 @@ function ServicesSection() {
                       <CloseIcon sx={{ fontSize: '1.5rem' }} />
                     </IconButton>
                     <CardContent>
-                      <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: "#00ffff" }}>
+                      <Typography variant="h5" fontWeight={600} gutterBottom sx={{ color: "#f97316" }}>
                         {services[selected].title}
                       </Typography>
-                      <Typography variant="body1" gutterBottom sx={{ color: "#ffffff" }}>
+                      <Typography variant="body1" gutterBottom sx={{ color: "#555" }}>
                         {services[selected].desc}
                       </Typography>
                       <Divider sx={{ 
                         my: 2, 
-                        borderColor: "#00ffff",
+                        borderColor: "rgba(6, 182, 212, 0.3)",
                         transition: "all 0.3s ease",
                         '&:hover': {
                           borderColor: "rgba(6, 182, 212, 0.6)"
                         }
                       }} />
                       <Typography variant="subtitle1" gutterBottom sx={{ 
-                        color: "#6cf5f5ff",
+                        color: "#06b6d4",
                         transition: "all 0.3s ease",
                         '&:hover': {
                           textShadow: "0 0 8px rgba(6, 182, 212, 0.3)"
@@ -222,7 +223,7 @@ function ServicesSection() {
                             <Box sx={{
                               width: 8,
                               height: 8,
-                              bgcolor: "#00ffff",
+                              bgcolor: "#f97316",
                               borderRadius: "50%",
                               mr: 2,
                               mt: "6px",
@@ -236,11 +237,10 @@ function ServicesSection() {
                               primary={feature} 
                               primaryTypographyProps={{ 
                                 sx: { 
-                                  fontSize: "0.92rem",
-                                  color: "#ffffff",
+                                  color: "#444",
                                   transition: "all 0.3s ease",
                                   '&:hover': {
-                                    color: "#00ffff"
+                                    color: "#222"
                                   }
                                 } 
                               }} 
@@ -257,18 +257,20 @@ function ServicesSection() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Card
-                  sx={{
-                    background:
-                      "linear-gradient(to right, #ae8bf6ff, #fe74b9ff)",
-                    color: "#fff",
+                  <Card sx={{
+                    bgcolor: "#f0fdfa",
+                    color: "#333",
                     borderRadius: 3,
                     boxShadow: "0 6px 16px -4px rgba(6, 182, 212, 0.3)",
                     px: 5,
                     py: 6,
                     textAlign: "center",
-                  }}
-                >
+                    transition: "all 0.3s ease",
+                    '&:hover': {
+                      boxShadow: "0 8px 20px -4px rgba(6, 182, 212, 0.4)",
+                      transform: "translateY(-2px)"
+                    }
+                  }}>
                     <CardContent>
                       <motion.div
                         animate={{
@@ -285,7 +287,7 @@ function ServicesSection() {
                         ✨
                       </motion.div>
                       <Typography variant="h4" fontWeight={700} gutterBottom sx={{ 
-                        color: "#00ffff",
+                        color: "#ec4899",
                         transition: "all 0.3s ease",
                         '&:hover': {
                           textShadow: "0 0 8px rgba(236, 72, 153, 0.3)"
@@ -295,7 +297,11 @@ function ServicesSection() {
                       </Typography>
                       <Typography variant="body1" sx={{ 
                         fontSize: "1.125rem", 
-                        color: "#ffffff",
+                        color: "#555",
+                        transition: "all 0.3s ease",
+                        '&:hover': {
+                          color: "#333"
+                        }
                       }}>
                         Choose a domain card to explore how we empower areas like technology, creative design, and corporate innovation.
                       </Typography>
