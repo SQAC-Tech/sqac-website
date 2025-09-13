@@ -1,8 +1,11 @@
 import React from 'react'
+import IDCardForm from './IDCardForm'
 
 function JoinUs() {
   return (
-    <div></div>
+    <div>
+      <IDCardForm/>
+    </div>
   )
 }
 
