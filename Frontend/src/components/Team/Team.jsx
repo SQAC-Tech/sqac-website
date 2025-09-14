@@ -53,7 +53,7 @@ const hardcodedBoardMembers = [
     'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/priyanshu_pskop4',
   },
   {
-    Name: 'Vedant Modi',
+    Name: 'Vansh Jain',
     'Position in SQAC': 'Corporate Lead ',
     'Sub Domain': 'Board Member',
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
