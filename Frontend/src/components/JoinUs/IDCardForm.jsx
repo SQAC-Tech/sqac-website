@@ -204,7 +204,7 @@ const IDCardForm = () => {
                 />
                 <HoverBorderGradient as="button" onClick={handleFlip}>
                   <AceternityLogo />
-                  <span>Flip →</span>
+                  <span className="cursor-pointer">Flip →</span>
                 </HoverBorderGradient>
               </div>
               {/* Back Side */}
@@ -278,10 +278,10 @@ const IDCardForm = () => {
                   <span>Generate Recruitment ID</span>
                 </HoverBorderGradient>
                 <div className="flex justify-between w-full mt-auto gap-3">
-                  <HoverBorderGradient as="button" onClick={handleFlip} className="flex-1">
+                  <HoverBorderGradient as="button" onClick={handleFlip} className="flex-1 cursor-pointer">
                     ← Flip Back
                   </HoverBorderGradient>
-                  <HoverBorderGradient as="button" type="button" onClick={handleSubmit} className="flex-1">
+                  <HoverBorderGradient as="button" type="button" onClick={handleSubmit} className="flex-1 cursor-pointer">
                     Submit
                   </HoverBorderGradient>
                 </div>
