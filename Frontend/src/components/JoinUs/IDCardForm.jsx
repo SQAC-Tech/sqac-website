@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
+import LogoSQAC from "../../assets/LogoSQAC.png";
+import { FaIdBadge } from "react-icons/fa";
 
-const HoverBorderGradient = ({ children, className, containerClassName, as = "button", ...props }) => {
+const HoverBorderGradient = ({
+  children,
+  className,
+  containerClassName,
+  as = "button",
+  ...props
+}) => {
   const Component = as;
   return (
     <div
-      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${containerClassName || ""}`}
+      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${
+        containerClassName || ""
+      }`}
     >
       <Component
-        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${className || ""}`}
+        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${
+          className || ""
+        }`}
         {...props}
       >
         {children}
@@ -59,7 +71,8 @@ const IDCardForm = () => {
 
   const handleFlip = () => setIsFlipped(!isFlipped);
 
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
     try {
@@ -94,25 +107,6 @@ const IDCardForm = () => {
     }
   };
 
-  const AceternityLogo = () => (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 66 65"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4 text-black"
-    >
-      <path
-        d="M8 8.05571C8 8.05571 54.9009 18.1782 57.8687 30.062C60.8365 41.9458 9.05432 57.4696 9.05432 57.4696"
-        stroke="currentColor"
-        strokeWidth="15"
-        strokeMiterlimit="3.86874"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-
   return (
     <div className="flex justify-center items-center min-h-screen px-10 bg-gradient-to-br from-cyan-200 via-purple-200 to-pink-200">
       <div className="flex-1 flex justify-center">
@@ -121,9 +115,14 @@ const IDCardForm = () => {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
               {/* Front Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <h2 className="text-2xl font-extrabold text-center text-[#a78bfa] mb-6">
-                  Software Quality Assurance Community
-                </h2>
+                <img
+                  src={LogoSQAC}
+                  alt="SQAC Logo"
+                  className="w-15 h-15 mb-4"
+                />
+                <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
+                  SQAC
+                </h1>
                 <input
                   type="text"
                   name="cardholderName"
@@ -203,15 +202,19 @@ const IDCardForm = () => {
                   className="w-full mb-6 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 />
                 <HoverBorderGradient as="button" onClick={handleFlip}>
-                  <AceternityLogo />
                   <span className="cursor-pointer">Flip →</span>
                 </HoverBorderGradient>
               </div>
               {/* Back Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <h2 className="text-2xl font-extrabold text-center text-[#a78bfa] mb-6">
-                  Software Quality Assurance Community
-                </h2>
+                <img
+                  src={LogoSQAC}
+                  alt="SQAC Logo"
+                  className="w-15 h-15 mb-4"
+                />
+                <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
+                  SQAC
+                </h1>
                 <select
                   name="coreDomain"
                   value={formData.coreDomain}
@@ -273,15 +276,26 @@ const IDCardForm = () => {
                     className="w-1/2 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                   />
                 </div>
-                <HoverBorderGradient as="button" onClick={handleSubmit}>
-                  <AceternityLogo />
+
+                <HoverBorderGradient as="button" >
+                  <FaIdBadge className="h-5 w-5 text-purple-600" />
                   <span>Generate Recruitment ID</span>
                 </HoverBorderGradient>
+
                 <div className="flex justify-between w-full mt-auto gap-3">
-                  <HoverBorderGradient as="button" onClick={handleFlip} className="flex-1 cursor-pointer">
+                  <HoverBorderGradient
+                    as="button"
+                    onClick={handleFlip}
+                    className="flex-1 cursor-pointer"
+                  >
                     ← Flip Back
                   </HoverBorderGradient>
-                  <HoverBorderGradient as="button" type="button" onClick={handleSubmit} className="flex-1 cursor-pointer">
+                  <HoverBorderGradient
+                    as="button"
+                    type="button"
+                    onClick={handleSubmit}
+                    className="flex-1 cursor-pointer"
+                  >
                     Submit
                   </HoverBorderGradient>
                 </div>
@@ -291,7 +305,7 @@ const IDCardForm = () => {
         </div>
       </div>
 
-      {/* Onboarding text, hidden on small and medium */}
+      {/* Onboarding text */}
       <div className="flex-1 flex items-center justify-center hidden lg:flex">
         <AnimatePresence mode="wait">
           <motion.div
