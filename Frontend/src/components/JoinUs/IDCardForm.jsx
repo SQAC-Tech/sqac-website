@@ -14,14 +14,12 @@ const HoverBorderGradient = ({
   const Component = as;
   return (
     <div
-      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${
-        containerClassName || ""
-      }`}
+      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${containerClassName || ""
+        }`}
     >
       <Component
-        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${
-          className || ""
-        }`}
+        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${className || ""
+          }`}
         {...props}
       >
         {children}
@@ -107,6 +105,10 @@ const IDCardForm = () => {
     }
   };
 
+  // ✅ Validation logic
+  const isFormValid =
+    Object.values(formData).every((val) => val.trim() !== "") && /^[0-9]{10}$/.test(formData.mobileNumber);
+
   return (
     <div className="flex justify-center items-center min-h-screen px-10 bg-gradient-to-br from-cyan-200 via-purple-200 to-pink-200">
       <div className="flex-1 flex justify-center">
@@ -115,11 +117,7 @@ const IDCardForm = () => {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
               {/* Front Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <img
-                  src={LogoSQAC}
-                  alt="SQAC Logo"
-                  className="w-15 h-15 mb-4"
-                />
+                <img src={LogoSQAC} alt="SQAC Logo" className="w-15 h-15 mb-4" />
                 <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
                   SQAC
                 </h1>
@@ -205,13 +203,10 @@ const IDCardForm = () => {
                   <span className="cursor-pointer">Flip →</span>
                 </HoverBorderGradient>
               </div>
+
               {/* Back Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <img
-                  src={LogoSQAC}
-                  alt="SQAC Logo"
-                  className="w-15 h-15 mb-4"
-                />
+                <img src={LogoSQAC} alt="SQAC Logo" className="w-15 h-15 mb-4" />
                 <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
                   SQAC
                 </h1>
@@ -252,8 +247,15 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("mobileNumber")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Mobile No"
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-1 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 />
+                {/* Error message for invalid phone */}
+                {formData.mobileNumber &&
+                  !/^[0-9]{10}$/.test(formData.mobileNumber) && (
+                    <p className="text-sm text-red-500 mb-3">
+                      Enter a valid 10-digit phone number
+                    </p>
+                  )}
                 <div className="flex w-full mb-4 gap-3">
                   <input
                     type="text"
@@ -277,7 +279,9 @@ const IDCardForm = () => {
                   />
                 </div>
 
-                <h2 className="text-center font-bold">Click Submit button to submit the form</h2>
+                <h2 className="text-center font-bold">
+                  Click Submit button to submit the form
+                </h2>
 
                 <div className="flex justify-between w-full mt-auto gap-3">
                   <HoverBorderGradient
@@ -291,7 +295,8 @@ const IDCardForm = () => {
                     as="button"
                     type="button"
                     onClick={handleSubmit}
-                    className="flex-1 cursor-pointer"
+                    className="flex-1 cursor-pointer disabled:opacity-50"
+                    disabled={!isFormValid}
                   >
                     Submit
                   </HoverBorderGradient>
