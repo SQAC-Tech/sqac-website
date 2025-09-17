@@ -277,10 +277,7 @@ const IDCardForm = () => {
                   />
                 </div>
 
-                <HoverBorderGradient as="button" >
-                  <FaIdBadge className="h-5 w-5 text-purple-600" />
-                  <span>Generate Recruitment ID</span>
-                </HoverBorderGradient>
+                <h2 className="text-center font-bold">Click Submit button to submit the form</h2>
 
                 <div className="flex justify-between w-full mt-auto gap-3">
                   <HoverBorderGradient
