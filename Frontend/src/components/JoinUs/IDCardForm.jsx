@@ -3,6 +3,9 @@ import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 import LogoSQAC from "../../assets/LogoSQAC.png";
 import { FaIdBadge } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const HoverBorderGradient = ({
   children,
@@ -14,12 +17,14 @@ const HoverBorderGradient = ({
   const Component = as;
   return (
     <div
-      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${containerClassName || ""
-        }`}
+      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${
+        containerClassName || ""
+      }`}
     >
       <Component
-        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${className || ""
-          }`}
+        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${
+          className || ""
+        }`}
         {...props}
       >
         {children}
@@ -73,37 +78,41 @@ const IDCardForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-    try {
-      const res = await fetch("https://recruitement-demo.onrender.com/apply", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  try {
+    const res = await fetch("https://recruitement-demo.onrender.com/apply", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json(); // parse JSON
+
+    if (res.ok) {
+      toast.success(data.message || "Form Submitted Successfully!");
+      setFormData({
+        cardholderName: "",
+        year: "",
+        gender: "",
+        batch: "",
+        raNumber: "",
+        srmMailId: "",
+        department: "",
+        coreDomain: "",
+        subDomain: "",
+        mobileNumber: "",
+        githubId: "",
+        linkedinId: "",
       });
-      if (res.ok) {
-        alert("Form Submitted Successfully!");
-        setFormData({
-          cardholderName: "",
-          year: "",
-          gender: "",
-          batch: "",
-          raNumber: "",
-          srmMailId: "",
-          department: "",
-          coreDomain: "",
-          subDomain: "",
-          mobileNumber: "",
-          githubId: "",
-          linkedinId: "",
-        });
-        setIsFlipped(false);
-      } else {
-        alert("Failed to Submit Form. Try again!");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Internal Server error. Please try again later.");
+      setIsFlipped(false);
+    } else {
+      toast.error(data.error || "Failed to Submit Form. Try again!");
     }
-  };
+  } catch (error) {
+    console.error(error);
+    toast.error("Internal Server error. Please try again later.");
+  }
+};
+
 
   // ✅ Validation logic
   const isFormValid =
@@ -117,7 +126,11 @@ const IDCardForm = () => {
             <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
               {/* Front Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <img src={LogoSQAC} alt="SQAC Logo" className="w-15 h-15 mb-4" />
+                <img
+                  src={LogoSQAC}
+                  alt="SQAC Logo"
+                  className="w-15 h-15 mb-4"
+                />
                 <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
                   SQAC
                 </h1>
@@ -206,7 +219,11 @@ const IDCardForm = () => {
 
               {/* Back Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
-                <img src={LogoSQAC} alt="SQAC Logo" className="w-15 h-15 mb-4" />
+                <img
+                  src={LogoSQAC}
+                  alt="SQAC Logo"
+                  className="w-15 h-15 mb-4"
+                />
                 <h1 className="text-3xl font-extrabold text-center text-[#a78bfa] mb-6">
                   SQAC
                 </h1>
