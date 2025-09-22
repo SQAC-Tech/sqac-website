@@ -17,14 +17,12 @@ const HoverBorderGradient = ({
   const Component = as;
   return (
     <div
-      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${
-        containerClassName || ""
-      }`}
+      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${containerClassName || ""
+        }`}
     >
       <Component
-        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${
-          className || ""
-        }`}
+        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${className || ""
+          }`}
         {...props}
       >
         {children}
@@ -78,45 +76,47 @@ const IDCardForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-  try {
-    const res = await fetch("https://recruitement-demo.onrender.com/apply", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await res.json(); // parse JSON
-
-    if (res.ok) {
-      toast.success(data.message || "Form Submitted Successfully!");
-      setFormData({
-        cardholderName: "",
-        year: "",
-        gender: "",
-        batch: "",
-        raNumber: "",
-        srmMailId: "",
-        department: "",
-        coreDomain: "",
-        subDomain: "",
-        mobileNumber: "",
-        githubId: "",
-        linkedinId: "",
+    try {
+      const res = await fetch("https://recruitement-demo.onrender.com/apply", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
-      setIsFlipped(false);
-    } else {
-      toast.error(data.error || "Failed to Submit Form. Try again!");
+
+      const data = await res.json(); // parse JSON
+
+      if (res.ok) {
+        toast.success(data.message || "Form Submitted Successfully!");
+        setFormData({
+          cardholderName: "",
+          year: "",
+          gender: "",
+          batch: "",
+          raNumber: "",
+          srmMailId: "",
+          department: "",
+          coreDomain: "",
+          subDomain: "",
+          mobileNumber: "",
+          githubId: "",
+          linkedinId: "",
+        });
+        setIsFlipped(false);
+      } else {
+        toast.error(data.error || "Failed to Submit Form. Try again!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Internal Server error. Please try again later.");
     }
-  } catch (error) {
-    console.error(error);
-    toast.error("Internal Server error. Please try again later.");
-  }
-};
+  };
 
 
   // ✅ Validation logic
   const isFormValid =
-    Object.values(formData).every((val) => val.trim() !== "") && /^[0-9]{10}$/.test(formData.mobileNumber);
+    Object.values(formData).every((val) => val.trim() !== "") &&
+    /^[0-9]{10}$/.test(formData.mobileNumber) &&
+    /^RA\d{13}$/.test(formData.raNumber);
 
   return (
     <div className="flex justify-center items-center min-h-screen px-10 bg-gradient-to-br from-cyan-200 via-purple-200 to-pink-200">
@@ -192,6 +192,11 @@ const IDCardForm = () => {
                   placeholder="Registration Number"
                   className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 />
+                {formData.raNumber && !/^RA\d{13}$/.test(formData.raNumber) && (
+                  <p className="text-sm text-red-500 mb-3">
+                    Enter a valid RA number (e.g., RA2314567890123)
+                  </p>
+                )}
                 <input
                   type="email"
                   name="srmMailId"
