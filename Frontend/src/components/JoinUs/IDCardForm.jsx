@@ -3,6 +3,9 @@ import ReactCardFlip from "react-card-flip";
 import { motion, AnimatePresence } from "framer-motion";
 import LogoSQAC from "../../assets/LogoSQAC.png";
 import { FaIdBadge } from "react-icons/fa";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const HoverBorderGradient = ({
   children,
@@ -14,14 +17,12 @@ const HoverBorderGradient = ({
   const Component = as;
   return (
     <div
-      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${
-        containerClassName || ""
-      }`}
+      className={`relative rounded-full p-[3px] bg-gradient-to-tr from-pink-500 via-purple-500 to-cyan-500 hover:shadow-lg transition-shadow duration-300 ${containerClassName || ""
+        }`}
     >
       <Component
-        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${
-          className || ""
-        }`}
+        className={`relative rounded-full bg-white text-black flex items-center justify-center space-x-2 px-6 py-2 font-semibold select-none ${className || ""
+          }`}
         {...props}
       >
         {children}
@@ -81,8 +82,11 @@ const IDCardForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
+      const data = await res.json(); // parse JSON
+
       if (res.ok) {
-        alert("Form Submitted Successfully!");
+        toast.success(data.message || "Form Submitted Successfully!");
         setFormData({
           cardholderName: "",
           year: "",
@@ -99,13 +103,20 @@ const IDCardForm = () => {
         });
         setIsFlipped(false);
       } else {
-        alert("Failed to Submit Form. Try again!");
+        toast.error(data.error || "Failed to Submit Form. Try again!");
       }
     } catch (error) {
       console.error(error);
-      alert("Internal Server error. Please try again later.");
+      toast.error("Internal Server error. Please try again later.");
     }
   };
+
+
+  // ✅ Validation logic
+  const isFormValid =
+    Object.values(formData).every((val) => val.trim() !== "") &&
+    /^[0-9]{10}$/.test(formData.mobileNumber) &&
+    /^RA\d{13}$/.test(formData.raNumber);
 
   return (
     <div className="flex justify-center items-center min-h-screen px-10 bg-gradient-to-br from-cyan-200 via-purple-200 to-pink-200">
@@ -181,6 +192,11 @@ const IDCardForm = () => {
                   placeholder="Registration Number"
                   className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 />
+                {formData.raNumber && !/^RA\d{13}$/.test(formData.raNumber) && (
+                  <p className="text-sm text-red-500 mb-3">
+                    Enter a valid RA number (e.g., RA2314567890123)
+                  </p>
+                )}
                 <input
                   type="email"
                   name="srmMailId"
@@ -205,6 +221,7 @@ const IDCardForm = () => {
                   <span className="cursor-pointer">Flip →</span>
                 </HoverBorderGradient>
               </div>
+
               {/* Back Side */}
               <div className="relative w-[380px] h-[540px] rounded-3xl shadow-2xl p-6 flex flex-col items-center border bg-white/90 backdrop-blur-lg">
                 <img
@@ -252,8 +269,15 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("mobileNumber")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Mobile No"
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-1 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
                 />
+                {/* Error message for invalid phone */}
+                {formData.mobileNumber &&
+                  !/^[0-9]{10}$/.test(formData.mobileNumber) && (
+                    <p className="text-sm text-red-500 mb-3">
+                      Enter a valid 10-digit phone number
+                    </p>
+                  )}
                 <div className="flex w-full mb-4 gap-3">
                   <input
                     type="text"
@@ -277,7 +301,11 @@ const IDCardForm = () => {
                   />
                 </div>
 
-                <h2 className ="text-center font-bold">Click Submit button to submit the form</h2>
+           
+                <h2 className="text-center font-bold">
+                  Click Submit button to submit the form
+                </h2>
+
 
                 <div className="flex justify-between w-full mt-auto gap-3">
                   <HoverBorderGradient
@@ -291,7 +319,8 @@ const IDCardForm = () => {
                     as="button"
                     type="button"
                     onClick={handleSubmit}
-                    className="flex-1 cursor-pointer"
+                    className="flex-1 cursor-pointer disabled:opacity-50"
+                    disabled={!isFormValid}
                   >
                     Submit
                   </HoverBorderGradient>

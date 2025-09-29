@@ -10,9 +10,12 @@ import JoinUs from './components/JoinUs/JoinUs.jsx';
 import ScrollToTop from './components/ScrollToTop.jsx';
 import useLenisScroll from './utils/smoothScroll';
 import Navbar from './components/HomePage/Navbar.jsx';
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
-import './App.css'; // Make sure this is imported for custom styles
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import './App.css';
 
 const App = () => {
   useLenisScroll();
@@ -32,9 +35,20 @@ const App = () => {
         </Routes>
         <Footer />
       </Router>
-      <SpeedInsights/>
-    </div>
 
+      {/* Toast container goes here */}
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        theme="colored"
+      />
+
+      <SpeedInsights />
+    </div>
   );
 };
 
