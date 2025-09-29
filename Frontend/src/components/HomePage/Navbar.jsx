@@ -40,7 +40,7 @@ function Navbar() {
         </ul>
 
         <Link to="/recruitment" onClick={closeMenu}>
-          <button className="hidden sm:block rounded-full px-6 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md hover:scale-110 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)] transition duration-300">
+          <button className="hidden sm:block rounded-full px-6 py-2 text-sm font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md hover:scale-110 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)] transition duration-300 cursor-pointer">
             Join Us
           </button>
         </Link>
@@ -93,7 +93,7 @@ function Navbar() {
           ))}
 
           <Link to="/recruitment" onClick={closeMenu}>
-            <button className="w-full mt-2 rounded-full px-5 py-2 text-base font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md active:scale-95 active:shadow-sm transition-all duration-200">
+            <button className="w-full mt-2 rounded-full px-5 py-2 text-base font-semibold bg-gradient-to-r from-purple-500 to-pink-400 text-white shadow-md active:scale-95 active:shadow-sm transition-all duration-200 cursor-pointer">
               Join Us
             </button>
           </Link>

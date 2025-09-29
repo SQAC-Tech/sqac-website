@@ -301,9 +301,11 @@ const IDCardForm = () => {
                   />
                 </div>
 
+           
                 <h2 className="text-center font-bold">
                   Click Submit button to submit the form
                 </h2>
+
 
                 <div className="flex justify-between w-full mt-auto gap-3">
                   <HoverBorderGradient
