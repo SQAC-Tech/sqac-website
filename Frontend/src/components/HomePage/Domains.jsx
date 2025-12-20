@@ -98,9 +98,9 @@ const Bubble = ({ children, className }) => (
   <motion.div 
     className={`bg-white p-6 rounded-2xl shadow-xl border border-gray-200 flex items-center backdrop-blur-sm min-h-[260px] md:h-[320px] transition-all duration-300 ${className}`}
     whileHover={{
-      backgroundColor: 'rgba(255, 255, 255, 0.9)',
-      borderColor: '#e5e7eb',
-      boxShadow: '0 0 40px rgba(0, 0, 0, 0.1)',
+      backgroundColor: 'rgba(255, 255, 255, 0.95)',
+      borderColor: '#ff6b35',
+      boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)',
       scale: 1.02
     }}
   >

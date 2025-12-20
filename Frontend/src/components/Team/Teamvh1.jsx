@@ -26,7 +26,7 @@
  * HOVER EFFECTS IMPLEMENTED:
  * - backgroundColor: 'rgba(249, 115, 22, 0.8)' (orange)
  * - scale: 1.1 (subtle zoom)
- * - boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)' (orange glow)
+ * - boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)' (orange glow)
  * - Smooth transitions with duration settings
  * 
  * CSS CLASSES TARGETED (via index.css):
@@ -87,7 +87,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.2, 
@@ -107,7 +107,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.1, 
@@ -135,7 +135,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.3, 
@@ -155,7 +155,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.4, 
@@ -175,7 +175,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.7, 
@@ -196,7 +196,7 @@ const Teamvh1 = () => {
           whileHover={{
             backgroundColor: 'rgba(249, 115, 22, 0.8)',
             scale: 1.1,
-            boxShadow: '0 0 30px rgba(249, 115, 22, 0.6)'
+            boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)'
           }}
           transition={{ 
             duration: 2.8, 

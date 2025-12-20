@@ -714,24 +714,8 @@ html.light .bg-dark-surface\/70.border.border-gray-600 {
   border-color: #e2e8f0 !important;
 }
 
-/* AboutUs2ndvh Cards Light Mode */
-html.light .bg-black.border-gray-600 {
-  background-color: #ffffff !important;
-  border-color: #e2e8f0 !important;
-}
 
-html.light .bg-black.border-gray-600 .text-white {
-  color: #1e293b !important;
-}
-
-html.light .bg-black.border-gray-600 .text-gray-300 {
-  color: #64748b !important;
-}
-
-html.light .bg-black.border-gray-600 .text-gray-300.group-hover\:text-white:hover {
-  color: #1e293b !important;
-}
-
+  
 /* Projects Section Theme Support */
 html.light .projects-section {
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
