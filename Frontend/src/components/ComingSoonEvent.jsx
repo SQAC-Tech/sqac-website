@@ -1,3 +1,9 @@
+/**
+ * Coming Soon Event Component
+ * Updated on: December 20, 2025
+ * Changes: Enhanced coming soon page with animations and improved navigation
+ * Purpose: Displays coming soon message for events with navigation options
+ */
 import React , {useEffect}from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -76,10 +82,10 @@ const ComingSoonPage = () => {
               onClick={() => navigate('/JoinUs')}
               whileHover={{
                 scale: 1.05,
-                boxShadow: '0 5px 15px rgba(192, 38, 211, 0.3)',
+                boxShadow: '0 5px 15px rgba(255, 107, 53, 0.4)',
               }}
               whileTap={{ scale: 0.98 }}
-              className="px-10 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold shadow-lg transition-all duration-300"
+              className="px-10 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full font-semibold shadow-lg transition-all duration-300"
             >
               Get Involved
             </motion.button>

@@ -1,3 +1,9 @@
+/**
+ * Team View 2 Component
+ * Updated on: December 20, 2025
+ * Changes: Enhanced domain selection with dropdown menus for Technical, Corporate, and Media domains
+ * Purpose: Allows users to select specific domains and subdomains for team viewing
+ */
 import React, { useState } from 'react';
 import {
   Users, Code2, Building2, Camera,Palette ,Globe, Brain,
@@ -26,18 +32,18 @@ const Teamvh2 = ({ onSelectDomain }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-orange-200 to-pink-200 flex flex-col items-center justify-center px-4 py-1 font-['Poppins']">
-      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">Choose Your Domain</h1>
+      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] text-center">Choose Your Domain</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20">
         <div className={cardStyle} onClick={() => handleCardClick('Board Member')}>
           <Users className={iconStyle} />
-          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Board Members</p>
+          <p className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">Board Members</p>
         </div>
 
         <div className="flex flex-col items-center">
           <div className={cardStyle} onClick={() => handleCardClick('Technical')}>
             <Code2 className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Technical</p>
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">Technical</p>
           </div>
           {openDropdown === 'Technical' && (
             <div className={dropdownStyle}>
@@ -57,7 +63,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
         <div className="flex flex-col items-center">
           <div className={cardStyle} onClick={() => handleCardClick('Corporate')}>
             <Building2 className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Corporate</p>
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">Corporate</p>
           </div>
           {openDropdown === 'Corporate' && (
             <div className={dropdownStyle}>
@@ -74,7 +80,7 @@ const Teamvh2 = ({ onSelectDomain }) => {
         <div className="flex flex-col items-center">
           <div className={cardStyle} onClick={() => handleCardClick('Media')}>
             <Camera className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Media</p>
+            <p className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-white">Media</p>
           </div>
           {openDropdown === 'Media' && (
             <div className={dropdownStyle}>

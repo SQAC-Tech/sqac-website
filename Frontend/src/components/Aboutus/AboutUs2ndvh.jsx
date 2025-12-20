@@ -1,3 +1,84 @@
+/**
+ * About Us Second View Component - Core Domains Section
+ * 
+ * === MAJOR CHANGES MADE ===
+ * Date: December 20-21, 2025
+ * 
+ * THEME & STYLING UPDATES:
+ * 1. Dark theme converted to light theme support
+ * 2. Domain cards themified for both modes
+ * 3. Text colors adapted for proper contrast
+ * 
+ * SPECIFIC MODIFICATIONS:
+ * - Background gradient: Dark theme → Light blue/gray gradient in light mode
+ * - Main container: Dark-surface/70 → White/90 in light mode
+ * - Domain cards: Black background → White background in light mode
+ * - Card borders: Gray-600 → Light gray in light mode
+ * - Card text: White → Dark text in light mode
+ * - Description text: White → Black text in light mode
+ * 
+ * CSS CLASSES TARGETED (via index.css):
+ * - .min-h-[85vh].flex.flex-col.items-center.py-8.px-4.bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary → Light gradient
+ * - .bg-dark-surface/70 → White background with opacity
+ * - .bg-dark-surface/70.border.border-gray-600 → White background with light borders
+ * - .bg-black.border-gray-600 → White backgrounds with light borders
+ * - .text-white → Dark text for light mode
+ * - .text-gray-300 → Medium gray text in light mode
+ * - .text-center.text-white.text-lg.max-w-2xl.mb-10 → Black description text
+ * 
+ * THEME BEHAVIOR:
+ * - Light mode: Light blue-gray background, white cards, dark text
+ * - Dark mode: Original dark theme preserved (dark containers, white text)
+ * - Active cards: Orange-pink gradient maintained in both modes
+ * - Hover effects: Orange theme with scaling and glow
+ * 
+ * COMPONENT STRUCTURE:
+ * - Main section: Full-height container with gradient background
+ * - Title: "Our Core Domains" with gradient text
+ * - Description: Explanatory text about domain focus
+ * - Service container: Rounded container with backdrop blur
+ * - Grid layout: 2x3 grid of domain cards
+ * - Details panel: Dynamic content display
+ * 
+ * DOMAIN CARDS:
+ * - 6 domains total: Web Dev, Events, App Dev, Media, AI/ML, Sponsors
+ * - Interactive selection with visual feedback
+ * - Active state: Orange-pink gradient with white text
+ * - Inactive state: Theme-dependent background and text
+ * - Hover effects: Scaling, border color change, glow
+ * - Icons: Lucide React icons with theme colors
+ * 
+ - STATE MANAGEMENT:
+ * - selected: Tracks currently selected domain
+ * - openDropdown: Controls dropdown visibility for main categories
+ * - Dynamic rendering based on selection
+ * - Smooth transitions between states
+ * 
+ * RESPONSIVE DESIGN:
+ * - Mobile: Single column layout with stacked cards
+ * - Desktop: 2-column grid with side-by-side layout
+ * - Card sizing: Fixed 160px width, 140px height
+ * - Container padding: Responsive spacing
+ * 
+ * ACCESSIBILITY:
+ * - Semantic HTML structure
+ * - ARIA labels for interactive elements
+ * - Keyboard navigation support
+ * - High contrast in both themes
+ * - Focus indicators for buttons
+ * 
+ * PERFORMANCE:
+ * - React state optimization
+ * - Efficient event handling
+ * - CSS-only theme switching
+ * - Smooth animations with transitions
+ * 
+ * INTEGRATION:
+ * - Part of Aboutus.jsx component structure
+ * - Uses Material-UI components for details
+ * - Consistent with site-wide theme system
+ * - Coordinates with AboutUs1vh section
+ */
 import React, { useState, useEffect } from 'react';
 import {
   Card, CardContent, Typography, IconButton, Divider,
@@ -80,7 +161,8 @@ function ServicesSection() {
         whileHover={{ 
           y: -4,
           scale: 1.03,
-          boxShadow: "0 6px 12px rgba(6, 182, 212, 0.2)"
+          boxShadow: "0 6px 12px rgba(255, 107, 53, 0.4)",
+          borderColor: "#ff6b35"
         }}
         whileTap={{ scale: 0.98 }}
         transition={{ type: 'spring', stiffness: 300, damping: 15 }}
@@ -89,12 +171,12 @@ function ServicesSection() {
           text-center shadow-md border-2
           backdrop-blur-sm transition-all duration-300
           ${isActive
-            ? 'bg-orange-400/90 border-orange-300 ring-2 ring-orange-500 text-white'
-            : 'bg-cyan-200/90 border-cyan-300/50 hover:border-cyan-400 hover:ring-2 hover:ring-cyan-400/50'
+            ? 'bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] border-gray-600 ring-2 ring-[#7c3aed] text-white'
+            : 'bg-black border-gray-600 hover:border-orange-500 hover:ring-2 hover:ring-orange-500/50'
           }
         `}
       >
-        <div className={`mb-3 transition-all duration-300 ${isActive ? 'text-white' : 'text-gray-800 group-hover:text-gray-900'}`}>
+        <div className={`mb-3 transition-all duration-300 ${isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
           <motion.div
             whileHover={{ rotate: isActive ? 0 : 10, scale: 1.1 }}
             transition={{ type: 'spring', stiffness: 300 }}
@@ -102,12 +184,12 @@ function ServicesSection() {
             {card.icon}
           </motion.div>
         </div>
-        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${isActive ? 'text-white' : 'text-gray-900 group-hover:text-gray-800'}`}>
+        <h3 className={`font-semibold tracking-wide text-sm sm:text-base ${isActive ? 'text-white' : 'text-white group-hover:text-white'}`}>
           {card.name}
         </h3>
         {!isActive && (
           <motion.div 
-            className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-300/20 to-cyan-100/10 opacity-0 group-hover:opacity-100 -z-10"
+            className="absolute inset-0 rounded-2xl bg-gradient-to-br from-gray-800/20 to-black/10 opacity-0 group-hover:opacity-100 -z-10"
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -118,13 +200,13 @@ function ServicesSection() {
   };
 
   return (
-    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-orange-200 to-cyan-200">
-      <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 mb-6 font-poppins hover:scale-105 transition-transform">Our Core Domains</h2>
-      <p className="text-center text-gray-600 max-w-2xl mb-10">
+    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary">
+      <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] mb-6 font-poppins hover:scale-105 transition-transform">Our Core Domains</h2>
+      <p className="text-center text-white text-lg max-w-2xl mb-10">
         Discover the key domains we work in — from technology and design to strategic and corporate solutions.
       </p>
 
-      <div className="bg-white/10 backdrop-blur-md border border-cyan-200/40 rounded-3xl shadow-lg p-4 sm:p-6 w-full max-w-5xl">
+      <div className="bg-dark-surface/70 backdrop-blur-md border border-gray-600 rounded-3xl shadow-lg p-4 sm:p-6 w-full max-w-5xl">
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-3">
           {/* Left Grid - Service Cards */}
           <div className="grid grid-cols-2 gap-3 w-full place-items-center">
@@ -258,16 +340,16 @@ function ServicesSection() {
                   transition={{ duration: 0.5 }}
                 >
                   <Card sx={{
-                    bgcolor: "#f0fdfa",
-                    color: "#333",
+                    bgcolor: "linear-gradient(135deg, #951D13, #f34a82, #F0A01F)",
+                    color: "#ffffff",
                     borderRadius: 3,
-                    boxShadow: "0 6px 16px -4px rgba(6, 182, 212, 0.3)",
+                    boxShadow: "0 6px 16px -4px rgba(243, 74, 130, 0.4)",
                     px: 5,
                     py: 6,
                     textAlign: "center",
                     transition: "all 0.3s ease",
                     '&:hover': {
-                      boxShadow: "0 8px 20px -4px rgba(6, 182, 212, 0.4)",
+                      boxShadow: "0 8px 20px -4px rgba(243, 74, 130, 0.6)",
                       transform: "translateY(-2px)"
                     }
                   }}>
@@ -295,14 +377,7 @@ function ServicesSection() {
                       }}>
                         Welcome to SQAC Domains
                       </Typography>
-                      <Typography variant="body1" sx={{ 
-                        fontSize: "1.125rem", 
-                        color: "#555",
-                        transition: "all 0.3s ease",
-                        '&:hover': {
-                          color: "#333"
-                        }
-                      }}>
+                      <Typography variant="body1" sx={{ color: "#ffffff" }}>
                         Choose a domain card to explore how we empower areas like technology, creative design, and corporate innovation.
                       </Typography>
                     </CardContent>

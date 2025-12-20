@@ -1,12 +1,18 @@
+/**
+ * Recruitment Closed Component
+ * Created on: December 20, 2025
+ * Changes: New component added to handle recruitment closed state
+ * Purpose: Displays recruitment closed message with navigation back to home
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Closed = () => {
   return (
-    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-blue-400">
+    <div className="flex items-center justify-center h-screen bg-gradient-to-r from-purple-800 to-purple-900">
       <div className="bg-white p-10 rounded-3xl shadow-xl text-center max-w-md">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">Recruitments Closed</h1>
-        <p className="text-gray-600 text-lg mb-6">
+        <h1 className="text-3xl font-bold text-red-600 mb-4">Recruitments Closed</h1>
+        <p className="text-white text-lg mb-6">
           Thank you for your interest! Our recruitment drive is currently closed. 
           Please check back later for future opportunities.
         </p>

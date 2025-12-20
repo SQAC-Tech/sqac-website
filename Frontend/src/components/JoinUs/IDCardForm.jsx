@@ -142,7 +142,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("cardholderName")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Cardholder Name"
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 />
                 <div className="flex w-full mb-4 gap-3">
                   <select
@@ -151,7 +151,7 @@ const IDCardForm = () => {
                     onChange={handleChange}
                     onFocus={() => setFocusedField("year")}
                     onBlur={() => setFocusedField("")}
-                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                   >
                     <option value="">Year</option>
                     <option value="1">1st</option>
@@ -163,7 +163,7 @@ const IDCardForm = () => {
                     onChange={handleChange}
                     onFocus={() => setFocusedField("gender")}
                     onBlur={() => setFocusedField("")}
-                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                   >
                     <option value="">Gender</option>
                     <option value="Male">Male</option>
@@ -175,7 +175,7 @@ const IDCardForm = () => {
                     onChange={handleChange}
                     onFocus={() => setFocusedField("batch")}
                     onBlur={() => setFocusedField("")}
-                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-1/3 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                   >
                     <option value="">Batch</option>
                     <option value="1">Batch 1</option>
@@ -190,7 +190,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("raNumber")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Registration Number"
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 />
                 {formData.raNumber && !/^RA\d{13}$/.test(formData.raNumber) && (
                   <p className="text-sm text-red-500 mb-3">
@@ -205,7 +205,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("srmMailId")}
                   onBlur={() => setFocusedField("")}
                   placeholder="SRM Mail ID"
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 />
                 <input
                   type="text"
@@ -215,7 +215,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("department")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Department"
-                  className="w-full mb-6 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-6 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 />
                 <HoverBorderGradient as="button" onClick={handleFlip}>
                   <span className="cursor-pointer">Flip →</span>
@@ -238,7 +238,7 @@ const IDCardForm = () => {
                   onChange={handleChange}
                   onFocus={() => setFocusedField("coreDomain")}
                   onBlur={() => setFocusedField("")}
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 >
                   <option value="">Select Core Domain</option>
                   <option value="Technical">Technical</option>
@@ -251,7 +251,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("subDomain")}
                   onBlur={() => setFocusedField("")}
                   disabled={!formData.coreDomain}
-                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400 disabled:opacity-50"
+                  className="w-full mb-4 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300 disabled:opacity-50"
                 >
                   <option value="">Select Subdomain</option>
                   {formData.coreDomain &&
@@ -269,7 +269,7 @@ const IDCardForm = () => {
                   onFocus={() => setFocusedField("mobileNumber")}
                   onBlur={() => setFocusedField("")}
                   placeholder="Mobile No"
-                  className="w-full mb-1 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                  className="w-full mb-1 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                 />
                 {/* Error message for invalid phone */}
                 {formData.mobileNumber &&
@@ -287,7 +287,7 @@ const IDCardForm = () => {
                     onFocus={() => setFocusedField("githubId")}
                     onBlur={() => setFocusedField("")}
                     placeholder="Github ID"
-                    className="w-1/2 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-1/2 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                   />
                   <input
                     type="text"
@@ -297,7 +297,7 @@ const IDCardForm = () => {
                     onFocus={() => setFocusedField("linkedinId")}
                     onBlur={() => setFocusedField("")}
                     placeholder="LinkedIn ID"
-                    className="w-1/2 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-400"
+                    className="w-1/2 px-4 py-2 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
                   />
                 </div>
 
