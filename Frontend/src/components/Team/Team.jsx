@@ -59,7 +59,7 @@ const hardcodedBoardMembers = [
     'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
     'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
     'GitHub Profile Link': 'https://github.com/VEDANTMODI21',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/ved_iit_pic_-_VEDANT_MODI_psuieb',
+    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/v1754250193/Vansh_Jain_Head_-_Vansh_Jain_xsjiw0.jpg',
   },
 ];
 
