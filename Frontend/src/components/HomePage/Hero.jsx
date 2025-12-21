@@ -24,7 +24,7 @@ function Hero() {
 
   return (
     <div
-      className="w-full relative"
+      className="w-full relative bg-transparent dark:bg-zinc-950"
       style={{
         height: `calc(${sectionHeight}px + 100vh)`,
       }}
