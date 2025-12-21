@@ -1,9 +1,3 @@
-/**
- * Navigation Bar Component
- * Updated on: December 20, 2025
- * Changes: Enhanced navigation with improved mobile menu, styling, and theme toggle
- * Purpose: Provides site navigation with responsive mobile menu functionality and dark/light mode toggle
- */
 import React, { useState } from "react";
 import SQAC from "../../assets/LogoSQAC.png";
 import { Link } from "react-router-dom";

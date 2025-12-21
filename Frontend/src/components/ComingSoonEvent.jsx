@@ -1,9 +1,3 @@
-/**
- * Coming Soon Event Component
- * Updated on: December 20, 2025
- * Changes: Enhanced coming soon page with animations and improved navigation
- * Purpose: Displays coming soon message for events with navigation options
- */
 import React , {useEffect}from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';

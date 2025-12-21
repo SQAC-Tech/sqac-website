@@ -1,9 +1,3 @@
-/**
- * Recruitment Closed Component
- * Created on: December 20, 2025
- * Changes: New component added to handle recruitment closed state
- * Purpose: Displays recruitment closed message with navigation back to home
- */
 import React from 'react';
 import { Link } from 'react-router-dom';
 

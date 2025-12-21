@@ -1,9 +1,3 @@
-/**
- * Home Landing Hero Component
- * Updated on: December 20, 2025
- * Changes: Enhanced landing page with improved animations and visual effects
- * Purpose: Displays main landing hero section with club branding and call-to-action
- */
 import { motion } from "framer-motion";
 import SQAC from "../../assets/LogoSQAC.png";
 

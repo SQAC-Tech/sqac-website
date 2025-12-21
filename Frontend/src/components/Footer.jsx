@@ -1,9 +1,3 @@
-/**
- * Footer Component
- * Updated on: December 20, 2025
- * Changes: Enhanced footer with improved styling, scroll-to-top functionality, and contact form
- * Purpose: Displays site footer with navigation, social links, and contact information
- */
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaGithub, FaInstagram, FaLinkedin, FaArrowUp } from "react-icons/fa";

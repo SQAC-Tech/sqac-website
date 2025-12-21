@@ -1,148 +1,3 @@
-/**
- * GLOBAL STYLESHEET - Main CSS File
- * 
- * === COMPREHENSIVE THEME SYSTEM IMPLEMENTATION ===
- * Date: December 20-21, 2025
- * 
- * OVERVIEW:
- * This file contains the complete theme system for the SQAC website,
- * including light/dark mode support, component-specific styling,
- * and responsive design patterns.
- * 
- * MAJOR SECTIONS ADDED:
- * 1. Domains Section Purple Theme Override
- * 2. About Section Light Mode Theme
- * 3. Team Section Text Theming
- * 4. Projects Section Theme Support
- * 5. AboutUs2ndvh Cards Light Mode
- * 
- * THEME SYSTEM ARCHITECTURE:
- * - Uses html.light and html.dark selectors
- * - CSS custom properties for consistent theming
- * - Component-specific class overrides
- * - Smooth transitions between themes
- * 
- * === SECTION 1: DOMAINS SECTION STYLING ===
- * 
- * PURPOSE:
- * Override the default blue gradient background with purple theme
- * matching the "What We Do" section for consistency.
- * 
- * CLASSES TARGETED:
- * - .bg-gradient-to-b.from-blue-50.to-blue-100: Container background
- * - .bg-white.border-gray-200: Bubble containers
- * - .text-white: Text color consistency
- * 
- * IMPLEMENTATION:
- * - Uses CSS custom properties (--dark-primary, etc.)
- * - Semi-transparent backgrounds for visual depth
- * - Orange glow effects on hover
- * - Consistent across light and dark modes
- * 
- * === SECTION 2: ABOUT SECTION LIGHT MODE THEME ===
- * 
- * PURPOSE:
- * Convert dark-themed About section components to work properly
- * in light mode with appropriate contrast and colors.
- * 
- * COMPONENTS STYLED:
- * - AboutUs1vh: Main about section with team photo
- * - AboutUs2ndvh: Core domains section with interactive cards
- * - Text elements: Headings, descriptions, quotes
- * - Containers: Backgrounds, borders, cards
- * 
- * COLOR SCHEME (LIGHT MODE):
- * - Backgrounds: Light blue-gray gradients (#f8fafc to #cbd5e1)
- * - Text: Dark colors (#1e293b, #334155, #475569)
- * - Borders: Light gray (#e2e8f0, #cbd5e1)
- * - Containers: White with opacity for depth
- * 
- * === SECTION 3: TEAM SECTION TEXT THEMING ===
- * 
- * PURPOSE:
- * Ensure team section text is properly visible in light mode
- * by converting white text to dark colors.
- * 
- * ELEMENTS TARGETED:
- * - "MEET OUR TEAM" heading text
- * - Protest Riot font text elements
- * - Team bubble text content
- * 
- * IMPLEMENTATION:
- * - Specific class targeting for precision
- * - Black text (#000000) for maximum contrast
- * - Maintains original styling in dark mode
- * 
- * === SECTION 4: PROJECTS SECTION THEME SUPPORT ===
- * 
- * PURPOSE:
- * Apply consistent theming to the Projects page matching
- * the home page background and text colors.
- * 
- * FEATURES:
- * - Same gradient as home page for consistency
- * - Theme-dependent text colors
- * - Proper contrast in both modes
- * - Maintains orange-pink accent colors
- * 
- * === SECTION 5: ABOUTUS2NDVH CARDS LIGHT MODE ===
- * 
- * PURPOSE:
- * Convert dark domain cards to light theme with proper
- * contrast and visual hierarchy.
- * 
- * CARD STYLING:
- * - Background: Black → White
- * - Borders: Gray-600 → Light gray
- * - Text: White → Dark colors
- * - Hover states: Consistent orange theme
- * - Active states: Orange-pink gradient maintained
- * 
- * === TECHNICAL IMPLEMENTATION DETAILS ===
- * 
- * CSS SELECTORS USED:
- * - html.light: Light mode specific styles
- * - html.dark: Dark mode specific styles  
- * - Class combinations: Precise targeting
- * - !important: Ensures override priority
- * 
- * COLOR VARIABLES:
- * - Primary: #1e293b, #334155, #475569
- * - Secondary: #64748b, #94a3b8
- * - Light: #f8fafc, #e2e8f0, #cbd5e1
- * - Accent: #ff6b35, #f34a82, #F0A01F
- * 
- * PERFORMANCE OPTIMIZATIONS:
- * - CSS-only theme switching (no JavaScript)
- * - GPU-accelerated transforms
- * - Efficient selector targeting
- * - Minimal reflow/repaint
- * 
- * BROWSER COMPATIBILITY:
- * - Modern CSS features supported
- * - Fallback colors for older browsers
- * - Vendor prefixes where needed
- * - Responsive design patterns
- * 
- * MAINTENANCE NOTES:
- * - All changes are additive (no removals)
- * - Consistent naming conventions
- * - Clear section organization
- * - Comprehensive documentation
- * 
- * INTEGRATION POINTS:
- * - React components use specific CSS classes
- * - Theme switching handled by HTML class
- * - Consistent with Tailwind CSS utilities
- * - Coordinates with component styling
- */
-
-/**
- * Global CSS Styles
- * Updated on: December 20, 2025
- * Changes: Enhanced global styles with new color variables, font definitions, utility classes, and theme support
- * Purpose: Provides base styling for the entire application including custom properties and dark/light themes
- */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100..900;1,100..900&family=Protest+Riot&family=Stick+No+Bills:wght@200..800&display=swap");
 @import "tailwindcss";
 
@@ -172,7 +27,7 @@ html.light {
 }
 
 html.light body {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%);
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%);
   color: #1e293b;
   min-height: 100vh;
   -ms-overflow-style: none;  
@@ -216,8 +71,8 @@ html.dark nav button:hover {
 
 /* Light Theme Navigation */
 html.light nav {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(248, 250, 252, 0.9)) !important;
-  border-bottom: 1px solid #e2e8f0 !important;
+  background: linear-gradient(135deg, rgba(255, 235, 238, 0.9), rgba(255, 205, 210, 0.9)) !important;
+  border-bottom: 1px solid #ffcdd2 !important;
 }
 
 html.light nav ul li a {
@@ -248,8 +103,8 @@ html.dark nav .text-dark-text-primary {
 }
 
 html.light nav .bg-dark-surface {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border: 1px solid #e2e8f0 !important;
+  background: rgba(255, 235, 238, 0.95) !important;
+  border: 1px solid #ffcdd2 !important;
 }
 
 html.light nav .text-dark-text-primary {
@@ -265,7 +120,7 @@ nav .border-gray-300 {
 }
 
 html.light nav .border-gray-300 {
-  border-color: #e2e8f0 !important;
+  border-color: #ffcdd2 !important;
 }
 
 /* Global theme overrides */
@@ -275,7 +130,7 @@ html.dark body:not(.projects-page) {
 }
 
 html.light body:not(.projects-page) {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
   color: #1e293b !important;
 }
 
@@ -292,9 +147,9 @@ html.dark .form-input:focus {
 }
 
 html.light .form-input {
-  background-color: #ffffff !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
   color: #1e293b !important;
-  border: 1px solid #cbd5e1 !important;
+  border: 1px solid #ffcdd2 !important;
 }
 
 html.light .form-input:focus {
@@ -312,11 +167,11 @@ html.dark [class*="border-white"] {
 }
 
 html.light [class*="bg-white"] {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
 }
 
 html.light [class*="border-white"] {
-  border-color: #e2e8f0 !important;
+  border-color: #ffcdd2 !important;
 }
 
 /* Component-specific theme overrides */
@@ -367,7 +222,7 @@ html.dark body:not(.projects-page) div[class*="min-h-screen"] {
 }
 
 html.light body:not(.projects-page) div[class*="min-h-screen"] {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 /* Accent color overrides for buttons and interactive elements */
@@ -398,7 +253,7 @@ html.dark .bg-gradient-to-t.from-violet-300 {
 }
 
 html.light .bg-gradient-to-t.from-violet-300 {
-  background: linear-gradient(to top, #f8fafc, #e2e8f0, #cbd5e1) !important;
+  background: linear-gradient(to top, #ffebee, #ffcdd2, #ef9a9a) !important;
 }
 
 /* Force ContactUs background */
@@ -492,7 +347,7 @@ html.dark [class*="bg-white"] {
 }
 
 html.light [class*="bg-white"] {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
 }
 
 html.dark [class*="border-white"] {
@@ -500,7 +355,7 @@ html.dark [class*="border-white"] {
 }
 
 html.light [class*="border-white"] {
-  border-color: #cbd5e1 !important;
+  border-color: #ffcdd2 !important;
 }
 
 /* Remove old conflicting gradient overrides - now handled by theme-specific rules above */
@@ -514,7 +369,7 @@ html.dark footer {
 }
 
 html.light footer {
-  background: linear-gradient(to top, #f8fafc, #e2e8f0, #f8fafc) !important;
+  background: linear-gradient(to top, #ffebee, #ffcdd2, #ffebee) !important;
   color: #1e293b !important;
 }
 
@@ -524,7 +379,7 @@ html.dark .bg-black\/70 {
 }
 
 html.light .bg-black\/70 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
 }
 
 /* Footer borders */
@@ -533,7 +388,7 @@ html.dark footer .border-gray-600 {
 }
 
 html.light footer .border-gray-600 {
-  border-color: #cbd5e1 !important;
+  border-color: #ffcdd2 !important;
 }
 
 /* Footer text colors */
@@ -553,9 +408,9 @@ html.dark footer input {
 }
 
 html.light footer input {
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-color: rgba(255, 235, 238, 0.8) !important;
   color: #1e293b !important;
-  border-color: #cbd5e1 !important;
+  border-color: #ffcdd2 !important;
 }
 
 html.dark footer input::placeholder {
@@ -639,16 +494,16 @@ html.lenis {
   overflow: hidden;
 }
 
-/* Domains Section Purple Theme Override */
+/* Domains Section Baby Pink Theme Override */
 html.light .bg-gradient-to-b.from-blue-50.to-blue-100,
 html.dark .bg-gradient-to-b.from-blue-50.to-blue-100 {
-  background: linear-gradient(to bottom, var(--dark-primary), var(--dark-secondary), var(--dark-tertiary)) !important;
+  background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a) !important;
 }
 
 html.light .bg-white.border-gray-200,
 html.dark .bg-white.border-gray-200 {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  border-color: rgba(255, 255, 255, 0.2) !important;
+  background-color: rgba(255, 235, 238, 0.1) !important;
+  border-color: rgba(255, 205, 210, 0.2) !important;
 }
 
 html.light .text-white,
@@ -668,20 +523,20 @@ html.light .font-\[\'Protest_Riot\'\].font-semibold.text-white {
 
 /* About Section Light Mode Theme */
 html.light .bg-white {
-  background-color: #ffffff !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
 }
 
 html.light .bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.light .bg-black\/90 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
 }
 
 html.light .bg-black\/90.border-gray-600 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: #e2e8f0 !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
+  border-color: #ffcdd2 !important;
 }
 
 html.light .text-white {
@@ -701,24 +556,77 @@ html.light .bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertia
 
 /* About Us 2ndvh Light Mode */
 html.light .min-h-\[85vh\].flex.flex-col.items-center.py-8.px-4.bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.light .bg-dark-surface\/70 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: #e2e8f0 !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
+  border-color: #ffcdd2 !important;
 }
 
 html.light .bg-dark-surface\/70.border.border-gray-600 {
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  border-color: #e2e8f0 !important;
+  background-color: rgba(255, 235, 238, 0.9) !important;
+  border-color: #ffcdd2 !important;
 }
 
 
   
+/* Join Us/Closed Section Baby Pink Theme */
+html.light .bg-gradient-to-r.from-purple-800.to-purple-900 {
+  background: linear-gradient(to right, #ffebee, #ffcdd2, #ef9a9a) !important;
+}
+
+html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md {
+  background-color: rgba(255, 235, 238, 0.95) !important;
+  border: 1px solid #ffcdd2 !important;
+}
+
+html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .text-white {
+  color: #1e293b !important;
+}
+
+html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .bg-blue-500 {
+  background-color: #ec4899 !important;
+}
+
+html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .bg-blue-500:hover {
+  background-color: #db2777 !important;
+}
+
+/* Make "SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW" text black in light mode */
+html.light .text-gray-500.text-sm.tracking-wider,
+html.light .text-gray-500,
+html.light .text-sm.tracking-wider {
+  color: #000000 !important;
+}
+
+html.light .text-sm.tracking-wider[style*="color: #ff6b35"],
+html.light .text-sm.tracking-wider[style],
+html.light div[style*="color: #ff6b35"] {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+/* More specific selectors for both components */
+html.light section .text-gray-500.text-sm.tracking-wider,
+html.light section .text-sm.tracking-wider {
+  color: #000000 !important;
+}
+
+html.light section div[style*="color: #ff6b35"] {
+  color: #000000 !important;
+  text-shadow: none !important;
+}
+
+/* Override any motion.div elements */
+html.light motion.div.text-gray-500.text-sm.tracking-wider,
+html.light motion.div.text-sm.tracking-wider {
+  color: #000000 !important;
+}
+
 /* Projects Section Theme Support */
 html.light .projects-section {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #e2e8f0 75%, #f8fafc 100%) !important;
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.dark .projects-section {

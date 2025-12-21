@@ -1,9 +1,3 @@
-/**
- * Center Image Component
- * Updated on: December 20, 2025
- * Changes: Enhanced center image display with scroll-based animations and visual effects
- * Purpose: Displays animated center logo with parallax scrolling effects
- */
 import { useEffect, useState } from "react";
 import {
   motion,

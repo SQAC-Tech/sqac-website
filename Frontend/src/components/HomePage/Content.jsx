@@ -1,9 +1,3 @@
-/**
- * Content Component
- * Updated on: December 20, 2025
- * Changes: Enhanced content sections with improved layout and animations
- * Purpose: Displays main content sections for projects, teams, and events
- */
 import React from "react";
 import { motion } from "framer-motion";
 import Projects from "../../assets/projectsPhoto.png";

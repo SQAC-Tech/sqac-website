@@ -1,9 +1,3 @@
-/**
- * Contact Us Component
- * Updated on: December 20, 2025
- * Changes: Enhanced contact form with improved styling and success state handling
- * Purpose: Handles user contact form submissions with feedback
- */
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 

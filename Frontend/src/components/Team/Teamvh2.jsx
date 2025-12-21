@@ -1,9 +1,3 @@
-/**
- * Team View 2 Component
- * Updated on: December 20, 2025
- * Changes: Enhanced domain selection with dropdown menus for Technical, Corporate, and Media domains
- * Purpose: Allows users to select specific domains and subdomains for team viewing
- */
 import React, { useState } from 'react';
 import {
   Users, Code2, Building2, Camera,Palette ,Globe, Brain,

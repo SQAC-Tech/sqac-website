@@ -1,9 +1,3 @@
-/**
- * About Us Main Component
- * Updated on: December 20, 2025
- * Changes: Enhanced layout with animated background bubbles and improved styling
- * Purpose: Main container for About Us page with Navbar and sub-components
- */
 import React from 'react'
 import Navbar from '../HomePage/Navbar'
 import AboutUs from './AboutUs1vh'
