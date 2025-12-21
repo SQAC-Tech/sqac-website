@@ -5,7 +5,6 @@ import Closed from './Closed'
 function JoinUs() {
   return (
     <div>
-      {/* <IDCardForm/> */}
       <Closed/>
     </div>
   )

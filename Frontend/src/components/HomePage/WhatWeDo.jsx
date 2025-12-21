@@ -1,4 +1,4 @@
-import { useState } from "react";
+ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Laptop,
@@ -61,7 +61,7 @@ const WhatWeDoSection = () => {
   const [front, back] = cards[index];
 
   return (
-    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-red-300 via-orange-200 to-orange-300 overflow-hidden flex-col md:flex-row">
+    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary overflow-hidden flex-col md:flex-row">
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
         initial={{ x: 100, opacity: 0 }}
@@ -69,13 +69,15 @@ const WhatWeDoSection = () => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-bold text-gray-900 font-poppins">
-          WHAT WE{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+        <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-bold font-poppins">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
+            WHAT WE
+          </span>{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
             DO
           </span>
         </h2>
-        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-xl mt-6">
+        <p className="text-base sm:text-lg md:text-xl text-white max-w-xl mt-6" style={{textShadow: '0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2)'}}>
           At SQAC, we're more than just code. We build experiences, spark
           innovation, and bring bold ideas to life through design, tech, and
           collaboration.
@@ -95,7 +97,7 @@ const WhatWeDoSection = () => {
             setFlip(false);
             setIndex((index - 1 + cards.length) % cards.length);
           }}
-          className="absolute -left-4 sm:-left-10 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-purple-500 text-white rounded-full hover:bg-purple-600 active:scale-95 transition z-10"
+          className="absolute -left-4 sm:-left-10 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-accent text-white rounded-full hover:bg-accentSecondary active:scale-95 transition z-10"
         >
           ←
         </button>
@@ -141,7 +143,7 @@ const WhatWeDoSection = () => {
             setFlip(false);
             setIndex((index + 1) % cards.length);
           }}
-          className="absolute -right-4 sm:-right-10 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-cyan-500 text-white rounded-full hover:bg-cyan-600 active:scale-95 transition z-10"
+          className="absolute -right-4 sm:-right-10 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-accent text-white rounded-full hover:bg-accentSecondary active:scale-95 transition z-10"
         >
           →
         </button>

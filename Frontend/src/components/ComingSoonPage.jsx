@@ -64,7 +64,7 @@ const ComingSoonPage = () => {
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mx-auto"
+            className="mt-6 text-lg md:text-xl text-white max-w-2xl leading-relaxed mx-auto"
           >
             Our team is working tirelessly to deliver an experience that exceeds all expectations.
           </motion.p>
