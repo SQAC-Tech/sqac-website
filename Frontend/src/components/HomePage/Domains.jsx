@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+ import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 import tech from "../../assets/technical.png";
@@ -14,8 +14,8 @@ const FloatBox = ({ name, description }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="px-4 py-2 bg-white/80 rounded-full shadow-md border border-[#D9A6C9] backdrop-blur-sm hover:bg-white transition-colors">
-        <p className="text-sm font-semibold text-[#3B0A4B]">{name}</p>
+      <button className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-800 rounded-full shadow-md border border-purple-500 backdrop-blur-sm hover:scale-110 transition-all hover:from-purple-500 hover:to-purple-700">
+        <p className="text-sm font-semibold text-white">{name}</p>
       </button>
 
       {open && (
@@ -47,20 +47,28 @@ const HoverDock = ({ items }) => (
 );
 
 const Bubble = ({ children, className }) => (
-  <div className={`bg-white/70 p-6 rounded-2xl shadow-xl border border-white/50 flex items-center backdrop-blur-sm min-h-[260px] md:h-[320px] ${className}`}>
+  <motion.div 
+    className={`bg-gradient-to-b from-purple-900/20 to-purple-800/10 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-purple-500/30 flex items backdrop-blur-sm min-h-[260px] md:h-[320px] transition-all duration-300 ${className}`}
+    whileHover={{
+      backgroundColor: 'rgba(147, 51, 234, 0.3)',
+      borderColor: 'rgba(168, 85, 247, 0.6)',
+      boxShadow: '0 8px 40px rgba(147, 51, 234, 0.4), 0 0 60px rgba(168, 85, 247, 0.3), 0 0 80px rgba(196, 181, 253, 0.2)',
+      scale: 1.02
+    }}
+  >
     {children}
-  </div>
+  </motion.div>
 );
 
 const DomainContent = ({ item, isPhotoLeft }) => {
   const Mobile = () => (
     <div className="space-y-8 md:hidden">
       <Bubble className="justify-center flex-col">
-        <h3 className="text-xl font-bold text-[#4A1E5C] mb-2">{item.title}</h3>
+        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
         <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
       </Bubble>
       <Bubble className="flex-col items-center">
-        <p className="text-[#333] text-center text-base ">{item.description}</p>
+        <p className="text-white text-center text-base ">{item.description}</p>
         <HoverDock items={item.subdomains} />
       </Bubble>
     </div>
@@ -75,21 +83,21 @@ const DomainContent = ({ item, isPhotoLeft }) => {
             <img src={item.mainImage} alt="" className="w-full h-full object-cover rounded-2xl" />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
-            <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
+            <div className="absolute w-4 h-4 rounded-full bg-dark-surface border-2 border-accent" />
           </div>
           <Bubble className="flex-col items-center">
-            <p className="text-[#333] text-base text-center lg:text-lg">{item.description}</p>
+            <p className="text-white text-base text-center lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
         </>
       ) : (
         <>
           <Bubble className="flex-col items-center">
-            <p className="text-[#333] text-base text-center lg:text-lg">{item.description}</p>
+            <p className="text-white text-base text-center lg:text-lg">{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
-            <div className="absolute w-4 h-4 rounded-full bg-white border-2 border-[#8A4E9E]" />
+            <div className="absolute w-4 h-4 rounded-full bg-dark-surface border-2 border-accent" />
           </div>
           <Bubble className="justify-center flex-col">
             {/* <h3 className="text-3xl font-bold text-[#4A1E5C] mb-5">{item.title}</h3> */}
@@ -152,19 +160,21 @@ export default function Domains() {
   ];
 
   return (
-    <div className="py-20 lg:py-32 bg-gradient-to-b from-orange-300 via-fuchsia-100 to-cyan-200">
-      <h2 className="text-4xl lg:text-5xl font-bold mb-12 text-center text-[#3B0A4B]">
-        Our Core Domains
+    <div className="py-20 lg:py-32 bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary">
+      <h2 className="text-4xl lg:text-5xl font-bold mb-12 text-center">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
+          Our Core Domains
+        </span>
       </h2>
 
       <div ref={targetRef} className="relative max-w-5xl mx-auto px-6">
-        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-neutral-300 hidden md:block" />
+        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-purple-900/50 hidden md:block" />
         <motion.div
           className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 hidden md:block"
           style={{
             scaleY: pathLength,
             transformOrigin: "top",
-            background: "linear-gradient(to bottom, #4A1E5C, #B966D6)",
+            background: "linear-gradient(to bottom, #7c3aed, #a855f7)",
           }}
         />
 

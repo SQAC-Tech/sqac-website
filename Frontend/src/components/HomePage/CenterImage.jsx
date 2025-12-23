@@ -43,7 +43,7 @@ function CenterImage({ sectionHeight }) {
 
   return (
     <div className="sticky top-0 w-full h-screen overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-zinc-50 via-orange-200 to-orange-400 flex flex-col items-center justify-center space-y-4">
+      <div className="absolute inset-0 z-0 bg-gradient-to-t from-dark-primary via-dark-secondary to-dark-tertiary flex flex-col items-center justify-center space-y-4">
         <motion.img
           src={Logo}
           alt="SQAC Logo"
@@ -53,23 +53,23 @@ function CenterImage({ sectionHeight }) {
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           style={{
             filter: `
-              drop-shadow(0 0 10px rgba(236, 72, 153, 1))
-              drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))
-              drop-shadow(0 0 30px rgba(236, 72, 153, 0.6))
+              drop-shadow(0 0 10px rgba(124, 58, 237, 1))
+              drop-shadow(0 0 20px rgba(124, 58, 237, 0.8))
+              drop-shadow(0 0 30px rgba(124, 58, 237, 0.6))
             `,
           }}
         />
 
         <motion.h1
-          className="text-4xl md:text-7xl font-extrabold text-pink-600 text-center px-4 animate-glowBlink mb-20"
+          className="text-4xl md:text-7xl font-extrabold text-accent text-center px-4 animate-glowBlink mb-20"
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           style={{
             textShadow: `
-              0 0 10px rgba(236, 72, 153, 1),
-              0 0 20px rgba(236, 72, 153, 0.8),
-              0 0 30px rgba(236, 72, 153, 0.6)
+              0 0 10px rgba(124, 58, 237, 1),
+              0 0 20px rgba(124, 58, 237, 0.8),
+              0 0 30px rgba(124, 58, 237, 0.6)
             `,
           }}
         >
@@ -85,14 +85,14 @@ function CenterImage({ sectionHeight }) {
           backgroundSize: bgSize,
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
-          height: "100%", 
+          height: "100%",
         }}
       >
         <motion.div
           style={{
             opacity: gradientOpacity,
             background:
-              "linear-gradient(to top, rgba(236, 72, 153, 0.7) 0%, rgba(245, 158, 11, 0.6) 100%)",
+              "linear-gradient(to top, rgba(124, 58, 237, 0.7) 0%, rgba(168, 85, 247, 0.6) 100%)",
             width: "100%",
             height: "100%",
             position: "absolute",

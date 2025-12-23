@@ -171,15 +171,15 @@ const Team = () => {
                       return (
                         <div
                           key={index}
-                          className="bg-white rounded-xl border-2 border-gray-200 shadow-md p-4 w-64 text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2 hover:scale-105"
+                          className="bg-white dark:bg-black rounded-xl border-2 border-gray-200 dark:border-gray-600 shadow-md p-4 w-64 text-center cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:scale-105 hover:border-orange-500 hover:ring-2 hover:ring-orange-500/40 hover:shadow-[0_8px_40px_rgba(255,107,53,0.4),0_0_60px_rgba(243,74,130,0.3),0_0_80px_rgba(240,160,31,0.2)]"
                         >
                           <img
                             src={imageUrl}
                             alt={member.Name}
                             className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-white shadow"
                           />
-                          <h3 className="text-lg font-semibold text-gray-800">{member.Name}</h3>
-                          <p className="text-sm text-gray-600">{member['Position in SQAC']}</p>
+                          <h3 className="text-lg font-semibold dark:text-white text-gray-800">{member.Name}</h3>
+                          <p className="text-sm dark:text-gray-300 text-gray-600">{member['Position in SQAC']}</p>
                           <div className="flex justify-center gap-4 mt-3">
                             {member['LinkedIn Profile Link']?.trim() && (
                               <a 
