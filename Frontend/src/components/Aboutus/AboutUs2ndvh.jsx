@@ -1,83 +1,197 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import {
+  Card, CardContent, Typography, IconButton, Divider,
+  Box, List, ListItem, ListItemText
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  LayoutTemplate, Smartphone, Cpu,
+  CalendarClock, Handshake, Camera
+} from 'lucide-react';
 
 const services = {
   webdev: {
     title: 'Web Development',
     desc: 'We build responsive websites using React, Node.js, and full-stack tech.',
-    features: ['Custom Web Apps', 'E-commerce', 'API Development', 'DB Design']
+    features: ['Custom Web Apps', 'E-commerce Platforms', 'API Integration', 'Database Design'],
+  },
+  appdev: {
+    title: 'App Development',
+    desc: 'Crafting intuitive mobile apps using modern frameworks for Android and iOS.',
+    features: ['Cross-platform Apps', 'React Native & Flutter', 'UI/UX Design', 'App Deployment'],
   },
   aiml: {
-    title: 'AI/ML',
+    title: 'AI / ML',
     desc: 'Automate and gain insights with intelligent AI/ML systems.',
-    features: ['Analytics', 'NLP', 'Computer Vision', 'Recommendations']
+    features: ['Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Recommendation Engines'],
   },
-  creatives: {
-    title: 'Creatives',
-    desc: 'We create stunning designs and brand experiences.',
-    features: ['Brand Design', 'UI/UX', 'Motion Graphics', 'Illustrations']
+  events: {
+    title: 'Event Management',
+    desc: 'Organizing impactful tech events, workshops, and community meetups.',
+    features: ['Hackathons', 'Seminars', 'Meetups', 'Community Sessions'],
   },
-  corporate: {
-    title: 'Corporate',
-    desc: 'Optimize operations with our digital corporate solutions.',
-    features: ['Consulting', 'Automation', 'Transformation', 'Project Mgmt']
-  }
+  sponsor: {
+    title: 'Sponsorship',
+    desc: 'Building corporate relationships and securing funding for initiatives.',
+    features: ['Brand Collaborations', 'Fundraising', 'Corporate Outreach', 'Partnership Growth'],
+  },
+  media: {
+    title: 'Media',
+    desc: 'Managing our external communication and media presence.',
+    features: ['Content Creation', 'Video Editing', 'Community Engagement', 'Brand Identity'],
+  },
 };
 
 const serviceCards = [
-  { id: 'webdev', name: 'Web Dev', icon: '🌐' },
-  { id: 'aiml', name: 'AI/ML', icon: '🤖' },
-  { id: 'creatives', name: 'Creatives', icon: '🎨' },
-  { id: 'corporate', name: 'Corporate', icon: '🏢' }
+  { id: 'webdev', name: 'Web Dev', icon: <LayoutTemplate size={36} /> },
+  { id: 'events', name: 'Events', icon: <CalendarClock size={36} /> },
+  { id: 'appdev', name: 'App Dev', icon: <Smartphone size={36} /> },
+  { id: 'media', name: 'Media', icon: <Camera size={36} /> },
+  { id: 'aiml', name: 'AI/ML', icon: <Cpu size={36} /> },
+  { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={36} /> },
 ];
 
-const ServicesSection = () => {
+function ServicesSection() {
   const [selected, setSelected] = useState(null);
-  return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-t from-pink-300 to-purple-100" />
-      <div className="absolute inset-0 flex justify-center items-center z-0">
-        <div className="w-full max-w-6xl h-[600px] rounded-[40px] bg-pink-100/50 backdrop-blur-sm" />
+
+  useEffect(() => {
+    if (selected && window.innerWidth < 768) {
+      document.getElementById("details-card")?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+  }, [selected]);
+
+  const renderCard = (id) => {
+    const card = serviceCards.find(c => c.id === id);
+    if (!card) return null;
+
+    const isActive = selected === card.id;
+
+    return (
+      <div
+        key={card.id}
+        role="button"
+        aria-label={`Select ${card.name}`}
+        onClick={() => setSelected(card.id)}
+        className={`
+          cursor-pointer rounded-2xl p-5 flex flex-col items-center text-center
+          shadow-md border-2 backdrop-blur-sm
+          transition-all duration-200
+          ${isActive
+            ? 'bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] border-gray-600 text-white'
+            : 'dark:bg-black bg-white dark:border-gray-600 border-gray-300 dark:text-white text-black hover:border-orange-500 hover:ring-2 hover:ring-orange-500/40 hover:shadow-[0_8px_40px_rgba(255,107,53,0.4),0_0_60px_rgba(243,74,130,0.3),0_0_80px_rgba(240,160,31,0.2)]'
+          }
+        `}
+      >
+        <div className={`mb-3 ${isActive ? 'text-white' : 'dark:text-gray-300 text-gray-600 hover:text-white'}`}>
+          {card.icon}
+        </div>
+        <h3 className="font-semibold tracking-wide text-sm sm:text-base dark:text-white text-black">
+          {card.name}
+        </h3>
       </div>
-      <div className="relative z-10 flex flex-col items-center px-4 pt-16">
-        <motion.h2 className="text-4xl md:text-5xl font-bold text-center mb-12 bg-gradient-to-b from-[#3B0A4B] to-[#7B2A8C] bg-clip-text text-transparent font-poppins" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          Services We Provide
-        </motion.h2>
-        <div className={`grid gap-12 w-full max-w-7xl ${selected ? 'lg:grid-cols-2' : 'grid-cols-1'}`}>
-          <div className="grid grid-cols-2 gap-8 max-w-2xl mx-auto">
-            {serviceCards.map((card, i) => (
-              <motion.div key={card.id} onClick={() => setSelected(card.id)} className={`relative p-10 rounded-2xl cursor-pointer flex flex-col items-center text-center min-h-[200px] ${selected === card.id ? 'bg-gradient-to-br from-pink-200 to-purple-200 shadow-xl scale-105' : 'bg-white/80 hover:bg-gradient-to-br hover:from-pink-100 hover:to-purple-100 shadow-md'}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: i * 0.1 }} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <div className="text-5xl mb-6">{card.icon}</div>
-                <h3 className="text-2xl font-semibold text-gray-800">{card.name}</h3>
-                {selected === card.id && (
-                  <motion.div className="absolute top-3 right-3 w-3 h-3 bg-pink-500 rounded-full" initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 0.3 }} />
-                )}
-              </motion.div>
+    );
+  };
+
+  return (
+    <div className="min-h-[85vh] flex flex-col items-center py-8 px-4 bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary">
+      <h2 className="mt-9 text-5xl sm:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] mb-6">
+        Our Core Domains
+      </h2>
+
+      <p className="text-center text-white text-lg max-w-2xl mb-10">
+        Discover the key domains we work in — from technology and design to strategic and corporate solutions.
+      </p>
+
+      <div className="bg-dark-surface/70 backdrop-blur-md border border-gray-600 rounded-3xl shadow-lg p-6 w-full max-w-5xl">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4">
+
+          {/* Left Grid */}
+          <div className="grid grid-cols-2 gap-3 place-items-center">
+            {serviceCards.map(card => (
+              <div key={card.id} className="w-[160px] h-[140px]">
+                {renderCard(card.id)}
+              </div>
             ))}
           </div>
-          <AnimatePresence>
-            {selected && (
-              <motion.div key="info-panel" className="flex justify-center items-center -ml-6" initial={{ opacity: 0, x: 100 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 100 }} transition={{ duration: 0.5 }}>
-                <div className="relative p-10 bg-white/90 border border-pink-200 rounded-2xl shadow-xl w-full max-w-lg min-h-[300px]">
-                  <button onClick={() => setSelected(null)} className="absolute top-3 right-3 text-xl font-bold text-pink-800 hover:text-pink-900">✕</button>
-                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-b from-[#3B0A4B] to-[#7B2A8C] bg-clip-text text-transparent font-poppins">{services[selected].title}</h3>
-                  <p className="text-gray-600 mb-6 text-[17px] leading-relaxed">{services[selected].desc}</p>
-                  <ul className="space-y-3">
+
+          {/* Right Details */}
+          <div className="flex items-center justify-center" id="details-card">
+            {selected ? (
+              <Card sx={{
+                bgcolor: "#f0fdfa",
+                borderRadius: 3,
+                px: 5,
+                py: 6,
+                textAlign: "center",
+                position: "relative",
+                transition: "box-shadow 0.2s",
+                '&:hover': {
+                  boxShadow: "0 8px 20px rgba(6,182,212,0.35)"
+                }
+              }}>
+                <IconButton
+                  onClick={() => setSelected(null)}
+                  sx={{ position: "absolute", top: 12, right: 12 }}
+                >
+                  <CloseIcon />
+                </IconButton>
+
+                <CardContent>
+                  <Typography variant="h5" fontWeight={600} gutterBottom color="#f97316">
+                    {services[selected].title}
+                  </Typography>
+
+                  <Typography gutterBottom color="#555">
+                    {services[selected].desc}
+                  </Typography>
+
+                  <Divider sx={{ my: 2 }} />
+
+                  <List dense>
                     {services[selected].features.map((f, i) => (
-                      <motion.li key={i} className="flex items-center text-gray-700 text-[16px]" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 + i * 0.1 }}>
-                        <span className="w-2 h-2 bg-pink-500 rounded-full mr-3" />
-                        {f}
-                      </motion.li>
+                      <ListItem key={i} disableGutters>
+                        <Box sx={{
+                          width: 8,
+                          height: 8,
+                          bgcolor: "#f97316",
+                          borderRadius: "50%",
+                          mr: 2
+                        }} />
+                        <ListItemText primary={f} />
+                      </ListItem>
                     ))}
-                  </ul>
-                </div>
-              </motion.div>
+                  </List>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card sx={{
+                bgcolor: "#111",
+                color: "#fff",
+                px: 5,
+                py: 6,
+                textAlign: "center",
+                borderRadius: 3,
+                transition: "box-shadow 0.2s",
+                '&:hover': {
+                  boxShadow: "0 8px 20px rgba(243,74,130,0.4)"
+                }
+              }}>
+                <Typography variant="h4" fontWeight={700} gutterBottom color="#ec4899">
+                  Welcome to SQAC Domains
+                </Typography>
+                <Typography>
+                  Choose a domain card to explore how we empower technology, creativity, and innovation.
+                </Typography>
+              </Card>
             )}
-          </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default ServicesSection;

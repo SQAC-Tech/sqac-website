@@ -1,24 +1,17 @@
 import Content from "./Content";
 import WhatWeDoSection from "./WhatWeDo";
 import Domains from "./Domains";
-import Hero from "./Hero";
-import ContactUs from "./ContactUs";
-import Footer from "../Footer";
+import Home from "./Home";
+
 
 function HomePage() {
   return (
-    <>
       <div className="relative min-h-screen">
-        <Hero/>
-        <Content />
+        <Home />
         <WhatWeDoSection />
         <Domains />
-        
-        
+
       </div>
-      
-    </>
   );
 };
-
 export default HomePage;
