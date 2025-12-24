@@ -5,283 +5,134 @@ import Footer from '../Footer';
 import Teamvh1 from './Teamvh1';
 import Teamvh2 from './Teamvh2';
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
+import {
+  SiReact, SiFlutter, SiFigma, SiAndroid, SiNodedotjs, SiMongodb,
+} from 'react-icons/si';
 
 const boardMemberHierarchy = [
-  'Secretary',
-  'Joint Secretary',
-  'Leads',
-  'Domain Lead',
-  'Associate',
-  'Member',
+  'Secretary','Joint Secretary','Leads','Domain Lead','Associate','Member'
 ];
+const LEAD_ROLES = ['project lead','media lead'];
 
-const hardcodedBoardMembers = [
-  {
-    Name: 'Yash Gupta',
-    'Position in SQAC': 'Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/yash-gupta-052a32142/',
-    'Instagram Profile Link': 'https://www.instagram.com/guptayash_16/',
-    'GitHub Profile Link': 'https://github.com/Yash9837',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/WhatsApp_Image_2025-07-29_at_11.47.56_-_Yash_Gupta_fcyni0',
-  },
-  {
-    Name: 'Tanmay Bansal',
-    'Position in SQAC': 'Joint Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/tanmay-bansal-3b17a8247/',
-    'Instagram Profile Link': 'https://www.instagram.com/tanmay__170/?igsh=MTZ5NG1pbDcweDg4bg%3D%3D',
-    'GitHub Profile Link': 'https://github.com/Tanmay170',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/IMG-20240927-WA0002_-_TANMAY_BANSAL_RA2311043010022_xj6wui',
-  },
-  {
-    Name: 'Nityam Sharma',
-    'Position in SQAC': 'Joint Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/nityamsharma-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-    'Instagram Profile Link': 'https://www.instagram.com/_nityamsharma_/?igsh=MXhkM3AzZ203YzZ1Zw%3D%3D',
-    'GitHub Profile Link': 'https://github.com/SharmaNityam',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/Screenshot_2025-01-07-19-52-51-05_6012fa4d4ddec268fc5c7112cbb265e7_-_Nityam_Sharma_jjfgcn',
-  },
-  {
-    Name: 'Priyanshu Vasudev',
-    'Position in SQAC': 'Technical Lead ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/priyanshu-vasudev-off/',
-    'Instagram Profile Link': 'https://www.instagram.com/priyanshu.vasudev/',
-    'GitHub Profile Link': 'https://github.com/Priyanshu2608',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/priyanshu_pskop4',
-  },
-  {
-    Name: 'Vansh Jain',
-    'Position in SQAC': 'Corporate Lead ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
-    'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
-    'GitHub Profile Link': 'https://github.com/VEDANTMODI21',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/v1754250193/Vansh_Jain_Head_-_Vansh_Jain_xsjiw0.jpg',
-  },
+const techIcons = [
+  <SiReact className="text-cyan-400"/>,
+  <SiFlutter className="text-sky-400"/>,
+  <SiFigma className="text-pink-400"/>,
+  <SiAndroid className="text-green-500"/>,
+  <SiNodedotjs className="text-lime-400"/>,
+  <SiMongodb className="text-emerald-500"/>,
 ];
 
 const Team = () => {
-  const [teamData, setTeamData] = useState([]);
-  const [subDomains, setSubDomains] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState('Board Member');
-  const [loading, setLoading] = useState(true);
+  const [teamData,setTeamData] = useState([]);
+  const [selectedDomain,setSelectedDomain] = useState('Board Member');
+  const [loading,setLoading] = useState(true);
+  const [activeIndex,setActiveIndex] = useState(-1);
 
-  useEffect(() => {
-    axios.get(import.meta.env.VITE_API)
-      .then((res) => {
-        setTeamData(res.data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    axios.get(import.meta.env.VITE_API)
-      .then((response) => {
-        const data = response.data;
-        const uniqueDomains = [...new Set(data.map(row => row['Sub Domain']).filter(Boolean))];
-        setSubDomains(uniqueDomains);
-      })
-      .catch(() => {});
-  }, []);
+  useEffect(()=>{
+    axios.get(import.meta.env.VITE_API).then(res=>{
+      setTeamData(res.data?.data||[]);
+      setLoading(false);
+    });
+  },[]);
 
   const filterMembersByDomain = () => {
-    if (!selectedDomain) return [];
-
-    if (selectedDomain.toLowerCase() === 'board member') {
-      return hardcodedBoardMembers;
-    }
-
-    if (selectedDomain.toLowerCase() === 'media') {
-      return teamData.filter(
-        (member) => (member['Core Domain'] || '').trim().toLowerCase() === 'media'
-      );
-    }
-
-    return teamData.filter((member) => {
-      const domainField = member['Sub Domain'] || '';
-      const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
-      return subdomains.includes(selectedDomain.toLowerCase());
-    });
+    const d = selectedDomain.toLowerCase();
+    if(d==='board member') return teamData.filter(m=>m.coredomain?.toLowerCase()==='board member');
+    if(LEAD_ROLES.includes(d)) return teamData.filter(m=>m.position?.toLowerCase().includes(d));
+    if(['technical','corporate'].includes(d)) return teamData.filter(m=>m.coredomain?.toLowerCase()===d);
+    if(d==='media') return teamData.filter(m=>m.coredomain?.toLowerCase()==='corporate' && ['creative','public relations'].includes(m.subdomain?.toLowerCase()));
+    return teamData.filter(m=>m.subdomain?.toLowerCase()===d);
   };
 
-  const groupByHierarchy = (members) => {
-    const groups = Object.fromEntries(boardMemberHierarchy.map(role => [role, []]));
-
-    members.forEach((member) => {
-      const position = member['Position in SQAC'] || '';
-      if (selectedDomain.toLowerCase() === 'board member') {
-        if (position.includes('Secretary') && member.Name === 'Yash Gupta') {
-          groups['Secretary'].push(member);
-        } else if (position.includes('Joint Secretary')) {
-          groups['Joint Secretary'].push(member);
-        } else if (position.includes('Lead')) {
-          groups['Leads'].push(member);
-        } else {
-          groups['Member'].push(member);
-        }
-      } else {
-        const role = boardMemberHierarchy.find(h => position.toLowerCase().includes(h.toLowerCase()));
-        if (role) {
-          groups[role].push(member);
-        } else {
-          groups['Member'].push(member);
-        }
+  const groupByHierarchy = (members)=>{
+    const groups = Object.fromEntries(boardMemberHierarchy.map(r=>[r,[]]));
+    members.forEach(m=>{
+      const p=(m.position||'').toLowerCase();
+      if(selectedDomain.toLowerCase()==='board member'){
+        if(p.includes('secretary')) groups.Secretary.push(m);
+        else if(p.includes('joint secretary')) groups['Joint Secretary'].push(m);
+        else groups.Leads.push(m); return;
       }
+      if(p.includes('domain lead')) groups['Domain Lead'].push(m);
+      else if(p.includes('associate')) groups.Associate.push(m);
+      else if(p.includes('lead')) groups.Leads.push(m);
+      else groups.Member.push(m);
     });
-
     return groups;
   };
 
-  const displayMembers = useMemo(() => groupByHierarchy(filterMembersByDomain()), [teamData, selectedDomain]);
-  const timelineRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [hoverIndex, setHoverIndex] = useState(-1);
+  const displayMembers = useMemo(()=>groupByHierarchy(filterMembersByDomain()),[teamData,selectedDomain]);
 
-  useEffect(() => {
-    const root = timelineRef.current;
-    if (!root) return;
-
-    const sections = Array.from(root.querySelectorAll('[data-role-index]'));
-    if (!sections.length) return;
-
-    // activate slightly earlier and smoother
-    const observer = new IntersectionObserver((entries) => {
-      let best = null;
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
-        }
-      });
-      if (best) {
-        const idx = parseInt(best.target.getAttribute('data-role-index'), 10);
-        setActiveIndex(idx);
-      }
-    }, { root: null, threshold: [0.15, 0.4, 0.65], rootMargin: '-20% 0px -20% 0px' });
-
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [timelineRef, displayMembers]);
+  useEffect(()=>{
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(e=>e.isIntersecting&&setActiveIndex(Number(e.target.dataset.idx)));
+    },{threshold:0.5});
+    document.querySelectorAll('[data-idx]').forEach(el=>obs.observe(el));
+    return()=>obs.disconnect();
+  },[displayMembers]);
 
   return (
     <div>
-      <Navbar />
-      <Teamvh1 />
-      <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
+      <Navbar/>
+      <Teamvh1/>
+      <Teamvh2 onSelectDomain={setSelectedDomain}/>
 
-      <div className="pt-2 p-6 bg-gradient-to-b from-pink-200 via-yellow-100 to-cyan-200 min-h-screen">
-        {loading ? (
-          <div className="text-center mt-10">Loading team data...</div>
-        ) : (
-          <>
-            <h2 className="text-center text-5xl font-bold mb-10">{selectedDomain}</h2>
+      <div className="relative min-h-screen bg-gradient-to-b from-purple-300 via-pink-200 to-orange-200 py-32">
 
-            <div ref={timelineRef} className="relative max-w-6xl mx-auto px-4 py-6">
-              {/* Vertical timeline spine (centered) */}
-              <div className="absolute left-1/2 top-6 bottom-6 -translate-x-1/2 w-1 bg-gray-800/30 rounded-full" aria-hidden="true" />
+        {/* CENTER SPINE */}
+        <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-orange-400/30 rounded-full"/>
 
-              {boardMemberHierarchy.map((role, i) => {
-                const members = displayMembers[role] || [];
-                if (!members.length) return null;
+        {loading?<div>Loading...</div>:boardMemberHierarchy.map((role,i)=>{
+          const members=displayMembers[role];
+          if(!members?.length) return null;
 
-                // descending sizes per hierarchy (use min-heights so content can grow)
-                const sizeMap = ['lg', 'xl', 'md', 'sm', 'xs', 'xs'];
-                const size = sizeMap[i] || 'sm';
-                const sizeClasses = {
-                  xl: 'w-[28rem] min-h-[14rem]',
-                  lg: 'w-[24rem] min-h-[13rem]',
-                  md: 'w-[20rem] min-h-[12rem]',
-                  sm: 'w-[18rem] min-h-[11rem]',
-                  xs: 'w-[16rem] min-h-[10rem]',
-                };
+          return(
+            <div key={i} data-idx={i} className="relative mb-40">
 
-                return (
-                  <div
-                    key={role}
-                    data-role-index={i}
-                    onMouseEnter={() => setHoverIndex(i)}
-                    onMouseLeave={() => setHoverIndex(-1)}
-                    className="relative mb-10 flex justify-center"
-                  >
-                    {/* branch connector from centered spine to cards */}
-                    <div className="absolute" style={{ left: '50%', transform: 'translateX(20px)' }} aria-hidden="true">
-                      <div className="relative w-28 h-1">
-                        <div className={`absolute inset-0 rounded-full transition-opacity duration-500 ${activeIndex === i || hoverIndex === i ? 'opacity-0' : 'opacity-100 bg-gray-700/30'}`} />
-                        <div className={`absolute left-0 top-0 h-1 rounded-full transition-all duration-500 ease-out`} style={{ width: activeIndex === i || hoverIndex === i ? '100%' : '0%', background: 'linear-gradient(90deg,#ff8c00,#f6a23e)' }} />
-                      </div>
-                      {/* bigger glow at spine intersection */}
-                      <div className={`absolute -left-8 -top-2 rounded-full transition-all duration-500 ${activeIndex === i || hoverIndex === i ? 'w-8 h-8 bg-orange-400/80 shadow-[0_0_30px_rgba(255,140,0,0.85)] scale-125 ring-4 ring-orange-400/25' : 'w-5 h-5 bg-gray-600/40'}`} aria-hidden="true" />
+              {/* GLOWING BRANCH THROUGH CARDS */}
+              <div className={`absolute top-24 left-0 right-0 h-[4px] transition-all duration-700 
+                ${activeIndex===i?'bg-gradient-to-r from-transparent via-orange-400 to-transparent shadow-[0_0_30px_orange]':'bg-gray-400/20'}`} />
+
+              {/* ROLE NODE */}
+              <div className="relative flex flex-col items-center">
+                <div className={`w-6 h-6 rounded-full ${activeIndex===i?'bg-orange-500 shadow-[0_0_40px_orange]':'bg-gray-500/40'}`}/>
+                <span className={`mt-2 px-4 py-1 rounded-full font-bold 
+                  ${activeIndex===i?'bg-orange-400 text-black shadow-[0_0_20px_orange]':'bg-gray-600/40 text-gray-300'}`}>
+                  {role}
+                </span>
+              </div>
+
+              {/* CARDS */}
+              <div className="flex flex-wrap gap-14 justify-center mt-20 relative z-10">
+                {members.map((m,idx)=>(
+                  <article key={idx} className="group relative w-[22rem] min-h-[18rem]
+                    bg-gradient-to-br from-[#041021]/40 to-[#062032]/25 backdrop-blur-md
+                    border border-orange-500/20 p-6 rounded-2xl hover:scale-105 hover:ring-8
+                    hover:ring-orange-400/45 transition-all">
+
+                    {/* TECH FLOAT ICONS */}
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex gap-3 opacity-0 group-hover:opacity-100 group-hover:-translate-y-10 transition-all">
+                      {techIcons.map((Icon,i)=><span key={i} style={{transitionDelay:`${i*70}ms`}}>{Icon}</span>)}
                     </div>
 
-                    <div className="flex-1 ml-8">
-                      <div className="mb-4 flex items-center gap-3 justify-center">
-                        <h3 className={`text-xl font-semibold ${activeIndex === i ? 'text-white' : 'text-gray-100'}`}>{role}</h3>
-                      </div>
+                    <img src={m.pic} className="w-44 h-44 rounded-full mx-auto mb-4 object-cover shadow-xl group-hover:scale-110 transition-transform"/>
+                    <h4 className="text-xl text-white text-center font-semibold">{m.name}</h4>
+                    <p className="text-orange-200 text-center">{m.position}</p>
 
-                      <div className="flex flex-wrap gap-6 justify-center">
-                        {members.map((member, idx) => {
-                          const rawImage = (member['Your Image For Website'] || member['Your Image For Website '] || '').toString().trim();
-                          const imageUrl = rawImage && rawImage.startsWith('https://') ? rawImage : 'https://via.placeholder.com/150';
-
-                          return (
-                            <article
-                              key={idx}
-                              tabIndex={0}
-                              className={`${sizeClasses[size]} group relative rounded-2xl bg-gradient-to-br from-[#041021]/40 to-[#062032]/25 backdrop-blur-md border border-orange-500/20 p-4 shadow-[0_10px_30px_rgba(2,6,23,0.35)] hover:scale-105 hover:border-orange-300 hover:ring-8 hover:ring-orange-400/45 hover:shadow-[0_0_60px_rgba(255,140,0,0.55)] transform-gpu transition-all duration-300 ease-out flex flex-col items-center text-center overflow-visible`} 
-                              aria-label={`${member.Name} - ${member['Position in SQAC'] || ''}`}
-                            >
-                              {/* orange edge-glow overlay (visible on hover) */}
-                              <span
-                                aria-hidden="true"
-                                className="absolute -inset-2 rounded-2xl pointer-events-none opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:animate-pulse"
-                                style={{
-                                  background: 'radial-gradient(ellipse at 10% 10%, rgba(255,140,0,0.36) 0%, rgba(255,140,0,0.12) 24%, transparent 46%), radial-gradient(ellipse at 90% 90%, rgba(246,162,62,0.22) 0%, rgba(246,162,62,0.08) 22%, transparent 48%)',
-                                  mixBlendMode: 'screen',
-                                  filter: 'blur(20px)'
-                                }}
-                              />
-                                <div className="flex flex-col items-center text-center justify-start flex-1 w-full">
-                                  <img src={imageUrl} alt={member.Name} loading="lazy" onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/150'; }} className="w-28 h-28 md:w-32 md:h-32 rounded-full aspect-square border-2 border-orange-400/20 object-cover shadow-md mb-3 transition-transform duration-300 group-hover:scale-105" />
-                                  <h4 className="text-lg font-semibold text-white break-words max-w-full transition-colors duration-300 group-hover:text-orange-200 group-hover:drop-shadow-lg">{member.Name}</h4>
-                                  <p className="text-sm text-orange-200/80 break-words max-w-full whitespace-normal">{member['Position in SQAC']}</p>
-                                  {member['Sub Domain'] && (
-                                    <p className="text-xs text-gray-300 mt-1 break-words max-w-full">{member['Sub Domain']}</p>
-                                  )}
-                                  <div className="mt-3 flex items-center gap-3 justify-center opacity-80 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                                  {member['LinkedIn Profile Link']?.trim() && (
-                                    <a href={member['LinkedIn Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-orange-300 hover:scale-110 transition-transform" aria-label="LinkedIn">
-                                      <FaLinkedin className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                  {member['GitHub Profile Link']?.trim() && (
-                                    <a href={member['GitHub Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:scale-110 transition-transform" aria-label="GitHub">
-                                      <FaGithub className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                  {member['Instagram Profile Link']?.trim() && (
-                                    <a href={member['Instagram Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:scale-110 transition-transform" aria-label="Instagram">
-                                      <FaInstagram className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-                            </article>
-                          );
-                        })}
-                      </div>
+                    <div className="flex justify-center gap-4 mt-4 text-xl">
+                      {m.linkdln&&<a href={m.linkdln}><FaLinkedin/></a>}
+                      {m.github&&<a href={m.github}><FaGithub/></a>}
+                      {m.insta&&<a href={m.insta}><FaInstagram/></a>}
                     </div>
-                  </div>
-                );
-              })}
+                  </article>
+                ))}
+              </div>
             </div>
-          </>
-        )}
+          );
+        })}
       </div>
-
-     
+      <Footer/>
     </div>
   );
 };

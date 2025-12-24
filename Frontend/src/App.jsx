@@ -16,6 +16,7 @@ import { ThemeProvider } from './contexts/ThemeContext';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import MeshBackground from './MeshBackground.jsx';
 import './App.css';
 
 const App = () => {
@@ -23,22 +24,29 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <div className="app-container">
+      {/* 🌈 GLOBAL MESH BACKGROUND */}
+      <MeshBackground />
+
+      <div className="relative min-h-screen overflow-x-hidden">
         <Router>
           <ScrollToTop />
           <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<Aboutus />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/recruitment" element={<JoinUs />} />
-          </Routes>
+
+          <main className="relative z-10">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about" element={<Aboutus />} />
+              <Route path="/events" element={<Events />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/recruitment" element={<JoinUs />} />
+            </Routes>
+          </main>
+
           <Footer />
         </Router>
 
-        {/* Toast container goes here */}
+        {/* 🔔 Toast Notifications */}
         <ToastContainer
           position="top-center"
           autoClose={3000}
