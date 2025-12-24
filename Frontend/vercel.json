@@ -1,18 +1,13 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
+      "source": "/((?!maintenance).*)",
       "has": [
         {
-          "type": "query",
-          "key": "dev",
-          "value": "true"
+          "type": "host",
+          "value": "sqac.space"
         }
       ],
-      "destination": "/index.html"
-    },
-    {
-      "source": "/(.*)",
       "destination": "/maintenance",
       "permanent": false
     }
