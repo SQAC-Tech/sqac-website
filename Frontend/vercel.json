@@ -1,5 +1,26 @@
 {
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "query",
+          "key": "dev",
+          "value": "true"
+        }
+      ],
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/maintenance",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
