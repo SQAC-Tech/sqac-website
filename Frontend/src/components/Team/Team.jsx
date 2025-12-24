@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import axios from 'axios';
 import Navbar from '../HomePage/Navbar';
 import Teamvh1 from './Teamvh1';
@@ -21,6 +21,8 @@ const techIcons = [
 export default function Team(){
   const [team,setTeam] = useState([]);
   const [domain,setDomain] = useState('Board Member');
+  const cardsRowRefs = useRef({});
+  const [connectorsMap, setConnectorsMap] = useState({});
 
   useEffect(()=>{
     axios.get(import.meta.env.VITE_API).then(r=>setTeam(r.data?.data||[]));
@@ -54,6 +56,37 @@ export default function Team(){
     return g;
   },[filtered,domain]);
 
+  useEffect(()=>{
+    const computeAll = ()=>{
+      const newMap = {};
+      Object.keys(cardsRowRefs.current).forEach(key=>{
+        const container = cardsRowRefs.current[key];
+        if(!container) return;
+        const containerRect = container.getBoundingClientRect();
+        const spineX = containerRect.width/2;
+        const conns = [];
+        const articles = Array.from(container.querySelectorAll('article'));
+        articles.forEach(a=>{
+          const r = a.getBoundingClientRect();
+          const centerX = (r.left - containerRect.left) + r.width/2;
+          const top = (r.top - containerRect.top) + r.height/2;
+          const left = Math.min(spineX, centerX);
+          const width = Math.max(2, Math.abs(centerX - spineX));
+          conns.push({left, top, width});
+        });
+        newMap[key]=conns;
+      });
+      setConnectorsMap(newMap);
+    };
+    computeAll();
+    window.addEventListener('resize', computeAll);
+    window.addEventListener('scroll', computeAll, {passive:true});
+    return ()=>{
+      window.removeEventListener('resize', computeAll);
+      window.removeEventListener('scroll', computeAll);
+    };
+  },[grouped, domain, team]);
+
   return(
     <div className="min-h-screen bg-gradient-to-b from-[#1b0033] via-[#240046] to-[#0a0014]">
       <Navbar/>
@@ -65,13 +98,21 @@ export default function Team(){
             const members=grouped[role];
             if(!members.length) return null;
             return(
-              <div key={i} className="relative mb-48">
+              <div key={i} className="relative mb-20">
                 <div className="flex flex-col items-center">
                   <div className="w-6 h-6 rounded-full bg-orange-500 shadow-[0_0_40px_orange]"/>
                   <span className="mt-2 px-5 py-1 rounded-full font-bold bg-orange-400 text-black shadow-[0_0_20px_orange]">{role}</span>
                 </div>
                <div className="flex justify-center mt-20">
-  <div className="flex flex-wrap justify-center gap-16 w-full max-w-7xl">
+  <div ref={el=>cardsRowRefs.current[i]=el} className="relative flex flex-wrap justify-center gap-16 w-full max-w-7xl">
+    {/* connectors overlay for this row (computed in JS) */}
+    {connectorsMap[i] && connectorsMap[i].length>0 && (
+      <div className="absolute inset-0 pointer-events-none">
+        {connectorsMap[i].map((c,ci)=> (
+          <div key={ci} style={{position:'absolute', left: `${c.left}px`, top: `${c.top}px`, width: `${c.width}px`, height: '4px', borderRadius: '999px', boxShadow: '0 0 18px rgba(255,140,0,0.8)'}} className="bg-orange-400" />
+        ))}
+      </div>
+    )}
 
                   {members.map((m,idx)=>(
                     <article key={idx} className="group w-[18rem] min-h-[16rem] bg-gradient-to-br from-[#041021]/50 to-[#062032]/30 backdrop-blur-md border border-orange-500/20 p-5 rounded-2xl hover:scale-105 hover:ring-8 hover:ring-orange-400/45 transition-all">
