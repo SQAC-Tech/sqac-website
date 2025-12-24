@@ -1,7 +1,62 @@
 {
   "redirects": [
     {
-      "source": "/((?!maintenance|assets|favicon.ico|robots.txt|.*\\.(js|css|png|jpg|jpeg|svg|webp|ico)).*)",
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sqac.space"
+        }
+      ],
+      "destination": "/maintenance",
+      "permanent": false
+    },
+    {
+      "source": "/about",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sqac.space"
+        }
+      ],
+      "destination": "/maintenance",
+      "permanent": false
+    },
+    {
+      "source": "/events",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sqac.space"
+        }
+      ],
+      "destination": "/maintenance",
+      "permanent": false
+    },
+    {
+      "source": "/team",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sqac.space"
+        }
+      ],
+      "destination": "/maintenance",
+      "permanent": false
+    },
+    {
+      "source": "/projects",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.sqac.space"
+        }
+      ],
+      "destination": "/maintenance",
+      "permanent": false
+    },
+    {
+      "source": "/recruitment",
       "has": [
         {
           "type": "host",
