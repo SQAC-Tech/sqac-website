@@ -14,7 +14,7 @@ const FloatBox = ({ name, description }) => {
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <button className="px-4 py-2 bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] rounded-full shadow-md border border-[#f34a82] backdrop-blur-sm hover:scale-110 transition-colors">
+      <button className="px-4 py-2 bg-gradient-to-r from-purple-600 to-purple-800 rounded-full shadow-md border border-purple-500 backdrop-blur-sm hover:scale-110 transition-all hover:from-purple-500 hover:to-purple-700">
         <p className="text-sm font-semibold text-white">{name}</p>
       </button>
 
@@ -48,11 +48,11 @@ const HoverDock = ({ items }) => (
 
 const Bubble = ({ children, className }) => (
   <motion.div 
-    className={`bg-white p-6 rounded-2xl shadow-xl border border-gray-200 flex items-center backdrop-blur-sm min-h-[260px] md:h-[320px] transition-all duration-300 ${className}`}
+    className={`bg-gradient-to-b from-purple-900/20 to-purple-800/10 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-purple-500/30 flex items backdrop-blur-sm min-h-[260px] md:h-[320px] transition-all duration-300 ${className}`}
     whileHover={{
-      backgroundColor: 'rgba(255, 255, 255, 0.95)',
-      borderColor: '#ff6b35',
-      boxShadow: '0 8px 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(243, 74, 130, 0.3), 0 0 80px rgba(240, 160, 31, 0.2)',
+      backgroundColor: 'rgba(147, 51, 234, 0.3)',
+      borderColor: 'rgba(168, 85, 247, 0.6)',
+      boxShadow: '0 8px 40px rgba(147, 51, 234, 0.4), 0 0 60px rgba(168, 85, 247, 0.3), 0 0 80px rgba(196, 181, 253, 0.2)',
       scale: 1.02
     }}
   >
@@ -160,7 +160,7 @@ export default function Domains() {
   ];
 
   return (
-    <div className="py-20 lg:py-32 bg-gradient-to-b from-blue-50 to-blue-100">
+    <div className="py-20 lg:py-32 bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary">
       <h2 className="text-4xl lg:text-5xl font-bold mb-12 text-center">
         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
           Our Core Domains
@@ -168,7 +168,7 @@ export default function Domains() {
       </h2>
 
       <div ref={targetRef} className="relative max-w-5xl mx-auto px-6">
-        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-gray-600 hidden md:block" />
+        <div className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 bg-purple-900/50 hidden md:block" />
         <motion.div
           className="absolute left-1/2 top-0 h-full w-1 -translate-x-1/2 hidden md:block"
           style={{
