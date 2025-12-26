@@ -11,7 +11,7 @@ const Closed = () => {
           Please check back later for future opportunities.
         </p>
         <Link to="/">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
+          <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-full shadow-md transition duration-300">
             Back to Home
           </button>
         </Link>

@@ -427,7 +427,7 @@ html.dark .from-orange-500.to-pink-500 {
 }
 
 html.light .from-orange-500.to-pink-500 {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #f97316, #fb7185, #f97316) !important;
 }
 
 /* Footer heading gradients */
@@ -439,7 +439,7 @@ html.dark .from-orange-500.via-pink-500.to-orange-500 {
 }
 
 html.light .from-orange-500.via-pink-500.to-orange-500 {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #f97316, #fb7185, #f97316) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -452,8 +452,8 @@ html.dark footer input:focus {
 }
 
 html.light footer input:focus {
-  border-color: #2563eb !important;
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+  border-color: #f97316 !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08) !important;
 }
 
 /* Remove old conflicting text and gradient overrides - now handled by theme-specific rules above */
