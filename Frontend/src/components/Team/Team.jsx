@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import Navbar from '../HomePage/Navbar';
 import Teamvh1 from './Teamvh1';
@@ -95,14 +96,25 @@ export default function Team(){
       <Teamvh1/>
       <Teamvh2 onSelectDomain={setDomain}>
         <div className="relative py-24">
-          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-orange-400/30 rounded-full"/>
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 rounded-full" style={{background:'rgba(249,115,22,0.65)', boxShadow:'0 0 40px rgba(249,115,22,0.55), 0 0 90px rgba(249,115,22,0.25)'}} />
           {hierarchy.map((role,i)=>{
             const members=grouped[role];
             if(!members.length) return null;
             return(
               <div key={i} className="relative mb-20">
                 <div className="flex flex-col items-center">
-                  <div className="w-6 h-6 rounded-full bg-orange-500 shadow-[0_0_40px_orange]"/>
+                  <motion.div className="w-6 h-6 rounded-full bg-orange-500"
+                    animate={{
+                      scale: [1, 1.14, 1],
+                      y: [0, -4, 0],
+                      boxShadow: [
+                        '0 0 16px rgba(249,115,22,0.6)',
+                        '0 0 80px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.35)',
+                        '0 0 16px rgba(249,115,22,0.6)'
+                      ]
+                    }}
+                    transition={{ duration: 2.0, repeat: Infinity, ease: 'easeInOut' }}
+                  />
                   <span className="mt-2 px-5 py-1 rounded-full font-bold bg-orange-400 text-black shadow-[0_0_20px_orange]">{role}</span>
                 </div>
                <div className="flex justify-center mt-20">
@@ -110,8 +122,23 @@ export default function Team(){
     {/* connectors overlay for this row (computed in JS) */}
     {connectorsMap[i] && connectorsMap[i].length>0 && (
       <div className="absolute inset-0 pointer-events-none">
-        {connectorsMap[i].map((c,ci)=> (
-          <div key={ci} style={{position:'absolute', left: `${c.left}px`, top: `${c.top}px`, width: `${c.width}px`, height: '4px', borderRadius: '999px', boxShadow: '0 0 18px rgba(255,140,0,0.8)'}} className="bg-orange-400" />
+          {connectorsMap[i].map((c,ci)=> (
+          <motion.div
+            key={ci}
+            className="bg-orange-500"
+            style={{position:'absolute', left: `${c.left}px`, top: `${c.top}px`, width: `${c.width}px`, height: '6px', borderRadius: '999px', transformOrigin: 'left center'}}
+            initial={{ opacity: 0.7, scaleX: 0.98, boxShadow: '0 0 8px rgba(249,115,22,0.3)'}}
+            animate={{
+              opacity: [0.7, 1, 0.7],
+              scaleX: [1, 1.08, 1],
+              boxShadow: [
+                '0 0 12px rgba(249,115,22,0.45)',
+                '0 0 72px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.3)',
+                '0 0 12px rgba(249,115,22,0.45)'
+              ]
+            }}
+            transition={{ duration: 1.6, repeat: Infinity, delay: ci * 0.05, ease: 'easeInOut' }}
+          />
         ))}
       </div>
     )}
@@ -128,7 +155,13 @@ export default function Team(){
                     } : {};
                     return (
                       <div key={idx} className={`${!isDarkMode ? 'p-[1px] rounded-2xl bg-gradient-to-r from-orange-300/50 via-yellow-200/30 to-transparent' : ''}`}>
-                        <article className={`${cardBase} ${cardVariant} ${!isDarkMode ? 'hover:scale-105 hover:-translate-y-2' : 'hover:scale-105'}`} style={innerStyle}>
+                        <motion.article className={`${cardBase} ${cardVariant} ${!isDarkMode ? 'hover:scale-105 hover:-translate-y-2' : 'hover:scale-105'}`} style={innerStyle}
+                          initial={{ opacity: 0, y: 18 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          whileHover={{ scale: 1.06, y: -10, boxShadow: '0 28px 90px rgba(249,115,22,0.22), 0 0 80px rgba(249,115,22,0.12)' }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{ duration: 0.45, delay: idx * 0.04, type: 'spring', stiffness: 160 }}
+                        >
                           {/* left/right gradient edges, corner accents and hover glow for light mode */}
                           {!isDarkMode && (
                             <>
@@ -156,9 +189,9 @@ export default function Team(){
                           </div>
                           {/* avatar with orange edge ring for light theme */}
                           <div className={`mx-auto mb-3 w-36 h-36 ${!isDarkMode ? 'relative p-1 rounded-full bg-gradient-to-br from-orange-50 to-white shadow-lg' : 'rounded-full overflow-hidden'}`}>
-                            <div className={`w-full h-full rounded-full overflow-hidden ${isDarkMode ? '' : 'bg-white'}`}>
+                            <motion.div whileHover={{ scale: 1.08, boxShadow: '0 22px 70px rgba(249,115,22,0.16), 0 0 48px rgba(249,115,22,0.08)' }} transition={{ type: 'spring', stiffness: 320 }} className={`w-full h-full rounded-full overflow-hidden ${isDarkMode ? '' : 'bg-white'}`}>
                               <img src={m.pic} className="w-full h-full object-cover" />
-                            </div>
+                            </motion.div>
                             {!isDarkMode && (
                               <div className="absolute inset-0 rounded-full pointer-events-none" style={{boxShadow:'inset 0 0 0 4px rgba(255,160,60,0.14), 0 8px 30px rgba(255,140,40,0.06)'}} />
                             )}
@@ -175,7 +208,7 @@ export default function Team(){
                             {m.github&&<a href={m.github} className={!isDarkMode?'inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-slate-100 to-slate-50 text-slate-800 hover:from-slate-200 hover:to-slate-100 shadow-md transition-all':'text-white'}><FaGithub style={{color:'#000'}}/></a>}
                             {m.insta&&<a href={m.insta} className={!isDarkMode?'inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 text-pink-500 hover:from-pink-200 hover:to-pink-100 shadow-md transition-all':'text-white'}><FaInstagram style={isDarkMode?{color:'#f973a4'}:{}}/></a>}
                           </div>
-                        </article>
+                        </motion.article>
                       </div>
                     );
                   })}
