@@ -21,7 +21,7 @@ const FloatBox = ({ name, description }) => {
       onMouseLeave={() => setOpen(false)}
     >
       <button className={`px-4 py-2 bg-gradient-to-r ${btnGradient} rounded-full shadow-md backdrop-blur-sm hover:scale-110 transition-all`}>
-        <p className="text-sm font-semibold text-white">{name}</p>
+        <p className={`text-sm font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{name}</p>
       </button>
 
       {open && (
@@ -29,7 +29,7 @@ const FloatBox = ({ name, description }) => {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max max-w-xs px-3 py-1.5 bg-black/80 text-white text-xs rounded-md shadow-lg pointer-events-none z-10"
+          className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max max-w-xs px-3 py-1.5 text-xs rounded-md shadow-lg pointer-events-none z-10 ${isDarkMode ? 'bg-black/80 text-white' : 'bg-white/90 text-gray-900'}`}
         >
           {description}
         </motion.div>
@@ -84,14 +84,15 @@ const Bubble = ({ children, className }) => {
 };
 
 const DomainContent = ({ item, isPhotoLeft }) => {
+  const { isDarkMode } = useTheme();
   const Mobile = () => (
     <div className="space-y-8 md:hidden">
       <Bubble className="justify-center flex-col">
-        <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+        <h3 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{item.title}</h3>
         <img src={item.mainImage} alt="" className="max-h-48 object-contain" />
       </Bubble>
       <Bubble className="flex-col items-center">
-        <p className="text-white text-center text-base ">{item.description}</p>
+        <p className={`${isDarkMode ? 'text-white' : 'text-gray-900'} text-center text-base `}>{item.description}</p>
         <HoverDock items={item.subdomains} />
       </Bubble>
     </div>
@@ -109,14 +110,14 @@ const DomainContent = ({ item, isPhotoLeft }) => {
             <div className="absolute w-4 h-4 rounded-full bg-dark-surface border-2 border-accent" />
           </div>
           <Bubble className="flex-col items-center">
-            <p className="text-white text-base text-center lg:text-lg">{item.description}</p>
+            <p className={`${isDarkMode ? 'text-white' : 'text-gray-900'} text-base text-center lg:text-lg`}>{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
         </>
       ) : (
         <>
           <Bubble className="flex-col items-center">
-            <p className="text-white text-base text-center lg:text-lg">{item.description}</p>
+            <p className={`${isDarkMode ? 'text-white' : 'text-gray-900'} text-base text-center lg:text-lg`}>{item.description}</p>
             <HoverDock items={item.subdomains} />
           </Bubble>
           <div className="relative h-full flex items-center justify-center">
