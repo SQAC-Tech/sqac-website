@@ -97,7 +97,7 @@ function Footer() {
                     placeholder=" "
                     className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
                   />
-                  <label className={`absolute left-12 top-3 text-sm text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                  <label className={`absolute left-12 top-1 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
                     Name
                   </label>
                 </div>
@@ -113,7 +113,7 @@ function Footer() {
                     placeholder=" "
                     className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
                   />
-                  <label className={`absolute left-12 top-3 text-sm text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                  <label className={`absolute left-12 top-1 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
                     Email
                   </label>
                 </div>
@@ -130,7 +130,7 @@ function Footer() {
                   placeholder=" "
                   className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
                 ></textarea>
-                <label className={`absolute left-12 top-4 text-sm text-slate-500 transition-all duration-150 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                <label className={`absolute left-12 top-2 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
                   Message
                 </label>
               </div>
