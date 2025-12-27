@@ -7,6 +7,7 @@ const cron = require('node-cron');
 const xlsx = require('xlsx');
 
 const Data = require('./models/Data');
+const Contact = require('./models/Contact');
 const { storage } = require('./utils/cloudinary');
 const upload = multer({ storage });
 
@@ -56,6 +57,31 @@ app.post('/api/upload/:id', upload.single('image'), async (req, res) => {
 
 app.get('/api/health', (req, res) => {
   res.send('Backend is running');
+});
+
+app.post('/api/contact', async (req, res) => {
+  try {
+    console.log('Contact form submission received:', req.body);
+    const { name, email, message } = req.body;
+    
+    if (!name || !email || !message) {
+      console.log('Validation failed - missing fields');
+      return res.status(400).json({ message: 'Name, email, and message are required' });
+    }
+
+    const contact = new Contact({
+      name,
+      email,
+      message
+    });
+
+    await contact.save();
+    console.log('Contact saved to MongoDB:', contact._id);
+    res.status(201).json({ message: 'Contact form submitted successfully', contact });
+  } catch (err) {
+    console.error('Error saving contact:', err);
+    res.status(500).json({ message: err.message });
+  }
 });
 
 cron.schedule('0 * * * *', async () => {
