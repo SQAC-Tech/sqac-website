@@ -5,7 +5,8 @@ import teamImg2 from '../../assets/teamImg2.png';
 
 const Teamvh1 = () => {
   return (
-    <div className="relative min-h-screen bg-gradient-to-b from-purple-300 via-pink-200 to-orange-200 p-4 md:p-8 overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-purple-300 via-pink-200 to-orange-200 p-4 md:p-8 overflow-hidden after:absolute after:bottom-0 after:left-0 after:w-full after:h-24 after:bg-gradient-to-t after:from-orange-200 after:to-transparent">
+
       {/* Title */}
       <div className="relative w-full h-full">
         <h1 className="absolute font-['Protest_Riot'] font-semibold text-white leading-[60px] text-[40px] sm:text-[60px] md:text-[80px] left-[3vw] top-[12vh]

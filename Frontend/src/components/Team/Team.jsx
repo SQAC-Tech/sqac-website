@@ -1,289 +1,226 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import Navbar from '../HomePage/Navbar';
-import Footer from '../Footer';
 import Teamvh1 from './Teamvh1';
 import Teamvh2 from './Teamvh2';
+import { useTheme } from '../../contexts/ThemeContext';
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
+import { SiReact, SiFlutter, SiFigma, SiAndroid, SiNodedotjs, SiMongodb } from 'react-icons/si';
 
-const boardMemberHierarchy = [
-  'Secretary',
-  'Joint Secretary',
-  'Leads',
-  'Domain Lead',
-  'Associate',
-  'Member',
+const hierarchy = ['Secretary','Joint Secretary','Leads','Domain Lead','Associate','Member'];
+const LEAD_ROLES = ['project lead','media lead'];
+
+const techIcons = [
+  { Icon: SiReact, color: '#06b6d4' },
+  { Icon: SiFlutter, color: '#38bdf8' },
+  { Icon: SiFigma, color: '#fb7185' },
+  { Icon: SiAndroid, color: '#22c55e' },
+  { Icon: SiNodedotjs, color: '#a3e635' },
+  { Icon: SiMongodb, color: '#10b981' },
 ];
 
-const hardcodedBoardMembers = [
-  {
-    Name: 'Yash Gupta',
-    'Position in SQAC': 'Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/yash-gupta-052a32142/',
-    'Instagram Profile Link': 'https://www.instagram.com/guptayash_16/',
-    'GitHub Profile Link': 'https://github.com/Yash9837',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/WhatsApp_Image_2025-07-29_at_11.47.56_-_Yash_Gupta_fcyni0',
-  },
-  {
-    Name: 'Tanmay Bansal',
-    'Position in SQAC': 'Joint Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/tanmay-bansal-3b17a8247/',
-    'Instagram Profile Link': 'https://www.instagram.com/tanmay__170/?igsh=MTZ5NG1pbDcweDg4bg%3D%3D',
-    'GitHub Profile Link': 'https://github.com/Tanmay170',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/IMG-20240927-WA0002_-_TANMAY_BANSAL_RA2311043010022_xj6wui',
-  },
-  {
-    Name: 'Nityam Sharma',
-    'Position in SQAC': 'Joint Secretary ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/nityamsharma-cse?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
-    'Instagram Profile Link': 'https://www.instagram.com/_nityamsharma_/?igsh=MXhkM3AzZ203YzZ1Zw%3D%3D',
-    'GitHub Profile Link': 'https://github.com/SharmaNityam',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/Screenshot_2025-01-07-19-52-51-05_6012fa4d4ddec268fc5c7112cbb265e7_-_Nityam_Sharma_jjfgcn',
-  },
-  {
-    Name: 'Priyanshu Vasudev',
-    'Position in SQAC': 'Technical Lead ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/priyanshu-vasudev-off/',
-    'Instagram Profile Link': 'https://www.instagram.com/priyanshu.vasudev/',
-    'GitHub Profile Link': 'https://github.com/Priyanshu2608',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/priyanshu_pskop4',
-  },
-  {
-    Name: 'Vansh Jain',
-    'Position in SQAC': 'Corporate Lead ',
-    'Sub Domain': 'Board Member',
-    'LinkedIn Profile Link': 'https://www.linkedin.com/in/vedant-modi-b99b0628a/',
-    'Instagram Profile Link': 'https://www.instagram.com/vedantmodi21/?igsh=MTdoMGE0MDYxODMxaA%3D%3D',
-    'GitHub Profile Link': 'https://github.com/VEDANTMODI21',
-    'Your Image For Website': 'https://res.cloudinary.com/deibvuz1h/image/upload/v1754250193/Vansh_Jain_Head_-_Vansh_Jain_xsjiw0.jpg',
-  },
-];
+export default function Team(){
+  const [team,setTeam] = useState([]);
+  const [domain,setDomain] = useState('Board Member');
+  const cardsRowRefs = useRef({});
+  const [connectorsMap, setConnectorsMap] = useState({});
+  const { isDarkMode } = useTheme();
 
-const Team = () => {
-  const [teamData, setTeamData] = useState([]);
-  const [subDomains, setSubDomains] = useState([]);
-  const [selectedDomain, setSelectedDomain] = useState('Board Member');
-  const [loading, setLoading] = useState(true);
+  useEffect(()=>{
+    axios.get(import.meta.env.VITE_API).then(r=>setTeam(r.data?.data||[]));
+  },[]);
 
-  useEffect(() => {
-    axios.get(import.meta.env.VITE_API)
-      .then((res) => {
-        setTeamData(res.data);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
+  const filtered = useMemo(()=>{
+    const d = domain.toLowerCase();
+    if(d==='board member') return team.filter(m=>m.coredomain?.toLowerCase()==='board member');
+    if(LEAD_ROLES.includes(d)) return team.filter(m=>m.position?.toLowerCase().includes(d));
+    if(['technical','corporate'].includes(d)) return team.filter(m=>m.coredomain?.toLowerCase()===d);
+    if(d==='media') return team.filter(m=>m.coredomain?.toLowerCase()==='corporate' && ['creative','public relations'].includes(m.subdomain?.toLowerCase()));
+    return team.filter(m=>m.subdomain?.toLowerCase()===d);
+  },[team,domain]);
 
-  useEffect(() => {
-    axios.get(import.meta.env.VITE_API)
-      .then((response) => {
-        const data = response.data;
-        const uniqueDomains = [...new Set(data.map(row => row['Sub Domain']).filter(Boolean))];
-        setSubDomains(uniqueDomains);
-      })
-      .catch(() => {});
-  }, []);
-
-  const filterMembersByDomain = () => {
-    if (!selectedDomain) return [];
-
-    if (selectedDomain.toLowerCase() === 'board member') {
-      return hardcodedBoardMembers;
-    }
-
-    if (selectedDomain.toLowerCase() === 'media') {
-      return teamData.filter(
-        (member) => (member['Core Domain'] || '').trim().toLowerCase() === 'media'
-      );
-    }
-
-    return teamData.filter((member) => {
-      const domainField = member['Sub Domain'] || '';
-      const subdomains = domainField.split(/and|,/).map((d) => d.trim().toLowerCase());
-      return subdomains.includes(selectedDomain.toLowerCase());
-    });
-  };
-
-  const groupByHierarchy = (members) => {
-    const groups = Object.fromEntries(boardMemberHierarchy.map(role => [role, []]));
-
-    members.forEach((member) => {
-      const position = member['Position in SQAC'] || '';
-      if (selectedDomain.toLowerCase() === 'board member') {
-        if (position.includes('Secretary') && member.Name === 'Yash Gupta') {
-          groups['Secretary'].push(member);
-        } else if (position.includes('Joint Secretary')) {
-          groups['Joint Secretary'].push(member);
-        } else if (position.includes('Lead')) {
-          groups['Leads'].push(member);
-        } else {
-          groups['Member'].push(member);
-        }
-      } else {
-        const role = boardMemberHierarchy.find(h => position.toLowerCase().includes(h.toLowerCase()));
-        if (role) {
-          groups[role].push(member);
-        } else {
-          groups['Member'].push(member);
-        }
+  const grouped = useMemo(()=>{
+    const g = Object.fromEntries(hierarchy.map(h=>[h,[]]));
+    filtered.forEach(m=>{
+      const p=(m.position||'').toLowerCase();
+      if(domain.toLowerCase()==='board member'){
+        if(p.includes('secretary')&&!p.includes('joint')) g.Secretary.push(m);
+        else if(p.includes('joint')) g['Joint Secretary'].push(m);
+        else if(p.includes('technical')) g.Leads.push({...m,position:'Technical Lead'});
+        else if(p.includes('corporate')) g.Leads.push({...m,position:'Corporate Lead'});
+        return;
       }
+      if(p.includes('domain lead')) g['Domain Lead'].push(m);
+      else if(p.includes('associate')) g.Associate.push(m);
+      else if(p.includes('lead')) g.Leads.push(m);
+      else g.Member.push(m);
     });
+    return g;
+  },[filtered,domain]);
 
-    return groups;
-  };
-
-  const displayMembers = useMemo(() => groupByHierarchy(filterMembersByDomain()), [teamData, selectedDomain]);
-  const timelineRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [hoverIndex, setHoverIndex] = useState(-1);
-
-  useEffect(() => {
-    const root = timelineRef.current;
-    if (!root) return;
-
-    const sections = Array.from(root.querySelectorAll('[data-role-index]'));
-    if (!sections.length) return;
-
-    // activate slightly earlier and smoother
-    const observer = new IntersectionObserver((entries) => {
-      let best = null;
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
-        }
+  useEffect(()=>{
+    const computeAll = ()=>{
+      const newMap = {};
+      Object.keys(cardsRowRefs.current).forEach(key=>{
+        const container = cardsRowRefs.current[key];
+        if(!container) return;
+        const containerRect = container.getBoundingClientRect();
+        const spineX = containerRect.width/2;
+        const conns = [];
+        const articles = Array.from(container.querySelectorAll('article'));
+        articles.forEach(a=>{
+          const r = a.getBoundingClientRect();
+          const centerX = (r.left - containerRect.left) + r.width/2;
+          const top = (r.top - containerRect.top) + r.height/2;
+          const left = Math.min(spineX, centerX);
+          const width = Math.max(2, Math.abs(centerX - spineX));
+          conns.push({left, top, width});
+        });
+        newMap[key]=conns;
       });
-      if (best) {
-        const idx = parseInt(best.target.getAttribute('data-role-index'), 10);
-        setActiveIndex(idx);
-      }
-    }, { root: null, threshold: [0.15, 0.4, 0.65], rootMargin: '-20% 0px -20% 0px' });
+      setConnectorsMap(newMap);
+    };
+    computeAll();
+    window.addEventListener('resize', computeAll);
+    window.addEventListener('scroll', computeAll, {passive:true});
+    return ()=>{
+      window.removeEventListener('resize', computeAll);
+      window.removeEventListener('scroll', computeAll);
+    };
+  },[grouped, domain, team]);
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [timelineRef, displayMembers]);
-
-  return (
-    <div>
-      <Navbar />
-      <Teamvh1 />
-      <Teamvh2 onSelectDomain={setSelectedDomain} subDomains={subDomains} />
-
-      <div className="pt-2 p-6 bg-gradient-to-b from-pink-200 via-yellow-100 to-cyan-200 min-h-screen">
-        {loading ? (
-          <div className="text-center mt-10">Loading team data...</div>
-        ) : (
-          <>
-            <h2 className="text-center text-5xl font-bold mb-10">{selectedDomain}</h2>
-
-            <div ref={timelineRef} className="relative max-w-6xl mx-auto px-4 py-6">
-              {/* Vertical timeline spine (centered) */}
-              <div className="absolute left-1/2 top-6 bottom-6 -translate-x-1/2 w-1 bg-gray-800/30 rounded-full" aria-hidden="true" />
-
-              {boardMemberHierarchy.map((role, i) => {
-                const members = displayMembers[role] || [];
-                if (!members.length) return null;
-
-                // descending sizes per hierarchy (use min-heights so content can grow)
-                const sizeMap = ['lg', 'xl', 'md', 'sm', 'xs', 'xs'];
-                const size = sizeMap[i] || 'sm';
-                const sizeClasses = {
-                  xl: 'w-[28rem] min-h-[14rem]',
-                  lg: 'w-[24rem] min-h-[13rem]',
-                  md: 'w-[20rem] min-h-[12rem]',
-                  sm: 'w-[18rem] min-h-[11rem]',
-                  xs: 'w-[16rem] min-h-[10rem]',
-                };
-
-                return (
-                  <div
-                    key={role}
-                    data-role-index={i}
-                    onMouseEnter={() => setHoverIndex(i)}
-                    onMouseLeave={() => setHoverIndex(-1)}
-                    className="relative mb-10 flex justify-center"
-                  >
-                    {/* branch connector from centered spine to cards */}
-                    <div className="absolute" style={{ left: '50%', transform: 'translateX(20px)' }} aria-hidden="true">
-                      <div className="relative w-28 h-1">
-                        <div className={`absolute inset-0 rounded-full transition-opacity duration-500 ${activeIndex === i || hoverIndex === i ? 'opacity-0' : 'opacity-100 bg-gray-700/30'}`} />
-                        <div className={`absolute left-0 top-0 h-1 rounded-full transition-all duration-500 ease-out`} style={{ width: activeIndex === i || hoverIndex === i ? '100%' : '0%', background: 'linear-gradient(90deg,#ff8c00,#f6a23e)' }} />
-                      </div>
-                      {/* bigger glow at spine intersection */}
-                      <div className={`absolute -left-8 -top-2 rounded-full transition-all duration-500 ${activeIndex === i || hoverIndex === i ? 'w-8 h-8 bg-orange-400/80 shadow-[0_0_30px_rgba(255,140,0,0.85)] scale-125 ring-4 ring-orange-400/25' : 'w-5 h-5 bg-gray-600/40'}`} aria-hidden="true" />
-                    </div>
-
-                    <div className="flex-1 ml-8">
-                      <div className="mb-4 flex items-center gap-3 justify-center">
-                        <h3 className={`text-xl font-semibold ${activeIndex === i ? 'text-white' : 'text-gray-100'}`}>{role}</h3>
-                      </div>
-
-                      <div className="flex flex-wrap gap-6 justify-center">
-                        {members.map((member, idx) => {
-                          const rawImage = (member['Your Image For Website'] || member['Your Image For Website '] || '').toString().trim();
-                          const imageUrl = rawImage && rawImage.startsWith('https://') ? rawImage : 'https://via.placeholder.com/150';
-
-                          return (
-                            <article
-                              key={idx}
-                              tabIndex={0}
-                              className={`${sizeClasses[size]} group relative rounded-2xl bg-gradient-to-br from-[#041021]/40 to-[#062032]/25 backdrop-blur-md border border-orange-500/20 p-4 shadow-[0_10px_30px_rgba(2,6,23,0.35)] hover:scale-105 hover:border-orange-300 hover:ring-8 hover:ring-orange-400/45 hover:shadow-[0_0_60px_rgba(255,140,0,0.55)] transform-gpu transition-all duration-300 ease-out flex flex-col items-center text-center overflow-visible`} 
-                              aria-label={`${member.Name} - ${member['Position in SQAC'] || ''}`}
-                            >
-                              {/* orange edge-glow overlay (visible on hover) */}
-                              <span
-                                aria-hidden="true"
-                                className="absolute -inset-2 rounded-2xl pointer-events-none opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:animate-pulse"
-                                style={{
-                                  background: 'radial-gradient(ellipse at 10% 10%, rgba(255,140,0,0.36) 0%, rgba(255,140,0,0.12) 24%, transparent 46%), radial-gradient(ellipse at 90% 90%, rgba(246,162,62,0.22) 0%, rgba(246,162,62,0.08) 22%, transparent 48%)',
-                                  mixBlendMode: 'screen',
-                                  filter: 'blur(20px)'
-                                }}
-                              />
-                                <div className="flex flex-col items-center text-center justify-start flex-1 w-full">
-                                  <img src={imageUrl} alt={member.Name} loading="lazy" onError={(e) => { e.currentTarget.src = 'https://via.placeholder.com/150'; }} className="w-28 h-28 md:w-32 md:h-32 rounded-full aspect-square border-2 border-orange-400/20 object-cover shadow-md mb-3 transition-transform duration-300 group-hover:scale-105" />
-                                  <h4 className="text-lg font-semibold text-white break-words max-w-full transition-colors duration-300 group-hover:text-orange-200 group-hover:drop-shadow-lg">{member.Name}</h4>
-                                  <p className="text-sm text-orange-200/80 break-words max-w-full whitespace-normal">{member['Position in SQAC']}</p>
-                                  {member['Sub Domain'] && (
-                                    <p className="text-xs text-gray-300 mt-1 break-words max-w-full">{member['Sub Domain']}</p>
-                                  )}
-                                  <div className="mt-3 flex items-center gap-3 justify-center opacity-80 transform translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                                  {member['LinkedIn Profile Link']?.trim() && (
-                                    <a href={member['LinkedIn Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-orange-300 hover:scale-110 transition-transform" aria-label="LinkedIn">
-                                      <FaLinkedin className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                  {member['GitHub Profile Link']?.trim() && (
-                                    <a href={member['GitHub Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:scale-110 transition-transform" aria-label="GitHub">
-                                      <FaGithub className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                  {member['Instagram Profile Link']?.trim() && (
-                                    <a href={member['Instagram Profile Link'].trim()} target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:scale-110 transition-transform" aria-label="Instagram">
-                                      <FaInstagram className="w-5 h-5" />
-                                    </a>
-                                  )}
-                                </div>
-                              </div>
-                            </article>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
+  return(
+    <div className="min-h-screen bg-gradient-to-b from-[#1b0033] via-[#240046] to-[#0a0014]">
+      <Navbar/>
+      <Teamvh1/>
+      <Teamvh2 onSelectDomain={setDomain}>
+        <div className="relative py-24">
+          <div className="absolute left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 rounded-full" style={{background:'rgba(249,115,22,0.65)', boxShadow:'0 0 40px rgba(249,115,22,0.55), 0 0 90px rgba(249,115,22,0.25)'}} />
+          {hierarchy.map((role,i)=>{
+            const members=grouped[role];
+            if(!members.length) return null;
+            return(
+              <div key={i} className="relative mb-20">
+                <div className="flex flex-col items-center">
+                  <motion.div className="w-6 h-6 rounded-full bg-orange-500"
+                    animate={{
+                      scale: [1, 1.14, 1],
+                      y: [0, -4, 0],
+                      boxShadow: [
+                        '0 0 16px rgba(249,115,22,0.6)',
+                        '0 0 80px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.35)',
+                        '0 0 16px rgba(249,115,22,0.6)'
+                      ]
+                    }}
+                    transition={{ duration: 2.0, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  <span className="mt-2 px-5 py-1 rounded-full font-bold bg-orange-400 text-black shadow-[0_0_20px_orange]">{role}</span>
+                </div>
+               <div className="flex justify-center mt-20">
+  <div ref={el=>cardsRowRefs.current[i]=el} className="relative flex flex-wrap justify-center gap-16 w-full max-w-7xl">
+    {/* connectors overlay for this row (computed in JS) */}
+    {connectorsMap[i] && connectorsMap[i].length>0 && (
+      <div className="absolute inset-0 pointer-events-none">
+          {connectorsMap[i].map((c,ci)=> (
+          <motion.div
+            key={ci}
+            className="bg-orange-500"
+            style={{position:'absolute', left: `${c.left}px`, top: `${c.top}px`, width: `${c.width}px`, height: '6px', borderRadius: '999px', transformOrigin: 'left center'}}
+            initial={{ opacity: 0.7, scaleX: 0.98, boxShadow: '0 0 8px rgba(249,115,22,0.3)'}}
+            animate={{
+              opacity: [0.7, 1, 0.7],
+              scaleX: [1, 1.08, 1],
+              boxShadow: [
+                '0 0 12px rgba(249,115,22,0.45)',
+                '0 0 72px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.3)',
+                '0 0 12px rgba(249,115,22,0.45)'
+              ]
+            }}
+            transition={{ duration: 1.6, repeat: Infinity, delay: ci * 0.05, ease: 'easeInOut' }}
+          />
+        ))}
       </div>
+    )}
 
-     
+                  {members.map((m,idx)=>{
+                    const cardBase = 'group w-[18rem] min-h-[18rem] p-5 rounded-2xl transition-all relative overflow-hidden';
+                    const cardVariant = isDarkMode
+                      ? 'bg-gradient-to-br from-[#041021]/50 to-[#062032]/30 backdrop-blur-md border border-orange-500/20 hover:scale-105 hover:ring-8 hover:ring-orange-400/45'
+                      : 'bg-gradient-to-br from-white/95 to-white/90 border border-gray-200/60';
+                    // For light mode, add refined inner styling: soft shadow, subtle pattern and a top accent stripe
+                    const innerStyle = !isDarkMode ? {
+                      boxShadow: '0 18px 50px rgba(15,23,42,0.08)',
+                      backgroundImage: 'linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,250,0.98)), repeating-linear-gradient(135deg, rgba(0,0,0,0.015) 0 2px, transparent 2px 8px)'
+                    } : {};
+                    return (
+                      <div key={idx} className={`${!isDarkMode ? 'p-[1px] rounded-2xl bg-gradient-to-r from-orange-300/50 via-yellow-200/30 to-transparent' : ''}`}>
+                        <motion.article className={`${cardBase} ${cardVariant} ${!isDarkMode ? 'hover:scale-105 hover:-translate-y-2' : 'hover:scale-105'}`} style={innerStyle}
+                          initial={{ opacity: 0, y: 18 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          whileHover={{ scale: 1.06, y: -10, boxShadow: '0 28px 90px rgba(249,115,22,0.22), 0 0 80px rgba(249,115,22,0.12)' }}
+                          viewport={{ once: true, amount: 0.15 }}
+                          transition={{ duration: 0.45, delay: idx * 0.04, type: 'spring', stiffness: 160 }}
+                        >
+                          {/* left/right gradient edges, corner accents and hover glow for light mode */}
+                          {!isDarkMode && (
+                            <>
+                              <div className="absolute left-0 top-0 h-full w-1 rounded-l-2xl transition-all duration-300 group-hover:blur-sm" style={{background:'linear-gradient(180deg,#ffd3a5,#ff9a5a)', boxShadow:'0 0 18px rgba(255,160,60,0.12)'}} />
+                              <div className="absolute right-0 top-0 h-full w-1 rounded-r-2xl transition-all duration-300 group-hover:blur-sm" style={{background:'linear-gradient(180deg,#ffd3f0,#ffd3a5)', boxShadow:'0 0 18px rgba(255,160,120,0.06)'}} />
+                              {/* corner highlight shapes */}
+                              <div className="absolute -top-3 -left-3 w-6 h-6 rotate-45" style={{background:'linear-gradient(135deg,#fff6e6,#ffd3a5)', boxShadow:'0 6px 18px rgba(255,200,140,0.12)'}} />
+                              <div className="absolute -bottom-3 -right-3 w-6 h-6 -rotate-12" style={{background:'linear-gradient(135deg,#ffd3f0,#ffe7a8)', boxShadow:'0 6px 18px rgba(255,150,200,0.06)'}} />
+                              {/* subtle top shimmer line - reduced to avoid double top-line */}
+                              <div className="absolute top-3 left-8 right-8 h-px rounded-full opacity-40 pointer-events-none" style={{background:'linear-gradient(90deg, rgba(255,211,165,0.18), rgba(255,231,168,0.12), rgba(255,211,240,0.14))'}} />
+                              {/* glowing outline on hover */}
+                              <div className="absolute inset-0 rounded-2xl transition-shadow duration-300 pointer-events-none group-hover:shadow-[0_8px_40px_rgba(255,160,60,0.16)]" />
+                            </>
+                          )}
+                          {/* top accent stripe for light theme */}
+                          {!isDarkMode && <div className="absolute left-0 right-0 top-0 h-1 rounded-t-2xl" style={{background:'linear-gradient(90deg,#ffd3a5,#ff9a5a,#ffd3f0)', boxShadow:'0 6px 20px rgba(255,140,40,0.08)'}} />}
+                          {/* bottom accent stripe to match edges */}
+                          {!isDarkMode && <div className="absolute left-0 right-0 bottom-0 h-1 rounded-b-2xl" style={{background:'linear-gradient(90deg,#ffd3a5,#ff9a5a,#ffd3f0)', boxShadow:'0 -6px 20px rgba(255,140,40,0.06)'}} />}
+                          <div className={`flex justify-center gap-3 mb-3 transition-all ${isDarkMode ? 'opacity-0 group-hover:opacity-100 -translate-y-3 group-hover:-translate-y-6' : 'opacity-0 group-hover:opacity-100 -translate-y-1 group-hover:-translate-y-3'}`}>
+                            {techIcons.map(({Icon, color}, i) => (
+                              <span key={i} className={`flex items-center justify-center w-8 h-8 rounded-full ${!isDarkMode ? 'bg-white/90 border border-white/60 shadow-sm' : ''}`}>
+                                <Icon className="w-4 h-4" style={{ color }} />
+                              </span>
+                            ))}
+                          </div>
+                          {/* avatar with orange edge ring for light theme */}
+                          <div className={`mx-auto mb-3 w-36 h-36 ${!isDarkMode ? 'relative p-1 rounded-full bg-gradient-to-br from-orange-50 to-white shadow-lg' : 'rounded-full overflow-hidden'}`}>
+                            <motion.div whileHover={{ scale: 1.08, boxShadow: '0 22px 70px rgba(249,115,22,0.16), 0 0 48px rgba(249,115,22,0.08)' }} transition={{ type: 'spring', stiffness: 320 }} className={`w-full h-full rounded-full overflow-hidden ${isDarkMode ? '' : 'bg-white'}`}>
+                              <img src={m.pic} className="w-full h-full object-cover" />
+                            </motion.div>
+                            {!isDarkMode && (
+                              <div className="absolute inset-0 rounded-full pointer-events-none" style={{boxShadow:'inset 0 0 0 4px rgba(255,160,60,0.14), 0 8px 30px rgba(255,140,40,0.06)'}} />
+                            )}
+                          </div>
+                          <h4 className={`text-lg text-center font-semibold ${isDarkMode ? 'text-white' : 'bg-clip-text text-transparent bg-gradient-to-r from-orange-600 to-pink-500'}`}>{m.name}</h4>
+                          {/* show plain position only in dark mode; light theme uses the role pill */}
+                          {isDarkMode ? (
+                            <p className="text-center text-orange-200">{m.position}</p>
+                          ) : (
+                            <div className="flex justify-center mt-2"><span className="text-xs px-3 py-1 rounded-full bg-orange-50 text-orange-600 font-medium shadow-sm">{m.position}</span></div>
+                          )}
+                          <div className={`flex justify-center gap-4 mt-3 text-lg ${isDarkMode ? '' : 'text-slate-700'}`}>
+                            {m.linkdln&&<a href={m.linkdln} className={!isDarkMode?'inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-sky-100 to-sky-50 text-sky-600 hover:from-sky-200 hover:to-sky-100 shadow-md transition-all':'text-white'}><FaLinkedin style={isDarkMode?{color:'#0ea5e9'}:{}}/></a>}
+                            {m.github&&<a href={m.github} className={!isDarkMode?'inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-slate-100 to-slate-50 text-slate-800 hover:from-slate-200 hover:to-slate-100 shadow-md transition-all':'text-white'}><FaGithub style={{color:'#000'}}/></a>}
+                            {m.insta&&<a href={m.insta} className={!isDarkMode?'inline-flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-pink-100 to-pink-50 text-pink-500 hover:from-pink-200 hover:to-pink-100 shadow-md transition-all':'text-white'}><FaInstagram style={isDarkMode?{color:'#f973a4'}:{}}/></a>}
+                          </div>
+                        </motion.article>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+                </div>
+
+            );
+          })}
+          
+        </div>
+      </Teamvh2>
     </div>
   );
-};
-
-export default Team;
+}

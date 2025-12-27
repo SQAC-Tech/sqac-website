@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaGithub, FaInstagram, FaLinkedin, FaArrowUp } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaLinkedin, FaArrowUp, FaUser, FaEnvelope, FaRegComment, FaPaperPlane } from "react-icons/fa";
 import { motion } from "framer-motion";
 import SQAC from "../assets/LogoSQAC.png";
+import { useTheme } from "../contexts/ThemeContext";
 
 function Footer() {
   const [success, setSuccess] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,14 +85,14 @@ function Footer() {
         </motion.button>
       )}
 
-      <footer className="w-full bg-gradient-to-t from-black via-purple-950 to-black text-white px-6 py-16">
+      <footer className={`w-full px-6 py-16 backdrop-blur-sm ${isDarkMode ? 'bg-gradient-to-t from-black via-purple-950 to-black text-white' : 'bg-white/90 text-slate-800'}`}>
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
           {/* Left Column: Contact Form */}
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="backdrop-blur-md bg-black/70 border border-gray-600 rounded-xl p-8 shadow-2xl w-full"
+            className={`backdrop-blur-md rounded-xl p-8 shadow-2xl w-full ${isDarkMode ? 'bg-black/70 border border-gray-600' : 'bg-white/80 border border-gray-200'}`}
           >
             <h2 className="text-3xl font-bold mb-6 text-center">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-orange-500">
@@ -98,63 +101,82 @@ function Footer() {
             </h2>
 
             {success && (
-              <div className="text-green-400 text-center mb-4">
-                Thank you! Your message has been sent.
-              </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.35 }}
+                className="text-green-600 bg-green-50 rounded-md p-3 text-center mb-4 shadow-inner"
+              >
+                ✅ Thank you — your message has been sent.
+              </motion.div>
             )}
 
-            <form onSubmit={handleSubmit}>
-              <input
-                type="hidden"
-                name="access_key"
-                value="04602206-c2ae-44af-a679-d76004a657fc"
-              />
+            <form onSubmit={handleSubmit} className="space-y-4 relative">
+              <input type="hidden" name="access_key" value="04602206-c2ae-44af-a679-d76004a657fc" />
+              {/* Honeypot to deter bots */}
+              <input type="text" name="hp" tabIndex="-1" autoComplete="off" className="hidden" />
 
-              <div className="mb-4">
-                <label className="block text-white font-semibold mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-black/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Your Name"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="relative">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-orange-500">
+                    <FaUser />
+                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    placeholder=" "
+                    className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
+                  />
+                  <label className={`absolute left-12 top-1 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                    Name
+                  </label>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-orange-500">
+                    <FaEnvelope />
+                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    placeholder=" "
+                    className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
+                  />
+                  <label className={`absolute left-12 top-1 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-3 peer-placeholder-shown:text-sm peer-focus:top-1 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                    Email
+                  </label>
+                </div>
               </div>
 
-              <div className="mb-4">
-                <label className="block text-white font-semibold mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-black/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="you@example.com"
-                />
-              </div>
-
-              <div className="mb-6">
-                <label className="block text-white font-semibold mb-1">
-                  Message
-                </label>
+              <div className="relative">
+                <div className="absolute left-3 top-4 text-orange-500">
+                  <FaRegComment />
+                </div>
                 <textarea
                   name="message"
-                  rows="4"
+                  rows="5"
                   required
-                  className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-black/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                  placeholder="Your message..."
+                  placeholder=" "
+                  className={`peer w-full pl-12 pr-4 py-3 rounded-xl border shadow-sm transition focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-400 ${isDarkMode ? 'bg-black/50 border-gray-700 text-white placeholder-transparent' : 'bg-white border-orange-200 text-slate-800 placeholder-transparent'}`}
                 ></textarea>
+                <label className={`absolute left-12 top-2 text-xs text-slate-500 transition-all duration-150 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs ${isDarkMode ? 'text-gray-300' : 'text-slate-500'}`}>
+                  Message
+                </label>
               </div>
 
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-pink-500 text-white font-bold py-3 rounded-lg hover:scale-105 transition transform duration-300"
-              >
-                Send Message
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  type="submit"
+                  className="flex-1 inline-flex items-center justify-center gap-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white font-semibold py-3 rounded-xl shadow-lg hover:scale-[1.02] transition-transform duration-200"
+                >
+                  <FaPaperPlane className="-ml-1" />
+                  <span>Send Message</span>
+                </button>
+              </div>
+
+              {/* accent removed */}
             </form>
           </motion.div>
 
@@ -169,7 +191,7 @@ function Footer() {
                 <h3 className="text-[27px] font-bold">
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-orange-500">SQAC</span>
                 </h3>
-                <p className="text-sm text-black dark:text-white italic mt-2 max-w-xs">
+                <p className={`text-sm italic mt-2 max-w-xs ${isDarkMode ? 'text-white' : 'text-slate-700'}`}>
                   "Software assurance isn't just about finding bugs — it's about
                   building trust into every line of code."
                 </p>
@@ -177,8 +199,8 @@ function Footer() {
 
               {/* Block 2 - Quick Links */}
               <div className="flex-1">
-                <h4 className="text-lg font-bold mb-2 text-black dark:text-white">Quick Links</h4>
-                <div className="flex flex-col gap-2 text-md text-black dark:text-white font-medium">
+                <h4 className={`text-lg font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>Quick Links</h4>
+                <div className={`flex flex-col gap-2 text-md font-medium ${isDarkMode ? 'text-white' : 'text-slate-700'}`}>
                   <Link to="/about" className="hover:text-orange-500 transition">
                     About Us
                   </Link>
@@ -196,8 +218,8 @@ function Footer() {
 
               {/* Block 3 - Address & Socials */}
               <div className="flex-1">
-                <h4 className="text-lg font-semibold mb-2 text-black dark:text-white">Contact Info</h4>
-                <p className="text-sm text-black dark:text-white mb-3 leading-relaxed">
+                <h4 className={`text-lg font-semibold mb-2 ${isDarkMode ? 'text-white' : 'text-slate-800'}`}>Contact Info</h4>
+                <p className={`text-sm mb-3 leading-relaxed ${isDarkMode ? 'text-white' : 'text-slate-700'}`}>
                   SRM Institute of Science & Technology,
                   <br />
                   Kattankulathur, Chennai 603203
@@ -210,21 +232,21 @@ function Footer() {
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FaGithub className="hover:text-orange-500 text-gray-300" />
+                    <FaGithub className={`${isDarkMode ? 'text-gray-300 hover:text-orange-500' : 'text-gray-500 hover:text-orange-500'}`} />
                   </a>
                   <a
                     href="https://www.instagram.com/sqac.srmist/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FaInstagram className="hover:text-orange-500 text-gray-300" />
+                    <FaInstagram className={`${isDarkMode ? 'text-gray-300 hover:text-orange-500' : 'text-gray-500 hover:text-orange-500'}`} />
                   </a>
                   <a
                     href="https://www.linkedin.com/company/sqacsrm/posts/?feedView=all"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <FaLinkedin className="hover:text-orange-500 text-gray-300" />
+                    <FaLinkedin className={`${isDarkMode ? 'text-gray-300 hover:text-orange-500' : 'text-gray-500 hover:text-orange-500'}`} />
                   </a>
                 </div>
               </div>
@@ -233,7 +255,7 @@ function Footer() {
         </div>
 
         {/* Footer bottom line */}
-        <div className="mt-12 text-center text-sm text-gray-400 border-t border-gray-600 pt-6">
+        <div className={`mt-12 text-center text-sm pt-6 border-t ${isDarkMode ? 'text-gray-400 border-gray-600' : 'text-slate-600 border-gray-200'}`}>
           © {new Date().getFullYear()} SQAC. All rights reserved.
         </div>
       </footer>
