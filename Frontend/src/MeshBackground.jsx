@@ -7,7 +7,7 @@ export default function MeshBackground() {
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
       {/* Dark Theme Mesh */}
-      <div className={`absolute top-10 left-10 w-[28rem] h-[28rem] rounded-full blur-[120px] animate-pulse transition-all duration-1000 ${isDarkMode ? 'bg-purple-400/30' : 'bg-blue-300/20'}`} />
+      <div className={`absolute top-10 left-10 w-[28rem] h-[28rem] rounded-full blur-[120px] animate-pulse transition-all duration-1000 ${isDarkMode ? 'bg-purple-400/30' : 'bg-orange-300/20'}`} />
       <div className={`absolute top-32 right-20 w-[26rem] h-[26rem] rounded-full blur-[120px] animate-pulse transition-all duration-1000 ${isDarkMode ? 'bg-pink-400/30' : 'bg-pink-200/25'}`} />
       <div className={`absolute bottom-20 left-1/3 w-[30rem] h-[30rem] rounded-full blur-[130px] animate-pulse transition-all duration-1000 ${isDarkMode ? 'bg-orange-400/30' : 'bg-orange-200/20'}`} />
 
