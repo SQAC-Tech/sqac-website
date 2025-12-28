@@ -27,12 +27,43 @@ function Footer() {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
+    // Extract form data for MongoDB
+    const contactData = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+
+    // ✉️ Send email (existing system - don't touch)
+    const emailResponse = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       body: formData,
     });
 
-    if (response.ok) {
+    // 🗄️ Save the same data in MongoDB (new feature)
+    const backendUrl = import.meta.env.VITE_API_BACKEND || 'http://localhost:5000';
+    try {
+      const mongoResponse = await fetch(`${backendUrl}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(contactData),
+      });
+      
+      if (!mongoResponse.ok) {
+        const errorData = await mongoResponse.json().catch(() => ({ message: 'Unknown error' }));
+        console.error('MongoDB save failed:', errorData);
+      } else {
+        console.log('Data saved to MongoDB successfully!');
+      }
+    } catch (error) {
+      console.error('Error saving to MongoDB:', error);
+      console.error('Backend URL attempted:', `${backendUrl}/api/contact`);
+      // Don't fail the form submission if MongoDB save fails
+    }
+
+    if (emailResponse.ok) {
       setSuccess(true);
       e.target.reset();
     }
