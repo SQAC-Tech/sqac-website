@@ -84,6 +84,11 @@ app.post('/api/contact', async (req, res) => {
   }
 });
 
+app.get('/api/contact', async (req, res) => {
+  const contacts = await Contact.find().sort({ submittedAt: -1 });
+  res.json(contacts);
+});
+
 cron.schedule('0 * * * *', async () => {
   console.log('Running Excel to MongoDB sync...');
 
