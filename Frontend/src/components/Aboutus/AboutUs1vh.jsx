@@ -1,4 +1,4 @@
- import React, { useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import TeamPic from "../../assets/SQAC_Team.jpg";
 
@@ -7,7 +7,7 @@ const AboutUs = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section className="h-screen px-4 sm:px-6 pt-4 pb-6 z-10 bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary flex justify-center items-center">
+    <section className="h-screen px-4 sm:px-6 pt-4 pb-6 z-10 flex justify-center items-center projects-section">
       <div
         ref={ref}
         className="flex flex-col justify-center items-center text-center max-w-6xl mx-auto z-3"
@@ -27,10 +27,10 @@ const AboutUs = () => {
           transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
           className="bg-black/90 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-3xl mx-auto mt-1 border border-gray-600 transition-all duration-300"
           whileHover={{
-            backgroundColor: 'rgba(255, 107, 53, 0.15)',
-            borderColor: '#ff6b35',
-            boxShadow: '0 0 40px rgba(255, 107, 53, 0.4)',
-            scale: 1.02
+            backgroundColor: "rgba(255, 107, 53, 0.15)",
+            borderColor: "#ff6b35",
+            boxShadow: "0 0 40px rgba(255, 107, 53, 0.4)",
+            scale: 1.02,
           }}
         >
           <div className="rounded-xl overflow-hidden mb-4 max-h-[45vh]">
@@ -47,8 +47,12 @@ const AboutUs = () => {
             transition={{ delay: 0.4, duration: 0.7 }}
             className="text-sm sm:text-base text-white font-poppins leading-relaxed font-medium"
           >
-            At <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] font-semibold">SQAC</strong>, we're a student-led community passionate
-            about clean code, real-world projects, and collaborative learning. We host hands-on
+            At{" "}
+            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] font-semibold">
+              SQAC
+            </strong>
+            , we're a student-led community passionate about clean code,
+            real-world projects, and collaborative learning. We host hands-on
             sessions, testing workshops, and build future-ready developers.
           </motion.p>
 
@@ -58,7 +62,8 @@ const AboutUs = () => {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] text-lg italic font-semibold text-center"
             style={{
-              textShadow: '0 0 3px rgba(243, 74, 130, 0.3), 0 0 6px rgba(243, 74, 130, 0.2), 0 0 9px rgba(243, 74, 130, 0.1)'
+              textShadow:
+                "0 0 3px rgba(243, 74, 130, 0.3), 0 0 6px rgba(243, 74, 130, 0.2), 0 0 9px rgba(243, 74, 130, 0.1)",
             }}
           >
             “Where code meets perfection — and you're part of it.”
