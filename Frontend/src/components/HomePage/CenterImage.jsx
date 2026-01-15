@@ -43,7 +43,13 @@ function CenterImage({ sectionHeight }) {
 
   return (
     <div className="sticky top-0 w-full h-screen overflow-hidden">
-      <div className="absolute inset-0 z-0 bg-gradient-to-t from-dark-primary via-dark-secondary to-dark-tertiary flex flex-col items-center justify-center space-y-4">
+      <div
+        className="absolute inset-0 z-0 bg-gradient-to-t
+          from-zinc-50 via-orange-200 to-orange-400
+          dark:from-zinc-900 dark:via-zinc-800 dark:to-black
+          flex flex-col items-center justify-center space-y-4
+        "
+      >
         <motion.img
           src={Logo}
           alt="SQAC Logo"
@@ -61,7 +67,7 @@ function CenterImage({ sectionHeight }) {
         />
 
         <motion.h1
-          className="text-4xl md:text-7xl font-extrabold text-accent text-center px-4 animate-glowBlink mb-20"
+          className="text-4xl md:text-7xl font-extrabold text-pink-600 dark:text-pink-400 text-center px-4 animate-glowBlink mb-20"
           initial={{ scale: 1 }}
           animate={{ scale: [1, 1.05, 1] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
@@ -92,7 +98,7 @@ function CenterImage({ sectionHeight }) {
           style={{
             opacity: gradientOpacity,
             background:
-              "linear-gradient(to top, rgba(124, 58, 237, 0.7) 0%, rgba(168, 85, 247, 0.6) 100%)",
+              "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.85) 100%)",
             width: "100%",
             height: "100%",
             position: "absolute",

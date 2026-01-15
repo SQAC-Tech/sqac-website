@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-
 function ContactUs() {
   const [success, setSuccess] = useState(false);
 
@@ -53,27 +52,28 @@ function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{background: 'linear-gradient(135deg, #0a0014 0%, #1a0033 25%, #2d1b69 50%, #1a0033 75%, #0a0014 100%)'}}>
+    <div className="min-h-screen flex items-center justify-center px-4 py-12
+    bg-gradient-to-br
+    from-cyan-200 via-purple-200 to-pink-200
+    dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="backdrop-blur-md bg-dark-surface/70 border border-gray-600 rounded-xl p-8 max-w-md w-full shadow-2xl cursor-pointer"
-        whileHover={{
-          backgroundColor: 'rgba(255, 107, 53, 0.15)',
-          borderColor: '#ff6b35',
-          boxShadow: '0 0 40px rgba(255, 107, 53, 0.4)',
-          scale: 1.02
-        }}
+        className="
+          backdrop-blur-md
+          bg-white/30 dark:bg-zinc-900/40
+          border border-white/20 dark:border-white/10
+          rounded-xl p-8 max-w-md w-full
+          shadow-2xl
+        "
       >
-        <h2 className="text-3xl font-bold mb-6 text-center">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
-            Get in Touch
-          </span>
+        <h2 className="text-3xl font-bold text-center mb-6 text-purple-700 dark:text-purple-300">
+          Get in Touch
         </h2>
 
         {success && (
-          <div className="text-green-400 text-center mb-4">
+          <div className="text-green-700 dark:text-green-400 text-center mb-4">
             Thank you! Your message has been sent.
           </div>
         )}
@@ -86,53 +86,82 @@ function ContactUs() {
           />
 
           <div className="mb-4">
-            <label className="block text-white font-semibold mb-1">
+            <label className="block text-purple-900 dark:text-purple-200 font-semibold mb-1">
               Name
             </label>
             <input
               type="text"
               name="name"
               required
-              className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-dark-primary/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
+              className="
+                w-full px-4 py-2 rounded-lg
+                border border-white/30 dark:border-white/10
+                bg-white/20 dark:bg-zinc-800/50
+                text-purple-900 dark:text-gray-200
+                placeholder-purple-800 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2
+                focus:ring-purple-400 dark:focus:ring-purple-500
+              "
               placeholder="Your Name"
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-white font-semibold mb-1">
+            <label className="block text-purple-900 dark:text-purple-200 font-semibold mb-1">
               Email
             </label>
             <input
               type="email"
               name="email"
               required
-              className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-dark-primary/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
+              className="
+                w-full px-4 py-2 rounded-lg
+                border border-white/30 dark:border-white/10
+                bg-white/20 dark:bg-zinc-800/50
+                text-purple-900 dark:text-gray-200
+                placeholder-purple-800 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2
+                focus:ring-purple-400 dark:focus:ring-purple-500
+              "
               placeholder="you@example.com"
             />
           </div>
 
           <div className="mb-6">
-            <label className="block text-white font-semibold mb-1">
+            <label className="block text-purple-900 dark:text-purple-200 font-semibold mb-1">
               Message
             </label>
             <textarea
               name="message"
               rows="4"
               required
-              className="w-full px-4 py-2 rounded-lg border border-gray-600 bg-dark-primary/50 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 hover:border-orange-500 transition-all duration-300"
+              className="
+                w-full px-4 py-2 rounded-lg
+                border border-white/30 dark:border-white/10
+                bg-white/20 dark:bg-zinc-800/50
+                text-purple-900 dark:text-gray-200
+                placeholder-purple-800 dark:placeholder-gray-400
+                focus:outline-none focus:ring-2
+                focus:ring-purple-400 dark:focus:ring-purple-500
+              "
               placeholder="Your message..."
             ></textarea>
           </div>
 
           <button
             type="submit"
-            className="w-full bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] text-white font-bold py-3 rounded-lg hover:scale-105 transition transform duration-300"
+            className="
+              w-full bg-gradient-to-r
+              from-purple-400 to-pink-400
+              dark:from-purple-500 dark:to-pink-500
+              text-white font-bold py-3 rounded-lg
+              hover:scale-105 transition transform duration-300
+            "
           >
             Send Message
           </button>
         </form>
       </motion.div>
-      
     </div>
   );
 }

@@ -34,12 +34,11 @@ const techIcons = [
   { Icon: SiMongodb, color: "#10b981" },
 ];
 
-export default function Team() {
-  const [team, setTeam] = useState([]);
-  const [domain, setDomain] = useState("Board Member");
+export default function Team(){
+  const [team,setTeam] = useState([]);
+  const [domain,setDomain] = useState('Board Member');
   const cardsRowRefs = useRef({});
   const [connectorsMap, setConnectorsMap] = useState({});
-  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     axios
@@ -49,20 +48,12 @@ export default function Team() {
 
   const filtered = useMemo(() => {
     const d = domain.toLowerCase();
-    if (d === "board member")
-      return team.filter((m) => m.coredomain?.toLowerCase() === "board member");
-    if (LEAD_ROLES.includes(d))
-      return team.filter((m) => m.position?.toLowerCase().includes(d));
-    if (["technical", "corporate"].includes(d))
-      return team.filter((m) => m.coredomain?.toLowerCase() === d);
-    if (d === "media")
-      return team.filter(
-        (m) =>
-          m.coredomain?.toLowerCase() === "corporate" &&
-          ["creative", "public relations"].includes(m.subdomain?.toLowerCase())
-      );
-    return team.filter((m) => m.subdomain?.toLowerCase() === d);
-  }, [team, domain]);
+    if(d==='board member') return team.filter(m=>m.coredomain?.toLowerCase()==='board member');
+    if(LEAD_ROLES.includes(d)) return team.filter(m=>m.position?.toLowerCase().includes(d));
+    if(['technical','corporate'].includes(d)) return team.filter(m=>m.coredomain?.toLowerCase()===d);
+    if(d==='media') return team.filter(m=>m.coredomain?.toLowerCase()==='corporate' && ['creative','public relations'].includes(m.subdomain?.toLowerCase()));
+    return team.filter(m=>m.subdomain?.toLowerCase()===d);
+  },[team,domain]);
 
   const grouped = useMemo(() => {
     const g = Object.fromEntries(hierarchy.map((h) => [h, []]));
@@ -108,6 +99,7 @@ export default function Team() {
       });
       setConnectorsMap(newMap);
     };
+
     computeAll();
     window.addEventListener("resize", computeAll);
     window.addEventListener("scroll", computeAll, { passive: true });
@@ -129,26 +121,19 @@ export default function Team() {
             return (
               <div key={i} className="relative mb-20">
                 <div className="flex flex-col items-center">
-                  <motion.div
-                    className="w-6 h-6 rounded-full bg-orange-500"
+                  <motion.div className="w-6 h-6 rounded-full bg-orange-500"
                     animate={{
                       scale: [1, 1.14, 1],
                       y: [0, -4, 0],
                       boxShadow: [
-                        "0 0 16px rgba(249,115,22,0.6)",
-                        "0 0 80px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.35)",
-                        "0 0 16px rgba(249,115,22,0.6)",
-                      ],
+                        '0 0 16px rgba(249,115,22,0.6)',
+                        '0 0 80px rgba(249,115,22,0.95), 0 0 120px rgba(249,115,22,0.35)',
+                        '0 0 16px rgba(249,115,22,0.6)'
+                      ]
                     }}
-                    transition={{
-                      duration: 2.0,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
+                    transition={{ duration: 2.0, repeat: Infinity, ease: 'easeInOut' }}
                   />
-                  <span className="mt-2 px-5 py-1 rounded-full font-bold bg-orange-400 text-black shadow-[0_0_20px_orange]">
-                    {role}
-                  </span>
+                  <span className="mt-2 px-5 py-1 rounded-full font-bold bg-orange-400 text-black shadow-[0_0_20px_orange]">{role}</span>
                 </div>
                 <div className="flex justify-center mt-20">
                   <div
