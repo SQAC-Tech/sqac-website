@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { motion } from 'framer-motion';
 import teamImg1 from '../../assets/teamImg1.png';
 import teamImg2 from '../../assets/teamImg2.png';

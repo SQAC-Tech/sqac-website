@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navbar from '../HomePage/Navbar';
 import Teamvh1 from './Teamvh1';
 import Teamvh2 from './Teamvh2';
+import { useTheme } from '../../contexts/ThemeContext';
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa';
 import { SiReact, SiFlutter, SiFigma, SiAndroid, SiNodedotjs, SiMongodb } from 'react-icons/si';
 

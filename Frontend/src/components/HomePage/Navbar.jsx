@@ -5,6 +5,7 @@ import ToggleDarkMode from "../ToggleDarkMode";
 
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
@@ -51,7 +52,7 @@ function Navbar() {
                 "
               >
                 {item.label}
-                <span className="block h-[2px] max-w-0 group-hover:max-w-full transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-400"></span>
+                <span className="block h-[2px] max-w-0 group-hover:max-w-full transition-all duration-300 bg-gradient-to-r from-accent to-accentSecondary"></span>
               </Link>
             </li>
           ))}
@@ -81,17 +82,17 @@ function Navbar() {
             className="relative w-6 h-6 flex flex-col justify-between items-center focus:outline-none"
           >
             <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-transform duration-300 ${
+              className={`h-[3px] w-full bg-accent rounded transition-transform duration-300 ${
                 isMenuOpen ? "rotate-45 translate-y-[10.5px]" : ""
               }`}
             ></span>
             <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-opacity duration-300 ${
+              className={`h-[3px] w-full bg-accent rounded transition-opacity duration-300 ${
                 isMenuOpen ? "opacity-0" : ""
               }`}
             ></span>
             <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-transform duration-300 ${
+              className={`h-[3px] w-full bg-accent rounded transition-transform duration-300 ${
                 isMenuOpen ? "-rotate-45 -translate-y-[10px]" : ""
               }`}
             ></span>

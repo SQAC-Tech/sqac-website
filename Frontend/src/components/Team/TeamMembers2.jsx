@@ -28,7 +28,7 @@ const ProfileCard = ({ member }) => {
       />
       <h3 className="text-lg font-semibold">{Name}</h3>
       <p className="text-sm text-gray-600 mb-2">{Position}</p>
-      <div className="flex justify-center gap-3 mt-2 text-blue-600">
+      <div className="flex justify-center gap-3 mt-2 text-orange-600">
         {GitHub && (
           <a href={GitHub} target="_blank" rel="noopener noreferrer">
             <FaGithub />

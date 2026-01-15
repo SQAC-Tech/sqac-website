@@ -1,4 +1,4 @@
-import { useState } from "react";
+ import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   Laptop,
@@ -19,13 +19,13 @@ const WhatWeDoSection = () => {
         title: "Code & Create",
         icon: <Laptop className="w-16 h-16 text-purple-500" />,
         desc: "We craft intelligent solutions through clean and efficient code. From web apps to embedded systems, our creations turn ideas into impactful digital experiences.",
-        grad: "from-purple-500 to-blue-600",
+        grad: "from-purple-500 to-orange-600",
       },
       {
         title: "Build & Innovate",
-        icon: <Code className="w-16 h-16 text-blue-500" />,
+        icon: <Code className="w-16 h-16 text-orange-500" />,
         desc: "Innovation is our blueprint. We engineer with curiosity and build with purpose — blending software, hardware, and imagination to solve real-world challenges.",
-        grad: "from-blue-500 to-cyan-600",
+        grad: "from-orange-500 to-pink-600",
       },
     ],
     [

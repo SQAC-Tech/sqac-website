@@ -4,7 +4,6 @@ import {
   Box, List, ListItem, ListItemText
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { motion } from 'framer-motion';
 import {
   LayoutTemplate, Smartphone, Cpu,
   CalendarClock, Handshake, Camera
@@ -70,7 +69,7 @@ function ServicesSection() {
     const isActive = selected === card.id;
 
     return (
-      <motion.div
+      <div
         key={card.id}
         onClick={() => setSelected(card.id)}
         whileHover={{ y: -4, scale: 1.03 }}

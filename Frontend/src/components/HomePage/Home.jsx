@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import SQAC from "../../assets/LogoSQAC.png";
+import { useTheme } from "../../contexts/ThemeContext";
 
 export default function LandingHero() {
+  const { isDarkMode } = useTheme();
   return (
     <section
       className="

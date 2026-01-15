@@ -59,9 +59,9 @@ function CenterImage({ sectionHeight }) {
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           style={{
             filter: `
-              drop-shadow(0 0 10px rgba(236, 72, 153, 1))
-              drop-shadow(0 0 20px rgba(236, 72, 153, 0.8))
-              drop-shadow(0 0 30px rgba(236, 72, 153, 0.6))
+              drop-shadow(0 0 10px rgba(124, 58, 237, 1))
+              drop-shadow(0 0 20px rgba(124, 58, 237, 0.8))
+              drop-shadow(0 0 30px rgba(124, 58, 237, 0.6))
             `,
           }}
         />
@@ -73,9 +73,9 @@ function CenterImage({ sectionHeight }) {
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           style={{
             textShadow: `
-              0 0 10px rgba(236, 72, 153, 1),
-              0 0 20px rgba(236, 72, 153, 0.8),
-              0 0 30px rgba(236, 72, 153, 0.6)
+              0 0 10px rgba(124, 58, 237, 1),
+              0 0 20px rgba(124, 58, 237, 0.8),
+              0 0 30px rgba(124, 58, 237, 0.6)
             `,
           }}
         >

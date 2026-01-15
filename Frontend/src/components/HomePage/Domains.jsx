@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTheme } from "../../contexts/ThemeContext";
 
 import tech from "../../assets/technical.png";
 import corp from "../../assets/Corp.png";
@@ -7,6 +8,11 @@ import media from "../../assets/Media.png";
 
 const FloatBox = ({ name, description }) => {
   const [open, setOpen] = useState(false);
+  const { isDarkMode } = useTheme();
+
+  const btnGradient = isDarkMode
+    ? 'from-purple-600 to-purple-800 border-purple-500 hover:from-purple-500 hover:to-purple-700'
+    : 'from-orange-500 to-orange-700 border-orange-400 hover:from-orange-400 hover:to-orange-600';
 
   return (
     <div
@@ -57,6 +63,7 @@ const Bubble = ({ children, className }) => (
 );
 
 const DomainContent = ({ item, isPhotoLeft }) => {
+  const { isDarkMode } = useTheme();
   const Mobile = () => (
     <div className="space-y-8 md:hidden">
       <Bubble className="justify-center flex-col">
@@ -133,6 +140,7 @@ const DomainContent = ({ item, isPhotoLeft }) => {
 
 export default function Domains() {
   const targetRef = useRef(null);
+  const { isDarkMode } = useTheme();
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start center", "end center"],
@@ -188,7 +196,7 @@ export default function Domains() {
           style={{
             scaleY: pathLength,
             transformOrigin: "top",
-            background: "linear-gradient(to bottom, #4A1E5C, #B966D6)",
+            background: isDarkMode ? "linear-gradient(to bottom, #7c3aed, #a855f7)" : "linear-gradient(to bottom, #f97316, #fb7185)",
           }}
         />
 

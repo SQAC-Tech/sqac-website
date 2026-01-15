@@ -41,6 +41,14 @@ function Content() {
           "
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
+          whileHover={{
+            boxShadow: '0 0 60px rgba(255, 107, 53, 1)',
+            scale: 1.05,
+            transition: { duration: 0.3 }
+          }}
+          style={{
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+          }}
         >
           <img src={Teams} alt="Team" className="w-full h-full object-cover" />
         </motion.div>
@@ -53,6 +61,14 @@ function Content() {
           "
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+          whileHover={{
+            boxShadow: '0 0 60px rgba(255, 107, 53, 1)',
+            scale: 1.05,
+            transition: { duration: 0.3 }
+          }}
+          style={{
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+          }}
         >
           <img
             src={Projects}
@@ -69,6 +85,14 @@ function Content() {
           "
           animate={{ y: [0, -20, 0] }}
           transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+          whileHover={{
+            boxShadow: '0 0 60px rgba(255, 107, 53, 1)',
+            scale: 1.05,
+            transition: { duration: 0.3 }
+          }}
+          style={{
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+          }}
         >
           <img
             src={Events}

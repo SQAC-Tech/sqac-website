@@ -12,10 +12,13 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import SQAC from "../assets/LogoSQAC.png";
+import { useTheme } from "../contexts/ThemeContext";
 
 function Footer() {
   const [success, setSuccess] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  const { isDarkMode } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 300);
