@@ -9,14 +9,14 @@ export default function LandingHero() {
         px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden
         bg-gradient-to-b
         from-[#f3d79e] via-[#f3d8ad] to-red-300
-        dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800
+        dark:from-zinc-950 dark:via-zinc-900 dark:to-[#0f0a1a]
       "
     >
       {/* Blurred background circle */}
       <div
         className="
-          absolute w-[600px] sm:w-[800px] md:w-[900px]
-          h-[600px] sm:h-[800px] md:h-[900px]
+          absolute w-[500px] sm:w-[500px] md:w-[900px]
+          h-[600px] sm:h-[800px] md:h-[600px]
           bg-pink-300 dark:bg-purple-600
           opacity-20 dark:opacity-15
           rounded-full blur-3xl

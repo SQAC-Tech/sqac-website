@@ -1,4 +1,4 @@
-import React , {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const ComingSoonPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,7 +35,13 @@ const ComingSoonPage = () => {
   };
 
   return (
-    <section className="min-h-[95vh] px-4 sm:px-6 py-10 sm:py-14 bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200">
+    <section
+      className="
+        min-h-[95vh] px-4 sm:px-6 py-10 sm:py-14
+        bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200
+        dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
+      "
+    >
       <motion.div
         initial="hidden"
         animate="visible"
@@ -45,7 +51,11 @@ const ComingSoonPage = () => {
         <div className="max-w-3xl w-full px-6">
           <motion.h1
             variants={itemVariants}
-            className="text-6xl md:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 animate-glowBlink mb-8 leading-tight"
+            className="
+              text-6xl md:text-8xl font-bold text-transparent bg-clip-text
+              bg-gradient-to-r from-purple-600 via-pink-500 to-red-500
+              animate-glowBlink mb-8 leading-tight
+            "
             style={{
               fontFamily: 'var(--font-head)',
               textShadow: '0 2px 10px rgba(236, 72, 153, 0.3)',
@@ -56,7 +66,10 @@ const ComingSoonPage = () => {
 
           <motion.p
             variants={itemVariants}
-            className="mt-4 text-2xl md:text-3xl text-gray-800 font-medium max-w-2xl leading-snug mx-auto"
+            className="
+              mt-4 text-2xl md:text-3xl font-medium max-w-2xl leading-snug mx-auto
+              text-gray-800 dark:text-gray-200
+            "
           >
             We're building something{' '}
             <span className="text-pink-500 font-semibold">truly special</span>
@@ -64,7 +77,10 @@ const ComingSoonPage = () => {
 
           <motion.p
             variants={itemVariants}
-            className="mt-6 text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mx-auto"
+            className="
+              mt-6 text-lg md:text-xl max-w-2xl leading-relaxed mx-auto
+              text-gray-600 dark:text-gray-400
+            "
           >
             Our team is working tirelessly to deliver an experience that exceeds all expectations.
           </motion.p>
@@ -80,7 +96,11 @@ const ComingSoonPage = () => {
                 boxShadow: '0 5px 15px rgba(192, 38, 211, 0.3)',
               }}
               whileTap={{ scale: 0.98 }}
-              className="px-10 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-full font-semibold shadow-lg transition-all duration-300"
+              className="
+                px-10 py-3 rounded-full font-semibold shadow-lg
+                bg-gradient-to-r from-purple-600 to-pink-600
+                text-white transition-all duration-300
+              "
             >
               Join Us
             </motion.button>
@@ -88,9 +108,12 @@ const ComingSoonPage = () => {
 
           <motion.div
             variants={itemVariants}
-            className="mt-12 text-gray-500 text-sm tracking-wider"
+            className="
+              mt-12 text-sm tracking-wider
+              text-gray-500 dark:text-gray-400
+            "
           >
-            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW          
+            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW
           </motion.div>
         </div>
       </motion.div>

@@ -1,95 +1,137 @@
-import React, { useState } from 'react';
+import React,{useState} from 'react';
 import {
-  Users, Code2, Building2, Camera,Palette ,Globe, Brain,
-  Smartphone, Megaphone, HandCoins, Calendar, Image as MediaIcon
+  Users,Code2,Building2,Camera,Palette,Globe,
+  Brain,Smartphone,Megaphone,HandCoins,Calendar,
+  ChevronDown,Crown
 } from 'lucide-react';
 
-const Teamvh2 = ({ onSelectDomain }) => {
-  const [openDropdown, setOpenDropdown] = useState(null);
+export default function Teamvh2({onSelectDomain,children}){
+  const [open,setOpen]=useState(null);
+  const [lead,setLead]=useState(null);
 
-  const handleCardClick = (domain) => {
-    if (domain === 'Technical' || domain === 'Corporate' || domain === 'Media') {
-      setOpenDropdown(openDropdown === domain ? null : domain);
-    } else {
-      onSelectDomain(domain);
-    }
-  };
+  const select=v=>{onSelectDomain(v);setOpen(null);setLead(null);};
 
-  const handleSubdomainClick = (subdomain) => {
-    onSelectDomain(subdomain);
-    setOpenDropdown(null);
-  };
+  return(
+    <section
+      className="
+        w-full flex flex-col items-center pt-16
+        bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200
+        dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
+      "
+    >
+      <h1 className="text-5xl font-extrabold mb-12 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
+        Choose Your Domain
+      </h1>
 
-  const cardStyle = 'cursor-pointer flex flex-col items-center text-center hover:scale-105 transition-transform duration-300';
-  const iconStyle = 'w-16 h-16 sm:w-20 sm:h-20 mb-4 text-indigo-700';
-  const dropdownStyle = 'mt-2 bg-white shadow-md rounded-xl px-4 py-3 text-sm font-medium text-gray-800 space-y-2';
-
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-200 to-pink-200 flex flex-col items-center justify-center px-4 py-1 font-['Poppins']">
-      <h1 className="text-4xl md:text-5xl font-extrabold mb-12 text-gray-900 text-center">Choose Your Domain</h1>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-20">
-        <div className={cardStyle} onClick={() => handleCardClick('Board Member')}>
-          <Users className={iconStyle} />
-          <p className="text-xl sm:text-2xl font-semibold text-gray-800">Board Members</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-14 mb-20 dark:text-white">
+        <div
+          className="cursor-pointer flex flex-col items-center hover:scale-110 transition"
+          onClick={()=>select('Board Member')}
+        >
+          <Users className="w-20 h-20 text-orange-500 dark:text-white"/>
+          Board Members
         </div>
 
         <div className="flex flex-col items-center">
-          <div className={cardStyle} onClick={() => handleCardClick('Technical')}>
-            <Code2 className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Technical</p>
+          <div
+            className="cursor-pointer flex flex-col items-center hover:scale-110 transition"
+            onClick={()=>setOpen(open==='Technical'?null:'Technical')}
+          >
+            <Code2 className="w-20 h-20 text-indigo-500"/>
+            Technical <ChevronDown/>
           </div>
-          {openDropdown === 'Technical' && (
-            <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Web Dev')}>
-                <Globe className="w-4 h-4" /> Web Dev
+
+          {open==='Technical'&&(
+            <div className="mt-3 bg-white/20 dark:bg-white/10 backdrop-blur-xl rounded-xl px-4 py-3 space-y-2">
+              <div
+                onClick={()=>setLead(lead==='Technical'?null:'Technical')}
+                className="flex gap-2 text-orange-400 cursor-pointer"
+              >
+                <Crown className="w-4"/>Leads
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('App Dev')}>
-                <Smartphone className="w-4 h-4" /> App Dev
+
+              {lead==='Technical'&&(
+                <div
+                  onClick={()=>select('Project Lead')}
+                  className="ml-6 font-semibold cursor-pointer"
+                >
+                  Project Lead
+                </div>
+              )}
+
+              <div onClick={()=>select('Web Dev')} className="flex gap-2 cursor-pointer">
+                <Globe className="w-4"/>Web Dev
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('AI/ML')}>
-                <Brain className="w-4 h-4" /> AI / ML
+              <div onClick={()=>select('App Dev')} className="flex gap-2 cursor-pointer">
+                <Smartphone className="w-4"/>App Dev
+              </div>
+              <div onClick={()=>select('AI/ML')} className="flex gap-2 cursor-pointer">
+                <Brain className="w-4"/>AI / ML
               </div>
             </div>
           )}
         </div>
 
         <div className="flex flex-col items-center">
-          <div className={cardStyle} onClick={() => handleCardClick('Corporate')}>
-            <Building2 className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Corporate</p>
+          <div
+            className="cursor-pointer flex flex-col items-center hover:scale-110 transition"
+            onClick={()=>setOpen(open==='Corporate'?null:'Corporate')}
+          >
+            <Building2 className="w-20 h-20 text-emerald-500"/>
+            Corporate <ChevronDown/>
           </div>
-          {openDropdown === 'Corporate' && (
-            <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Sponsorship')}>
-                <HandCoins className="w-4 h-4" /> Sponsorship
+
+          {open==='Corporate'&&(
+            <div className="mt-3 bg-white/20 dark:bg-white/10 backdrop-blur-xl rounded-xl px-4 py-3 space-y-2">
+              <div onClick={()=>select('Sponsorship')} className="flex gap-2 cursor-pointer">
+                <HandCoins className="w-4"/>Sponsorship
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Events')}>
-                <Calendar className="w-4 h-4" /> Events
+              <div onClick={()=>select('Events')} className="flex gap-2 cursor-pointer">
+                <Calendar className="w-4"/>Events
               </div>
             </div>
           )}
         </div>
 
         <div className="flex flex-col items-center">
-          <div className={cardStyle} onClick={() => handleCardClick('Media')}>
-            <Camera className={iconStyle} />
-            <p className="text-xl sm:text-2xl font-semibold text-gray-800">Media</p>
+          <div
+            className="cursor-pointer flex flex-col items-center hover:scale-110 transition"
+            onClick={()=>setOpen(open==='Media'?null:'Media')}
+          >
+            <Camera className="w-20 h-20 text-pink-500"/>
+            Media <ChevronDown/>
           </div>
-          {openDropdown === 'Media' && (
-            <div className={dropdownStyle}>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('Creatives')}>
-                <Palette className="w-4 h-4" /> Creatives
+
+          {open==='Media'&&(
+            <div className="mt-3 bg-white/20 dark:bg-white/10 backdrop-blur-xl rounded-xl px-4 py-3 space-y-2">
+              <div
+                onClick={()=>setLead(lead==='Media'?null:'Media')}
+                className="flex gap-2 text-orange-400 cursor-pointer"
+              >
+                <Crown className="w-4"/>Leads
               </div>
-              <div className="flex items-center gap-2 hover:text-purple-600 cursor-pointer" onClick={() => handleSubdomainClick('PR')}>
-                <Megaphone className="w-4 h-4" /> PR
+
+              {lead==='Media'&&(
+                <div
+                  onClick={()=>select('Media Lead')}
+                  className="ml-6 font-semibold cursor-pointer"
+                >
+                  Media Lead
+                </div>
+              )}
+
+              <div onClick={()=>select('Creative')} className="flex gap-2 cursor-pointer">
+                <Palette className="w-4"/>Creative
+              </div>
+              <div onClick={()=>select('Public Relations')} className="flex gap-2 cursor-pointer">
+                <Megaphone className="w-4"/>PR
               </div>
             </div>
           )}
         </div>
       </div>
-    </div>
-  );
-};
 
-export default Teamvh2;
+      {children}
+    </section>
+  );
+}

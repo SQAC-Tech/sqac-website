@@ -25,7 +25,7 @@ const FloatBox = ({ name, description }) => {
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max max-w-xs px-3 py-1.5 bg-black/80 dark:bg-black/90 text-white text-xs rounded-md shadow-lg pointer-events-none z-10"
+          className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max max-w-xs px-3 py-1.5 bg-black/80 dark:bg-black/90  text-white text-xs rounded-md shadow-lg pointer-events-none z-10"
         >
           {description}
         </motion.div>
@@ -175,7 +175,7 @@ export default function Domains() {
   ];
 
   return (
-    <div className="py-20 lg:py-32 bg-gradient-to-b from-orange-300 via-fuchsia-100 to-cyan-200 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800">
+    <div className="py-20 lg:py-32 bg-gradient-to-b from-orange-300 via-fuchsia-100 to-cyan-200 dark:from-[#12081f] dark:via-zinc-900 dark:to-zinc-800">
       <h2 className="text-4xl lg:text-5xl font-bold mb-12 text-center text-[#3B0A4B] dark:text-purple-300">
         Our Core Domains
       </h2>
