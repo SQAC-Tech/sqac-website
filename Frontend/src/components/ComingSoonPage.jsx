@@ -1,124 +1,173 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import {
+  Card, CardContent, Typography, IconButton, Divider,
+  Box, List, ListItem, ListItemText
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import {
+  LayoutTemplate, Smartphone, Cpu,
+  CalendarClock, Handshake, Camera
+} from 'lucide-react';
 
-const ComingSoonPage = () => {
-  const navigate = useNavigate();
+const services = {
+  webdev: {
+    title: 'Web Development',
+    desc: 'We build responsive websites using React, Node.js, and full-stack tech.',
+    features: ['Custom Web Apps', 'E-commerce Platforms', 'API Integration', 'Database Design'],
+  },
+  appdev: {
+    title: 'App Development',
+    desc: 'Crafting intuitive mobile apps using modern frameworks for Android and iOS.',
+    features: ['Cross-platform Apps', 'React Native & Flutter', 'UI/UX Design', 'App Deployment'],
+  },
+  aiml: {
+    title: 'AI / ML',
+    desc: 'Automate and gain insights with intelligent AI/ML systems.',
+    features: ['Data Analytics', 'Natural Language Processing', 'Computer Vision', 'Recommendation Engines'],
+  },
+  events: {
+    title: 'Event Management',
+    desc: 'Organizing impactful tech events, workshops, and community meetups.',
+    features: ['Hackathons', 'Seminars', 'Meetups', 'Community Sessions'],
+  },
+  sponsor: {
+    title: 'Sponsorship',
+    desc: 'Building corporate relationships and securing funding for initiatives.',
+    features: ['Brand Collaborations', 'Fundraising', 'Corporate Outreach', 'Partnership Growth'],
+  },
+  media: {
+    title: 'Media',
+    desc: 'Managing our external communication and media presence.',
+    features: ['Content Creation', 'Video Editing', 'Community Engagement', 'Brand Identity'],
+  },
+};
+
+const serviceCards = [
+  { id: 'webdev', name: 'Web Dev', icon: <LayoutTemplate size={36} /> },
+  { id: 'events', name: 'Events', icon: <CalendarClock size={36} /> },
+  { id: 'appdev', name: 'App Dev', icon: <Smartphone size={36} /> },
+  { id: 'media', name: 'Media', icon: <Camera size={36} /> },
+  { id: 'aiml', name: 'AI/ML', icon: <Cpu size={36} /> },
+  { id: 'sponsor', name: 'Sponsors', icon: <Handshake size={36} /> },
+];
+
+function ServicesSection() {
+  const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (selected && window.innerWidth < 768) {
+      document.getElementById("details-card")?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+  }, [selected]);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  const renderCard = (id) => {
+    const card = serviceCards.find(c => c.id === id);
+    if (!card) return null;
+    const isActive = selected === card.id;
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 12,
-        mass: 0.5,
-      },
-    },
+    return (
+      <motion.div
+        key={card.id}
+        onClick={() => setSelected(card.id)}
+        whileHover={{ y: -4, scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        className={`
+          cursor-pointer rounded-2xl p-5 flex flex-col items-center text-center
+          border-2 backdrop-blur-md transition-all duration-300
+          ${isActive
+            ? 'bg-orange-500/90 border-orange-400 text-white'
+            : 'bg-cyan-200/80 dark:bg-white/10 border-cyan-300/50 dark:border-white/10 text-gray-800 dark:text-zinc-200'}
+        `}
+      >
+        <div className="mb-3">{card.icon}</div>
+        <h3 className="font-semibold">{card.name}</h3>
+      </motion.div>
+    );
   };
 
   return (
     <section
       className="
-        min-h-[95vh] px-4 sm:px-6 py-10 sm:py-14
-        bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200
-        dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
+        min-h-[85vh] py-10 px-4 flex flex-col items-center
+        bg-gradient-to-b from-orange-200 to-cyan-200
+       dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
       "
     >
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="min-h-screen flex items-center justify-center text-center"
-      >
-        <div className="max-w-3xl w-full px-6">
-          <motion.h1
-            variants={itemVariants}
-            className="
-              text-6xl md:text-8xl font-bold text-transparent bg-clip-text
-              bg-gradient-to-r from-purple-600 via-pink-500 to-red-500
-              animate-glowBlink mb-8 leading-tight
-            "
-            style={{
-              fontFamily: 'var(--font-head)',
-              textShadow: '0 2px 10px rgba(236, 72, 153, 0.3)',
-            }}
-          >
-            COMING SOON
-          </motion.h1>
+      <h2 className="mt-9 text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 dark:from-pink-400 dark:to-orange-400">
+        Our Core Domains
+      </h2>
 
-          <motion.p
-            variants={itemVariants}
-            className="
-              mt-4 text-2xl md:text-3xl font-medium max-w-2xl leading-snug mx-auto
-              text-gray-800 dark:text-gray-200
-            "
-          >
-            We're building something{' '}
-            <span className="text-pink-500 font-semibold">truly special</span>
-          </motion.p>
+      <p className="text-center max-w-2xl mb-10 text-gray-600 dark:text-zinc-300">
+        Discover the key domains we work in — from technology and design to strategic innovation.
+      </p>
 
-          <motion.p
-            variants={itemVariants}
-            className="
-              mt-6 text-lg md:text-xl max-w-2xl leading-relaxed mx-auto
-              text-gray-600 dark:text-gray-400
-            "
-          >
-            Our team is working tirelessly to deliver an experience that exceeds all expectations.
-          </motion.p>
+      <div className="bg-white/20 dark:bg-white/5 backdrop-blur-md border border-white/20 rounded-3xl shadow-lg p-6 w-full max-w-5xl">
+        <div className="grid lg:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 place-items-center">
+            {serviceCards.map(c => (
+              <div key={c.id} className="w-full max-w-[160px] h-[140px]">
+                {renderCard(c.id)}
+              </div>
+            ))}
+          </div>
 
-          <motion.div
-            variants={itemVariants}
-            className="mt-10 flex justify-center"
-          >
-            <motion.button
-              onClick={() => navigate('/JoinUs')}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: '0 5px 15px rgba(192, 38, 211, 0.3)',
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="
-                px-10 py-3 rounded-full font-semibold shadow-lg
-                bg-gradient-to-r from-purple-600 to-pink-600
-                text-white transition-all duration-300
-              "
-            >
-              Join Us
-            </motion.button>
-          </motion.div>
+          {/* DETAILS */}
+          <div className="flex items-center justify-center">
+            <motion.div id="details-card" className="w-full max-w-md">
+              <div className="rounded-3xl bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl p-6 shadow-xl border border-white/10">
+                <Card sx={{ bgcolor: "transparent", boxShadow: "none" }}>
+                  <CardContent>
+                    {selected ? (
+                      <>
+                        <IconButton
+                          onClick={() => setSelected(null)}
+                          sx={{ position: "absolute", top: 12, right: 12, color: "#ec4899" }}
+                        >
+                          <CloseIcon />
+                        </IconButton>
 
-          <motion.div
-            variants={itemVariants}
-            className="
-              mt-12 text-sm tracking-wider
-              text-gray-500 dark:text-gray-400
-            "
-          >
-            SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW
-          </motion.div>
+                        <Typography variant="h5" sx={{ color: "#f97316", mb: 1 }}>
+                          {services[selected].title}
+                        </Typography>
+
+                        <Typography sx={{ color: "#aaa", mb: 2 }}>
+                          {services[selected].desc}
+                        </Typography>
+
+                        <Divider sx={{ mb: 2, borderColor: "rgba(255,255,255,0.1)" }} />
+
+                        <List dense>
+                          {services[selected].features.map((f, i) => (
+                            <ListItem key={i} disableGutters>
+                              <Box sx={{ width: 8, height: 8, bgcolor: "#f97316", borderRadius: "50%", mr: 2 }} />
+                              <ListItemText primary={f} primaryTypographyProps={{ sx: { color: "#ddd" } }} />
+                            </ListItem>
+                          ))}
+                        </List>
+                      </>
+                    ) : (
+                      <>
+                        <Typography variant="h4" sx={{ color: "#ec4899", mb: 2 }}>
+                          Welcome to SQAC Domains
+                        </Typography>
+                        <Typography sx={{ color: "#aaa" }}>
+                          Select a domain card to explore how we operate across tech, design, and innovation.
+                        </Typography>
+                      </>
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
-};
+}
 
-export default ComingSoonPage;
+export default ServicesSection;
