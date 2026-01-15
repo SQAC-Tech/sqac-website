@@ -10,16 +10,6 @@ import {
   FaRegComment,
   FaPaperPlane,
 } from "react-icons/fa";
-import {
-  FaGithub,
-  FaInstagram,
-  FaLinkedin,
-  FaArrowUp,
-  FaUser,
-  FaEnvelope,
-  FaRegComment,
-  FaPaperPlane,
-} from "react-icons/fa";
 import { motion } from "framer-motion";
 import SQAC from "../assets/LogoSQAC.png";
 import { useTheme } from "../contexts/ThemeContext";
