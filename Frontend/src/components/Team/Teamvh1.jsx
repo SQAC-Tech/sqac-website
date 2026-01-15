@@ -1,14 +1,14 @@
- import React from 'react';
-import { motion } from 'framer-motion';
-import teamImg1 from '../../assets/teamImg1.png';
-import teamImg2 from '../../assets/teamImg2.png';
+import React from "react";
+import { motion } from "framer-motion";
+import teamImg1 from "../../assets/teamImg1.png";
+import teamImg2 from "../../assets/teamImg2.png";
 
 const Teamvh1 = () => {
   return (
     <div className="relative min-h-screen bg-gradient-to-b from-purple-300 via-pink-200 to-orange-200
       dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-[#12081f]
       p-4 md:p-8 overflow-hidden">
-      
+
       {/* Title */}
       <div className="relative w-full h-full">
         <h1 className="absolute font-['Protest_Riot'] font-semibold text-[#5C5C5C] dark:text-zinc-300 leading-[60px] text-[40px] sm:text-[60px] md:text-[80px] left-[3vw] top-[12vh]">
@@ -45,7 +45,11 @@ const Teamvh1 = () => {
           transition={{ duration: 2.7, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-[58vh] left-[11vw] md:top-[58vh] md:left-[24vw] w-33 h-33 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-gray-300 dark:border-zinc-600"
         >
-          <img src={teamImg2} alt="Puzzle Team" className="w-full h-full object-cover" />
+          <img
+            src={teamImg2}
+            alt="Puzzle Team"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
 
         <motion.div
@@ -89,7 +93,11 @@ const Teamvh1 = () => {
           transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-[36vh] left-[57vw] md:left-[63vw] md:top-[38vh] w-33 h-33 md:w-45 md:h-45 rounded-full overflow-hidden border-2 border-gray-300 dark:border-zinc-600"
         >
-          <img src={teamImg1} alt="Team Meeting" className="w-full h-full object-cover" />
+          <img
+            src={teamImg1}
+            alt="Team Meeting"
+            className="w-full h-full object-cover"
+          />
         </motion.div>
       </div>
     </div>

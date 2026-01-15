@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage.jsx";
 import Footer from "./components/Footer.jsx";
@@ -14,7 +19,7 @@ import useLenisScroll from "./utils/smoothScroll";
 import Navbar from "./components/HomePage/Navbar.jsx";
 import { SpeedInsights } from "@vercel/speed-insights/react";
 import { ThemeProvider } from "./contexts/ThemeContext";
-
+import { DarkModeProvider } from "./DarkModeContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,9 +36,7 @@ const Layout = ({ children }) => {
       {/* Hide Navbar during maintenance */}
       {!isMaintenancePage && <Navbar />}
 
-      <main className="relative z-10">
-        {children}
-      </main>
+      <main className="relative z-10">{children}</main>
 
       {/* Hide Footer during maintenance */}
       {!isMaintenancePage && <Footer />}
@@ -46,43 +49,45 @@ const App = () => {
   useLenisScroll();
 
   return (
-    <ThemeProvider>
-      {/* Optional: Hide mesh background on maintenance */}
-      <MeshBackground />
+    <DarkModeProvider>
+      <ThemeProvider>
+        {/* Optional: Hide mesh background on maintenance */}
+        <MeshBackground />
 
-      <div className="relative min-h-screen overflow-x-hidden">
-        <Router>
-          <ScrollToTop />
+        <div className="relative min-h-screen overflow-x-hidden">
+          <Router>
+            <ScrollToTop />
 
-          <Layout>
-            <Routes>
-              {/* Maintenance */}
-              <Route path="/maintenance" element={<Maintenance />} />
+            <Layout>
+              <Routes>
+                {/* Maintenance */}
+                <Route path="/maintenance" element={<Maintenance />} />
 
-              {/* Main Website */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/about" element={<Aboutus />} />
-              <Route path="/events" element={<Events />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/projects" element={<Projects />} />
-              <Route path="/recruitment" element={<JoinUs />} />
-            </Routes>
-          </Layout>
-        </Router>
+                {/* Main Website */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<Aboutus />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/team" element={<Team />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/recruitment" element={<JoinUs />} />
+              </Routes>
+            </Layout>
+          </Router>
 
-        {/* Toast Notifications */}
-        <ToastContainer
-          position="top-center"
-          autoClose={3000}
-          newestOnTop
-          closeOnClick
-          pauseOnHover
-          theme="colored"
-        />
+          {/* Toast Notifications */}
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            theme="colored"
+          />
 
-        <SpeedInsights />
-      </div>
-    </ThemeProvider>
+          <SpeedInsights />
+        </div>
+      </ThemeProvider>
+    </DarkModeProvider>
   );
 };
 

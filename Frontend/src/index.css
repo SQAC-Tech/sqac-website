@@ -8,6 +8,9 @@
   --font-bubble: "Stick No Bills", "sans-serif";
   --font-head: "Poppins", "sans-serif";
   --font-domains: "Protest Riot", "sans-serif";
+  --dark-primary: #0D0D14;
+  --dark-secondary: #0a0a0a;
+  --dark-tertiary: #1e1e2e;
 }
 
 /* Dark Theme (Default) */
@@ -16,11 +19,11 @@ html.dark {
 }
 
 html.dark body {
-  background: linear-gradient(135deg, #0a0014 0%, #1a0033 25%, #2d1b69 50%, #1a0033 75%, #0a0014 100%);
+  background: #0D0D14;
   color: #ffffff;
   min-height: 100vh;
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Light Theme */
@@ -29,11 +32,19 @@ html.light {
 }
 
 html.light body {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%);
+  background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a);
+  animation: gradientCycle 8s ease-in-out infinite;
   color: #1e293b;
   min-height: 100vh;
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes gradientCycle {
+  0%, 100% { background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a); }
+  25% { background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a); }
+  50% { background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a); }
+  75% { background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a); }
 }
 
 body {
@@ -50,7 +61,7 @@ body::-webkit-scrollbar {
 
 /* Dark Theme Navigation */
 html.dark nav {
-  background: linear-gradient(135deg, rgba(10, 0, 20, 0.8), rgba(26, 0, 51, 0.8)) !important;
+  background: linear-gradient(to bottom, rgba(10, 0, 20, 0.8), rgba(26, 0, 51, 0.8)) !important;
   border-bottom: 1px solid #374151 !important;
 }
 
@@ -73,7 +84,7 @@ html.dark nav button:hover {
 
 /* Light Theme Navigation */
 html.light nav {
-  background: linear-gradient(135deg, rgba(255, 235, 238, 0.9), rgba(255, 205, 210, 0.9)) !important;
+  background: linear-gradient(to bottom, rgba(255, 235, 238, 0.9), rgba(255, 205, 210, 0.9)) !important;
   border-bottom: 1px solid #ffcdd2 !important;
 }
 
@@ -127,12 +138,12 @@ html.light nav .border-gray-300 {
 
 /* Global theme overrides */
 html.dark body:not(.projects-page) {
-  background: linear-gradient(135deg, #0a0014 0%, #1a0033 25%, #2d1b69 50%, #1a0033 75%, #0a0014 100%) !important;
+  background: #0D0D14 !important;
   color: #ffffff !important;
 }
 
 html.light body:not(.projects-page) {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
   color: #1e293b !important;
 }
 
@@ -185,7 +196,7 @@ html.dark .text-purple-700 {
 }
 
 html.light .text-purple-700 {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -215,16 +226,16 @@ html.dark .to-pink-400 {
 
 html.light .from-purple-400,
 html.light .to-pink-400 {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
 }
 
 /* Background gradient overrides */
 html.dark body:not(.projects-page) div[class*="min-h-screen"] {
-  background: linear-gradient(135deg, #0a0014 0%, #1a0033 25%, #2d1b69 50%, #1a0033 75%, #0a0014 100%) !important;
+  background: #0D0D14 !important;
 }
 
 html.light body:not(.projects-page) div[class*="min-h-screen"] {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 /* Accent color overrides for buttons and interactive elements */
@@ -237,7 +248,7 @@ html.dark .to-accent {
 html.light .bg-accent,
 html.light .from-accent,
 html.light .to-accent {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
 }
 
 /* Teamvh2 and other component specific overrides */
@@ -246,16 +257,16 @@ html.dark .text-indigo-700 {
 }
 
 html.light .text-indigo-700 {
-  color: #2563eb !important;
+  color: #951D13 !important;
 }
 
 /* Footer and other gradient backgrounds */
 html.dark .bg-gradient-to-t.from-violet-300 {
-  background: linear-gradient(to top, #0a0014, #1a0033, #2d1b69) !important;
+  background: linear-gradient(to bottom, #000000 0%, #1a1a1a 25%, #fb923c 35%, #f97316 50%, #ea580c 65%, #1a1a1a 75%, #000000 100%) !important;
 }
 
 html.light .bg-gradient-to-t.from-violet-300 {
-  background: linear-gradient(to top, #ffebee, #ffcdd2, #ef9a9a) !important;
+  background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a) !important;
 }
 
 /* Force ContactUs background */
@@ -279,9 +290,13 @@ body:has(.projects-no-purple) {
   background: white !important;
 }
 
-/* Fallback for browsers that don't support :has */
-body.projects-page {
-  background: white !important;
+/* Theme-specific body backgrounds for Projects page */
+html.dark body.projects-page {
+  background: #0D0D14 !important;
+}
+
+html.light body.projects-page {
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 /* Remove old conflicting text-purple-700 override - now handled by theme-specific rules above */
@@ -305,7 +320,7 @@ html.light .text-purple-800 {
 
 /* Comprehensive text color fixes for light theme */
 html.light .text-white {
-  color: #1e293b !important;
+  color: #ffffff !important;
 }
 
 /* Exception for mission statement - keep it white in light mode */
@@ -314,7 +329,7 @@ html.light .text-white.font-poppins.leading-relaxed {
 }
 
 html.light [class*="text-white"] {
-  color: #1e293b !important;
+  color: #ffffff !important;
 }
 
 /* Component-specific text colors */
@@ -366,12 +381,11 @@ html.light [class*="border-white"] {
 
 /* Footer theme-specific overrides */
 html.dark footer {
-  background: linear-gradient(to top, #000000, #581c87, #000000) !important;
   color: #ffffff !important;
 }
 
 html.light footer {
-  background: linear-gradient(to top, #ffebee, #ffcdd2, #ffebee) !important;
+  background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a) !important;
   color: #1e293b !important;
 }
 
@@ -496,6 +510,80 @@ html.lenis {
   overflow: hidden;
 }
 
+/* Enhanced animations */
+@keyframes pulse-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 20px rgba(243, 74, 130, 0.5),
+      0 0 40px rgba(243, 74, 130, 0.3),
+      0 0 60px rgba(243, 74, 130, 0.2);
+  }
+  50% {
+    text-shadow:
+      0 0 30px rgba(243, 74, 130, 0.8),
+      0 0 60px rgba(243, 74, 130, 0.5),
+      0 0 90px rgba(243, 74, 130, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Floating animation for background elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Particle animation */
+@keyframes particle-float {
+  0% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.animate-particle {
+  animation: particle-float 4s ease-in-out infinite;
+}
+
+/* Enhanced hover effects */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient text animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 4s ease infinite;
+}
+
 /* Domains Section Baby Pink Theme Override */
 html.light .bg-gradient-to-b.from-blue-50.to-blue-100,
 html.dark .bg-gradient-to-b.from-blue-50.to-blue-100 {
@@ -529,7 +617,7 @@ html.light .bg-white {
 }
 
 html.light .bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.light .bg-black\/90 {
@@ -542,7 +630,7 @@ html.light .bg-black\/90.border-gray-600 {
 }
 
 html.light .text-white {
-  color: #1e293b !important;
+  color: #ffffff !important;
 }
 
 html.light .text-white.font-poppins.leading-relaxed.font-medium {
@@ -550,7 +638,7 @@ html.light .text-white.font-poppins.leading-relaxed.font-medium {
 }
 
 html.light .bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary .text-transparent.bg-clip-text.bg-gradient-to-r.from-\[#951D13\].via-\[#f34a82\].to-\[#F0A01F\] {
-  background: linear-gradient(to right, #2563eb, #3b82f6, #60a5fa) !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
@@ -558,7 +646,7 @@ html.light .bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertia
 
 /* About Us 2ndvh Light Mode */
 html.light .min-h-\[85vh\].flex.flex-col.items-center.py-8.px-4.bg-gradient-to-b.from-dark-primary.via-dark-secondary.to-dark-tertiary {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.light .bg-dark-surface\/70 {
@@ -588,11 +676,12 @@ html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .text-white
 }
 
 html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .bg-blue-500 {
-  background-color: #ec4899 !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
 }
 
 html.light .bg-white.p-10.rounded-3xl.shadow-xl.text-center.max-w-md .bg-blue-500:hover {
-  background-color: #db2777 !important;
+  background: linear-gradient(to right, #951D13, #f34a82, #F0A01F) !important;
+  filter: brightness(0.9) !important;
 }
 
 /* Make "SOMETHING BIG IS BREWING.. BE THE FIRST TO KNOW" text black in light mode */
@@ -628,11 +717,11 @@ html.light motion.div.text-sm.tracking-wider {
 
 /* Projects Section Theme Support */
 html.light .projects-section {
-  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
+  background: linear-gradient(to bottom, #ffebee 0%, #ffcdd2 25%, #ef9a9a 50%, #ffcdd2 75%, #ffebee 100%) !important;
 }
 
 html.dark .projects-section {
-  background: linear-gradient(135deg, #0a0014 0%, #1a0033 25%, #2d1b69 50%, #1a0033 75%, #0a0014 100%) !important;
+  background: #0D0D14 !important;
 }
 
 html.light .projects-description {
@@ -649,6 +738,17 @@ html.light .projects-subtitle {
 
 html.dark .projects-subtitle {
   color: #ffffff !important;
+}
+
+/* Projects page footer theme support */
+html.dark body.projects-page footer {
+  background: linear-gradient(to bottom, var(--dark-primary) 0%, var(--dark-secondary) 30%, var(--dark-tertiary) 70%, var(--dark-primary) 100%) !important;
+  color: #ffffff !important;
+}
+
+html.light body.projects-page footer {
+  background: linear-gradient(to bottom, #ffebee, #ffcdd2, #ef9a9a) !important;
+  color: #1e293b !important;
 }
 
 
