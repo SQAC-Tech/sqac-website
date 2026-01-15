@@ -61,7 +61,8 @@ const WhatWeDoSection = () => {
   const [front, back] = cards[index];
 
   return (
-    <div className="flex px-6 md:px-16 min-h-screen bg-gradient-to-b from-dark-primary via-dark-secondary to-dark-tertiary overflow-hidden flex-col md:flex-row">
+    <div className="flex px-6 md:px-16 pt-24 min-h-screen bg-gradient-to-b from-red-300 via-orange-200 to-orange-300 dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-[#12081f] overflow-hidden flex-col md:flex-row">
+
       <motion.div
         className="flex flex-col justify-center flex-1 mt-20 md:mt-0"
         initial={{ x: 100, opacity: 0 }}
@@ -69,15 +70,14 @@ const WhatWeDoSection = () => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
-        <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-bold font-poppins">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
-            WHAT WE
-          </span>{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F]">
+        <h2 className="text-[clamp(2.5rem,8vw,5rem)] font-bold font-poppins text-gray-900 dark:text-gray-100">
+          WHAT WE{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
             DO
           </span>
         </h2>
-        <p className="text-base sm:text-lg md:text-xl text-white max-w-xl mt-6" style={{textShadow: '0 0 5px rgba(255, 255, 255, 0.3), 0 0 10px rgba(255, 255, 255, 0.2)'}}>
+
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-xl mt-6">
           At SQAC, we're more than just code. We build experiences, spark
           innovation, and bring bold ideas to life through design, tech, and
           collaboration.
@@ -91,30 +91,38 @@ const WhatWeDoSection = () => {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
+        {/* PREV BUTTON */}
         <button
           aria-label="Previous"
           onClick={() => {
             setFlip(false);
             setIndex((index - 1 + cards.length) % cards.length);
           }}
-          className="absolute -left-4 sm:-left-10 md:-left-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-accent text-white rounded-full hover:bg-accentSecondary active:scale-95 transition z-10"
+          className="
+            absolute -left-4 sm:-left-10 md:-left-12
+            top-1/2 -translate-y-1/2
+            w-10 h-10 flex items-center justify-center
+            bg-purple-500 dark:bg-purple-600
+            text-white rounded-full
+            hover:bg-purple-600 dark:hover:bg-purple-500
+            active:scale-95 transition z-10
+          "
         >
           ←
         </button>
 
-       <div
-  className="relative w-64 sm:w-72 md:w-96 h-[400px] sm:h-[440px] md:h-[500px]"
-  onClick={() => {
-    if (window.innerWidth < 1024) setFlip((prev) => !prev); // mobile & tablet
-  }}
-  onMouseEnter={() => {
-    if (window.innerWidth >= 1024) setFlip(true); // desktop only
-  }}
-  onMouseLeave={() => {
-    if (window.innerWidth >= 1024) setFlip(false); // desktop only
-  }}
->
-
+        <div
+          className="relative w-64 sm:w-72 md:w-96 h-[400px] sm:h-[440px] md:h-[500px]"
+          onClick={() => {
+            if (window.innerWidth < 1024) setFlip((prev) => !prev);
+          }}
+          onMouseEnter={() => {
+            if (window.innerWidth >= 1024) setFlip(true);
+          }}
+          onMouseLeave={() => {
+            if (window.innerWidth >= 1024) setFlip(false);
+          }}
+        >
           {[front, back].map((card, i) => (
             <div
               key={i}
@@ -124,26 +132,45 @@ const WhatWeDoSection = () => {
                   : "opacity-0 rotate-y-180"
               }`}
             >
-              <div className="flex flex-col items-center justify-center h-full px-6 sm:px-8 py-6 text-center bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-                <div className="mb-4 p-4 bg-white/20 rounded-full backdrop-blur-sm">
+              <div className="
+                flex flex-col items-center justify-center h-full
+                px-6 sm:px-8 py-6 text-center
+                bg-white/10 dark:bg-black/30
+                backdrop-blur-sm rounded-2xl
+                border border-white/20 dark:border-white/10
+              ">
+                <div className="mb-4 p-4 bg-white/20 dark:bg-black/30 rounded-full backdrop-blur-sm">
                   {card.icon}
                 </div>
+
                 <h3 className="text-2xl font-bold text-white mb-2">
                   {card.title}
                 </h3>
-                <p className="text-white/90 text-sm">{card.desc}</p>
+
+                <p className="text-white/90 text-sm">
+                  {card.desc}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
+        {/* NEXT BUTTON */}
         <button
           aria-label="Next"
           onClick={() => {
             setFlip(false);
             setIndex((index + 1) % cards.length);
           }}
-          className="absolute -right-4 sm:-right-10 md:-right-12 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-accent text-white rounded-full hover:bg-accentSecondary active:scale-95 transition z-10"
+          className="
+            absolute -right-4 sm:-right-10 md:-right-12
+            top-1/2 -translate-y-1/2
+            w-10 h-10 flex items-center justify-center
+            bg-cyan-500 dark:bg-cyan-600
+            text-white rounded-full
+            hover:bg-cyan-600 dark:hover:bg-cyan-500
+            active:scale-95 transition z-10
+          "
         >
           →
         </button>
@@ -155,7 +182,7 @@ const WhatWeDoSection = () => {
               className={`h-2 rounded-full transition-all ${
                 i === index
                   ? "w-8 bg-gradient-to-r from-purple-500 to-pink-500"
-                  : "w-2 bg-gray-300"
+                  : "w-2 bg-gray-300 dark:bg-gray-600"
               }`}
             />
           ))}

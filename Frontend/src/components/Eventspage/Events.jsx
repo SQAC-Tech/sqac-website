@@ -5,7 +5,7 @@ const mineverse = new URL('../../assets/image.png', import.meta.url).href;
 
 const Events = () => {
   return (
-    <div className="relative min-h-screen flex justify-center items-center px-4 py-10">
+    <div className="min-h-screen bg-gradient-to-b from-[#b6f0ff] via-[#dcb6ff] to-cyan-200 flex justify-center items-center px-4 py-10">
 
       <motion.div
         initial={{ opacity: 0, y: 28 }}
