@@ -145,7 +145,7 @@ export default function Domains() {
       title: "Technical",
       description:
         "The Technical Domain nurtures passionate developers and designers. From building elegant websites to crafting AI models — this is where code meets creativity.",
-      mainImage: tech,
+      mainImage: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjI5fHx0ZWNobm9sb2d5fGVufDB8fDB8fHww",
       subdomains: [
         { name: "Web Dev", description: "Building responsive and dynamic websites." },
         { name: "App Dev", description: "Creating intuitive mobile applications." },
@@ -156,7 +156,7 @@ export default function Domains() {
       title: "Corporate",
       description:
         "The Corporate Domain powers our visibility and network. It manages events, sponsorships, and public relations, making sure our voice reaches far and wide.",
-      mainImage: corp,
+      mainImage: "https://plus.unsplash.com/premium_photo-1661396923254-92ed923a1485?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTd8fGNvcnBvcmF0ZSUyMGV2ZW50fGVufDB8fDB8fHww",
       subdomains: [
         { name: "Events", description: "Organizing engaging events and workshops." },
         { name: "Sponsorship", description: "Securing partnerships and sponsorships." },
@@ -166,7 +166,7 @@ export default function Domains() {
       title: "Media",
       description:
         "The Media Domain shapes our identity and amplifies our presence. It blends public relations and creative design to craft compelling stories, manage our image, and ensure our club resonates with every audience it reaches.",
-      mainImage: media,
+      mainImage: "https://images.unsplash.com/photo-1542293011-a7c656888275?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fG1lZGlhJTIwcGhvdG9ncmFwaHl8ZW58MHx8MHx8fDA%3D",
       subdomains: [
         { name: "Creatives", description: "Designing stunning graphics and user interfaces." },
         { name: "Public Relations", description: "Managing public relations and media outreach." },

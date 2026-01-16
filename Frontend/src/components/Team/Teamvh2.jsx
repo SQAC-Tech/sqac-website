@@ -16,7 +16,7 @@ export default function Teamvh2({onSelectDomain,children}){
       className="
         w-full flex flex-col items-center pt-16
         bg-gradient-to-b from-orange-200 via-pink-200 to-cyan-200
-        dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
+        dark:from-[#12081f] dark:via-[#1b0b2e] dark:to-zinc-800
       "
     >
       <h1 className="text-5xl font-extrabold mb-12 bg-gradient-to-r from-orange-400 via-pink-500 to-purple-500 bg-clip-text text-transparent">
