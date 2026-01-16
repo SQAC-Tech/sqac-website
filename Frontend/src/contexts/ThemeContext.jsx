@@ -11,7 +11,7 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     // Update localStorage and document class when theme changes
@@ -32,6 +32,8 @@ export const ThemeProvider = ({ children }) => {
     const shouldBeDark = savedTheme
       ? savedTheme === "dark"
       : window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    setIsDarkMode(shouldBeDark);
 
     if (shouldBeDark) {
       document.documentElement.classList.add("dark");
