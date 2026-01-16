@@ -90,7 +90,7 @@ const ComingSoonPage = () => {
             className="mt-10 flex justify-center"
           >
             <motion.button
-              onClick={() => navigate('/JoinUs')}
+              onClick={() => navigate('/recruitment')}
               whileHover={{
                 scale: 1.05,
                 boxShadow: '0 5px 15px rgba(192, 38, 211, 0.3)',
