@@ -4,10 +4,7 @@ import TeamPic from "../../assets/SQAC_Team.jpg";
 
 const AboutUs = () => {
   const ref = useRef(null);
- const inView = useInView(ref, { once: true });
-
-const isInView = inView;
-
+  const isInView = useInView(ref, { once: true });
 
   return (
     <section
@@ -43,13 +40,16 @@ const isInView = inView;
           initial={{ scale: 0.97, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.6, ease: "easeOut" }}
-          className="bg-black/90 backdrop-blur-lg shadow-xl rounded-3xl p-4 sm:p-8 w-full max-w-3xl mx-auto mt-1 border border-gray-600 transition-all duration-300"
-          whileHover={{
-            backgroundColor: 'rgba(255, 107, 53, 0.15)',
-            borderColor: '#ff6b35',
-            boxShadow: '0 0 40px rgba(255, 107, 53, 0.4)',
-            scale: 1.02
-          }}
+          className="
+            w-full max-w-3xl mx-auto mt-1
+            p-4 sm:p-8 rounded-3xl
+            backdrop-blur-lg shadow-xl
+            bg-gradient-to-tr
+            from-white/40 via-orange-100/30 to-pink-100/40
+            dark:from-white/5 dark:via-white/10 dark:to-white/5
+            border border-orange-200 dark:border-white/10
+            hover:shadow-2xl transition-all duration-300
+          "
         >
           <div className="rounded-xl overflow-hidden mb-4 max-h-[45vh]">
             <img
@@ -69,8 +69,12 @@ const isInView = inView;
               dark:text-zinc-300
             "
           >
-            At <strong className="text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] font-semibold">SQAC</strong>, we're a student-led community passionate
-            about clean code, real-world projects, and collaborative learning. We host hands-on
+            At{" "}
+            <strong className="text-pink-600 dark:text-pink-400 font-semibold">
+              SQAC
+            </strong>
+            , we’re a student-led community passionate about clean code,
+            real-world projects, and collaborative learning. We host hands-on
             sessions, testing workshops, and build future-ready developers.
           </motion.p>
 
@@ -78,10 +82,11 @@ const isInView = inView;
             initial={{ y: 20, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ delay: 0.6, duration: 0.6 }}
-            className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-[#951D13] via-[#f34a82] to-[#F0A01F] text-lg italic font-semibold text-center"
-            style={{
-              textShadow: '0 0 3px rgba(243, 74, 130, 0.3), 0 0 6px rgba(243, 74, 130, 0.2), 0 0 9px rgba(243, 74, 130, 0.1)'
-            }}
+            className="
+              mt-6 text-lg italic font-semibold text-center
+              text-orange-600
+              dark:text-orange-300
+            "
           >
             “Where code meets perfection — and you're part of it.”
           </motion.blockquote>
