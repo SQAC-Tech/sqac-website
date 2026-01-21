@@ -59,7 +59,7 @@ function ServicesSection() {
     if (selected && window.innerWidth < 768) {
       document.getElementById("details-card")?.scrollIntoView({
         behavior: "smooth",
-        block: "nearest"
+        block: "nearest",
       });
     }
   }, [selected]);
@@ -94,7 +94,7 @@ function ServicesSection() {
       className="
         min-h-[85vh] py-10 px-4 flex flex-col items-center
         bg-gradient-to-b from-orange-200 to-cyan-200
-       dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
+        dark:from-[#0f0a1a] dark:via-[#1b0b2e] dark:to-zinc-800
       "
     >
       <h2 className="mt-9 text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-orange-500 dark:from-pink-400 dark:to-orange-400">
@@ -134,17 +134,37 @@ function ServicesSection() {
                           {services[selected].title}
                         </Typography>
 
-                        <Typography sx={{ color: "#aaa", mb: 2 }}>
+                        <Typography sx={{ color: "text.secondary", mb: 2 }}>
                           {services[selected].desc}
                         </Typography>
 
-                        <Divider sx={{ mb: 2, borderColor: "rgba(255,255,255,0.1)" }} />
+                        <Divider sx={{ mb: 2 }} />
 
                         <List dense>
                           {services[selected].features.map((f, i) => (
-                            <ListItem key={i} disableGutters>
-                              <Box sx={{ width: 8, height: 8, bgcolor: "#f97316", borderRadius: "50%", mr: 2 }} />
-                              <ListItemText primary={f} primaryTypographyProps={{ sx: { color: "#ddd" } }} />
+                            <ListItem key={i} disableGutters sx={{ alignItems: "flex-start" }}>
+                              <Box
+                                sx={{
+                                  width: 10,
+                                  height: 10,
+                                  mt: "6px",
+                                  mr: 2,
+                                  borderRadius: "50%",
+                                  bgcolor: "#ea580c",
+                                  boxShadow: "0 0 6px rgba(234, 88, 12, 0.6)",
+                                  flexShrink: 0,
+                                }}
+                              />
+                              <ListItemText
+                                primary={f}
+                                primaryTypographyProps={{
+                                  sx: {
+                                    color: "text.primary",
+                                    fontSize: "0.95rem",
+                                    fontWeight: 500,
+                                  },
+                                }}
+                              />
                             </ListItem>
                           ))}
                         </List>
@@ -154,7 +174,7 @@ function ServicesSection() {
                         <Typography variant="h4" sx={{ color: "#ec4899", mb: 2 }}>
                           Welcome to SQAC Domains
                         </Typography>
-                        <Typography sx={{ color: "#aaa" }}>
+                        <Typography sx={{ color: "text.secondary" }}>
                           Select a domain card to explore how we operate across tech, design, and innovation.
                         </Typography>
                       </>

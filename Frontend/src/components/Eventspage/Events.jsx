@@ -52,8 +52,8 @@ const Events = () => {
       title: "MineVerse",
       description:
         "Compete in coding challenges, trade resources, and build your empire in this thrilling strategy-based event.",
-      date: "Coming Soon",
-      venue: "To be announced",
+      date: "23rd August 2025",
+      venue: "Turing Hall",
       image: mineverse,
       link: "https://mineverse-sqac.vercel.app/",
       gradient: "from-purple-500 to-pink-500",
