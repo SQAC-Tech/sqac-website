@@ -179,7 +179,7 @@ function ServicesSection() {
                         <Typography
                           variant="h5"
                           sx={{
-                            color: isDarkMode ? "white" : "#f97316",
+                            color: "#f97316",
                             mb: 1,
                           }}
                         >
@@ -211,10 +211,8 @@ function ServicesSection() {
                                   mt: "6px",
                                   mr: 2,
                                   borderRadius: "50%",
-                                  bgcolor: isDarkMode ? "white" : "#ea580c",
-                                  boxShadow: isDarkMode
-                                    ? "0 0 6px rgba(255, 255, 255, 0.6)"
-                                    : "0 0 6px rgba(234, 88, 12, 0.6)",
+                                  bgcolor: "#f97316",
+                                  boxShadow: "0 0 6px rgba(249, 115, 22, 0.6)",
                                   flexShrink: 0,
                                 }}
                               />
