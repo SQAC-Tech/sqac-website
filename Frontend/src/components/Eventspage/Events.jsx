@@ -19,6 +19,7 @@ import {
   Sun,
 } from "lucide-react";
 import mineverse from "../../assets/image.png";
+import stadium from "../../assets/stadium.jpg";
 import EventsPhoto from "../../assets/Events-photo.png";
 import LogoSQAC from "../../assets/LogoSQAC.png";
 
@@ -63,6 +64,18 @@ const Events = () => {
 
     {
       id: 2,
+      title: "Hack and Hit",
+      description: "Think and code ",
+      date: "13 & 14 th February 2026",
+      venue: "TP -401/402",
+      image: stadium,
+      link: "https://hack-and-hit-webiste.vercel.app/",
+      gradient: "from-gray-500 to-gray-600",
+      bgColor: "from-gray-100 to-gray-200",
+      highlights: [],
+    },
+    {
+      id: 3,
       title: "More Events Coming Soon",
       description: "Stay tuned for exciting new events!",
       date: "Coming Soon",
@@ -479,7 +492,7 @@ const Events = () => {
                                       e.stopPropagation();
                                       window.open(
                                         events[currentSlide].link,
-                                        "_blank"
+                                        "_blank",
                                       );
                                     }}
                                     className={`inline-flex items-center space-x-2 px-8 py-3 text-white rounded-full hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl ${
@@ -533,7 +546,7 @@ const Events = () => {
                                           {highlight}
                                         </span>
                                       </motion.div>
-                                    )
+                                    ),
                                   )}
                                 </div>
                                 <motion.p
@@ -650,7 +663,7 @@ const Events = () => {
                                       e.stopPropagation();
                                       window.open(
                                         events[currentSlide].link,
-                                        "_blank"
+                                        "_blank",
                                       );
                                     }}
                                     className={`inline-flex items-center space-x-2 px-8 py-3 text-white rounded-full hover:scale-105 transition-all duration-300  shadow-lg hover:shadow-xl ${
@@ -704,7 +717,7 @@ const Events = () => {
                                           {highlight}
                                         </span>
                                       </motion.div>
-                                    )
+                                    ),
                                   )}
                                 </div>
                                 {events[currentSlide].highlights.length ===
