@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage.jsx";
 import Footer from "./components/Footer.jsx";
@@ -18,6 +18,27 @@ import "react-toastify/dist/ReactToastify.css";
 
 import "./App.css";
 
+const AppContent = () => {
+  const location = useLocation();
+  const showFooter = location.pathname !== "/team";
+
+  return (
+    <>
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/about" element={<Aboutus />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/recruitment" element={<JoinUs />} />
+      </Routes>
+      {showFooter && <Footer />}
+    </>
+  );
+};
+
 const App = () => {
   useLenisScroll();
 
@@ -25,17 +46,7 @@ const App = () => {
     <ThemeProvider>
       <div className="app-container">
         <Router>
-          <ScrollToTop />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/about" element={<Aboutus />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/recruitment" element={<JoinUs />} />
-          </Routes>
-          <Footer />
+          <AppContent />
         </Router>
 
         {/* Toast container goes here */}
