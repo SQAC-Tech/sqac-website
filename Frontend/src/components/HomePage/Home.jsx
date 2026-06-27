@@ -7,9 +7,7 @@ export default function LandingHero() {
       className="
         relative min-h-screen w-full flex items-center justify-center
         px-4 sm:px-8 md:px-12 lg:px-20 overflow-hidden
-        bg-gradient-to-b
-        from-[#f3d79e] via-[#f3d8ad] to-red-300
-        dark:from-zinc-950 dark:via-zinc-900 dark:to-[#0f0a1a]
+        bg-transparent
       "
     >
       {/* Blurred background circle */}
