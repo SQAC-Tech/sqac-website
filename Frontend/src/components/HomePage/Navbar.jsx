@@ -7,7 +7,6 @@ import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import ToggleDarkMode from "../ToggleDarkMode";
 import gsap from "gsap";
 
@@ -251,10 +250,6 @@ function Navbar() {
             <div className="nav-tooltip">Toggle Theme</div>
           </div>
 
-          <Link to="/" className="nav-icon-link logout-icon" onClick={() => setIsOpen(false)}>
-            <LogoutOutlinedIcon style={{ fontSize: '22px' }} />
-            <div className="nav-tooltip">Logout</div>
-          </Link>
         </div>
 
       </div>

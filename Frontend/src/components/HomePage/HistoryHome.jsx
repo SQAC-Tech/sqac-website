@@ -78,7 +78,13 @@ export default function HistoryHome() {
     <div className="relative min-h-screen bg-transparent overflow-hidden py-24 flex flex-col items-center transition-colors duration-500">
 
       {/* GridMotion Parallax Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-[0.08] dark:opacity-10 mix-blend-multiply dark:mix-blend-screen">
+      <div 
+        className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-[0.08] dark:opacity-10 mix-blend-multiply dark:mix-blend-screen"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent, black 35%, black 50%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 35%, black 50%, transparent)'
+        }}
+      >
         <GridMotion 
           items={historyMilestones.flatMap(m => [m.year, m.image, m.title, m.image, 'SQAC', m.image]).slice(0, 28)} 
           gradientColor="transparent" 
@@ -86,7 +92,7 @@ export default function HistoryHome() {
       </div>
 
       <div className="relative z-10 text-center mb-16">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#4A1E5C] to-[#8A4E9E] dark:from-pink-500 dark:via-purple-500 dark:to-cyan-400 font-poppins">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#971F18] to-[#971F18] dark:from-pink-500 dark:via-purple-500 dark:to-cyan-400 font-poppins">
           Our Interactive Archives
         </h1>
         <p className="mt-4 text-gray-700 dark:text-zinc-400 text-lg font-poppins max-w-2xl mx-auto px-4">

@@ -59,13 +59,13 @@ export default function Gallery3D() {
 
     // 1. Setup Scene and Camera
     const scene = new THREE.Scene();
-    
+
     const getCameraZ = () => {
       if (cachedWidth < 640) return 2100;
       if (cachedWidth < 1024) return 1750;
       return 1450;
     };
-    
+
     const camera = new THREE.PerspectiveCamera(40, cachedWidth / cachedHeight, 1, 10000);
     camera.position.z = getCameraZ();
 
@@ -126,7 +126,7 @@ export default function Gallery3D() {
       });
 
       const objectCSS = new CSS3DObject(element);
-      
+
       // Initialize falling state parameters
       const randomOffsetY = Math.random() * 200;
       const randomTiltZ = (Math.random() - 0.5) * 0.3;
@@ -178,7 +178,7 @@ export default function Gallery3D() {
           y,
           ringRadius * Math.cos(theta)
         );
-        
+
         // Face cards outward from center
         const targetVector = new THREE.Vector3(dummy.position.x * 2, dummy.position.y, dummy.position.z * 2);
         dummy.lookAt(targetVector);
@@ -223,7 +223,7 @@ export default function Gallery3D() {
     centerEl.style.pointerEvents = "none";
     centerEl.style.opacity = "0"; // Starts hidden
     centerEl.style.willChange = "opacity";
-    
+
     const centerObj = new CSS3DObject(centerEl);
     centerObj.position.set(0, 0, 0);
     scene.add(centerObj);
@@ -263,7 +263,7 @@ export default function Gallery3D() {
     // 9. Synchronized Animation loop (Driven by GSAP ticker for frame-rate synchronization)
     const animate = () => {
       const isTweening = trigger ? Math.abs(scrollState.progress - trigger.progress) > 0.001 : false;
-      
+
       // Perform rendering and calculations only when the section is active or catching up progress
       if (isSectionActive || isTweening) {
         const scrollProgress = scrollState.progress;
@@ -285,18 +285,18 @@ export default function Gallery3D() {
         // Staggered cards transition from falling coordinates to circular strip targets
         objects.forEach((obj, idx) => {
           const ringTarget = targets.ring[idx];
-          
+
           // Cards fall slowly between 0.2 and 0.85 progress, staggered (wider range makes it slower)
           const start_p = 0.2 + (idx / total) * 0.35;
           const duration_p = 0.3; // Slower individual card flight duration
-          
+
           let t;
           if (hasFormedCircle) {
             t = 1.0;
           } else {
             t = Math.max(0, Math.min(1.0, (scrollProgress - start_p) / duration_p));
           }
-          
+
           const t_ease = t * t * (3 - 2 * t); // Smooth easing
 
           // Interpolating from initial falling positions to target ring positions
@@ -367,9 +367,9 @@ export default function Gallery3D() {
   const isBubbleLeft = activeCard && activeCard.index % 2 === 0;
 
   return (
-    <div 
-      ref={scrollContainerRef} 
-      className="relative h-[110vh] w-full bg-transparent transition-colors duration-500 overflow-hidden"
+    <div
+      ref={scrollContainerRef}
+      className="relative h-[110vh] w-full -mt-[35vh] md:-mt-[30vh] bg-transparent transition-colors duration-500 overflow-hidden"
     >
       {/* Sticky viewport wrapper */}
       <div className="gallery-sticky-wrapper sticky top-0 h-screen w-full overflow-hidden flex flex-col items-center justify-center">
@@ -417,9 +417,8 @@ export default function Gallery3D() {
         >
           {/* Alternating layout wrapper */}
           <div
-            className={`relative max-w-5xl w-full flex flex-col items-center justify-center gap-6 md:gap-14 pointer-events-auto ${
-              isBubbleLeft ? "md:flex-row-reverse" : "md:flex-row"
-            }`}
+            className={`relative max-w-5xl w-full flex flex-col items-center justify-center gap-6 md:gap-14 pointer-events-auto ${isBubbleLeft ? "md:flex-row-reverse" : "md:flex-row"
+              }`}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Center Image view */}
@@ -442,10 +441,9 @@ export default function Gallery3D() {
             </div>
 
             {/* Alternating thought bubble details */}
-            <div 
-              className={`relative p-6 sm:p-8 md:p-10 bg-white/95 dark:bg-zinc-900/95 border-2 border-dashed border-purple-400 dark:border-purple-600 rounded-[2rem_2rem_2rem_2rem] md:rounded-[3rem_2rem_3rem_2.5rem] shadow-[0_15px_40px_rgba(168,85,247,0.18)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.55)] max-w-sm md:max-w-md font-poppins ${
-                isBubbleLeft ? "animate-cloud-pop-left" : "animate-cloud-pop-right"
-              }`}
+            <div
+              className={`relative p-6 sm:p-8 md:p-10 bg-white/95 dark:bg-zinc-900/95 border-2 border-dashed border-purple-400 dark:border-purple-600 rounded-[2rem_2rem_2rem_2rem] md:rounded-[3rem_2rem_3rem_2.5rem] shadow-[0_15px_40px_rgba(168,85,247,0.18)] dark:shadow-[0_15px_40px_rgba(0,0,0,0.55)] max-w-sm md:max-w-md font-poppins ${isBubbleLeft ? "animate-cloud-pop-left" : "animate-cloud-pop-right"
+                }`}
             >
               {/* Cloud content */}
               <div className="relative z-10 text-left">
@@ -468,10 +466,9 @@ export default function Gallery3D() {
               </div>
 
               {/* Cloud tail circles pointing horizontally on desktop (alternating sides) */}
-              <div 
-                className={`hidden md:flex absolute bottom-[-15px] ${
-                  isBubbleLeft ? "right-12 flex-row-reverse" : "left-12 flex-row"
-                } gap-1.5 items-end pointer-events-none`}
+              <div
+                className={`hidden md:flex absolute bottom-[-15px] ${isBubbleLeft ? "right-12 flex-row-reverse" : "left-12 flex-row"
+                  } gap-1.5 items-end pointer-events-none`}
               >
                 <div className="w-4.5 h-4.5 rounded-full bg-white dark:bg-zinc-900 border-2 border-dashed border-purple-400 dark:border-purple-600 shadow-md" />
                 <div className="w-2.5 h-2.5 rounded-full bg-white dark:bg-zinc-900 border-2 border-dashed border-purple-400 dark:border-purple-600 shadow-sm" />
