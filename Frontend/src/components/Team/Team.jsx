@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 //import { teamMembers } from '../data/teamData';
 import { ChevronLeft, ChevronRight, ChevronDown, Linkedin, Github, Globe, Users, Mouse } from 'lucide-react';
 import { useTheme } from "../../contexts/ThemeContext";
+import CircularMenu from './CircularMenu';
 
 import "./teamtheme.css";
 
@@ -243,7 +244,6 @@ export default function Team({ darkMode: propDarkMode }) {
   const [teamMembers, setTeamMembers] = useState(PLACEHOLDER_MEMBERS);
   const [filter, setFilter] = useState('Board'); // Default to Board based on the reference image showing Board active
   const [subFilter, setSubFilter] = useState('All');
-  const [openDropdown, setOpenDropdown] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
@@ -251,6 +251,9 @@ export default function Team({ darkMode: propDarkMode }) {
   const [radiusZ, setRadiusZ] = useState(360);
   const [cardWidth, setCardWidth] = useState(280);
   const [cardHeight, setCardHeight] = useState(420);
+  const [translateYOffset, setTranslateYOffset] = useState(0);
+  const [carouselHeight, setCarouselHeight] = useState(530);
+  const [isPhone, setIsPhone] = useState(false);
   const sectionRef = useRef(null);
   const isScrollingRef = useRef(false);
   const isDragging = useRef(false);
@@ -361,25 +364,35 @@ export default function Team({ darkMode: propDarkMode }) {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
+      const height = window.innerHeight;
       let cardW = 230;
       let cardH = 340;
 
       if (width >= 1280) {
         cardW = 300;
         cardH = 360;
+        if (height < 780) {
+          cardW = 250;
+          cardH = 300;
+        }
       } else if (width >= 1024) {
         cardW = 220;
         cardH = 290;
+        if (height < 700) {
+          cardW = 190;
+          cardH = 250;
+        }
       } else if (width >= 768) {
         cardW = 180;
         cardH = 240;
       } else {
-        cardW = 140;
-        cardH = 200;
+        cardW = 160;
+        cardH = 220;
       }
 
       setCardWidth(cardW);
       setCardHeight(cardH);
+      setIsPhone(width < 768);
 
       // Horizontal radius takes cards right to the edge with a 16px safe margin
       const rx = Math.max(200, width / 2 - cardW / 2 - 16);
@@ -388,6 +401,31 @@ export default function Team({ darkMode: propDarkMode }) {
 
       setRadiusX(rx);
       setRadiusZ(rz);
+
+      let carouselH = 530;
+      if (width < 640) {
+        carouselH = height < 600 ? 300 : 360;
+      } else if (width < 768) {
+        carouselH = 460;
+      } else {
+        if (height < 720) {
+          carouselH = 400;
+        } else if (height < 800) {
+          carouselH = 450;
+        } else if (height < 850) {
+          carouselH = 480;
+        } else {
+          carouselH = 530;
+        }
+      }
+      setCarouselHeight(carouselH);
+
+      const bottomMargin = width < 768 ? 60 : 30;
+      const center = carouselH / 2;
+      const activeCardH = cardH * 1.32;
+      const targetBottom = carouselH - bottomMargin;
+      const translateYVal = targetBottom - (activeCardH / 2) - center;
+      setTranslateYOffset(translateYVal);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -522,12 +560,25 @@ export default function Team({ darkMode: propDarkMode }) {
   }, [angleStep]);
 
   return (
-    <section ref={sectionRef} id="team" className={`relative overflow-hidden font-sans h-screen min-h-[600px] flex flex-col justify-center pt-20 pb-4 transition-colors duration-500 ${darkMode ? 'bg-mesh-dark text-white' : 'bg-mesh-light text-gray-900'}`}>
+    <section ref={sectionRef} id="team" className={`relative overflow-hidden font-sans h-screen min-h-[600px] flex flex-col justify-between pt-24 sm:pt-28 xl:pt-20 pb-0 transition-colors duration-500 ${darkMode ? 'bg-mesh-dark text-white' : 'bg-mesh-light text-gray-900'}`}>
+
+      {/* Circular dial menu — anchored to section top-right, never overlaps cards */}
+      <div className="absolute -right-[110px] sm:-right-[120px] md:-right-[130px] xl:right-8 top-[170px] sm:top-[180px] xl:top-[72px] z-[30] w-auto">
+        <CircularMenu
+          activeFilter={filter}
+          activeSubFilter={subFilter}
+          onChangeFilter={(f, sf) => {
+            setFilter(f);
+            setSubFilter(sf);
+          }}
+          darkMode={darkMode}
+        />
+      </div>
 
       {/* Top Header & Filters Section - Constrained Width */}
-      <div className="max-w-[1400px] mx-auto px-6 relative z-10 w-full flex flex-col justify-start">
+      <div className="max-w-[1400px] mx-auto px-6 relative z-20 w-full flex flex-col justify-start">
         {/* Header and Filters aligned top */}
-        <div className="flex flex-col xl:flex-row xl:items-center justify-between mb-6 gap-4 xl:gap-8">
+        <div className="flex flex-col xl:flex-row xl:items-center justify-between mb-3 gap-2 xl:gap-4">
           <div className="max-w-xl">
             <h2 className={`text-sm uppercase tracking-[0.2em] font-extrabold mb-3 ${darkMode ? 'text-sqac-primary' : 'text-[#FF3B7C]'}`}>
               THE PEOPLE BEHIND SQAC
@@ -535,103 +586,12 @@ export default function Team({ darkMode: propDarkMode }) {
             <h3 className={`text-4xl sm:text-6xl font-black tracking-tight leading-tight ${darkMode ? 'text-white' : 'text-[#1C1C1E]'}`}>
               Meet The Core Innovators
             </h3>
-            <p className={`text-base sm:text-lg mt-4 opacity-80 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-              A cross-functional unit driving operations, codebase quality, design narratives, and institutional partnerships.
-            </p>
-          </div>
 
-          {/* Pill-style Filter */}
-          <div className={`flex flex-wrap items-center gap-1 p-2 rounded-full shadow-sm ${darkMode ? 'bg-white/5 border border-white/10' : 'bg-white/80'} backdrop-blur-md relative z-[100]`}>
-            {['Board', 'Technical', 'Corporate', 'Media'].map((tab) => {
-              const hasDropdown = ['Technical', 'Corporate', 'Media'].includes(tab);
-              const options = hasDropdown ? {
-                Technical: ['LEADS', 'AI/ML', 'WEB DEV', 'APP DEV'],
-                Corporate: ['SPONSORSHIP', 'EVENTS'],
-                Media: ['LEADS', 'CREATIVE', 'PR']
-              }[tab] : [];
-              const dropdownList = hasDropdown ? ['ALL', ...options] : [];
-
-              return (
-                <div
-                  key={tab}
-                  className="relative"
-                  onMouseEnter={() => hasDropdown && setOpenDropdown(tab)}
-                  onMouseLeave={() => setOpenDropdown(null)}
-                >
-                  <button
-                    onClick={() => {
-                      setFilter(tab);
-                      setSubFilter('All');
-                      setOpenDropdown(null);
-                    }}
-                    className={`px-6 py-3 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer flex items-center justify-center gap-1.5 group ${filter === tab
-                      ? 'bg-gradient-to-r from-[#FF3B7C] to-[#FF7B6C] text-white shadow-md'
-                      : darkMode
-                        ? 'text-gray-300 hover:text-white hover:bg-white/10'
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-black/5'
-                      }`}
-                  >
-                    <span>{tab}</span>
-                    {hasDropdown && (
-                      <ChevronDown
-                        className={`w-3.5 h-3.5 transition-transform duration-200
-                          ${openDropdown === tab ? 'rotate-180' : ''}
-                          ${filter === tab
-                            ? 'text-white'
-                            : darkMode ? 'text-gray-400 group-hover:text-white' : 'text-gray-500 group-hover:text-gray-900'
-                          }
-                        `}
-                      />
-                    )}
-                  </button>
-
-                  <AnimatePresence>
-                    {openDropdown === tab && dropdownList.length > 0 && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        transition={{ duration: 0.15 }}
-                        className={`absolute top-full mt-2.5 left-1/2 -translate-x-1/2 min-w-[170px] rounded-[24px] p-2.5 shadow-2xl border backdrop-blur-xl z-[150]
-                          ${darkMode
-                            ? 'bg-[#1C1C1E]/95 border-white/10 text-white shadow-[0_12px_40px_rgba(0,0,0,0.6)]'
-                            : 'bg-white/95 border-black/5 text-[#1C1C1E] shadow-[0_12px_40px_rgba(0,0,0,0.12)]'
-                          }
-                        `}
-                      >
-                        {dropdownList.map((option) => {
-                          const isSelected = (option === 'ALL' && subFilter === 'All') || (option.toUpperCase() === subFilter.toUpperCase());
-
-                          return (
-                            <button
-                              key={option}
-                              onClick={() => {
-                                setFilter(tab);
-                                setSubFilter(option === 'ALL' ? 'All' : option);
-                                setOpenDropdown(null);
-                              }}
-                              className={`w-full text-left px-4 py-2.5 rounded-xl text-[10px] sm:text-[11px] font-bold uppercase tracking-widest transition-all duration-200 cursor-pointer
-                                ${isSelected
-                                  ? 'bg-gradient-to-r from-[#FF3B7C] to-[#FF7B6C] text-white shadow-sm font-extrabold'
-                                  : darkMode ? 'hover:bg-white/5 text-gray-300 hover:text-white' : 'hover:bg-black/5 text-[#1C1C1E] hover:text-gray-900'
-                                }
-                              `}
-                            >
-                              {option}
-                            </button>
-                          );
-                        })}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
           </div>
         </div>
 
         {/* Showing Text and Navigation */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-4 sm:gap-6">
             <span className={`text-[11px] font-bold uppercase tracking-widest opacity-60 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
               Showing member {totalMembers > 0 ? (((activeIndex % totalMembers) + totalMembers) % totalMembers) + 1 : 0} of {totalMembers}
@@ -665,10 +625,10 @@ export default function Team({ darkMode: propDarkMode }) {
         </div>
       </div>
 
-      {/* Bottom Section - Full Width Carousel Viewport (No rounded glass container) */}
+       {/* Bottom Section - Full Width Carousel Viewport (No rounded glass container) */}
       <div
-        className="relative h-[360px] sm:h-[460px] md:h-[580px] w-full flex items-center justify-center overflow-hidden perspective-2000"
-        style={{ touchAction: 'pan-y' }}
+        className="relative w-full flex items-center justify-center perspective-2000 mt-auto z-[40]"
+        style={{ touchAction: 'pan-y', height: carouselHeight }}
         onMouseLeave={() => setHoveredId(null)}
       >
         {/* Glowing Platform Base */}
@@ -679,7 +639,7 @@ export default function Team({ darkMode: propDarkMode }) {
           className="w-full h-full relative flex items-center justify-center preserve-3d cursor-grab active:cursor-grabbing"
           style={{ transformStyle: 'preserve-3d' }}
           animate={{
-            transform: `translateY(${radiusZ * 0.23}px) rotateX(12deg)`
+            transform: `translateY(${translateYOffset}px) rotateX(12deg)`
           }}
           transition={isDragging.current ? { duration: 0 } : { type: "spring", stiffness: 120, damping: 20 }}
           onPan={handlePan}
@@ -696,8 +656,12 @@ export default function Team({ darkMode: propDarkMode }) {
 
               const absoluteDiff = Math.abs(normAngle);
 
-              // Opacity is higher in front (1.0) and lower in back (0.45)
-              const opacity = 0.45 + 0.55 * (Math.cos(normAngle * Math.PI / 180) + 1) / 2;
+              // For phone view, only show 3 cards (active card + 2 neighbors) and hide the rest to avoid clutter.
+              // For tablet/desktop view, show all cards around the circle (no opacity = 0 clipping).
+              const isVisible = !isPhone || absoluteDiff < angleStep * 1.5;
+              const opacity = isPhone
+                ? (isVisible ? (0.45 + 0.55 * (Math.cos(normAngle * Math.PI / (angleStep * 1.5 * 2)) + 1) / 2) : 0)
+                : (0.45 + 0.55 * (Math.cos(normAngle * Math.PI / 180) + 1) / 2);
 
               // Continuous dynamic scaling based on relative angle (normAngle)
               // This ensures fluid scaling during dragging/scrolling
@@ -723,7 +687,7 @@ export default function Team({ darkMode: propDarkMode }) {
               return (
                 <motion.div
                   key={member.id}
-                  className={`absolute rounded-[32px] overflow-hidden shadow-2xl p-6 sm:p-8 flex flex-col justify-between select-none
+                  className={`absolute rounded-[32px] overflow-hidden shadow-2xl p-4 sm:p-6 md:p-8 flex flex-col justify-between select-none
                     bg-gradient-to-r ${gradientClass}
                     ${i === activeDisplayIndex
                       ? 'border-2 border-white/40 shadow-[0_0_30px_rgba(255,255,255,0.15)]'
@@ -732,19 +696,19 @@ export default function Team({ darkMode: propDarkMode }) {
                   `}
                   style={{
                     width: cardWidth,
-                    height: cardHeight,
                     position: 'absolute',
                     left: '50%',
                     top: '50%',
                     transformStyle: 'preserve-3d',
                     backfaceVisibility: 'hidden',
-                    pointerEvents: 'auto',
+                    pointerEvents: isVisible ? (i === activeDisplayIndex ? 'default' : 'pointer') : 'none',
                     cursor: i === activeDisplayIndex ? 'default' : 'pointer',
                   }}
                   animate={{
                     transform: `translate(-50%, -50%) translateX(${X}px) translateZ(${Z}px) rotateY(0deg) scale(${scale})`,
                     opacity: opacity,
                     zIndex: Math.round(Z + 1000),
+                    height: i === activeDisplayIndex ? cardHeight * 1.32 : cardHeight,
                   }}
                   transition={isDragging.current ? { duration: 0 } : {
                     type: 'spring',
@@ -764,10 +728,10 @@ export default function Team({ darkMode: propDarkMode }) {
 
                   {/* Card Content - Top */}
                   <div className="relative z-10 flex flex-col justify-between h-full w-full">
-                    <div className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-2 sm:gap-3 md:gap-4">
                       {/* Initials Circle */}
                       <div
-                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center font-bold text-white text-lg sm:text-xl shadow-sm overflow-hidden"
+                        className="w-9 h-9 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center font-bold text-white text-base sm:text-lg md:text-xl shadow-sm overflow-hidden"
                         style={{
                           background: 'linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%)',
                           backdropFilter: 'blur(10px)',
@@ -783,28 +747,28 @@ export default function Team({ darkMode: propDarkMode }) {
 
                       {/* Header info (Name, Role) */}
                       <div>
-                        <h4 className="font-black tracking-tight leading-none text-[#1C1C1E] dark:text-white text-xl sm:text-2xl whitespace-nowrap overflow-hidden text-ellipsis">
+                        <h4 className="font-black tracking-tight leading-tight text-[#1C1C1E] dark:text-white text-base sm:text-xl md:text-2xl whitespace-normal break-words">
                           {member.name}
                         </h4>
-                        <p className="font-semibold mt-1 text-xs sm:text-sm opacity-80 text-[#1C1C1E] dark:text-gray-200">
+                        <p className="font-semibold mt-0.5 sm:mt-1 text-[10px] sm:text-xs md:text-sm opacity-80 text-[#1C1C1E] dark:text-gray-200">
                           {member.role}
                         </p>
                       </div>
                     </div>
 
                     {/* Expandable Content (Middle) - Only visible when active */}
-                    <div className={`overflow-hidden flex-1 flex flex-col justify-start transition-all duration-500 mt-4 ${i === activeDisplayIndex ? 'opacity-100 max-h-[160px]' : 'opacity-0 max-h-0 pointer-events-none'
+                    <div className={`overflow-hidden flex-1 flex flex-col justify-start transition-all duration-500 mt-2 sm:mt-3 md:mt-4 ${i === activeDisplayIndex ? 'opacity-100 max-h-[200px]' : 'opacity-0 max-h-0 pointer-events-none'
                       }`}>
-                      <p className="text-xs font-medium text-[#1C1C1E]/80 dark:text-white/80 leading-relaxed mb-3 line-clamp-3">
+                      <p className="text-[10px] sm:text-xs font-medium text-[#1C1C1E]/80 dark:text-white/80 leading-relaxed mb-2 sm:mb-3 line-clamp-3">
                         {member.bio}
                       </p>
-                      <div className="space-y-1">
+                      <div className="space-y-0.5 sm:space-y-1">
                         <span className="text-[9px] uppercase font-black tracking-widest text-[#1C1C1E]/60 dark:text-white/60">
                           Key Contributions
                         </span>
                         <ul className="space-y-0.5">
                           {member.contributions.slice(0, 2).map((contr, idx) => (
-                            <li key={idx} className="flex items-start gap-1.5 text-[11px] font-medium text-[#1C1C1E]/90 dark:text-white/90">
+                            <li key={idx} className="flex items-start gap-1.5 text-[9px] sm:text-[11px] font-medium text-[#1C1C1E]/90 dark:text-white/90">
                               <span className="w-1.5 h-1.5 rounded-full bg-white/80 mt-1 flex-shrink-0" />
                               <span className="line-clamp-1">{contr}</span>
                             </li>
@@ -814,11 +778,11 @@ export default function Team({ darkMode: propDarkMode }) {
                     </div>
 
                     {/* Bottom Area (Domain / Socials) */}
-                    <div className="mt-auto pt-4 flex items-center justify-between border-t border-white/20">
+                    <div className="mt-auto pt-2 sm:pt-3 md:pt-4 flex items-center justify-between border-t border-white/20">
                       {/* Domain Badge */}
-                      <div className="flex items-center gap-1.5 text-[#1C1C1E] dark:text-white">
-                        <Users className="w-3.5 h-3.5 opacity-80" />
-                        <span className="font-bold text-[10px]">
+                      <div className="flex items-center gap-1 sm:gap-1.5 text-[#1C1C1E] dark:text-white">
+                        <Users className="w-3 h-3 sm:w-3.5 sm:h-3.5 opacity-80" />
+                        <span className="font-bold text-[9px] sm:text-[10px]">
                           {member.domain === 'Board' ? 'Leadership' :
                             member.domain === 'Technical' ? 'Engineering' :
                               member.domain === 'Corporate' ? 'Strategy & PR' : 'Creative'}
@@ -826,19 +790,19 @@ export default function Team({ darkMode: propDarkMode }) {
                       </div>
 
                       {/* Social Links - Visible only on active */}
-                      <div className={`flex items-center gap-1.5 transition-opacity duration-300 ${i === activeDisplayIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                      <div className={`flex items-center gap-1 sm:gap-1.5 transition-opacity duration-300 ${i === activeDisplayIndex ? 'opacity-100' : 'opacity-0 pointer-events-none'
                         }`}>
                         {[
-                          { icon: <Linkedin className="w-3.5 h-3.5" />, url: member.linkedin, label: 'LinkedIn' },
-                          { icon: <Github className="w-3.5 h-3.5" />, url: member.github, label: 'GitHub' },
-                          { icon: <Globe className="w-3.5 h-3.5" />, url: member.portfolio, label: 'Portfolio' },
+                          { icon: <Linkedin className="w-3 h-3 sm:w-3.5 sm:h-3.5" />, url: member.linkedin, label: 'LinkedIn' },
+                          { icon: <Github className="w-3 h-3 sm:w-3.5 sm:h-3.5" />, url: member.github, label: 'GitHub' },
+                          { icon: <Globe className="w-3 h-3 sm:w-3.5 sm:h-3.5" />, url: member.portfolio, label: 'Portfolio' },
                         ].map((social, idx) => (
                           <a
                             key={idx}
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-7 h-7 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-[#1C1C1E] dark:text-white transition-colors"
+                            className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white/20 hover:bg-white/40 flex items-center justify-center text-[#1C1C1E] dark:text-white transition-colors"
                             onClick={(e) => e.stopPropagation()}
                             aria-label={`${member.name} ${social.label}`}
                           >

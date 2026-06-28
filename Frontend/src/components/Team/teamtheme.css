@@ -312,3 +312,19 @@ body {
         height: 1200px;
     }
 }
+
+/* Circular Menu Enhancements */
+@keyframes dial-pulse {
+    0%, 100% {
+        opacity: 0.15;
+        transform: scale(0.98);
+    }
+    50% {
+        opacity: 0.25;
+        transform: scale(1.02);
+    }
+}
+
+.dial-bg-glow {
+    animation: dial-pulse 6s infinite ease-in-out;
+}
