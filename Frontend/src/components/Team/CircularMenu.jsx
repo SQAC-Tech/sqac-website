@@ -46,19 +46,19 @@ export default function CircularMenu({ activeFilter, activeSubFilter, onChangeFi
 
   // Card theme gradients mapped from Team.jsx to adapt correctly to existing light/dark color themes
   const lightGradients = [
-    { from: '#E83F7A', to: '#FF6B8A' }, // 0: Hot Pink / Rose
-    { from: '#FF5A87', to: '#FF8689' }, // 1: Vibrant Rose
-    { from: '#FF758F', to: '#FFAF7E' }, // 2: Pink-Peach
-    { from: '#FF8689', to: '#FFB494' }, // 3: Soft Salmon
-    { from: '#FF85A1', to: '#FFC982' }  // 4: Light Coral-Pink
+    { from: '#C4325F', to: '#D9566E' }, // 0: Muted Rose
+    { from: '#C94970', to: '#D97070' }, // 1: Dusty Rose
+    { from: '#C75E74', to: '#D98E6B' }, // 2: Muted Pink-Peach
+    { from: '#C96E73', to: '#D9947A' }, // 3: Muted Salmon
+    { from: '#C56B82', to: '#D9A66A' }  // 4: Muted Coral-Pink
   ];
 
   const darkGradients = [
-    { from: '#D6336C', to: '#E83F7A' }, // 0: Vibrant Dark Pink
-    { from: '#FF7AA2', to: '#FF959D' }, // 1: Pastel Rose
-    { from: '#FF959D', to: '#FFB494' }, // 2: Dusty Coral
-    { from: '#FFB494', to: '#FFC982' }, // 3: Peach Pink
-    { from: '#FFC982', to: '#FFAE6E' }  // 4: Warm Soft Pink
+    { from: '#A82855', to: '#C4325F' }, // 0: Deep Muted Pink
+    { from: '#C46282', to: '#C97880' }, // 1: Dusty Rose
+    { from: '#C97880', to: '#D9947A' }, // 2: Muted Dusty Coral
+    { from: '#D9947A', to: '#D9A66A' }, // 3: Muted Peach
+    { from: '#D9A66A', to: '#D98D5A' }  // 4: Muted Warm Pink
   ];
 
   const gradients = darkMode ? darkGradients : lightGradients;
