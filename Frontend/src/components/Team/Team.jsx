@@ -365,29 +365,29 @@ export default function Team({ darkMode: propDarkMode }) {
     const handleResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
-      let cardW = 230;
-      let cardH = 340;
+      let cardW = 200;
+      let cardH = 280;
 
       if (width >= 1280) {
-        cardW = 300;
-        cardH = 360;
+        cardW = 250;
+        cardH = 320;
         if (height < 780) {
-          cardW = 250;
-          cardH = 300;
+          cardW = 220;
+          cardH = 280;
         }
       } else if (width >= 1024) {
-        cardW = 220;
-        cardH = 290;
+        cardW = 200;
+        cardH = 260;
         if (height < 700) {
-          cardW = 190;
-          cardH = 250;
+          cardW = 180;
+          cardH = 240;
         }
       } else if (width >= 768) {
-        cardW = 180;
-        cardH = 240;
-      } else {
         cardW = 160;
         cardH = 220;
+      } else {
+        cardW = 140;
+        cardH = 190;
       }
 
       setCardWidth(cardW);
@@ -424,7 +424,8 @@ export default function Team({ darkMode: propDarkMode }) {
       const center = carouselH / 2;
       const activeCardH = cardH * 1.32;
       const targetBottom = carouselH - bottomMargin;
-      const translateYVal = targetBottom - (activeCardH / 2) - center;
+      // Added a small 30px offset to push cards down slightly without cropping
+      const translateYVal = targetBottom - (activeCardH / 2) - center + 30;
       setTranslateYOffset(translateYVal);
     };
     handleResize();
@@ -563,7 +564,7 @@ export default function Team({ darkMode: propDarkMode }) {
     <section ref={sectionRef} id="team" className={`relative overflow-hidden font-sans h-screen min-h-[600px] flex flex-col justify-between pt-24 sm:pt-28 xl:pt-20 pb-0 transition-colors duration-500 ${darkMode ? 'bg-mesh-dark text-white' : 'bg-mesh-light text-gray-900'}`}>
 
       {/* Circular dial menu — anchored to section top-right, never overlaps cards */}
-      <div className="absolute -right-[110px] sm:-right-[120px] md:-right-[130px] xl:right-8 top-[170px] sm:top-[180px] xl:top-[72px] z-[30] w-auto">
+      <div className="absolute -right-[110px] sm:-right-[120px] md:-right-[130px] lg:-right-[40px] xl:right-8 top-[160px] sm:top-[120px] md:top-[80px] xl:top-[72px] z-[30] w-auto">
         <CircularMenu
           activeFilter={filter}
           activeSubFilter={subFilter}
@@ -597,13 +598,7 @@ export default function Team({ darkMode: propDarkMode }) {
               Showing member {totalMembers > 0 ? (((activeIndex % totalMembers) + totalMembers) % totalMembers) + 1 : 0} of {totalMembers}
             </span>
 
-            {/* Scroll/Drag Indicator */}
-            <div className="hidden sm:flex items-center gap-1.5 opacity-50">
-              <Mouse className={`w-4 h-4 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-              <span className={`text-[11px] font-bold uppercase tracking-widest ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                Drag cards left/right or scroll to rotate
-              </span>
-            </div>
+
           </div>
 
           {totalMembers > 1 && (
