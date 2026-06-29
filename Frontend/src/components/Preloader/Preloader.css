@@ -28,10 +28,10 @@
 
 .watermark-overlay {
   position: absolute;
-  bottom: 11%;
-  right: 7%;
-  width: 70px;
-  height: 70px;
+  bottom: 8%;
+  right: 5%;
+  width: 90px;
+  height: 90px;
   background-color: #000;
   border-radius: 50%;
   display: flex;
