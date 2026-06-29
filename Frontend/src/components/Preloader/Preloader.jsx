@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import './Preloader.css';
+import SQACLogo from '../../assets/LogoSQAC.png';
 
 const Preloader = ({ onComplete }) => {
   const canvasRef = useRef(null);
@@ -152,7 +153,7 @@ const Preloader = ({ onComplete }) => {
         
         {/* Overlay to hide the Gemini logo and fly to navbar */}
         <div className="watermark-overlay" id="watermark-logo">
-          <img src="/src/assets/LogoSQAC.png" alt="SQAC" />
+          <img src={SQACLogo} alt="SQAC" />
         </div>
       </div>
     </div>
