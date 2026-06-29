@@ -1,4 +1,6 @@
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Preloader from "./components/Preloader/Preloader.jsx";
 
 import HomePage from "./components/HomePage/HomePage.jsx";
 import Footer from "./components/HomePage/Footer.jsx";
@@ -40,29 +42,43 @@ const AppContent = () => {
     </>
   );
 };
+
 const App = () => {
   useLenisScroll();
+  const [showPreloader, setShowPreloader] = useState(true);
 
   return (
     <ThemeProvider>
-      <div className="app-container">
+      {showPreloader && (
+        <Preloader 
+          onComplete={() => {
+            window.scrollTo(0, 0);
+            if (window.lenis) window.lenis.scrollTo(0, { immediate: true });
+            setShowPreloader(false);
+          }} 
+        />
+      )}
+      
+      <div 
+        className="app-container"
+        style={showPreloader ? { position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', overflow: 'hidden' } : {}}
+      >
         <Router>
           <AppContent />
         </Router>
 
-        {/* Toast container goes here */}
-        <ToastContainer
-          position="top-center"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop
-          closeOnClick
-          pauseOnHover
-          theme="colored"
-        />
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar={false}
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+            theme="colored"
+          />
 
-        <SpeedInsights />
-      </div>
+          <SpeedInsights />
+        </div>
     </ThemeProvider>
   );
 };
