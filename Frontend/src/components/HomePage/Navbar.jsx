@@ -1,155 +1,261 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SQAC from "../../assets/LogoSQAC.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined';
+import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+import EmojiEventsOutlinedIcon from '@mui/icons-material/EmojiEventsOutlined';
 import ToggleDarkMode from "../ToggleDarkMode";
+import gsap from "gsap";
+
+const navbarStyles = `
+.sidebar-nav {
+  position: fixed;
+  top: 1.25rem; 
+  left: 1.25rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 64px;
+  height: 64px; /* Default collapsed height */
+  overflow: visible;
+  border-radius: 40px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+.sidebar-logo-container {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.logo-box {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-divider {
+  width: 32px;
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: 10px 0;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.nav-items-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 20px;
+  z-index: 10;
+}
+
+.nav-icon-link {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  color: #a0a0ab;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-icon-link:hover {
+  color: #ffffff;
+  background: rgba(255,255,255,0.05);
+}
+
+.nav-icon-link.active {
+  background: linear-gradient(135deg, #ff7eb3, #ff758c);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+}
+
+/* Tooltip */
+.nav-tooltip {
+  position: absolute;
+  left: 60px;
+  background: #1f212c;
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 20;
+}
+
+.nav-icon-link:hover .nav-tooltip,
+.toggle-wrapper:hover .nav-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.logout-icon {
+  margin-top: 4px;
+  color: #ff758c;
+  opacity: 0.8;
+}
+.logout-icon:hover {
+  opacity: 1;
+  color: #ff4766;
+  background: rgba(255, 117, 140, 0.1);
+}
+
+.toggle-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+.toggle-wrapper > button {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #a0a0ab !important;
+}
+.toggle-wrapper > button:hover {
+  color: #ffffff !important;
+}
+`;
 
 function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef(null);
+  const timelineRef = useRef(null);
+  const location = useLocation();
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
+  const navItems = [
+    { label: "Home", path: "/", icon: <GridViewOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "About", path: "/about", icon: <InfoOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "Team", path: "/team", icon: <GroupOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "Projects", path: "/projects", icon: <RocketLaunchOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "Events", path: "/events", icon: <EventOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "Achievements", path: "/achievements", icon: <EmojiEventsOutlinedIcon style={{ fontSize: '22px' }} /> },
+    { label: "Join Us", path: "/recruitment", icon: <PersonAddOutlinedIcon style={{ fontSize: '22px' }} /> },
+  ];
+
+  useEffect(() => {
+    // Initial setup
+    gsap.set('.nav-icon-link, .sidebar-divider.anim, .toggle-wrapper', { opacity: 0, y: -10, display: 'none' });
+
+    timelineRef.current = gsap.timeline({ paused: true })
+      .to('.sidebar-nav', {
+        height: "auto", 
+        duration: 0.4,
+        ease: 'power3.out'
+      })
+      .set('.nav-icon-link, .sidebar-divider.anim, .toggle-wrapper', { display: 'flex' }, "-=0.2")
+      .to('.nav-icon-link, .sidebar-divider.anim, .toggle-wrapper', {
+        opacity: 1,
+        y: 0,
+        duration: 0.25,
+        stagger: 0.04,
+        ease: 'power2.out'
+      }, "-=0.2");
+
+    return () => {
+      if (timelineRef.current) timelineRef.current.kill();
+    };
+  }, []);
+
+  const toggleMenu = () => {
+    if (!timelineRef.current) return;
+    
+    setIsOpen(prev => {
+      const nextState = !prev;
+      if (nextState) {
+        timelineRef.current.timeScale(1).play();
+      } else {
+        timelineRef.current.timeScale(1.5).reverse();
+      }
+      return nextState;
+    });
+  };
+
+  const handleDoubleClick = () => {
+    if (isOpen) toggleMenu();
+  };
 
   return (
-    <nav className="
-      fixed top-0 left-0 right-0 z-50
-      bg-white/20 dark:bg-black/40
-      backdrop-blur-lg shadow-md
-      border-b border-white/30 dark:border-white/10
-      px-4 sm:px-8 py-3
-    ">
-      <div className="flex items-center justify-between">
-        <Link to="/" onClick={closeMenu}>
-          <img
-            src={SQAC}
-            alt="Logo"
-            className="w-10 h-10 transition duration-300 hover:scale-120"
-          />
-        </Link>
+    <div ref={containerRef}>
+      <style>{navbarStyles}</style>
 
+      <div 
+        className={`sidebar-nav ${isOpen ? 'bg-white/95 dark:bg-[#0b0d17]/95 border border-gray-200/50 dark:border-white/10 shadow-2xl backdrop-blur-xl' : 'bg-transparent border-transparent shadow-none'}`}
+        onDoubleClick={handleDoubleClick}
+      >
+        
+        {/* Logo Toggle Button */}
+        <div className="sidebar-logo-container" onClick={toggleMenu}>
+          <div className="logo-box">
+            <img src={SQAC} alt="SQAC Logo" className="w-8 h-8 object-contain drop-shadow-md hover:scale-110 transition-transform duration-200" />
+          </div>
+        </div>
 
-        <ul className="
-          hidden sm:flex gap-5
-          absolute left-1/2 transform -translate-x-1/2
-          font-sans text-lg font-semibold
-          text-gray-800 dark:text-gray-200
-        ">
-          {[
-            { label: "Home", path: "/" },
-            { label: "About", path: "/about" },
-            { label: "Team", path: "/team" },
-            { label: "Projects", path: "/projects" },
-            { label: "Events", path: "/events" },
-          ].map((item) => (
-            <li key={item.path} className="px-4">
-              <Link
-                to={item.path}
-                className="
-                  relative
-                  text-gray-800 dark:text-gray-200
-                  hover:text-purple-600 dark:hover:text-pink-400
-                  transition font-semibold duration-300 group
-                "
+        <div className="sidebar-divider anim"></div>
+
+        {/* Navigation Links */}
+        <div className="nav-items-container">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path || (item.path !== "/" && location.pathname.startsWith(item.path));
+            // Exact match for home, startsWith for others
+            const isActuallyActive = item.path === "/" ? location.pathname === "/" : location.pathname.startsWith(item.path);
+
+            return (
+              <Link 
+                key={item.path} 
+                to={item.path} 
+                className={`nav-icon-link ${isActuallyActive ? 'active' : ''}`}
+                onClick={() => setIsOpen(false)}
               >
-                {item.label}
-                <span className="block h-[2px] max-w-0 group-hover:max-w-full transition-all duration-300 bg-gradient-to-r from-purple-500 to-pink-400"></span>
+                {item.icon}
+                <div className="nav-tooltip">{item.label}</div>
               </Link>
-            </li>
-          ))}
-        </ul>
+            )
+          })}
+          
+          <div className="sidebar-divider anim mb-0"></div>
 
-        <div className="hidden sm:flex items-center gap-4">
-          <Link to="/recruitment" onClick={closeMenu}>
-            <button className="
-              rounded-full px-6 py-2 text-sm font-semibold
-              bg-gradient-to-r from-purple-500 to-pink-400
-              text-white shadow-md
-              hover:scale-110 hover:shadow-[0_0_15px_rgba(236,72,153,0.5)]
-              transition duration-300 cursor-pointer
-            ">
-              Join Us
-            </button>
-          </Link>
+          <div className="toggle-wrapper">
+            <ToggleDarkMode />
+            <div className="nav-tooltip">Toggle Theme</div>
+          </div>
 
-          <ToggleDarkMode />
         </div>
 
-        <div className="sm:hidden flex items-center gap-3">
-          <ToggleDarkMode />
-
-          <button
-            onClick={toggleMenu}
-            className="relative w-6 h-6 flex flex-col justify-between items-center focus:outline-none"
-          >
-            <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-transform duration-300 ${
-                isMenuOpen ? "rotate-45 translate-y-[10.5px]" : ""
-              }`}
-            ></span>
-            <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-opacity duration-300 ${
-                isMenuOpen ? "opacity-0" : ""
-              }`}
-            ></span>
-            <span
-              className={`h-[3px] w-full bg-pink-500 rounded transition-transform duration-300 ${
-                isMenuOpen ? "-rotate-45 -translate-y-[10px]" : ""
-              }`}
-            ></span>
-          </button>
-        </div>
       </div>
-
-      {isMenuOpen && (
-        <div className="
-          sm:hidden mt-4 px-4 py-4
-          bg-orange-200/90 dark:bg-zinc-900/90
-          backdrop-blur-md rounded-xl shadow-xl
-          space-y-3 text-base font-medium
-          transition-all duration-500 animate-fade-in-down
-        ">
-          {[
-            { label: "Home", path: "/" },
-            { label: "About", path: "/about" },
-            { label: "Team", path: "/team" },
-            { label: "Projects", path: "/projects" },
-            { label: "Events", path: "/events" },
-          ].map((item, index) => (
-            <div key={item.path} className="w-full">
-              <Link
-                to={item.path}
-                onClick={closeMenu}
-                className="
-                  block w-full py-2 px-4 rounded-xl
-                  text-gray-800 dark:text-gray-200
-                  active:bg-gradient-to-r
-                  active:from-orange-300 active:to-pink-300
-                  dark:active:from-pink-600 dark:active:to-purple-600
-                  active:text-white active:scale-95
-                  transition-all duration-200
-                "
-              >
-                {item.label}
-              </Link>
-              {index !== 4 && (
-                <hr className="my-2 border-t border-gray-300 dark:border-white/10 opacity-30" />
-              )}
-            </div>
-          ))}
-
-          <Link to="/recruitment" onClick={closeMenu}>
-            <button className="
-              w-full mt-2 rounded-full px-5 py-2 text-base font-semibold
-              bg-gradient-to-r from-purple-500 to-pink-400
-              text-white shadow-md
-              active:scale-95 active:shadow-sm
-              transition-all duration-200 cursor-pointer
-            ">
-              Join Us
-            </button>
-          </Link>
-        </div>
-      )}
-    </nav>
+    </div>
   );
 }
 
