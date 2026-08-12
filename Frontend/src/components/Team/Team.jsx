@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, ChevronDown, Linkedin, Github, Instagram, Us
 import { useTheme } from "../../contexts/ThemeContext";
 import SwipeableMenu from './SwipeableMenu';
 import CircularMenu from './CircularMenu';
+import { buildApiUrl } from "../../lib/api";
 import "./teamtheme.css";
 
 const DARK_CARD_GRADIENTS = [
@@ -80,10 +81,7 @@ export default function Team({ darkMode: propDarkMode }) {
   const [isCardFlipped, setIsCardFlipped] = useState(false);
 
   useEffect(() => {
-    const backendUrl = import.meta.env.VITE_API_BACKEND !== undefined && import.meta.env.VITE_API_BACKEND !== ""
-      ? import.meta.env.VITE_API_BACKEND
-      : (import.meta.env.DEV ? "http://localhost:5000" : "");
-    fetch(`${backendUrl}/api/team`)
+    fetch(buildApiUrl('/api/team'))
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch team data");
         return res.json();

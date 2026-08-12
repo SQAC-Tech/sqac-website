@@ -6,6 +6,7 @@ import SQAC from "../../assets/LogoSQAC-removebg-preview.png";
 import copyLogo from "../../assets/image copy.jpg";
 import Shuffle from "./Shuffle";
 import LogoLoop from "./LogoLoop";
+import { buildApiUrl } from "../../lib/api";
 
 function Footer() {
   const [success, setSuccess] = useState(false);
@@ -46,13 +47,8 @@ function Footer() {
       body: formData,
     });
 
-    const backendUrl =
-      import.meta.env.VITE_API_BACKEND !== undefined && import.meta.env.VITE_API_BACKEND !== ""
-        ? import.meta.env.VITE_API_BACKEND
-        : (import.meta.env.DEV ? "http://localhost:5000" : "");
-
     try {
-      await fetch(`${backendUrl}/api/contact`, {
+      await fetch(buildApiUrl('/api/contact'), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData),

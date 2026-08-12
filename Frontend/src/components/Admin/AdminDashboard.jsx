@@ -5,6 +5,7 @@ import {
   Search, ChevronDown, LogOut, FolderDot, CheckCircle, XCircle
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { buildApiUrl } from '../../lib/api';
 
 export default function AdminDashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,14 +24,10 @@ export default function AdminDashboard() {
     }
   }, [isAuthenticated]);
 
-  const backendUrl = import.meta.env.VITE_API_BACKEND !== undefined && import.meta.env.VITE_API_BACKEND !== ""
-    ? import.meta.env.VITE_API_BACKEND
-    : (import.meta.env.DEV ? "http://localhost:5000" : "");
-
   const fetchRecruits = async () => {
     setLoading(true);
     try {
-      const res = await fetch(`${backendUrl}/api/candidates`);
+      const res = await fetch(buildApiUrl('/api/candidates'));
       if (res.ok) {
         const data = await res.json();
         setRecruits(data);
@@ -46,7 +43,7 @@ export default function AdminDashboard() {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      const res = await fetch(`${backendUrl}/api/candidates/${id}/status`, {
+      const res = await fetch(buildApiUrl(`/api/candidates/${id}/status`), {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })

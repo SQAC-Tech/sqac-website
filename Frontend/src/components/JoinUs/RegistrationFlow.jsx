@@ -7,6 +7,7 @@ import DomainStep from './components/steps/DomainStep';
 import SpecializationStep from './components/steps/SpecializationStep';
 import MissionStep from './components/steps/MissionStep';
 import ReviewStep from './components/steps/ReviewStep';
+import { buildApiUrl } from '../../lib/api';
 
 const STEPS = [
   { id: 'identity', title: 'Identity', component: IdentityStep },
@@ -74,11 +75,8 @@ export default function RegistrationFlow() {
   };
 
   const handleDeploy = async () => {
-    const backendUrl = import.meta.env.VITE_API_BACKEND !== undefined && import.meta.env.VITE_API_BACKEND !== ""
-      ? import.meta.env.VITE_API_BACKEND
-      : (import.meta.env.DEV ? "http://localhost:5000" : "");
     try {
-      const res = await fetch(`${backendUrl}/api/candidates`, {
+      const res = await fetch(buildApiUrl('/api/candidates'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
