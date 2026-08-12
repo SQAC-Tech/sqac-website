@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
+// API config — loaded from environment variables
+const getKey = () => import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+const getEndpoint = () => import.meta.env.VITE_WEB3FORMS_URL || "https://api.web3forms.com/submit";
+
 function ContactUs() {
   const [success, setSuccess] = useState(false);
 
@@ -8,12 +12,9 @@ function ContactUs() {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    // Append the access key dynamically to bypass AV heuristic string matching
-    const kn = "access" + "_key";
-    formData.append(kn, "b9b073d7-78e3-4607-8102-4bc69c3f696f");
-    
-    const url = "https://api.we" + "b3forms.com/submit";
-    const response = await fetch(url, {
+    formData.append("access_key", getKey());
+
+    const response = await fetch(getEndpoint(), {
       method: "POST",
       body: formData,
     });
@@ -25,10 +26,12 @@ function ContactUs() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12
-    bg-gradient-to-br
-    from-cyan-200 via-purple-200 to-pink-200
-    dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800">
+    <div
+      className="min-h-screen flex items-center justify-center px-4 py-12
+      bg-gradient-to-br
+      from-cyan-200 via-purple-200 to-pink-200
+      dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-800"
+    >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}

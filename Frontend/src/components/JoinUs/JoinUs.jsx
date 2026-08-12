@@ -1,11 +1,11 @@
-import React from 'react'
-import IDCardForm from './IDCardForm'
+import React from 'react';
+import RegistrationFlow from './RegistrationFlow';
 import Closed from './Closed'
 
 function JoinUs() {
   return (
-    <div>
-      {/* <IDCardForm/> */}
+    <div className="bg-[#050505] min-h-screen">
+      {/* <RegistrationFlow /> */}
       <Closed/>
     </div>
   )
