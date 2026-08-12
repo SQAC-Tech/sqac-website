@@ -22,3 +22,14 @@ iii) push: `git push origin <your-branch-name>`
 Then go to GitHub and create your Push Request (PR) by writing the description of your work, and attach some screenshots of your testing. 
 
 ### 4) We will be reviewing your changes, suggesting edits, and merging it to the main branch on satisfaction.
+
+## Project structure
+
+- `Frontend/` contains the Vite + React app.
+- `backend/` contains the Express API used by the team page, contact form, and recruitment flows.
+
+## Local development
+
+- Frontend only: `npm run dev:frontend`
+- Backend only: `npm run dev:backend`
+- Full app: `npm run dev`

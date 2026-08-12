@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: sqac-backend
+    env: node
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm start
