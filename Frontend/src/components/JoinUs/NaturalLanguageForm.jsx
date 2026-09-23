@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-toastify";
+import { supabase } from "../../supabase";
 import "./naturalLanguageForm.css";
 
 /* ─── SQAC Logo paths (exact, from design file) ─────────────────── */
@@ -273,12 +274,37 @@ const NaturalLanguageForm = () => {
 
     setSubmitting(true);
     try {
-      await fetch("/api/candidates", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-    } catch { /* fall through to success */ }
+      const { error } = await supabase
+        .from('candidates')
+        .insert([
+          {
+            name: formData.name,
+            year: formData.year,
+            department: formData.department,
+            ra_number: formData.raNumber,
+            email: formData.email,
+            core_domain: formData.coreDomain,
+            sub_domain: formData.subDomain,
+            github: formData.github,
+            linkedin: formData.linkedin,
+            phone: formData.phone
+          }
+        ]);
+
+      if (error) {
+        if (error.code === '23505') { // Unique constraint violation
+          toast.error("This email or RA number has already been registered.");
+        } else {
+          toast.error("An error occurred during submission.");
+        }
+        setSubmitting(false);
+        return;
+      }
+    } catch (err) { 
+      toast.error("Something went wrong!");
+      setSubmitting(false);
+      return;
+    }
     setTimeout(() => setSubmitted(true), 400);
   };
 
