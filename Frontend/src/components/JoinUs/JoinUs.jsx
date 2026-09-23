@@ -1,12 +1,10 @@
 import React from 'react';
-import RegistrationFlow from './RegistrationFlow';
-import Closed from './Closed'
+import NaturalLanguageForm from './NaturalLanguageForm';
 
 function JoinUs() {
   return (
-    <div className="bg-[#050505] min-h-screen">
-      {/* <RegistrationFlow /> */}
-      <Closed/>
+    <div className="min-h-screen">
+      <NaturalLanguageForm />
     </div>
   )
 }
