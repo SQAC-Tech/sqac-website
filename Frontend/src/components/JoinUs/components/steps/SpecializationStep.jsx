@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 
 const SPECIALIZATIONS = {
-  web: ['FRONTEND_REACT', 'BACKEND_NODE', 'FULLSTACK', 'WEB3_CONTRACTS'],
-  aiml: ['COMPUTER_VISION', 'NLP', 'DATA_SCIENCE', 'GENERATIVE_AI'],
-  app: ['ANDROID_KOTLIN', 'IOS_SWIFT', 'FLUTTER', 'REACT_NATIVE'],
-  uiux: ['USER_RESEARCH', 'WIREFRAMING', 'PROTOTYPING', 'INTERACTION_DESIGN'],
-  media: ['VIDEO_EDITING', 'GRAPHIC_DESIGN', 'SOCIAL_MEDIA', 'CONTENT_WRITING'],
-  corporate: ['SPONSORSHIPS', 'EVENT_MGMT', 'PUBLIC_RELATIONS', 'LOGISTICS']
+  technical: ['WEB_DEV', 'APP_DEV', 'AI_ML'],
+  corporate: ['SPONSORSHIPS', 'EVENT_MGMT'],
+  media: [],
+  creatives: []
 };
 
 export default function SpecializationStep({ data, updateData, nextStep, prevStep }) {

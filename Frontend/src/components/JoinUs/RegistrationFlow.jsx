@@ -61,16 +61,24 @@ export default function RegistrationFlow() {
   };
 
   const nextStep = () => {
-    if (currentStepIndex < STEPS.length - 1) {
+    let stepAmount = 1;
+    if (currentStepIndex === 2 && (formData.domain === 'media' || formData.domain === 'creatives')) {
+      stepAmount = 2;
+    }
+    if (currentStepIndex + stepAmount < STEPS.length) {
       setDirection(1);
-      setCurrentStepIndex(prev => prev + 1);
+      setCurrentStepIndex(prev => prev + stepAmount);
     }
   };
 
   const prevStep = () => {
-    if (currentStepIndex > 0) {
+    let stepAmount = 1;
+    if (currentStepIndex === 4 && (formData.domain === 'media' || formData.domain === 'creatives')) {
+      stepAmount = 2;
+    }
+    if (currentStepIndex - stepAmount >= 0) {
       setDirection(-1);
-      setCurrentStepIndex(prev => prev - 1);
+      setCurrentStepIndex(prev => prev - stepAmount);
     }
   };
 
