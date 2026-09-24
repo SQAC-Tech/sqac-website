@@ -259,15 +259,16 @@ const NaturalLanguageForm = () => {
       { value: "Sponsorship", label: "Sponsorship" },
       { value: "Events", label: "Events" },
     ],
-    Media: [
-      { value: "Creatives", label: "Creatives" },
-      { value: "Public Relations", label: "Public Relations" },
-    ],
+    Media: [],
+    Creatives: [],
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const allFilled = FIELD_KEYS.every((k) => formData[k].trim() !== "");
+    const allFilled = FIELD_KEYS.every((k) => {
+      if (k === "subDomain" && formData.coreDomain && (!subdomainMap[formData.coreDomain] || subdomainMap[formData.coreDomain].length === 0)) return true;
+      return formData[k].trim() !== "";
+    });
     if (!allFilled) { toast.error("Please fill in all fields."); return; }
     if (!/^[0-9]{10}$/.test(formData.phone)) { toast.error("Enter a valid 10-digit phone number."); return; }
     if (!/^RA\d{13}$/i.test(formData.raNumber)) { toast.error("RA number must be RA + 13 digits."); return; }
@@ -310,7 +311,7 @@ const NaturalLanguageForm = () => {
 
   const yearOpts = [{ value: "1st", label: "1st" }, { value: "2nd", label: "2nd" }, { value: "3rd", label: "3rd" }, { value: "4th", label: "4th" }];
   const deptOpts = [{ value: "CSE", label: "CSE" }, { value: "ECE", label: "ECE" }, { value: "EEE", label: "EEE" }, { value: "MECH", label: "MECH" }, { value: "Civil", label: "Civil" }, { value: "Other", label: "Other" }];
-  const domainOpts = [{ value: "Technical", label: "Technical" }, { value: "Corporate", label: "Corporate" }, { value: "Media", label: "Media" }];
+  const domainOpts = [{ value: "Technical", label: "Technical" }, { value: "Corporate", label: "Corporate" }, { value: "Media", label: "Media" }, { value: "Creatives", label: "Creatives" }];
 
   return (
     <div className="nlf-page">
@@ -375,14 +376,19 @@ const NaturalLanguageForm = () => {
                 <p className="nlf-line">
                   I&apos;m interested in the{" "}
                   <InlineSelect name="coreDomain" value={formData.coreDomain} onChange={handleChange} options={domainOpts} placeholder="domain" />
-                  {" "}team, specifically{" "}
-                  <InlineSelect
-                    name="subDomain"
-                    value={formData.subDomain}
-                    onChange={handleChange}
-                    options={formData.coreDomain ? subdomainMap[formData.coreDomain] : []}
-                    placeholder="sub-domain"
-                  />.
+                  {" "}team
+                  {(!formData.coreDomain || (subdomainMap[formData.coreDomain] && subdomainMap[formData.coreDomain].length > 0)) && (
+                    <>
+                      , specifically{" "}
+                      <InlineSelect
+                        name="subDomain"
+                        value={formData.subDomain}
+                        onChange={handleChange}
+                        options={formData.coreDomain ? subdomainMap[formData.coreDomain] : []}
+                        placeholder="sub-domain"
+                      />
+                    </>
+                  )}.
                 </p>
 
                 <p className="nlf-line">
