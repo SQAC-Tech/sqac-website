@@ -2,12 +2,10 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const DOMAINS = [
-  { id: 'web', title: 'WEB_DEV', desc: 'Build modern, responsive web applications.' },
-  { id: 'aiml', title: 'AI_ML', desc: 'Train models and build intelligent systems.' },
-  { id: 'app', title: 'APP_DEV', desc: 'Create native and cross-platform mobile apps.' },
-  { id: 'uiux', title: 'UI_UX', desc: 'Design beautiful and intuitive user experiences.' },
-  { id: 'media', title: 'MEDIA_PR', desc: 'Manage social presence and public relations.' },
+  { id: 'technical', title: 'TECHNICAL', desc: 'Build modern applications, train models and intelligent systems.' },
   { id: 'corporate', title: 'CORPORATE', desc: 'Handle sponsorships, events, and outreach.' },
+  { id: 'media', title: 'MEDIA', desc: 'Manage social presence and media.' },
+  { id: 'creatives', title: 'CREATIVES', desc: 'Design beautiful and intuitive user experiences and graphics.' },
 ];
 
 export default function DomainStep({ data, updateData, nextStep, prevStep }) {
