@@ -309,7 +309,7 @@ const NaturalLanguageForm = () => {
     setTimeout(() => setSubmitted(true), 400);
   };
 
-  const yearOpts = [{ value: "1st", label: "1st" }, { value: "2nd", label: "2nd" }, { value: "3rd", label: "3rd" }, { value: "4th", label: "4th" }];
+  const yearOpts = [{ value: "1st", label: "1st" }, { value: "2nd", label: "2nd" }];
   const deptOpts = [{ value: "CSE", label: "CSE" }, { value: "ECE", label: "ECE" }, { value: "EEE", label: "EEE" }, { value: "MECH", label: "MECH" }, { value: "Civil", label: "Civil" }, { value: "Other", label: "Other" }];
   const domainOpts = [{ value: "Technical", label: "Technical" }, { value: "Corporate", label: "Corporate" }, { value: "Media", label: "Media" }, { value: "Creatives", label: "Creatives" }];
 
