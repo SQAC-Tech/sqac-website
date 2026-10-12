@@ -221,7 +221,7 @@ const SuccessScreen = ({ name }) => (
         Application Submitted,<br />
         <span>{name || "recruit"}</span>.
       </h2>
-      <p className="nlf-success-sub">We'll be in touch soon. Keep building. 🚀</p>
+      <p className="nlf-success-sub">We'll be in touch soon. Keep building.</p>
     </motion.div>
   </motion.div>
 );
