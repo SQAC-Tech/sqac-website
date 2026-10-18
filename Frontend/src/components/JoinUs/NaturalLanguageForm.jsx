@@ -5,7 +5,7 @@ import { supabase } from "../../supabase";
 import "./naturalLanguageForm.css";
 
 /* ─── SQAC Logo paths (exact, from design file) ─────────────────── */
-const BODY_PATH =
+export const BODY_PATH =
   "M105 245 C60 260 10 240 8 190 C6 130 40 70 100 42 " +
   "C150 20 250 15 330 18 L395 18 C415 18 418 32 408 58 " +
   "L372 175 C366 195 368 202 388 218 C420 240 430 275 422 320 " +
@@ -15,7 +15,7 @@ const BODY_PATH =
   "C292 380 312 380 318 362 C322 350 312 342 304 336 " +
   "C316 316 322 290 322 260 A112 112 0 1 0 105 245 Z";
 
-const DIAMOND_PATH = "M264 284 L292 312 L264 340 L236 312 Z";
+export const DIAMOND_PATH = "M264 284 L292 312 L264 340 L236 312 Z";
 
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
